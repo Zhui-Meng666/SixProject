@@ -1,0 +1,41 @@
+<!--pages/Personal/career/career.wxml-->
+
+<van-cell title="参加过的比赛" is-link bind:click="showPopup1" />
+<van-popup show="{{show1}}" bind:close="onClose1">
+    <view wx:for="{{athlete}}" class="secondlayout">
+        <view>{{item.game_name}} </view>
+        <view>{{item.ranking}} </view>
+        <view>{{item.date}} </view>
+    </view>
+</van-popup>
+
+<van-cell title="执裁过的比赛" is-link bind:click="showPopup2" />
+<van-popup show="{{show2}}" bind:close="onClose2">
+    <view wx:for="{{referee}}" class='secondlayout'>
+        <view>{{item.game_name}} </view>
+        <view>{{item.identity}} </view>
+        <view>{{item.date}} </view>
+    </view>
+</van-popup>
+
+<van-cell title="参加过的活动" is-link bind:click="showPopup3" />
+<van-popup show="{{show3}}" bind:close="onClose3">
+    <view wx:for="{{activity}}" class='secondlayout'>
+        <view>{{item.activity_name}} </view>
+        <view>{{item.date}} </view>
+    </view>
+</van-popup>
+
+<van-cell title="约过的球" is-link bind:click="showPopup4" />
+<van-popup show="{{show4}}" bind:close="onClose4" >
+    <view wx:for="{{play}}">
+        <view>第{{index+1}}次</view>
+        <view>场地：{{item.ground_id}} </view>
+        <view>开始时间：{{item.Stime}} </view>
+        <view>结束时间：{{item.Etime}} </view>
+    </view>
+</van-popup>
+
+
+
+
