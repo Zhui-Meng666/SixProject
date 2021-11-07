@@ -87,6 +87,11 @@ Page({
     onClose4() {
         this.setData({show4:false});
     },
+    back2main: function() {
+        wx.navigateTo({
+          url: '../main/main.wxml',
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */

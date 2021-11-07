@@ -1,4 +1,9 @@
 /* pages/Personal/career/career.wxss */
+.button1{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(130, 82, 192);
+}
 .lineview{
     width: 100%;
     height: 1px;

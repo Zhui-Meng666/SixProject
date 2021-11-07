@@ -36,6 +36,9 @@
     </view>
 </van-popup>
 
+<!-- <button type="primary" bindtap="back2main">返回首页</button> -->
 
+<!-- <van-button plain type="info" bindtap='back2main'>返回首页</van-button> -->
 
+<navigator url='../main/main' open-type="navigate" class="button1">返回首页</navigator>
 
