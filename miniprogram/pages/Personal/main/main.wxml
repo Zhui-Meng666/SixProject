@@ -1,2 +1,85 @@
 <!--miniprogram/pages/Personal/main/main.wxml-->
-<text>miniprogram/pages/Personal/main/main.wxml</text>
+<view class="front">
+  <view class="setupfield">
+    <view class="setup" bindtap="setup">
+      <image src="../../../images/setup.png" mode="aspectFit" class="setupicon"></image>
+    </view>
+  </view>
+</view>
+<view class="mid">
+  <view class="avatarfield">
+    <view class="userinfo-avatar">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+  </view>
+  <view class="userinfofield">
+    <view class="userinfoname">
+      <view class="userinfo-nickname">
+        <open-data type="userNickName" lang="zh_CN"></open-data>
+      </view>
+      <view class="gender">
+        <image src="{{gendersrc}}" class="genderimg" mode="aspectFit"></image>
+      </view>
+    </view>
+    <view class="introduction"> {{ intro }} </view>
+  </view>
+  <view class="coinfield">
+    <view class="coin-image">
+      <image src="../../../images/coin.png" mode="aspectFit" class="coinimg"></image>
+    </view>
+    <view class="coin-number">{{coinnum}}</view>
+  </view>
+</view>
+<view class="tail">
+  <view class="identifield">
+    <van-tag wx:for="{{identify}}" wx:key="key" type="primary" size="large" plain round>{{item}}</van-tag>
+    <image src="../../../images/add.png" mode="aspectFit" class="iconimg" bindtap="chooseid"></image>
+  </view>
+  <view class="levelfield">
+    <block wx:for="{{level}}" wx:key="key">
+      <view class="levelshow">
+        <view class="level-image">
+          <image src="{{item.icon}}" mode="aspectFit" class="iconimg"></image>
+          <view class="level-text">{{item.icontext}}</view>
+        </view>
+        <view class="progress">
+          <van-progress pivot-text="{{item.progresstext}}" percentage="{{item.percent}}" stroke-width="8" />
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="listfield">
+    <block wx:for="{{list}}" wx:key="key">
+      <view class="listshow" id="{{index}}" bindtap="onTap">
+        <image src="{{item.icon}}" class="listicon" mode="aspectFit"></image>
+        <view class="listtext">{{item.text}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="photofield">
+    <view class="phototext">个人相册</view>
+    <view class="photolist">
+      <view wx:for="{{imglist}}" wx:key="key" bindtap="Tophotolist">
+        <image src="../../../images/Cat.jpeg" class="photoimg" mode="aspectFit"></image>
+      </view>
+      <view bindtap="Toupload">
+        <image src="../../../images/upload.png" class="iconimg" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+  <view class="feedfield">
+    <button open-type="feedback">
+      <van-cell title="反馈" is-link bind:click="feedback" border="{{false}}"></van-cell>
+    </button>
+  </view>
+</view>
+
+<van-popup show="{{ show }}" bind:close="onClose" custom-class="pop" round>
+  <van-checkbox-group value="{{ useridentify }}" bind:change="onChange" max="{{3}}" direction="horizontal">
+    <view class="checkbox">
+      <view wx:key="key" wx:for="{{userallid}}" class="checkitem">
+        <van-checkbox name="{{item.id}}">{{item.value}}</van-checkbox>
+      </view>
+    </view>
+  </van-checkbox-group>
+</van-popup>

@@ -1,0 +1,17 @@
+<!--pages/Personal/like/like.wxml-->
+<view class="front">
+    <view class="videonum">视频：{{videonum}}</view>
+    <view class="search">
+        <van-search value="{{ value }}" placeholder="请输入搜索关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch" bind:focus="onFocus" bind:cancel="onCancel">
+        </van-search>
+    </view>
+</view>
+<scroll-view scroll-y enable-flex style="height: {{pgheight}}rpx;" class="likelist">
+    <view class="likeitem" wx:key="key" wx:for="{{likelist}}">
+        <image class="image" src="{{item.src}}" mode="aspectFill"></image>
+        <view class="videotitle">
+            <view class="titletext">{{item.title}}</view>
+            <image class="iconimg" src="../../../images/share.png"></image>
+        </view>
+    </view>
+</scroll-view>

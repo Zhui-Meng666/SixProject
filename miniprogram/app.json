@@ -1,7 +1,16 @@
 {
     "pages": [
+        "pages/Personal/like/like",
+        "pages/Personal/main/main",
+        "pages/Personal/login/login",
         "pages/index/index",
-        "pages/Personal/main/main"
+        "pages/Personal/setup/setup",
+        
+        "pages/Exchange/main/mian",
+        "pages/Personal/reward/reward",
+        "pages/Personal/carrer/carrer",
+        "pages/Personal/photolist/photolist",
+        "pages/Personal/upload/upload"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -10,5 +19,20 @@
         "navigationBarTitleText": "SUFE羽毛球助手",
         "navigationBarTextStyle": "black"
     },
-    "sitemapLocation": "sitemap.json"
+    "sitemapLocation": "sitemap.json",
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-radio": "@vant/weapp/radio/index",
+        "van-radio-group": "@vant/weapp/radio-group/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+        "van-toast": "@vant/weapp/toast/index",
+        "van-tag": "@vant/weapp/tag/index",
+        "van-progress": "@vant/weapp/progress/index",
+        "van-search": "@vant/weapp/search/index"
+    }
 }

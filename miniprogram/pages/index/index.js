@@ -5,7 +5,37 @@ Page({
      * 页面的初始数据
      */
     data: {
+        openid: '12345'
+    },
 
+    getid: function (e) {
+    },
+
+    http: function(e) {
+        let that = this
+        wx.cloud.callFunction({
+            // 要调用的云函数名称
+            name: 'httprequest',
+            // 传递给云函数的参数
+            data: {
+                url: 'http://www.baidu.com/s',
+                data: {
+                    wd: '书包'
+                }
+            },
+            success: res => {
+                console.log("成功", res)
+                that.setData({
+                    openid: res.result.openid
+                })
+            },
+            fail: err => {
+                console.log("错误", err);
+            },
+            complete: () => {
+                console.log('完成 ');
+            }
+        })
     },
 
     /**

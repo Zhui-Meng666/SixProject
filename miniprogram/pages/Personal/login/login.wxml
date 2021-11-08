@@ -1,0 +1,31 @@
+<!--pages/Personal/login/login.wxml-->
+<view class="container">
+  <van-cell-group inset>
+    <van-cell title="学号：" label="必填" title-width="50px" required>
+      <van-field placeholder="请输入学号（10位）" error-message="{{errmess}}" border="{{ false }}" bind:change="onchange" bind:blur="submit"></van-field>
+    </van-cell>
+    <van-cell title="性别：" label="选择" title-width="70px" center>
+      <van-radio-group bind:change="onChange" direction="horizontal">
+        <van-radio name="1">男</van-radio>
+        <van-radio name="2">女</van-radio>
+      </van-radio-group>
+    </van-cell>
+    <van-cell title="身份：" label="多选" is-link bind:click="showPopup" value-class="value" center>已选{{identify}}项</van-cell>
+  </van-cell-group>
+  <van-popup show="{{ show }}" round custom-style="display:flex;flex-direction:column;align-items:flex-start;justify-content: space-around;height: 20%;width:90%;padding-left:8px" bind:close="onClose">
+    <van-checkbox-group value="{{ result1 }}" bind:change="onChange1" direction="horizontal">
+      <van-checkbox name="0">管理员</van-checkbox>
+      <van-checkbox name="1">裁判</van-checkbox>
+      <van-checkbox name="2">运动员领队</van-checkbox>
+    </van-checkbox-group>
+    <van-checkbox-group value="{{ result2 }}" bind:change="onChange2" direction="horizontal">
+      <van-checkbox name="3">运动员</van-checkbox>
+      <van-checkbox name="4">会员</van-checkbox>
+      <van-checkbox name="5">非会员</van-checkbox>
+    </van-checkbox-group>
+  </van-popup>
+</view>
+<view style="display: flex;align-items: center;justify-content: center;margin-top: 50px;">
+  <van-button round type="primary" loading="{{loading}}" loading-text="登陆中..." loading-type="spinner" bind:click="register">注册/登录</van-button>
+</view>
+<van-toast id="van-toast" />
