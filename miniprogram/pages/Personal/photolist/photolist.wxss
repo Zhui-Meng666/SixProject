@@ -1,1 +1,61 @@
 /* pages/Personal/photolist/photolist.wxss */
+
+.box{
+    height: 80px;
+    width: 80px;
+    margin: 13px;
+    /* border-color: black;
+    border-style: groove; */
+}
+
+.background{
+    width: 100%;
+    height: 150px;
+}
+
+.container{
+    width: 100%;
+    height: 160px;
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+    background-color:greenyellow;
+}
+.row{
+    height: 27px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 346px;
+}
+.picnum{
+    width: 65px;
+    height: 20px;
+    border-style: dashed;
+    border-color: cadetblue;
+    margin-left: 5px;
+    align-items: center;
+}
+.org{
+    height: 20px;
+    width: 230px;
+    margin-right: 5px;
+    text-align: right;
+    font-family: "Kaiti";
+    font-size: 20px;
+
+}
+.line{
+    width: 100%;
+    height: 2px;
+    background-color:cornflowerblue;
+}
+.pics{
+    display: flex;
+    flex-direction: row;
+    /* margin-top: 15px;
+    margin-left: 15px; */
+    flex-wrap: wrap;
+    align-content: flex-start;  
+}

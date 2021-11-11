@@ -113,12 +113,12 @@ Page({
         break
       case 1:
         wx.navigateTo({
-          url: '../reward/reward',
+          url: '../prize/prize',
         })
         break
       case 2:
         wx.navigateTo({
-          url: '../carrer/carrer',
+          url: '../career/career',
         })
         break
       case 3:

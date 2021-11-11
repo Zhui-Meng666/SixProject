@@ -1,4 +1,5 @@
 // pages/Personal/career/career.js
+let app = getApp()
 Page({
 
     /**
@@ -12,45 +13,116 @@ Page({
 
         athlete : [
             {
-                game_name : "比赛1",
+                game_name : "新秀赛",
                 ranking : "1st",
-                date : "2021-10-10"
+                date : "2019-10-10",
+                class : "男子单打"
             },
             {
-                game_name : '比赛2',
+                game_name : '黄金赛',
                 ranking : '2nd',
-                date : '2021-10-10'
+                date : '2020-10-10',
+                class : "男子双打"
             },
             {
                 game_name : '比赛3',
                 ranking : '3rd',
-                date : '2021-10-10'
+                date : '2021-10-10',
+                class : "男子单打"
+            },
+        ],
+        athlete1 : [
+            {
+                game_name : "新秀赛",
+                ranking : "1st",
+                date : "2019-10-10",
+                class : "男子单打"
+            },
+            {
+                game_name : '黄金赛',
+                ranking : '2nd',
+                date : '2020-10-10',
+                class : "男子双打"
+            },
+            {
+                game_name : '比赛3',
+                ranking : '3rd',
+                date : '2021-10-10',
+                class : "男子单打"
             },
         ],
 
         play : [
             {
                 ground_id : '1', 
-                Stime : '2021-2-9 20:00:00',
-                Etime : '2021-2-9 21:00:00'
+                date : '2021-2-9',
+                datey : '2021',
+                datem : '2',
+                dated : '9',
+                partner : 'ABC',
+                class : '单打'
             },
             {
                 ground_id: '2',
-                Stime : '2021-2-11 15:00:00',
-                Etime : '2021-2-11 17:00:00'
+                date : '2021-3-9',
+                datey : '2021',
+                datem : '3',
+                dated : '9',
+                partner : 'QWE',
+                class : '男女双打'
+            },
+        ],
+        play1 : [
+            {
+                ground_id : '1', 
+                date : '2021-2-9',
+                datey : '2021',
+                datem : '2',
+                dated : '9',
+                partner : 'ABC',
+                class : '单打'
+            },
+            {
+                ground_id: '2',
+                date : '2021-3-9',
+                datey : '2021',
+                datem : '3',
+                dated : '9',
+                partner : 'QWE',
+                class : '男女双打'
             },
         ],
 
         referee : [
             {
                 game_name : '新生杯',
+                game_id : 2,
                 date : '2021-5-10',
-                identity : '主裁判'
+                identity : '主裁',
+                score : '+8'
             },
             {
                 game_name : '老生杯',
+                game_id : 1,
                 date : '2021-10-10',
-                identity : '辅助裁判'
+                identity : '边裁',
+                score : '-2'
+            }
+        ],
+        referee1 : [
+            {
+                game_name : '新生杯',
+                game_id : 2,
+                date : '2021-5-10',
+                identity : '主裁',
+                score : '+8'
+            },
+            {
+                game_name : '老生杯',
+                game_id : 1,
+                date : '2021-10-10',
+                identity : '边裁',
+                score : '-2'
             }
         ],
 
@@ -58,9 +130,96 @@ Page({
             {
                 activity_name : '宣讲会',
                 date : '2021-3-10',
+                img : 'test.png',
+                sb : 8
+            }
+        ],
+        activity1 : [
+            {
+                activity_name : '宣讲会',
+                date : '2021-3-10',
+                img : 'test.png',
+                sb : 8
             }
         ],
 
+    },
+
+    onChange: function (e) {
+        this.setData({
+            value: e.detail,
+        })
+    },
+    onSearch1: function (e) {
+        var newlist = []
+        var text = this.data.value
+        var list = this.data.play
+        var len = list.length
+        for (let i = 0; i < len; ++i) {
+            if (list[i].date.indexOf(text) != -1 || list[i].class.indexOf(text)!=-1 || list[i].partner.indexOf(text)!=-1) {
+                newlist.push(list[i])
+            }
+        }
+        this.setData({
+            play: newlist
+        })
+    },
+    onSearch2: function (e) {
+        var newlist = []
+        var text = this.data.value
+        var list = this.data.activity
+        var len = list.length
+        for (let i = 0; i < len; ++i) {
+            if (list[i].activity_name.indexOf(text) != -1 || list[i].date.indexOf(text)!=-1) {
+                newlist.push(list[i])
+            }
+        }
+        this.setData({
+            activity: newlist
+        })
+    },
+    onSearch3: function (e) {
+        var newlist = []
+        var text = this.data.value
+        var list = this.data.athlete
+        var len = list.length
+        for (let i = 0; i < len; ++i) {
+            if (list[i].game_name.indexOf(text) != -1 || list[i].class.indexOf(text)!=-1 || list[i].date.indexOf(text)!=-1) {
+                newlist.push(list[i])
+            }
+        }
+        this.setData({
+            athlete: newlist
+        })
+    },
+    onSearch4: function (e) {
+        var newlist = []
+        var text = this.data.value
+        var list = this.data.referee
+        var len = list.length
+        for (let i = 0; i < len; ++i) {
+            if (list[i].game_name.indexOf(text) != -1 || list[i].identity.indexOf(text)!=-1 || list[i].date.indexOf(text)!=-1) {
+                newlist.push(list[i])
+            }
+        }
+        this.setData({
+            referee: newlist
+        })
+    },
+    onFocus: function (e) {
+        this.setData({
+            showcancel: true
+        })
+    },
+
+    onCancel: function (e) {
+        this.setData({
+            athlete: this.data.athlete1,
+            referee : this.data.referee1,
+            activity : this.data.activity1,
+            play : this.data.play1,
+            showcancel: false
+        })
     },
 
     showPopup1() {

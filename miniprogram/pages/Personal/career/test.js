@@ -1,13 +1,19 @@
-// pages/Personal/reward/reward.js
+// pages/Personal/career/test.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        activate:1
     },
 
+    onChange(event) {
+        wx.showToast({
+          title: `切换到标签 ${event.detail.index + 1}`,
+          icon: 'none'
+        });
+      },
     /**
      * 生命周期函数--监听页面加载
      */

@@ -1,4 +1,4 @@
-// pages/Personal/carrer/carrer.js
+// pages/Exchange/main/main.js
 Page({
 
     /**

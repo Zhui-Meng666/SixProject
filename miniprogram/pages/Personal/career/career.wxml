@@ -1,44 +1,133 @@
 <!--pages/Personal/career/career.wxml-->
 
-<van-cell title="参加过的比赛" is-link bind:click="showPopup1" />
-<van-popup show="{{show1}}" bind:close="onClose1">
-    <view wx:for="{{athlete}}" class="secondlayout">
-        <view>{{item.game_name}} </view>
-        <view>{{item.ranking}} </view>
-        <view>{{item.date}} </view>
+<van-tabs antimated activate="{{activate}}" bind:change="onChange">
+    <van-tab title="约球">
+    <view class="search">
+        <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+        show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch1"
+        bind:focus="onFocus" bind:cancel="onCancel">
+        </van-search>
     </view>
-</van-popup>
-
-<van-cell title="执裁过的比赛" is-link bind:click="showPopup2" />
-<van-popup show="{{show2}}" bind:close="onClose2">
-    <view wx:for="{{referee}}" class='secondlayout'>
-        <view>{{item.game_name}} </view>
-        <view>{{item.identity}} </view>
-        <view>{{item.date}} </view>
+    <view class = "container">
+        <view wx:for="{{play}}" class='ele1'>
+            <view class="message">
+                <view class="row1">
+                    <view class='cmsg'>我在</view>
+                    <view class='bmsg'>{{item.datey}}年{{item.datem}}月{{item.dated}}日</view>
+                    <view class='cmsg'>和</view>
+                    <view class='bmsg'>{{item.partner}}</view>
+                </view>
+                <view class="row2">
+                    <view class='cmsg'>完成了一次</view>
+                    <view class='bmsg'>{{item.class}}</view>
+                    <view class='cmsg'>约球</view>
+                </view>
+            </view>
+            <view class="date">
+                创建日期：{{item.date}}
+            </view>
+        </view>
     </view>
-</van-popup>
+    </van-tab>
+    <van-tab title="活动">
+        <view class="search">
+            <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+            show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch2"
+            bind:focus="onFocus" bind:cancel="onCancel">
+            </van-search>
+        </view>
+        <view class="container">
+            <view wx:for="{{activity}}" class="act1">
+                <image wx:if="{{item.img}}" src="{{item.img}}" class="firstimagestyle"></image>
+                <view class="act2">
+                    <view class="act3">
+                        {{item.activity_name}}
+                    </view>
+                    <view class="act3">
+                        <view class="sb">
+                            {{item.sb}} <image wx:if="sufe币.png" src="sufe币.png" class="actsb"></image>
+                        </view>
+                         <viwe class="actdate">
+                            参与时间: {{item.date}}
+                        </viwe>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </van-tab>
+    <van-tab title="参赛">
+        <view class="search">
+            <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+            show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch3"
+            bind:focus="onFocus" bind:cancel="onCancel">
+            </van-search>
+        </view>
+        <view class="container">
+            <view wx:for="{{athlete}}" class="ele1">
+                <view class="message">
+                    <view class="row1">
+                        <view class="acmsg">我参加了</view>
+                        <view class='bmsg'>{{item.game_name}}</view>
+                        <view class="acmsg">的</view>
+                        <view class='bmsg'>{{item.class}}，</view>
+                        
+                    </view>
+                    <view class="row2">
+                        <view class="acmsg">取得了</view>
+                        <view class='bmsg'>{{item.ranking}}</view>
+                    </view>
+                </view>
+                
+                <view class="date">
+                    日期：{{item.date}}
+                </view>
+                
+            </view>
+        </view>
+    </van-tab>
+    <van-tab title="执裁">
+        <view class="refrow">
+            <view class="level">
+            裁判等级：10
+            </view>
+            <view class="search4">
+                <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+                show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch4"
+                bind:focus="onFocus" bind:cancel="onCancel">
+                </van-search>
+            </view>
+        </view>
+        
+        <view class="container">
+            <view wx:for="{{referee}}" class="rele1">
+                <view class="message">
+                    <view class="row1">
+                        <view class="cmsg">我在</view>
+                        <view class="bmsg">{{item.game_name}}</view> 
+                        <view class="cmsg">，担任了</view>
+                    </view>
+                    <view class="row2">
+                        <view class="bmsg">{{item.game_id}}</view>
+                        <view class="cmsg">的</view>
+                        <view class="bmsg">{{item.identity}}</view>
+                        <view class="cmsg">，信誉分</view>
+                        <view class="bmsg">{{item.score}}</view>
+                    </view>
+                    <view class="row1">
+                        <view class="cmsg">信誉分总计：</view>
+                        <view class="bmsg">6</view>
+                    </view>
+                    
+                </view>
+                <view class="rdate">
+                    日期：{{item.date}}
+                </view>
+            </view>
+            
+        </view>
+    </van-tab>
 
-<van-cell title="参加过的活动" is-link bind:click="showPopup3" />
-<van-popup show="{{show3}}" bind:close="onClose3">
-    <view wx:for="{{activity}}" class='secondlayout'>
-        <view>{{item.activity_name}} </view>
-        <view>{{item.date}} </view>
-    </view>
-</van-popup>
+</van-tabs>
 
-<van-cell title="约过的球" is-link bind:click="showPopup4" />
-<van-popup show="{{show4}}" bind:close="onClose4" >
-    <view wx:for="{{play}}">
-        <view>第{{index+1}}次</view>
-        <view>场地：{{item.ground_id}} </view>
-        <view>开始时间：{{item.Stime}} </view>
-        <view>结束时间：{{item.Etime}} </view>
-    </view>
-</van-popup>
 
-<!-- <button type="primary" bindtap="back2main">返回首页</button> -->
-
-<!-- <van-button plain type="info" bindtap='back2main'>返回首页</van-button> -->
-
-<navigator url='../main/main' open-type="navigate" class="button1">返回首页</navigator>
 

@@ -1,20 +1,26 @@
 <!--pages/Personal/prize/prize.wxml-->
 
-
 <view class="container">
     <view wx:for="{{test_data}}" class='secondlayout'>
         <image src="{{item.imgsrc}}" class='firstimagestyle'></image>
         <view class='containeritem'>
-            <view class='secondlayoutitemtwo'>
+            <view class='name'>
                 <text>{{item.name}}</text>
-                <view class='secondlayoutitem'>
-                    <text>详情</text>
-                </view>
             </view>
-            <view class='secondlayoutitemtwo'>
-                <text>{{item.date}}</text>
+            <view class='message'>
+                <view class='sb'>
+                    SUFE币：{{item.sb}}
+                </view>
+                <view class='divLine'></view>
+                <view class='date'>
+                    获得日期：{{item.date}}  
+                </view>
+                
             </view>
         </view>
     </view>
-    <view class='lineview'></view> 
+    
+</view>
+<view class='total'>
+        总计: 41 <image wx:if="{{sb_src}}" src="{{sb_src}}" class="sbimg"></image>
 </view>
