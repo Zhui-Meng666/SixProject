@@ -17,117 +17,151 @@
       flex-direction:column; 
       width: 100%;
       height: 100%;
+      margin-top: 15px;
   }
-  
-  .firstlayout{
-     width: 100%;
-     height: 100rpx;
-     display:flex;
-     flex-direction:row;
-     align-items: center;
-  }
-  
-  .firstlayoutitem{
-     display:flex;
-    flex-direction:column; 
-     width: 0rpx;
-     flex: 1;
-     height: 100%;
-  }
-  
-  .firstlayoutitemtwo{
-    display:flex;
-    flex-direction:row; 
-    width: 100%;
-    height: 100%;
-    justify-content:center;
-    align-items: center;
-  }
-  .lineviewtwo{
-    width: 100%;
-    height: 1px;
-    background: #FFA500;
-  }
-  
-  .lineviewthree{
-    width: 100%;
-    height: 1px;
-    background: #708090;
-  }
-  .firstfontcolorstyle{
-    color:#FFA500;
-  }
-  .secondfontcolorstyle{
-    color:#000000;
-  }
-  .secondlayout{
-    width: 100%;
-    height: 220rpx;
-    display:flex;
-    flex-direction:row; 
-  }
-  .secondlayoutitemtwo{
-    flex: 1;
-    height: 80rpx;
-    display:flex;
-    flex-direction:row;
-    align-items: center;
-    margin-top: 6rpx;
-  }
-  .secondlayoutitem{
-    flex: 1;
-    height: 100%rpx;
-    text-align: right;
-    margin-right: 20rpx;
-  }
+
   .firstimagestyle{
     width: 200rpx;
     height: 180rpx;
     margin: 20rpx;
   }
-  
-  .firstfontstyle{
-    font-size: 34rpx;
+
+  .ele1{
+    width: 90%;
+    height: 100px;
+    border-color: lightsteelblue;
+    border-style:groove;
+    margin: auto;
+    margin-bottom: 10px;
   }
-  .containeritem{
-     display:flex;
-      /*垂直方向 列方向 排布*/
-      flex-direction:column; 
-      width: 0rpx;
-      flex: 1;
-      height: 100%;
+  .rele1{
+    width: 90%;
+    height: 112px;
+    border-color: lightsteelblue;
+    border-style:groove;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 12px;
   }
-  
-  .firstlayoutitemthree{
-    flex: 1;
-    height: 60rpx;
-    display:flex;
-    flex-direction:row; 
-    align-items: center;
+  .act1{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 100px;
+    border-color: lightsteelblue;
+    border-style:groove;
+    margin: auto;
+    margin-bottom: 10px;
   }
-  .firstlayoutitemfour{
-    flex: 1;
-    height: 60rpx;
-    display:flex;
-    flex-direction:row; 
-    align-items: center;
+  .message{
+    display: flex;
+    flex-direction:column;
+    /* align-items: center; */
+    margin: auto;
+    padding-right: 5px;
   }
-  .firstlayoutitemfouritem{
-     flex: 1;
-    height: 100%rpx;
+  .act2{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .act3{
+    margin-top: 15px;
+    /* margin-left: 10px; */
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+  .sb{
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+  }
+  .actsb{
+    height: 20px;
+    width: 20px;
+  }
+  .bmsg{
+    font-size: 25px;
+    font-family: 'Kaiti';
+  }
+  .cmsg{
+    font-size: 20px;
+    font-family: 'Songti';
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .row1{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .row2{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .date{
+    margin: auto;
+    font-size: 10px;
+    color: gray;
     text-align: right;
-    margin-right: 20rpx;
+    margin-top:  20px;
+    margin-right: 5px;
   }
-  .secondfondstyle{
-     
-    color: #FF0000;
+  .rdate{
+    font-size: 10px;
+    width: 98%;
+    height: 50px;
+    text-align: right;
+    /* margin-right: 5px;
+    margin-bottom: 5px; */
+    color: gray;
   }
-  .thirdfondstyle{
-    font-size:34rpx;
+  .actdate{
+    margin-left: 20px;
+    align-items: center;
+    font-size: 15px;
+    width: 150px;
+    height: 50px;
+    /* color: gray; */
   }
-  
-  .lineviewfour{
-    width: 1px;
-    height: 60rpx;
-    background: #708090;
+
+  .level{
+    width: 100px;
+    height: 30px;
+    font-family: "Heiti";
+    font-size: 15px;
+    border-style:groove;
+    border-color: #607D8B;
+    border-width: 2px;
+    margin-left: 13px;
+    margin-top: 10px;
   }
+  .acmsg{
+    font-size: 15px;
+    font-family: 'Songti';
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .search {
+    width: 98%;
+    /* position: fixed; */
+    right: 30px;
+}
+.search4 {
+  width: 60%;
+  /* position: fixed;
+  right: 8px;
+  top: 35px; */
+}
+
+.refrow{
+  height: 34px;
+  width: 100%;
+  display: flex;
+  flex: row;
+  margin-top: 10px;
+}

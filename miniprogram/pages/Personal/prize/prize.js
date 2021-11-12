@@ -11,39 +11,52 @@ Page({
                 name : '火箭0',
                 date : '2021-10-10',
                 price : '99',
-                postID : 0
+                postID : 0,
+                sb : 9,
             },
             {
                 imgsrc : '../../../images/test.png',
                 name : '火箭1',
                 date : '2021-10-10',
                 price : '99',
-                postID : 1
+                postID : 1,
+                sb : 8,
             },
             {
                 imgsrc : '../../../images/test.png',
                 name : '火箭2',
                 date : '2021-10-10',
                 price : '99',
-                postID : 2
+                postID : 2,
+                sb : 8,
             },
             {
                 imgsrc : '../../../images/test.png',
                 name : '火箭3',
                 date : '2021-10-10',
                 price : '99',
-                postID : 3
+                postID : 3,
+                sb : 8,
             },
             {
                 imgsrc : '../../../images/test.png',
                 name : '火箭4',
                 date : '2021-10-10',
                 price : '99',
-                postID : 4
+                postID : 4,
+                sb : 8,
             }
-        ]
+        ],
+        sb_src : './sufe币.png'
     },
 
+    sum(test_data) {
+        var res = 0;
+        for (var i=0;i<test_data.length;i++){
+            res += test_data[i].sb;
+        }
+        return res;
+      },
     /**
      * 生命周期函数--监听页面加载
      */

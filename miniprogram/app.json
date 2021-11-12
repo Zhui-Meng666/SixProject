@@ -1,12 +1,12 @@
 {
     "pages": [
-        "pages/Personal/login/login",
         "pages/Personal/main/main",
-        
+        "pages/Personal/login/login",
         "pages/Personal/like/like",
+
+        "pages/Exchange/main/mian",
         "pages/index/index",
         "pages/Personal/prize/prize",
-        "pages/Exchange/main/mian",
         "pages/Personal/career/career",
         "pages/Personal/photolist/photolist",
         "pages/Personal/changeinfo/changeinfo"
@@ -32,6 +32,9 @@
         "van-toast": "@vant/weapp/toast/index",
         "van-tag": "@vant/weapp/tag/index",
         "van-progress": "@vant/weapp/progress/index",
-        "van-search": "@vant/weapp/search/index"
+        "van-search": "@vant/weapp/search/index",
+        "van-tabs" : "@vant/weapp/tabs/index",
+        "van-tab" : "@vant/weapp/tab/index",
+        "van-datetime-picker" : "@vant/weapp/datetime-picker/index"
     }
 }
