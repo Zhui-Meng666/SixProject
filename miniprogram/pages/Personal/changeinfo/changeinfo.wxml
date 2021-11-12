@@ -1,0 +1,44 @@
+<!--pages/Personal/changeinfo/changeinfo.wxml-->
+<view class="container">
+    <view class="avatarfield">
+        <view class="avatar">
+            <open-data type="userAvatarUrl"></open-data>
+        </view>
+    </view>
+    <view class="cellfield">
+        <van-cell title="昵称：" title-width="35%" center custom-class="normalcell" title-class="celltitle">
+            <view class="cellvalue">
+                <open-data type="userNickName"></open-data>
+            </view>
+        </van-cell>
+        <van-cell title="学号：" title-width="30%" center custom-class="normalcell" title-class="celltitle">
+            <van-field value="{{stuid}}" border="{{false}}" disabled="{{uneditable}}" clearable placeholder="请输入学号（10位）" input-class="inputfield" bind:click-icon="edit" bind:blur="substuid">
+                <view slot="right-icon">
+                    <image src="../../../images/edit.png" class="righticon" mode="aspectFit"></image>
+                </view>
+            </van-field>
+        </van-cell>
+        <van-cell title="性别：" title-width="30%" center custom-class="normalcell" title-class="celltitle">
+            <van-radio-group bind:change="onChange" direction="horizontal" value="{{gender}}" disabled="{{uneditable}}">
+                <view class="radiogroup">
+                    <van-radio name="1">男</van-radio>
+                    <van-radio name="2">女</van-radio>
+                    <view bindtap="edit">
+                        <image src="../../../images/edit.png" class="righticon" mode="aspectFit"></image>
+                    </view>
+                </view>
+            </van-radio-group>
+        </van-cell>
+        <van-cell title="个人简介：" label="不超过30字" title-width="30%" custom-class="largecell" title-class="celltitle">
+            <van-field type="textarea" autosize value="{{intro}}" border="{{false}}" disabled="{{uneditable}}" clearable placeholder="请输入个人简介" bind:click-icon="edit" maxlength="30" show-word-limit bind:blur="sunintro">
+                <view slot="right-icon">
+                    <image src="../../../images/edit.png" class="righticon" mode="aspectFit"></image>
+                </view>
+            </van-field>
+        </van-cell>
+    </view>
+    <view class="save">
+        <van-button custom-class="savebutton" type="primary" round color="#60BA46" loading="{{loading}}" loading-type="spinner" bind:click="save">保存</van-button>
+    </view>
+</view>
+<van-toast id="van-toast" />

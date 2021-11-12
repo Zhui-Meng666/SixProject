@@ -32,41 +32,14 @@ page {
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: stretch;
     flex-wrap: wrap;
 }
 
 .likeitem {
-    width: 40%;
-    height: 45%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 2% 4.5%;
-    border: thin solid #515c5d;
+    width: 33.3%;
 }
 
 .image {
-    width: 95%;
-    height: 80%;
-    margin: 15rpx 0;
-}
-
-.videotitle {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.titletext {
-    width: 70%;
-    margin-left: 20rpx;
-}
-
-.iconimg {
-    width: 60rpx;
-    height: 60rpx;
-    margin-right: 10rpx;
+    height: 100%;
 }

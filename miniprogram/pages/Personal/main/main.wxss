@@ -51,7 +51,7 @@ page {
     display: block;
     margin-left: 8%;
     border-radius: 50%;
-    border: 3rpx solid #a2cba3;
+    border: thin solid #a2cba3;
 }
 
 .userinfofield {
@@ -253,4 +253,9 @@ button {
 
 .checkitem {
     margin: 10px 0;
+}
+
+.setpop {
+    height: 100%;
+    width: 40%;
 }

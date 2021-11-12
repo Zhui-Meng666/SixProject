@@ -30,6 +30,30 @@ Page({
             {
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '我'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '你'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '他'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '视频标题'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '视频标题'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '视频标题'
             }
         ],
         likelist: [{
@@ -55,8 +79,32 @@ Page({
             {
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '我'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '你'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '他'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '视频标题'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '视频标题'
+            },
+            {
+                src: '../../../images/videoimg.jpg',
+                title: '视频标题'
             }
-        ]
+        ],
     },
 
     onChange: function (e) {
@@ -100,7 +148,8 @@ Page({
         var height = app.globalData.getPageHeight()
         // console.log(height)
         this.setData({
-            pgheight: height - 132
+            pgheight: height - 132,
+            likeheight: (height-132)/3,
         })
     },
 

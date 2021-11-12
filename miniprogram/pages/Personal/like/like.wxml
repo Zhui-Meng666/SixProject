@@ -6,12 +6,13 @@
         </van-search>
     </view>
 </view>
-<scroll-view scroll-y enable-flex style="height: {{pgheight}}rpx;" class="likelist">
-    <view class="likeitem" wx:key="key" wx:for="{{likelist}}">
+<view wx:if="{{likelist.length <= 9}}" class="likelist">
+    <view class="likeitem" style="height: {{likeheight}}rpx;" wx:key="key" wx:for="{{likelist}}">
         <image class="image" src="{{item.src}}" mode="aspectFill"></image>
-        <view class="videotitle">
-            <view class="titletext">{{item.title}}</view>
-            <image class="iconimg" src="../../../images/share.png"></image>
-        </view>
+    </view>
+</view>
+<scroll-view wx:else scroll-y enable-flex style="height: {{pgheight}}rpx;" class="likelist">
+    <view class="likeitem" style="height: {{likeheight}}rpx;" wx:key="key" wx:for="{{likelist}}">
+        <image class="image" src="{{item.src}}" mode="aspectFill"></image>
     </view>
 </scroll-view>

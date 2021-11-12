@@ -1,5 +1,6 @@
 // pages/Personal/login/login.js
 import Toast from '@vant/weapp/toast/toast';
+var app = getApp()
 Page({
 
   /**
@@ -7,11 +8,10 @@ Page({
    */
   data: {
     show: false,
+    stuid: '',
     gender: '0',
-    result1: [],
-    result2: [],
-    identify: 0,
-    loading: false
+    loading: false,
+    butwidth: 200
   },
 
   onchange: function (e) {
@@ -27,9 +27,15 @@ Page({
     }
   },
 
-  submit: function (e) {
+  submitid: function (e) {
     this.setData({
       stuid: e.detail.value
+    })
+  },
+
+  submitintro: function (e) {
+    this.setData({
+      userintro: e.detail.value
     })
   },
 
@@ -39,58 +45,56 @@ Page({
     })
   },
 
-  showPopup: function (e) {
-    this.setData({
-      show: true
-    })
-  },
-
-  onClose: function (e) {
-    this.setData({
-      show: false,
-      identify:this.data.result1.length+this.data.result2.length
-    })
-  },
-
-  onChange1: function (e) {
-    this.setData({
-      result1: e.detail
-    })
-  },
-
-  onChange2: function (e) {
-    this.setData({
-      result2: e.detail
-    })
-  },
-
   register: function (e) {
-    this.setData({
-      loading: true
-    })
-    var submitdata = {
-      stuid: this.data.stuid,
-      gender: this.data.gender,
-      identify: this.data.result1.concat(this.data.result2)
+    if (this.data.stuid.length != 10) {
+      Toast.fail('学号格式错误')
+      return -1
     }
-    console.log(submitdata)
-    wx.cloud.callFunction({
-      name: 'register',
-      data: submitdata,
-      success: (res) => {
-        console.log('成功', res)
-        this.setData({
-          loading: false
-        })
-        Toast.success('登录成功')
-        wx.redirectTo({
-          url: '../main/main',
-        })
-      },
-      fail: (err) => {
-        console.log('失败', err)
-      }
-    })
+    if (wx.canIUse('getUserProfile')) {
+      wx.getUserProfile({
+        desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        success: (res) => {
+          this.setData({
+            userInfo: res.userInfo,
+            butwidth: 300,
+            loading: true,
+          })
+          var submitdata = {
+            openid: app.globalData.openid,
+            student_id: this.data.stuid,
+            gender: this.data.gender,
+            introduction: this.data.userintro,
+            avatar: this.data.userInfo.avatarUrl,
+            nickname: this.data.userInfo.nickName
+          }
+          console.log(submitdata)
+          wx.cloud.callFunction({
+            name: 'register',
+            data: submitdata,
+            success: (res) => {
+              console.log('成功', res)
+              this.setData({
+                loading: false,
+                butwidth: 200
+              })
+              Toast.success('登录成功')
+              wx.redirectTo({
+                url: '../main/main',
+              })
+            },
+            fail: (err) => {
+              console.log('失败', err)
+            }
+          })
+        },
+        fail: (err) => {
+          console.log('出错', err)
+        }
+      })
+    } else {
+      Toast.fail('请升级微信版本')
+      return -1
+    }
   },
 
   /**

@@ -2,7 +2,7 @@
 
 
 <view class="container">
-    <view wx:for="{{test_data}}" class='secondlayout'>
+    <view wx:key="key" wx:for="{{test_data}}" class='secondlayout'>
         <image src="{{item.imgsrc}}" class='firstimagestyle'></image>
         <view class='containeritem'>
             <view class='secondlayoutitemtwo'>

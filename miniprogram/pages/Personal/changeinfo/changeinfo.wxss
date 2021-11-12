@@ -1,0 +1,86 @@
+/* pages/Personal/changeinfo/changeinfo.wxss */
+page {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatarfield {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a2cba3;
+}
+
+.avatar {
+    width: 150rpx;
+    height: 150rpx;
+    overflow: hidden;
+    display: block;
+    border-radius: 50%;
+    border: thin solid #a2cba3;
+}
+
+.cellfield {
+    width: 100%;
+    height: 50%;
+    border: thin solid black;
+}
+
+.normalcell {
+    height: 20%;
+    margin: 0 auto;
+}
+
+.largecell {
+    height: 40%;
+    margin: 0 auto;
+}
+
+.celltitle {
+    font-size: large;
+}
+
+.cellvalue {
+    text-align: left;
+    font-size: large;
+}
+
+.inputfield {
+    font-size: large;
+}
+
+.righticon {
+    width: 68rpx;
+    height: 68rpx;
+}
+
+.radiogroup {
+    width: 99%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.save {
+    height: 14%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.savebutton {
+    width: 200rpx;
+}

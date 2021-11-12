@@ -1,5 +1,5 @@
 <!--miniprogram/pages/Personal/main/main.wxml-->
-<view class="front">
+<view class="front" style="background-image: url({{bgimg}});">
   <view class="setupfield">
     <view class="setup" bindtap="setup">
       <image src="../../../images/setup.png" mode="aspectFit" class="setupicon"></image>
@@ -59,17 +59,17 @@
   <view class="photofield">
     <view class="phototext">个人相册</view>
     <view class="photolist">
-      <view wx:for="{{imglist}}" wx:key="key" bindtap="Tophotolist">
-        <image src="../../../images/Cat.jpeg" class="photoimg" mode="aspectFit"></image>
+      <view wx:for="{{imglist}}" wx:key="key" bindtap="preview" id="{{index}}">
+        <image src="{{item}}" class="photoimg" mode="aspectFit"></image>
       </view>
-      <view bindtap="Toupload">
+      <view bindtap="Tophotolist">
         <image src="../../../images/upload.png" class="iconimg" mode="aspectFit"></image>
       </view>
     </view>
   </view>
   <view class="feedfield">
     <button open-type="feedback">
-      <van-cell title="反馈" is-link bind:click="feedback" border="{{false}}"></van-cell>
+      <van-cell title="反馈" is-link border="{{false}}"></van-cell>
     </button>
   </view>
 </view>
@@ -82,4 +82,9 @@
       </view>
     </view>
   </van-checkbox-group>
+</van-popup>
+
+<van-popup custom-class="setpop" show="{{ showset }}" bind:close="closeset" position="right" round safe-area-inset-top>
+  <van-cell is-link title="修改信息" link-type="navigateTo" url="../changeinfo/changeinfo" bind:click="closeset" />
+  <van-cell is-link title="更换背景图" bind:click="chooseimg"></van-cell>
 </van-popup>

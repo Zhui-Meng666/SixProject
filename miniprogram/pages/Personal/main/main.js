@@ -6,6 +6,7 @@ Page({
    */
   data: {
     show: false,
+    bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
     gendersrc: '../../../images/man.png',
     intro: '这个人很懒，没留下什么信息',
     coinnum: 100,
@@ -40,7 +41,7 @@ Page({
         text: 'sufe币'
       }
     ],
-    imglist: [1, 2, 3],
+    imglist: ['../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg'],
     userallid: [{
         id: '0',
         value: '管理员'
@@ -69,8 +70,8 @@ Page({
   },
 
   setup: function (e) {
-    wx.navigateTo({
-      url: '../setup/setup',
+    this.setData({
+      showset: true
     })
   },
 
@@ -106,19 +107,18 @@ Page({
     let id = Number(e.currentTarget.id)
     switch (id) {
       case 0:
-        console.log(0)
         wx.navigateTo({
           url: '../like/like',
         })
         break
       case 1:
         wx.navigateTo({
-          url: '../reward/reward',
+          url: '../prize/prize',
         })
         break
       case 2:
         wx.navigateTo({
-          url: '../carrer/carrer',
+          url: '../career/career',
         })
         break
       case 3:
@@ -135,14 +135,45 @@ Page({
     })
   },
 
-  Toupload: function (e) {
-    wx.navigateTo({
-      url: '../upload/upload',
+  preview: function (e) {
+    var id = e.currentTarget.id
+    console.log(id)
+    wx.previewImage({
+      urls: this.data.imglist,
+      current: this.data.imglist[id],
+      success: (res) => {
+        console.log('成功', res)
+      },
+      fail: (err) => {
+        console.log('失败', err)
+      }
     })
   },
 
-  feedback: function (e) {
-    
+  closeset: function (e) {
+    this.setData({
+      showset: false,
+    })
+  },
+
+  chooseimg: function (e) {
+    this.setData({
+      showset: false,
+    })
+    wx.chooseImage({
+      count: 1,
+      success: (res) => {
+        console.log('成功')
+        var tempPath = res.tempFilePaths[0]
+        this.setData({
+          tempPath: tempPath,
+          bgimg: tempPath,
+        })
+      },
+      fail: (err) => {
+        console.log('失败', err)
+      }
+    })
   },
 
   /**

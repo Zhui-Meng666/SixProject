@@ -7,35 +7,35 @@ Page({
     data: {
         test_data : [
             {
-                imgsrc : './test.png',
+                imgsrc : '../../../images/test.png',
                 name : '火箭0',
                 date : '2021-10-10',
                 price : '99',
                 postID : 0
             },
             {
-                imgsrc : './test.png',
+                imgsrc : '../../../images/test.png',
                 name : '火箭1',
                 date : '2021-10-10',
                 price : '99',
                 postID : 1
             },
             {
-                imgsrc : './test.png',
+                imgsrc : '../../../images/test.png',
                 name : '火箭2',
                 date : '2021-10-10',
                 price : '99',
                 postID : 2
             },
             {
-                imgsrc : './test.png',
+                imgsrc : '../../../images/test.png',
                 name : '火箭3',
                 date : '2021-10-10',
                 price : '99',
                 postID : 3
             },
             {
-                imgsrc : './test.png',
+                imgsrc : '../../../images/test.png',
                 name : '火箭4',
                 date : '2021-10-10',
                 price : '99',

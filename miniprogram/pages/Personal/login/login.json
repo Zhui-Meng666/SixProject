@@ -1,5 +1,4 @@
 {
-  "usingComponents": {
-    "select": "/components/select/index"
-  }
+  "usingComponents": {},
+  "navigationBarTitleText": "登录"
 }
