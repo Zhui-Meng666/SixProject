@@ -1,4 +1,5 @@
 // miniprogram/pages/Personal/main/main.js
+const Identify = ['管理员', '裁判', '运动员领队', '运动员', '会员', '非会员']
 Page({
 
   /**
@@ -8,9 +9,8 @@ Page({
     show: false,
     bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
     gendersrc: '../../../images/man.png',
-    intro: '这个人很懒，没留下什么信息',
+    intro: '这个人很神秘，什么都没有~',
     coinnum: 100,
-    identify: ['运动员', '会员', '裁判'],
     level: [{
         icon: '../../../images/level.png',
         icontext: '等级',
@@ -41,32 +41,36 @@ Page({
         text: 'sufe币'
       }
     ],
-    imglist: ['../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg'],
-    userallid: [{
-        id: '0',
-        value: '管理员'
-      },
-      {
-        id: '1',
-        value: '裁判'
-      },
-      {
-        id: '2',
-        value: '运动员领队'
-      },
-      {
-        id: '3',
-        value: '运动员'
-      },
-      {
-        id: '4',
-        value: '会员'
-      },
-      {
-        id: '5',
-        value: '非会员'
+    imglist: ['../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg']
+  },
+
+  Idtoname: function (arr) {
+    var len = arr.length
+    var identify = []
+    var userid = []
+    var useridlist = []
+    if (len <= 3) {
+      for (var i = 0; i < len; ++i) {
+        identify.push(Identify[Number(arr[i])])
       }
-    ]
+      userid = arr
+    } else {
+      for (var i = 0; i < 3; ++i) {
+        identify.push(Identify[Number(arr[i])])
+        userid.push(arr[i])
+      }
+    }
+    for (var i = 0; i < len; ++i) {
+      useridlist.push({
+        id: arr[i],
+        value: Identify[Number(arr[i])]
+      })
+    }
+    this.setData({
+      identify: identify,
+      userid: userid,
+      useridlist: useridlist
+    })
   },
 
   setup: function (e) {
@@ -82,14 +86,11 @@ Page({
   },
 
   onClose: function (e) {
-    var idlist = ['管理员', '裁判', '运动员领队', '运动员', '会员', '非会员']
+    var userid = this.data.userid
+    var len = userid.length
     var identify = []
-    let userid = this.data.useridentify
-    if (userid) {
-      let len = userid.length
-      for (let i = 0; i < len; ++i) {
-        identify.push(idlist[Number(userid[i])])
-      }
+    for (var i = 0; i < len; ++i) {
+      identify.push(Identify[Number(userid[i])])
     }
     this.setData({
       show: false,
@@ -99,7 +100,7 @@ Page({
 
   onChange: function (e) {
     this.setData({
-      useridentify: e.detail
+      userid: e.detail
     })
   },
 
@@ -180,6 +181,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    var userallid = ['1', '3', '4', '2', '0', '5']
+    this.Idtoname(userallid.sort())
 
   },
 

@@ -130,7 +130,7 @@ Page({
             {
                 activity_name : '宣讲会',
                 date : '2021-3-10',
-                img : 'test.png',
+                img : '../../../images/test.png',
                 sb : 8
             }
         ],
@@ -138,7 +138,7 @@ Page({
             {
                 activity_name : '宣讲会',
                 date : '2021-3-10',
-                img : 'test.png',
+                img : '../../../images/test.png',
                 sb : 8
             }
         ],

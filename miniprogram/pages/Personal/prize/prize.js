@@ -47,7 +47,7 @@ Page({
                 sb : 8,
             }
         ],
-        sb_src : './sufe币.png'
+        sb_src : '../../../images/sufecoin.png'
     },
 
     sum(test_data) {

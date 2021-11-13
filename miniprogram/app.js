@@ -16,6 +16,7 @@ App({
 
     this.globalData = {
       registered: false,
+      bsurl: '',
       getPageHeight: function () {
         let systemInfo = wx.getSystemInfoSync()
         // px转换到rpx的比例
@@ -33,7 +34,7 @@ App({
         return ktxWindowHeight
       }
     }
-
+    
     //获取openid
     //     wx.cloud.callFunction({
     //       // 要调用的云函数名称

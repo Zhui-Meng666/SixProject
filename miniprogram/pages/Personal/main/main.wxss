@@ -6,7 +6,7 @@ page {
 
 .front {
     width: 100%;
-    height: 35%;
+    height: 25%;
     background-color: #a2cba3;
     display: flex;
     flex-direction: row-reverse;
@@ -18,19 +18,19 @@ page {
 }
 
 .setup {
-    width: 75rpx;
+    width: 60rpx;
     height: 100%;
     margin: 6rpx 12rpx 0 0;
 }
 
 .setupicon {
-    width: 75rpx;
-    height: 75rpx;
+    width: 60rpx;
+    height: 60rpx;
 }
 
 .mid {
     width: 100%;
-    height: 15%;
+    height: 12%;
     margin-top: -15%;
     display: flex;
     flex-direction: row;
@@ -51,7 +51,7 @@ page {
     display: block;
     margin-left: 8%;
     border-radius: 50%;
-    border: thin solid #a2cba3;
+    border: thin solid whitesmoke;
 }
 
 .userinfofield {
@@ -99,11 +99,11 @@ page {
 .coin-image {
     width: 50rpx;
     height: 50rpx;
-    margin-bottom: 46%;
+    margin-bottom: 28%;
 }
 
 .coin-number {
-    margin-bottom: 50%;
+    margin-bottom: 30%;
     margin-left: 5rpx;
 }
 
@@ -114,24 +114,39 @@ page {
 
 .tail {
     width: 100%;
-    height: 65%;
+    height: 70%;
     background-color: #fafafb;
-    margin-top: -15%;
+    margin-top: -11%;
 }
 
 .identifield {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    height: 80rpx;
+    justify-content: flex-start;
+    height: 70rpx;
     position: relative;
     top: 10%;
 }
 
+.identify {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 18rpx;
+}
+
+.identificon {
+    flex-grow: 8;
+    height: 48rpx;
+    margin-left: 18rpx;
+}
+
 .iconimg {
-    width: 60rpx;
-    height: 60rpx;
+    width: 50rpx;
+    height: 50rpx;
 }
 
 .levelfield {
@@ -168,7 +183,7 @@ page {
 }
 
 .listfield {
-    height: 200rpx;
+    height: 180rpx;
     position: relative;
     top: 10%;
     display: flex;
@@ -197,7 +212,7 @@ page {
 }
 
 .photofield {
-    height: 200rpx;
+    height: 250rpx;
     position: relative;
     top: 10%;
     border: thin solid #515c5d;
@@ -206,34 +221,48 @@ page {
     background-color: white;
 }
 
-.photolist {
-    width: 100%;
-    margin: 20rpx 0;
+.photofront {
+    height: 50rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-right: 12rpx;
+}
+
+.photolist {
+    width: 100%;
+    margin-top: 10rpx;
+    padding: 0 15rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.photoimglist {
+    border: thin solid white;
 }
 
 .photoimg {
-    width: 120rpx;
-    height: 120rpx;
+    width: 170rpx;
+    height: 170rpx;
 }
 
 .phototext {
     font-size: small;
-    margin: 5rpx 10rpx;
+    margin: 10rpx 0 0 20rpx;
 }
 
 .feedfield {
     position: relative;
     top: 10%;
-    margin: 10rpx 5rpx;
+    margin: 10rpx;
     border-bottom: thin solid #515c5d;
     border-radius: 15rpx;
 }
 
 button {
+    padding: 0;
     text-align: left;
     background-color: white;
 }

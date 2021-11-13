@@ -10,7 +10,7 @@ Page({
         stuid: '2019111637',
         uneditable: true,
         gender: '1',
-        intro: '这个人很懒，什么也没有留下~'
+        intro: '这个人很神秘，什么都没有~'
     },
 
     edit: function (e) {
