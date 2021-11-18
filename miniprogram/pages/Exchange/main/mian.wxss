@@ -51,9 +51,9 @@ page {
 }
 
 .goodsitem {
-    width: 45%;
+    width: 48%;
     border: thin solid whitesmoke;
-    margin: 10rpx 2.2%;
+    margin: 10rpx auto;
 }
 
 .goodsimg {

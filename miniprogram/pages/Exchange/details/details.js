@@ -1,5 +1,7 @@
 // pages/Exchange/details/details.js
 import Toast from '@vant/weapp/toast/toast';
+var app = getApp()
+const tempid = 'mBVcUt6ZBlmHcTWyjWYrceyz1ODekgtvPerEj8T3bus'
 
 function sleep(numberMillis) {
     var now = new Date();
@@ -18,6 +20,7 @@ Page({
     data: {
         show: false,
         id: '0',
+        goodsname: '雨伞',
         goodsimg: '../../../images/goodsimg.jpg',
         addr: '武东路三教101',
         day: 3,
@@ -53,6 +56,40 @@ Page({
             show: false,
         })
         Toast.success('兑换成功')
+        wx.requestSubscribeMessage({
+            tmplIds: [tempid],
+            success: (res) => {
+                console.log('成功', res[tempid])
+                if (res[tempid] == 'accept') {
+                    wx.cloud.callFunction({
+                        name: 'sendmsg',
+                        data: {
+                            openid: app.globalData.openid,
+                            data: {
+                                thing2: {
+                                    value: this.data.goodsname
+                                },
+                                amount3: {
+                                    value: this.data.price
+                                },
+                                thing5: {
+                                    value: '地点：' + this.data.addr
+                                }
+                            }
+                        },
+                        success: (res) => {
+                            console.log('成功', res)
+                        },
+                        fail: (err) => {
+                            console.log('失败', err)
+                        }
+                    })
+                }
+            },
+            fail: (err) => {
+                console.log('失败', err)
+            }
+        })
     },
 
     /**
@@ -62,7 +99,7 @@ Page({
         var deadline = '2021/11/20'
         var now = new Date()
         var dead = new Date(Date.parse(deadline))
-        var day = parseInt(Math.abs(now - dead) / 1000 / 60 / 60 / 24)+1
+        var day = parseInt(Math.abs(now - dead) / 1000 / 60 / 60 / 24) + 1
         this.setData({
             id: options.id,
             day: day

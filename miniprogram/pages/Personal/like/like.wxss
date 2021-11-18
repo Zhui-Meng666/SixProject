@@ -36,8 +36,9 @@ page {
 }
 
 .likeitem {
-    width: 32.8%;
+    width: 32.5%;
     border: thin solid whitesmoke;
+    margin: 0 auto;
 }
 
 .image {

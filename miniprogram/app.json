@@ -1,18 +1,16 @@
 {
     "pages": [
-        
+        "pages/index/index",
         "pages/Exchange/main/mian",
         "pages/Exchange/details/details",
         "pages/Personal/main/main",
         "pages/Personal/login/login",
         "pages/Personal/like/like",
-        "pages/index/index",
         "pages/Personal/prize/prize",
         "pages/Personal/career/career",
         "pages/Personal/photolist/photolist",
         "pages/Personal/changeinfo/changeinfo",
-        "pages/Popular_Sci/play"
-        
+        "pages/Popular_Sci/video_play/video_play"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

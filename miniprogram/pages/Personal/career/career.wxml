@@ -2,29 +2,30 @@
 
 <van-tabs antimated activate="{{activate}}">
     <van-tab title="约球">
-        <view class="search">
-            <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch1" bind:focus="onFocus" bind:cancel="onCancel">
-            </van-search>
-        </view>
-        <view class="container">
-            <view wx:for="{{play}}" class='ele1'>
-                <view class="message">
-                    <view class="row1">
-                        <view class='cmsg'>我在</view>
-                        <view class='bmsg'>{{item.datey}}年{{item.datem}}月{{item.dated}}日</view>
-                        <view class='cmsg'>和</view>
-                        <view class='bmsg'>{{item.partner}}</view>
-                    </view>
-                    <view class="row2">
-                        <view class='cmsg'>完成了一次</view>
-                        <view class='bmsg'>{{item.class}}</view>
-                        <view class='cmsg'>约球</view>
-                    </view>
+    <view class="search">
+        <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+        show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch1"
+        bind:focus="onFocus" bind:cancel="onCancel">
+        </van-search>
+    </view>
+    <view class = "container">
+        <view wx:for="{{play}}" class='items'>
+            <image src="../../../images/test.png" class="imgs"></image>
+            <view class="details">
+                <view class="row1">
+                    <view class="cmsg">约球对象：</view>
+                    <view class='bmsg'>{{item.partner}}</view>
+                </view>
+                <view class="row2">
+                    <view class='cmsg'>约球项目：</view>
+                    <view class='bmsg'>{{item.class}}</view>
                 </view>
                 <view class="date">
-                    创建日期：{{item.date}}
+                    创建日期：{{item.date}} 
                 </view>
             </view>
+            
+        </view>
         </view>
     </van-tab>
     <van-tab title="活动">
@@ -33,20 +34,22 @@
             </van-search>
         </view>
         <view class="container">
-            <view wx:for="{{activity}}" class="act1">
-                <image wx:if="{{item.img}}" src="{{item.img}}" class="firstimagestyle"></image>
-                <view class="act2">
-                    <view class="act3">
-                        {{item.activity_name}}
+            <view wx:for="{{activity}}" class="items">
+                <image wx:if="{{item.img}}" src="{{item.img}}" class="imgs"></image>
+                <view class="details">
+                    <view class="row1">
+                        <view class="cmsg">活动：</view>
+                        <view class="bmsg">{{item.activity_name}}</view> 
                     </view>
-                    <view class="act3">
-                        <view class="sb">
-                            {{item.sb}} <image wx:if="../../../images/sufecoin.png" src="../../../images/sufecoin.png" class="actsb"></image>
+                    <view class="row2">
+                    <view class="cmsg">获得SUFE币：</view>
+                        <view class="bmsg">
+                            {{item.sb}} <image wx:if="sufe币.png" src="sufe币.png" class="actsb"></image>
                         </view>
-                        <viwe class="actdate">
-                            参与时间: {{item.date}}
-                        </viwe>
                     </view>
+                    <viwe class="date">
+                            参与时间: {{item.date}}
+                    </viwe>
                 </view>
             </view>
         </view>
@@ -57,63 +60,61 @@
             </van-search>
         </view>
         <view class="container">
-            <view wx:for="{{athlete}}" class="ele1">
-                <view class="message">
+            <view wx:for="{{athlete}}" class="items">
+                <image class="imgs" src="../../../images/test.png"></image>
+                <view class="details">
                     <view class="row1">
-                        <view class="acmsg">我参加了</view>
+                        <view class="cmsg">赛事名称：</view>
                         <view class='bmsg'>{{item.game_name}}</view>
-                        <view class="acmsg">的</view>
+                    </view>
+                    <view class="row1">
+                        <view class="cmsg">项目名称：</view>
                         <view class='bmsg'>{{item.class}}，</view>
-
                     </view>
                     <view class="row2">
-                        <view class="acmsg">取得了</view>
+                        <view class="acmsg">取得名次：</view>
                         <view class='bmsg'>{{item.ranking}}</view>
                     </view>
-                </view>
-
-                <view class="date">
+                    <view class="date">
                     日期：{{item.date}}
+                    </view>
                 </view>
-
             </view>
         </view>
     </van-tab>
     <van-tab title="执裁">
-        <view class="refrow">
-            <view class="level">
-                裁判等级：10
-            </view>
-            <view class="search4">
-                <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch4" bind:focus="onFocus" bind:cancel="onCancel">
-                </van-search>
-            </view>
+        <view class="search">
+            <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+            show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch4"
+            bind:focus="onFocus" bind:cancel="onCancel">
+            </van-search>
         </view>
-
+            
         <view class="container">
-            <view wx:for="{{referee}}" class="rele1">
-                <view class="message">
+            <view wx:for="{{referee}}" class="items">
+                <image class="imgs" src="../../../images/test.png"></image>
+                <view class="details">
                     <view class="row1">
-                        <view class="cmsg">我在</view>
-                        <view class="bmsg">{{item.game_name}}</view>
-                        <view class="cmsg">，担任了</view>
+                        <view class="cmsg">比赛名称：</view>
+                        <view class="bmsg">{{item.game_name}}</view> 
                     </view>
                     <view class="row2">
+                        <view class="cmsg">比赛编号：</view>
                         <view class="bmsg">{{item.game_id}}</view>
-                        <view class="cmsg">的</view>
-                        <view class="bmsg">{{item.identity}}</view>
-                        <view class="cmsg">，信誉分</view>
-                        <view class="bmsg">{{item.score}}</view>
                     </view>
                     <view class="row1">
-                        <view class="cmsg">信誉分总计：</view>
-                        <view class="bmsg">6</view>
+                        <view class="cmsg">执裁身份：</view>
+                        <view class="bmsg">{{item.identity}}</view>
                     </view>
-
+                    <view class="row1">
+                        <view class="cmsg">信誉分变动：</view>
+                        <view class="bmsg">{{item.score}}</view>
+                    </view>
+                    <view class="date">
+                        日期：{{item.date}}
+                    </view>
                 </view>
-                <view class="rdate">
-                    日期：{{item.date}}
-                </view>
+                
             </view>
 
         </view>

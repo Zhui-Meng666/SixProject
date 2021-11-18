@@ -4,11 +4,11 @@
     "setting": {
         "urlCheck": true,
         "es6": true,
-        "enhance": true,
+        "enhance": false,
         "postcss": true,
         "preloadBackgroundData": false,
         "minified": true,
-        "newFeature": true,
+        "newFeature": false,
         "coverView": true,
         "nodeModules": true,
         "autoAudits": false,
@@ -33,9 +33,13 @@
         "useCompilerModule": true,
         "userConfirmedUseCompilerModuleSwitch": false,
         "userConfirmedBundleSwitch": false,
-        "packNpmManually": false,
-        "packNpmRelationList": [],
-        "minifyWXSS": true
+        "packNpmManually": true,
+        "packNpmRelationList": [{
+            "packageJsonPath": "./package.json",
+            "miniprogramNpmDistDir": "./"
+        }],
+        "minifyWXSS": true,
+        "minifyWXML": true
     },
     "appid": "wxaccc8e0fa18fa43b",
     "projectname": "Badminton",
@@ -58,13 +62,16 @@
             "list": []
         },
         "miniprogram": {
-            "list": [
-                {
-                    "id": -1,
-                    "name": "db guide",
-                    "pathName": "pages/databaseGuide/databaseGuide"
-                }
-            ]
+            "list": [{
+                "id": -1,
+                "name": "db guide",
+                "pathName": "pages/databaseGuide/databaseGuide"
+            }]
         }
+    },
+    "permissions": {
+        "openapi": [
+            "subscribeMessage.send"
+        ]
     }
 }

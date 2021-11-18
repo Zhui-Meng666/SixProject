@@ -34,38 +34,38 @@ App({
         return ktxWindowHeight
       }
     }
-    
-    //获取openid
-    //     wx.cloud.callFunction({
-    //       // 要调用的云函数名称
-    //       name: 'getopenid',
-    //       // 传递给云函数的参数
-    //       data: {},
-    //       success: res => {
-    //           console.log("成功", res)
-    //           this.globalData.openid = res.result.openid
-    //           wx.cloud.callFunction({
-    //             // 要调用的云函数名称
-    //             name: 'findopenid',
-    //             // 传递给云函数的参数
-    //             data: {
-    //               openid: res.result.openid
-    //             },
-    //             success: res => {
-    //                 console.log("成功", res)
-    //                 var data = res.result.data
-    //                 if (data) {
-    //                   this.globalData.registered = true
-    //                 }
-    //             },
-    //             fail: err => {
-    //                 console.log("错误", err);
-    //             }
-    //         })
-    //       },
-    //       fail: err => {
-    //           console.log("错误", err);
-    //       }
-    //   })
+
+    // 获取openid
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getopenid',
+      // 传递给云函数的参数
+      data: {},
+      success: res => {
+        console.log("成功", res)
+        this.globalData.openid = res.result.openid
+        // wx.cloud.callFunction({
+        //   // 要调用的云函数名称
+        //   name: 'findopenid',
+        //   // 传递给云函数的参数
+        //   data: {
+        //     openid: res.result.openid
+        //   },
+        //   success: res => {
+        //     console.log("成功", res)
+        //     var data = res.result.data
+        //     if (data) {
+        //       this.globalData.registered = true
+        //     }
+        //   },
+        //   fail: err => {
+        //     console.log("错误", err);
+        //   }
+        // })
+      },
+      fail: err => {
+        console.log("错误", err);
+      }
+    })
   }
 })

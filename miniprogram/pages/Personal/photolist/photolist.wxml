@@ -7,27 +7,24 @@
         <view class="picnum">
            {{num}}照片
         </view>
-        <view wx:if="{{adjust == true}}">
-            <view class="org" bindtap="org2">
-            管理图片
-        </view>
-        </view>
         <view wx:if="{{adjust == false}}">
             <view class="org" bindtap="org1">
             管理图片
         </view>
         </view>
-        
+        <view wx:if="{{adjust == true}}">
+            <view class="org" bindtap="org2">
+            管理图片
+        </view>
+        </view>
     </view>
-    <!-- <view class="line"></view> -->
-   
 </view>
 
 <view class="pics">
     <image src="../../../images/add-pic.png" class="box" bindtap="uploadimg"></image>
     <view wx:for="{{showimgs}}">
-        <view wx:if="{{item.show==true}}">
-            <image src="{{item.src}}" class="box" bindtap="del"></image>
-        </view>
+        <!-- <view wx:if="{{item.show==true}}"> -->
+            <image src="{{item.src}}" class="box"  data-index="{{index}}" bindtap="del"></image>
+        <!-- </view> -->
     </view>
 </view>

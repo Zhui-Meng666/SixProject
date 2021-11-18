@@ -1,0 +1,16 @@
+<!--pages/video_play.wxml-->
+<view class="video_box">
+  <view bindtouchend="touchEnd" id="myVideo{{index}}" animation="{{animation}}" bindtouchstart="touchStart" bindtouchmove="touchMove" class="video_list" wx:for="{{video_list}}" data-index="{{index}}" wx:key="index">
+    <!-- <text style="color:red;font-size:30px;display:block;">{{index}}</text> -->
+    <video custom-cache="{{false}}" src="{{item.video_src}}" enable-progress-gesture="{{true}}" object-fit="cover" controls="true" autoplay="true" loop="true" show-fullscreen-btn="false"></video>
+    <view class="video_msg">
+      {{item.video_name}}
+    </view>
+    <view class="video_msg">
+      @ {{item.author_name}}
+    </view>
+    <image class="like" src="{{like_src}}" bindtap="like_click"></image>
+    <image class="share" src="{{share_src}}"></image>
+  </view>
+
+</view>
