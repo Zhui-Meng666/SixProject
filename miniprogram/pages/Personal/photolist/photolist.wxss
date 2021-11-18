@@ -1,11 +1,9 @@
 /* pages/Personal/photolist/photolist.wxss */
 
 .box{
-    height: 80px;
-    width: 80px;
+    height: 193rpx;
+    width: 193rpx;
     margin: 13px;
-    /* border-color: black;
-    border-style: groove; */
 }
 
 .background{
@@ -26,16 +24,18 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    position: fixed;
-    bottom: 346px;
 }
 .picnum{
-    width: 65px;
-    height: 20px;
+    width: 69px;
+    height: 24px;
     border-style: dashed;
     border-color: cadetblue;
     margin-left: 5px;
     align-items: center;
+    position: relative;
+    top: 253rpx;
+    left: 20rpx;
+    font-size: 17px;
 }
 .org{
     height: 20px;
@@ -44,7 +44,9 @@
     text-align: right;
     font-family: "Kaiti";
     font-size: 20px;
-
+    position: relative;
+    top: 259rpx;
+    left: 120rpx;
 }
 .line{
     width: 100%;

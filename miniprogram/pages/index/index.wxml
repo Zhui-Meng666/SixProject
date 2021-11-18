@@ -1,5 +1,32 @@
 <!--miniprogram/pages/index/index.wxml-->
 
-<van-button type="primary" bindtap="getid">朴素按钮</van-button>
-<van-button type="info">朴素按钮</van-button>
-<view>{{openid}}</view>
+<swiper class="swiper_container" autoplay="true" circular="true" interval="3000">
+    <block wx:for="{{msglist}}">
+         <swiper-item>
+            <image wx:if="{{item.img_src}}" src="{{item.img_src}}" url = "{{item.url}}" data-index="{{index}}" bindtap="news_click" class="news_img"></image>
+            <view class="swiper_item">{{item.title}}</view>
+         </swiper-item>
+    </block>
+</swiper>
+
+<view class="search">
+            <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
+            show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch"
+            bind:focus="onFocus" bind:cancel="onCancel">
+            </van-search>
+</view>
+
+<scroll-view class="videos" scroll-y="true" refresher-enabled="true">
+  <view wx:for="{{videos}}" class="video">
+    <!-- <view>{{item.name}}</view> -->
+    <image src="{{item.cover_src}}" class="v_cover" id="{{index}}" bindtap="video_click"></image>
+    <view class="v_name">{{item.name}}</view>
+    <view class="v_detail">{{item.msg}}</view>
+  </view>
+</scroll-view>
+<view class="bottom">
+  <view wx:for="{{bottom_list}}" class="bottom_list">
+    <image src="{{item.img_src}}" class="bottom_img" id="{{index}}" bindtap="bottom_click"></image>
+  </view>
+</view>
+

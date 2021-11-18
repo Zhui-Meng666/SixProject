@@ -26,8 +26,8 @@
 <view class="pics">
     <image src="../../../images/add-pic.png" class="box" bindtap="uploadimg"></image>
     <view wx:for="{{showimgs}}">
-        <view wx:if="{{item.show==true}}">
-            <image src="{{item.src}}" class="box" bindtap="del"></image>
-        </view>
+        <!-- <view wx:if="{{item.show==true}}"> -->
+            <image src="{{item.src}}" class="box"  data-index="{{index}}" bindtap="del"></image>
+        <!-- </view> -->
     </view>
 </view>
