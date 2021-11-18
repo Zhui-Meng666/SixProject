@@ -1,6 +1,6 @@
 <!--pages/Personal/career/career.wxml-->
 
-<van-tabs antimated activate="{{activate}}" bind:change="onChange">
+<van-tabs antimated activate="{{activate}}">
     <van-tab title="约球">
     <view class="search">
         <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
@@ -26,13 +26,10 @@
             </view>
             
         </view>
-    </view>
     </van-tab>
     <van-tab title="活动">
         <view class="search">
-            <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
-            show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch2"
-            bind:focus="onFocus" bind:cancel="onCancel">
+            <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel">
             </van-search>
         </view>
         <view class="container">
@@ -58,9 +55,7 @@
     </van-tab>
     <van-tab title="参赛">
         <view class="search">
-            <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
-            show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch3"
-            bind:focus="onFocus" bind:cancel="onCancel">
+            <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch3" bind:focus="onFocus" bind:cancel="onCancel">
             </van-search>
         </view>
         <view class="container">
@@ -120,11 +115,8 @@
                 </view>
                 
             </view>
-            
+
         </view>
     </van-tab>
 
 </van-tabs>
-
-
-

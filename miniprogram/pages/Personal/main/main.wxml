@@ -32,8 +32,12 @@
 </view>
 <view class="tail">
   <view class="identifield">
-    <van-tag wx:for="{{identify}}" wx:key="key" type="primary" size="large" plain round>{{item}}</van-tag>
-    <image src="../../../images/add.png" mode="aspectFit" class="iconimg" bindtap="chooseid"></image>
+    <view class="identify">
+      <van-tag wx:for="{{identify}}" wx:key="key" type="primary" size="large" plain round>{{item}}</van-tag>
+    </view>
+    <view class="identificon">
+      <image src="../../../images/add.png" mode="aspectFit" class="iconimg" bindtap="chooseid"></image>
+    </view>
   </view>
   <view class="levelfield">
     <block wx:for="{{level}}" wx:key="key">
@@ -57,13 +61,13 @@
     </block>
   </view>
   <view class="photofield">
-    <view class="phototext">个人相册</view>
+    <view class="photofront">
+      <view class="phototext">个人相册</view>
+      <van-icon name="ellipsis" size="25" bind:click="Tophotolist"></van-icon>
+    </view>
     <view class="photolist">
-      <view wx:for="{{imglist}}" wx:key="key" bindtap="preview" id="{{index}}">
+      <view wx:for="{{imglist}}" wx:key="key" bindtap="preview" id="{{index}}" class="photoimglist">
         <image src="{{item}}" class="photoimg" mode="aspectFit"></image>
-      </view>
-      <view bindtap="Tophotolist">
-        <image src="../../../images/upload.png" class="iconimg" mode="aspectFit"></image>
       </view>
     </view>
   </view>
@@ -75,9 +79,9 @@
 </view>
 
 <van-popup show="{{ show }}" bind:close="onClose" custom-class="pop" round>
-  <van-checkbox-group value="{{ useridentify }}" bind:change="onChange" max="{{3}}" direction="horizontal">
+  <van-checkbox-group value="{{ userid }}" bind:change="onChange" max="{{3}}" direction="horizontal">
     <view class="checkbox">
-      <view wx:key="key" wx:for="{{userallid}}" class="checkitem">
+      <view wx:key="key" wx:for="{{useridlist}}" class="checkitem">
         <van-checkbox name="{{item.id}}">{{item.value}}</van-checkbox>
       </view>
     </view>
