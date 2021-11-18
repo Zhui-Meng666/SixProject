@@ -1,1 +1,113 @@
 /* pages/Exchange/main/mian.wxss */
+page {
+    width: 100%;
+    height: 100%;
+}
+
+.front {
+    width: 100%;
+    height: 130rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: thin solid #515c5d;
+}
+
+.coinfield {
+    width: 30%;
+    height: 60rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: small;
+    background-color: #FAFAFB;
+    border: thin solid #515c5d;
+    border-radius: 30rpx;
+    margin-right: 4%;
+}
+
+.search {
+    width: 65%;
+}
+
+.iconimg {
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 10rpx;
+}
+
+.coinnum {
+    width: 80%;
+    text-align: center;
+}
+
+.goodslist {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.goodsitem {
+    width: 45%;
+    border: thin solid whitesmoke;
+    margin: 10rpx 2.2%;
+}
+
+.goodsimg {
+    width: 100%;
+    height: 75%;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.inforfield {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.goodstitle {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 0 0 10rpx 10rpx;
+}
+
+.goodsinfo {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.goodsprice {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pricenum {
+    text-align: left;
+    margin-left: 10rpx;
+}
+
+.goodsnum {
+    height: 100%;
+    font-size: small;
+    color: #979797;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

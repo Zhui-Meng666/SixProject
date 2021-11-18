@@ -1,0 +1,39 @@
+<!--pages/Exchange/details/details.wxml-->
+<view class="container">
+    <view class="imagefield">
+        <image src="{{goodsimg}}" class="goodsimg"></image>
+    </view>
+    <view class="descrfield">这份奖品的编号为：{{id}}</view>
+    <view class="conditfield">
+        <van-icon name="location" size="25px" />
+        地址：{{addr}}
+    </view>
+    <view class="conditfield">
+        <van-icon name="clock" size="25px" />
+        距离截至日期还剩：<text class="day">{{day}}</text>天
+    </view>
+    <view class="receivfield">
+        <van-button color="linear-gradient(to right, #ef5f33, #ef1025)" custom-class="buttonfield" round bind:click="submit">
+            <view class="butinner">
+                <view class="goodsprice">
+                    <image src="../../../images/coin.png" mode="aspectFit" class="iconimg"></image>
+                    <view class="pricenum">{{price}}</view>
+                </view>
+                <view class="buttontext">兑换</view>
+            </view>
+        </van-button>
+    </view>
+</view>
+<van-popup show="{{ show }}" round>
+    <view class="popfield">
+        <van-loading wx:if="{{loading}}" type="spinner" color="#1989fa" vertical>兑换中...</van-loading>
+        <block wx:else>
+            <view class="poptitle">你确定要兑换吗？</view>
+            <view class="popchoice">
+                <van-button type="primary" round custom-class="popbut" bind:click="confirm">确认</van-button>
+                <van-button color="#979797" round custom-class="popbut" bind:click="onClose">取消</van-button>
+            </view>
+        </block>
+    </view>
+</van-popup>
+<van-toast id="van-toast" />

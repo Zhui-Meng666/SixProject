@@ -146,7 +146,6 @@ Page({
      */
     onLoad: function (options) {
         var height = app.globalData.getPageHeight()
-        // console.log(height)
         this.setData({
             pgheight: height - 132,
             likeheight: (height-132)/3,

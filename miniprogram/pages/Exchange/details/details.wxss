@@ -1,0 +1,134 @@
+/* pages/Exchange/details/details.wxss */
+page {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagefield {
+    width: 95%;
+    height: 40%;
+    border: thin solid #515c5d;
+    margin-top: 10rpx;
+    background-color: #fafafa;
+}
+
+.goodsimg {
+    width: 100%;
+    height: 100%;
+}
+
+.descrfield {
+    width: 93%;
+    height: 15%;
+    margin-top: 10rpx;
+    border: thin solid #515c5d;
+    border-radius: 25rpx;
+    text-align: center;
+    padding: 10rpx;
+    background-color: #fafafa;
+}
+
+.conditfield {
+    width: 91%;
+    height: 8%;
+    color: #979797;
+    margin-top: 10rpx;
+    border: thin solid #515c5d;
+    padding: 0 15rpx;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.day {
+    display: inline-block;
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 10rpx;
+    color: whitesmoke;
+    font-size: 30rpx;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ee0a24;
+    border-radius: 4rpx;
+}
+
+.receivfield {
+    width: 95%;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonfield {
+    width: 250rpx;
+    padding: 0;
+}
+
+.butinner {
+    width: 220rpx;
+    height: 80rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.iconimg {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.goodsprice {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pricenum {
+    margin-left: 5rpx;
+}
+
+.buttontext {
+    margin-left: 20rpx;
+    font-size: large;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.popfield {
+    width: 450rpx;
+    height: 250rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.poptitle {
+    font-size: large;
+    font-weight: bold;
+}
+
+.popchoice {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.popbut {
+    width: 180rpx;
+}

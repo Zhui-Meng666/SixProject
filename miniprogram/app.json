@@ -1,15 +1,18 @@
 {
     "pages": [
+        
+        "pages/Exchange/main/mian",
+        "pages/Exchange/details/details",
         "pages/Personal/main/main",
         "pages/Personal/login/login",
         "pages/Personal/like/like",
-        "pages/Exchange/main/mian",
         "pages/index/index",
         "pages/Personal/prize/prize",
         "pages/Personal/career/career",
         "pages/Personal/photolist/photolist",
         "pages/Personal/changeinfo/changeinfo",
         "pages/Popular_Sci/play"
+        
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -38,6 +41,7 @@
         "van-datetime-picker": "@vant/weapp/datetime-picker/index",
         "van-row": "@vant/weapp/row/index",
         "van-col": "@vant/weapp/col/index",
-        "van-icon": "@vant/weapp/icon/index"
+        "van-icon": "@vant/weapp/icon/index",
+        "van-loading": "@vant/weapp/loading/index"
     }
 }

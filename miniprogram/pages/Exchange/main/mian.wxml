@@ -1,2 +1,45 @@
 <!--pages/Exchange/main/mian.wxml-->
-<text>这是兑换系统首页</text>
+<view class="front">
+    <view class="search">
+        <van-search value="{{ value }}" placeholder="请输入搜索关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch" bind:focus="onFocus" bind:cancel="onCancel">
+        </van-search>
+    </view>
+    <view class="coinfield">
+        <image src="../../../images/coin.png" mode="aspectFit" class="iconimg"></image>
+        <view class="coinnum">余额：{{coinnum}}</view>
+    </view>
+</view>
+<view wx:if="{{goods.length <= 4}}" class="goodslist">
+    <view class="goodsitem" style="height: {{goodsheight}}rpx;" wx:key="key" wx:for="{{goods}}" id="{{item.id}}" bindtap="details">
+        <view class="goodsimg">
+            <image class="image" src="{{item.src}}" mode="aspectFill"></image>
+        </view>
+        <view class="inforfield">
+            <view class="goodstitle">{{item.name}}</view>
+            <view class="goodsinfo">
+                <view class="goodsprice">
+                    <image src="../../../images/coin.png" mode="aspectFit" class="iconimg"></image>
+                    <view class="pricenum">{{item.price}}</view>
+                </view>
+                <view class="goodsnum">{{item.sold}}/{{item.total}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<scroll-view wx:else scroll-y enable-flex style="height: {{pgheight}}rpx;" class="goodslist">
+    <view class="goodsitem" style="height: {{goodsheight}}rpx;" wx:key="key" wx:for="{{goods}}" id="{{index}}" bindtap="details">
+        <view class="goodsimg">
+            <image class="image" src="{{item.src}}" mode="aspectFill"></image>
+        </view>
+        <view class="inforfield">
+            <view class="goodstitle">{{item.name}}</view>
+            <view class="goodsinfo">
+                <view class="goodsprice">
+                    <image src="../../../images/coin.png" mode="aspectFit" class="iconimg"></image>
+                    <view class="pricenum">{{item.price}}</view>
+                </view>
+                <view class="goodsnum">{{item.sold}}/{{item.total}}</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

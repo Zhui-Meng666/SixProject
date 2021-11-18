@@ -67,11 +67,11 @@ page {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    margin-bottom: 25rpx;
+    margin-bottom: 24rpx;
 }
 
 .gender {
-    margin-left: 8rpx;
+    margin-left: 5rpx;
 }
 
 .genderimg {
