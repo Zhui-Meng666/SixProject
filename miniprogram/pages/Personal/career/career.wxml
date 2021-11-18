@@ -26,6 +26,7 @@
             </view>
             
         </view>
+        </view>
     </van-tab>
     <van-tab title="活动">
         <view class="search">

@@ -10,31 +10,37 @@ Page({
         showimgs : [
             {
                 idx : 0,
+                r_src : '../../../images/Cat.jpeg',
                 src : "../../../images/Cat.jpeg",
                 show : true
             },
             {
                 idx : 1,
+                r_src : '../../../images/coin.png',
                 src : "../../../images/coin.png",
                 show : true
             },
             {
                 idx : 2,
+                r_src : '../../../images/sufecoin.png',
                 src : "../../../images/sufecoin.png",
                 show : true
             },
             {
                 idx : 3,
+                r_src : '../../../images/home-click.png',
                 src : "../../../images/home-click.png",
                 show : true
             },
             {
                 idx : 4,
+                r_src : '../../../images/test.png',
                 src : "../../../images/test.png",
                 show : true
             },
             {
                 idx : 5,
+                r_src : '../../../images/Cat.jpeg',
                 src : "../../../images/Cat.jpeg",
                 show : true
             }
@@ -42,31 +48,37 @@ Page({
         imgs : [
             {
                 idx : 0,
+                r_src : '../../../images/Cat.jpeg',
                 src : "../../../images/Cat.jpeg",
                 show : true
             },
             {
                 idx : 1,
+                r_src : '../../../images/coin.png',
                 src : "../../../images/coin.png",
                 show : true
             },
             {
                 idx : 2,
+                r_src : '../../../images/sufecoin.png',
                 src : "../../../images/sufecoin.png",
                 show : true
             },
             {
                 idx : 3,
+                r_src : '../../../images/home-click.png',
                 src : "../../../images/home-click.png",
                 show : true
             },
             {
                 idx : 4,
+                r_src : '../../../images/test.png',
                 src : "../../../images/test.png",
                 show : true
             },
             {
                 idx : 5,
+                r_src : '../../../images/Cat.jpeg',
                 src : "../../../images/Cat.jpeg",
                 show : true
             }
@@ -84,17 +96,19 @@ Page({
               var tempFilePaths = res.tempFilePaths;
               let imgs = that.data.imgs;
               let idx = imgs.length;
+              let num = imgs.length;
               let temp = {
                   idx : idx,
                   src : tempFilePaths,
-                //   show : true
+                  r_src : tempFilePaths,
+                  show : true
               }
               imgs.push(temp)
               that.setData({
                 showimgs : imgs,
-                imgs : imgs
+                imgs : imgs,
+                num : num + 1
               })
-            //   moveBy.uploadFile(that, tempFilePaths, 0);
           }
         })
     },
@@ -112,10 +126,11 @@ Page({
     },
 
     org2: function(e) {
+        console.log(1)
         var showimgs = this.data.showimgs;
         var imgs = this.data.imgs;
         for(let i=0;i<showimgs.length;i++){
-            showimgs[i].src = imgs[showimgs[i].idx].src
+            showimgs[i].src = showimgs[i].r_src
         }
         this.setData({
             showimgs : showimgs,
@@ -140,8 +155,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log(this.data.showimgs.length)
         this.setData({
-            num : this.showimgs.length
+            num : this.data.showimgs.length
         })
     },
 

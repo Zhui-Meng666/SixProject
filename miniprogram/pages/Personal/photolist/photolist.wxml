@@ -7,20 +7,17 @@
         <view class="picnum">
            {{num}}照片
         </view>
-        <view wx:if="{{adjust == true}}">
-            <view class="org" bindtap="org2">
-            管理图片
-        </view>
-        </view>
         <view wx:if="{{adjust == false}}">
             <view class="org" bindtap="org1">
             管理图片
         </view>
         </view>
-        
+        <view wx:if="{{adjust == true}}">
+            <view class="org" bindtap="org2">
+            管理图片
+        </view>
+        </view>
     </view>
-    <!-- <view class="line"></view> -->
-   
 </view>
 
 <view class="pics">
