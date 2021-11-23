@@ -10,7 +10,10 @@
         "pages/Personal/career/career",
         "pages/Personal/photolist/photolist",
         "pages/Personal/changeinfo/changeinfo",
-        "pages/Popular_Sci/video_play/video_play"
+        "pages/Popular_Sci/video_play/video_play",
+        "pages/Entertainment/main/main",
+        "pages/Entertainment/buttle/buttle",
+        "pages/Entertainment/appoint/appoint"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
