@@ -114,13 +114,13 @@ Page({
     },
     
     org1: function(e) {
-        var showimgs = this.data.showimgs;
+        // var showimgs = this.data.showimgs;
         
-        for(let i=0;i<showimgs.length;i++){
-            showimgs[i].src = '../../../images/delete.png'
-        }
+        // for(let i=0;i<showimgs.length;i++){
+        //     showimgs[i].src = '../../../images/delete.png'
+        // }
         this.setData({
-            showimgs : showimgs,
+            // showimgs : showimgs,
             adjust : true
         })
     },

@@ -22,15 +22,14 @@
   margin-top: 100px;
 }
 .video_msg{
-  height: 20px;
-  width: 70px;
+  height: 35rpx;
+  width: 100rpx;
   color: white;
   position: relative;
-  top: 1077rpx;
+  top: 1275rpx;
   font-family: heiti;
-  left: 20px;
-
-  margin-top: 5rpx;
+  left: 20rpx;
+  margin-top: 10rpx;
 }
 
 .like{
@@ -38,7 +37,7 @@
   position: relative;
   width: 62rpx;
   height: 62rpx;
-  top: 1020rpx;
+  top: 1225rpx;
   left: 550rpx;
 }
 .share{
@@ -46,6 +45,6 @@
   position: relative;
   width: 62rpx;
   height: 62rpx;
-  top: 1020rpx;
+  top: 1225rpx;
   left: 600rpx;
 }

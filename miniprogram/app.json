@@ -43,6 +43,8 @@
         "van-row": "@vant/weapp/row/index",
         "van-col": "@vant/weapp/col/index",
         "van-icon": "@vant/weapp/icon/index",
-        "van-loading": "@vant/weapp/loading/index"
+        "van-loading": "@vant/weapp/loading/index",
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index"
     }
 }

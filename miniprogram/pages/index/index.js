@@ -7,6 +7,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        bottom_active : 'home',
         msglist : [
             {
                 title: "公告：多地首套房贷利率上浮 热点城市渐迎零折扣时代",
@@ -128,9 +129,29 @@ Page({
             videos : this.data.all_videos
         })
     },
-
-    bottom_click : function(e) {
-        let id = Number(e.currentTarget.id)
+    to_home(event){
+        wx.redirectTo({
+          url: '../index/index',
+        })
+    },
+    to_game(event){
+        wx.redirectTo({
+          url: '',
+        })
+    },
+    to_entertainment(event){
+        wx.redirectTo({
+          url: '../Entertainment/main/main',
+        })
+    },
+    to_personal(event){
+        wx.redirectTo({
+          url: '../Personal/main/main',
+        })
+    },
+    bottom_click(event) {
+        let id = event.detail.index
+        console.log(id)
         switch(id){
             case 0:
                 wx.navigateTo({
@@ -143,9 +164,9 @@ Page({
                 // })
                 break
             case 2:
-                // wx.navigateTo({
-                //     url: '',
-                // })
+                wx.navigateTo({
+                    url: '../Entertainment/main/main',
+                })
                 break
             case 3:
                 wx.navigateTo({
@@ -168,33 +189,14 @@ Page({
           url: String(url)
         })
     },
-    // http: function(e) {
-    //     let that = this
-    //     wx.cloud.callFunction({
-    //         // 要调用的云函数名称
-    //         name: 'httprequest',
-    //         // 传递给云函数的参数
-    //         data: {
-    //             url: 'http://www.baidu.com/s',
-    //             data: {
-    //                 wd: '书包'
-    //             }
-    //         },
-    //         success: res => {
-    //             console.log("成功", res)
-    //             that.setData({
-    //                 openid: res.result.openid
-    //             })
-    //         },
-    //         fail: err => {
-    //             console.log("错误", err);
-    //         },
-    //         complete: () => {
-    //             console.log('完成 ');
-    //         }
-    //     })
-    // },
 
+    onChangeBottom : function(event){
+        console.log(event.detail)
+        this.setData({
+            bottom_active : event.detail
+        })
+    },
+    
     /**
      * 生命周期函数--监听页面加载
      */

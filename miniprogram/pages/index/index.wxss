@@ -1,8 +1,11 @@
 /* miniprogram/pages/index/index.wxss */
-
+.icon_class{
+    height: 60rpx;
+    width: 60rpx;
+}
 .swiper_container{
-    height: 120px;
-    width: 95%;
+    height: 240rpx;
+    width: 99%;
     margin: auto;
 }
 
@@ -24,7 +27,7 @@
 
 .videos{
     width: 100%;
-    height: 758rpx;
+    height: 920rpx;
     display: flex;
     align-content: flex-start;
     flex-direction: row;
@@ -37,10 +40,8 @@
     display: inline-block;
 }
 .v_cover{
-    width: 80%;
-    height: 325rpx;
-    margin-left: 14px;
-    margin-top: -10px;
+    width: 350rpx;
+    height: 350rpx;
 }
 .v_name{
     position: relative;

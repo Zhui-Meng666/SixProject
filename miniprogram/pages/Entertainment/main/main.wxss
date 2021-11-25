@@ -1,1 +1,64 @@
 /* pages/Entertainment/main/main.wxss */
+.icon_class{
+    height: 60rpx;
+    width: 60rpx;
+}
+.class{
+    display: flex;
+    flex-direction: row;
+    height: 200rpx;
+    width: 100%;
+}
+.class_item{
+    border-color: chocolate;
+    border-style: groove;
+    width: 150rpx;
+    height: 150rpx;
+    margin: 10rpx;
+    margin-left: 60rpx;
+    align-self: center;
+    font-size: 52rpx;
+    text-align: center;
+    font-family: 'kaiti';
+}
+.class_item1{
+    border-color: chocolate;
+    border-style: groove;
+    width: 150rpx;
+    height: 150rpx;
+    margin: 10rpx;
+    margin-left: 9rpx;
+    font-size: 45rpx;
+    font-family: 'kaiti';
+    align-self: center;
+    text-align: center;
+}
+.acts{
+    width: 100%;
+    height: 865rpx;
+}
+
+.act_item{
+    width: 97%;
+    height: 250rpx;
+    display: flex;
+    flex-direction: row;
+    margin: 8rpx;
+    border-color: blue;
+    border-style: groove;
+}
+
+.act_img{
+    width: 240rpx;
+    height: 240rpx;
+    margin: 5rpx;
+}
+
+.act_details{
+    width: 300rpx;
+    margin-left: 20rpx;
+}
+
+.act_detail{
+    font-size: 35rpx;
+}

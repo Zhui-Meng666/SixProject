@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    bottom_active : 'personal',
     show: false,
     bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
     gendersrc: '../../../images/man.png',
@@ -177,6 +178,26 @@ Page({
     })
   },
 
+  to_home(event){
+    wx.redirectTo({
+      url: '../../index/index',
+    })
+  },
+  to_game(event){
+      wx.redirectTo({
+        url: '',
+      })
+  },
+  to_entertainment(event){
+      wx.redirectTo({
+        url: '../../Entertainment/main/main',
+      })
+  },
+  to_personal(event){
+      wx.redirectTo({
+        url: '../../Personal/main/main',
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
