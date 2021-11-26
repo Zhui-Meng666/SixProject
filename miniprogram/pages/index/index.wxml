@@ -22,8 +22,68 @@
     <view class="v_detail">{{item.msg}}</view>
   </view>
 </scroll-view>
-<view class="bottom">
-  <view wx:for="{{bottom_list}}" class="bottom_list">
-    <image src="{{item.img_src}}" class="bottom_img" id="{{index}}" bindtap="bottom_click"></image>
-  </view>
-</view>
+
+<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">  
+  <van-tabbar-item name = 'home' bindtap="bottom_click" class="icon_class">
+    <image
+      slot = "icon"
+      wx:if="../../images/home-unclick.png"
+      src = "../../images/home-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      wx:if="../../images/home-click.png"
+      src = "../../images/home-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    主页
+  </van-tabbar-item>
+  <van-tabbar-item name = 'game' bindtap="to_game" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../images/competition-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      src = "../../images/competition-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    赛事
+  </van-tabbar-item>
+  <van-tabbar-item name = 'entertainment' bindtap="to_entertainment" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../images/entertainment-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      src = "../../images/entertainment-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    娱乐
+  </van-tabbar-item>
+  <van-tabbar-item name = 'personal' bindtap="to_personal" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../images/me-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+      />
+    <image
+      slot = "icon-active"
+      src = "../../images/me-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+      />
+    个人
+  </van-tabbar-item>
+</van-tabbar>

@@ -55,9 +55,12 @@ Page({
     send: function (e) {
         var msglt = this.data.msglist
         msglt.push({
-            self: true,
-            avatar: '../../../images/unload.png',
-            messg: this.data.msg
+            type: 'message',
+            value: {
+                self: true,
+                avatar: '../../../images/unload.png',
+                messg: this.data.msg
+            }
         })
         this.setData({
             msglist: msglt,

@@ -86,9 +86,12 @@ Page({
     send: function (e) {
         var msglt = this.data.msglist
         msglt.push({
-            self: true,
-            avatar: '../../../images/unload.png',
-            messg: this.data.msg
+            type: 'message',
+            value: {
+                self: true,
+                avatar: '../../../images/unload.png',
+                messg: this.data.msg
+            }
         })
         this.setData({
             msglist: msglt,
@@ -211,14 +214,14 @@ Page({
         var grades = e.detail.value
         if (this.data.isingle) {
             var singlelist = this.data.singlelist
-            singlelist[this.data.nowid].grade = grades[0]+'  :  '+grades[1]
+            singlelist[this.data.nowid].grade = grades[0] + '  :  ' + grades[1]
             this.setData({
                 singlelist: singlelist,
                 showpop: false
             })
         } else {
             var couplelist = this.data.couplelist
-            couplelist[this.data.nowid].grade = grades[0]+'  :  '+grades[1]
+            couplelist[this.data.nowid].grade = grades[0] + '  :  ' + grades[1]
             this.setData({
                 couplelist: couplelist,
                 showpop: false

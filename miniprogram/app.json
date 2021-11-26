@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/index/index",
         "pages/Entertainment/appoint/appoint",
         "pages/Entertainment/buttle/buttle",
-        "pages/index/index",
+        
         "pages/Exchange/main/mian",
         "pages/Exchange/details/details",
         "pages/Personal/main/main",
@@ -46,6 +47,8 @@
         "van-icon": "@vant/weapp/icon/index",
         "van-loading": "@vant/weapp/loading/index",
         "van-picker": "@vant/weapp/picker/index",
-        "van-divider": "@vant/weapp/divider/index"
+        "van-divider": "@vant/weapp/divider/index",
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index"
     }
 }

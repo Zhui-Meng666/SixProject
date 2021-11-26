@@ -1,2 +1,117 @@
 <!--pages/Entertainment/main/main.wxml-->
-<text>pages/Entertainment/main/main.wxml</text>
+<van-tabs active="{{active}}" bind:change="onChange">
+    <van-tab title="乱斗">
+        <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange1" bind:search="onSearch1" bind:focus="onFocus1" bind:cancel="onCancel"></van-search>
+        
+        <view class="class">
+            <view class="class_item">我加入的</view>
+            <view class="class_item">推荐</view>
+            <view class="class_item">创建新的</view>
+        </view>
+
+        <view class="acts">
+            <view wx:for="{{acts_show}}" class="act_item" bindtap="Tobattle">
+                <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
+                <view class="act_details">
+                    <view class="act_detail">{{item.name}}</view>
+                    <view class="act_detail">{{item.detail}}</view>
+                    <view class="act_detail">人数：{{item.number}}</view>
+                    <view class="act_detail">{{item.date}}</view>
+                </view>
+            </view>
+        
+        </view>
+    </van-tab>
+
+    <van-tab title="约球">
+        <van-search value="{{value_show}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange2" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel"></van-search>
+        
+        <view class="class">
+            <view class="class_item1">女子单打</view>
+            <view class="class_item1">男子单打</view>
+            <view class="class_item1">女子双打</view>
+            <view class="class_item1">男子双打</view>
+            <view class="class_item1">混合双打</view>
+        </view>
+        <!-- <view>|   我的匹配</view> -->
+        <view class="acts">
+            <view wx:for="{{date_show}}" class="act_item" bindtap="Toappoint">
+                <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
+                <view class="act_details">
+                    <view class="act_detail">{{item.name}}</view>
+                    <view class="act_detail">{{item.class}}</view>
+                    <view class="act_detail">人数：{{item.number}}</view>
+                    <view class="act_detail">{{item.date}}</view>
+                </view>
+            </view>
+        
+        </view>
+
+    </van-tab>
+
+</van-tabs>
+
+<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">  
+  <van-tabbar-item name = 'home' bindtap="to_home" class="icon_class">
+    <image
+      slot = "icon"
+      wx:if="../../../images/home-unclick.png"
+      src = "../../../images/home-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      wx:if="../../../images/home-click.png"
+      src = "../../../images/home-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    主页
+  </van-tabbar-item>
+  <van-tabbar-item name = 'game' bindtap="to_game" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../../images/competition-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      src = "../../../images/competition-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    赛事
+  </van-tabbar-item>
+  <van-tabbar-item name = 'entertainment' bindtap="to_entertainment" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../../images/entertainment-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      src = "../../../images/entertainment-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    娱乐
+  </van-tabbar-item>
+  <van-tabbar-item name = 'personal' bindtap="to_personal" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../../images/me-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+      />
+    <image
+      slot = "icon-active"
+      src = "../../../images/me-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+      />
+    个人
+  </van-tabbar-item>
+</van-tabbar>

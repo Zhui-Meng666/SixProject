@@ -83,11 +83,11 @@
     width: 20px;
   }
   .bmsg{
-    font-size: 20px;
+    font-size: 33rpx;
     font-family: 'Kaiti';
   }
   .cmsg{
-    font-size: 12px;
+    font-size: 25rpx;
     font-family: 'Songti';
     margin-top: auto;
     margin-bottom: auto;
@@ -104,10 +104,10 @@
 
   .date{
     margin: auto;
-    font-size: 10px;
+    font-size: 24rpx;
     color: gray;
     text-align: right;
-    margin-bottom: 10px;
+    margin-bottom: 34rpx;
     position: relative;
     left: 100rpx;
   }
@@ -165,22 +165,21 @@
 .items{
   display: flex;
   flex-direction: row;
-  width: 95%;
-  height: 129px;
+  width: 98%;
+  height: 260rpx;
   border-color: lightsteelblue;
-  border-style:groove;
+  border-style: groove;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 
 .details{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    margin-left: 25px;
-    width: 183px;
-    height: 100%;
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 15rpx;
+  margin-left: 25rpx;
+  width: 430rpx;
+  height: 100%;
 }
 
 .imgs{
