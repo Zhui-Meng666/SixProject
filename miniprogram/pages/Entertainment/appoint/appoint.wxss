@@ -1,1 +1,71 @@
 /* pages/Entertainment/appoint/appoint.wxss */
+@import '../buttle/buttle.wxss';
+
+.photobox {
+    width: 200rpx;
+    height: 300rpx;
+    border-radius: 10rpx;
+    margin: 0 10rpx;
+}
+
+.photoimg {
+    width: 200rpx;
+    height: 300rpx;
+}
+
+.cardfield {
+    width: 40%;
+    height: 140rpx;
+    border-radius: 10rpx;
+    box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+    margin-right: 10rpx;
+}
+
+.userinfo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10rpx;
+    margin: 5rpx 10rpx;
+}
+
+.usernickname {
+    font-size: large;
+    font-weight: bold;
+    margin-left: 10rpx;
+}
+
+.cardtext {
+    font-size: small;
+    margin-left: 10rpx;
+}
+
+.personcardfield {
+    width: 500rpx;
+    height: 400rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: whitesmoke;
+}
+
+.cardinfo {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.infotext {
+    font-size: large;
+    font-weight: bold;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: #1989fa;
+}

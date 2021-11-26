@@ -42,7 +42,7 @@ App({
       // 传递给云函数的参数
       data: {},
       success: res => {
-        console.log("成功", res)
+        // console.log("成功", res)
         this.globalData.openid = res.result.openid
         // wx.cloud.callFunction({
         //   // 要调用的云函数名称

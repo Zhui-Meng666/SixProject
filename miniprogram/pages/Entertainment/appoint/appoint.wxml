@@ -1,2 +1,67 @@
 <!--pages/Entertainment/appoint/appoint.wxml-->
-<text>pages/Entertainment/appoint/appoint.wxml</text>
+<import src="../buttle/buttle.wxml"></import>
+<template name="photo">
+    <view class="user-message" style="flex-direction: {{self ? 'row-reverse' : 'row'}};">
+        <view class="userinfo-avatar">
+            <image src="{{avatar}}" mode="aspectFit" class="avatarimg"></image>
+        </view>
+        <view class="photobox" id="{{phoid}}" bindtap="preview">
+            <image src="{{imgsrc}}" mode="aspectFit" class="photoimg"></image>
+        </view>
+    </view>
+</template>
+<template name="personcard">
+    <view class="user-message" style="flex-direction: {{self ? 'row-reverse' : 'row'}};">
+        <view class="userinfo-avatar">
+            <image src="{{avatar}}" mode="aspectFit" class="avatarimg"></image>
+        </view>
+        <view class="cardfield" id="{{cdid}}" bindtap="showcard">
+            <view class="userinfo">
+                <view class="userinfo-avatar">
+                    <image src="{{avatar}}" mode="aspectFit" class="avatarimg"></image>
+                </view>
+                <view class="usernickname">{{nickname}}</view>
+            </view>
+            <view class="divider"></view>
+            <view class="cardtext">个人名片</view>
+        </view>
+    </view>
+</template>
+
+<view class="container">
+    <scroll-view scroll-y class="front" style="height: {{scrollh}}rpx;" enable-flex="true">
+        <view class="chatfield">
+            <block wx:for="{{msglist}}" wx:key="key">
+                <template is="{{item.type}}" data="{{...item.value}}"></template>
+            </block>
+        </view>
+    </scroll-view>
+    <view class="inputfield">
+        <view class="inputframe">
+            <van-icon name="volume-o" size="28px" bind:click="hidemore" bindlongpress="startrecord" bindtouchend="sendsound" />
+            <input class="inputbox" value="{{msg}}" bindfocus="hidemore" bindinput="showsend" bindconfirm="send"></input>
+            <button wx:if="{{showsend}}" type="primary" bindtap="send">发送</button>
+            <van-icon wx:else name="add-o" size="28px" bind:click="showmore" />
+        </view>
+        <view wx:if="{{showmore}}" class="show">
+            <view wx:for="{{imglist}}" wx:key="key" class="imgbox" id="{{index}}" bindtap="handlmore">
+                <image class="imgicon" src="{{item}}" mode="aspectFit"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<van-popup show="{{ showpop }}" round bind:close="onClose">
+    <view class="personcardfield">
+        <view class="userinfo-avatar">
+            <image src="{{useravatar}}" mode="aspectFit" class="avatarimg"></image>
+        </view>
+        <view class="cardinfo">
+            <view class="infotext">vx：{{wechat}}</view>
+            <view class="divider"></view>
+        </view>
+        <view class="cardinfo">
+            <view class="infotext">手机：{{phone}}</view>
+            <view class="divider"></view>
+        </view>
+    </view>
+</van-popup>

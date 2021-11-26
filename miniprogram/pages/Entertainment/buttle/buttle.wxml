@@ -1,2 +1,72 @@
 <!--pages/Entertainment/buttle/buttle.wxml-->
-<text>pages/Entertainment/buttle/buttle.wxml</text>
+<template name="message">
+    <view class="user-message" style="flex-direction: {{self ? 'row-reverse' : 'row'}};">
+        <view class="userinfo-avatar">
+            <image src="{{avatar}}" mode="aspectFit" class="avatarimg"></image>
+        </view>
+        <view class="messtext" style="background-color: {{self ? '#9eea6a' : 'white'}};">{{messg}}</view>
+    </view>
+</template>
+<template name="sound">
+    <view class="user-message" style="flex-direction: {{self ? 'row-reverse' : 'row'}};">
+        <view class="userinfo-avatar">
+            <image src="{{avatar}}" mode="aspectFit" class="avatarimg"></image>
+        </view>
+        <view class="messtext" id="{{sdid}}" style="background-color: {{self ? '#9eea6a' : 'white'}};" bindtap="playsound">{{sdtext}}</view>
+    </view>
+</template>
+<view class="container">
+    <scroll-view scroll-y class="front" style="height: {{scrollh}}rpx;" enable-flex="true">
+        <view class="chatfield">
+            <block wx:for="{{msglist}}" wx:key="key">
+                <template is="{{item.type}}" data="{{...item.value}}"></template>
+            </block>
+        </view>
+        <view class="matchfiled">
+            <view class="battle" wx:for="{{singlelist}}" wx:key="key">
+                <view class="battle-name">
+                    <view class="nametext">{{item.name1}}</view>
+                    <view class="than">vs</view>
+                    <view class="nametext">{{item.name2}}</view>
+                </view>
+                <van-button id="{{index}}" type="info" size="small" round bind:click="recordsig">{{item.grade}}</van-button>
+            </view>
+            <view class="battle" wx:for="{{couplelist}}" wx:key="key">
+                <view class="battle-name">
+                    <view class="nametext">
+                        <text>{{item.name11}}</text>
+                        <text>{{item.name12}}</text>
+                    </view>
+                    <view class="than">vs</view>
+                    <view class="nametext">
+                        <text>{{item.name21}}</text>
+                        <text>{{item.name22}}</text>
+                    </view>
+                </view>
+                <van-button id="{{index}}" type="info" size="small" round bind:click="recordcop">{{item.grade}}</van-button>
+            </view>
+        </view>
+        <view wx:if="{{showrank}}" class="rankfield">
+            <view wx:for="{{ranklist}}" wx:key="key" class="rankitem">
+                <image src="{{item.img}}" mode="aspectFit" class="rankimg"></image>
+                <view class="nametext">{{item.name}}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="inputfield">
+        <view class="inputframe">
+            <van-icon name="volume-o" size="28px" bind:click="hidemore" bindlongpress="startrecord" bindtouchend="sendsound" />
+            <input class="inputbox" value="{{msg}}" bindfocus="hidemore" bindinput="showsend" bindconfirm="send"></input>
+            <button wx:if="{{showsend}}" type="primary" bindtap="send">发送</button>
+            <van-icon wx:else name="add-o" size="28px" bind:click="showmore" />
+        </view>
+        <view wx:if="{{showmore}}" class="show">
+            <view wx:for="{{imglist}}" wx:key="key" class="imgbox" id="{{index}}" bindtap="handlmore">
+                <image class="imgicon" src="{{item}}" mode="aspectFit"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<van-popup show="{{ showpop }}" round>
+    <van-picker show-toolbar title="比分" visible-item-count="3" columns="{{ columns }}" bind:cancel="onCancel" bind:confirm="onConfirm" />
+</van-popup>
