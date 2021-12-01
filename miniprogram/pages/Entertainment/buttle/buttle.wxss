@@ -16,7 +16,6 @@ page {
     flex-direction: column;
     align-items: center;
     padding: 5rpx 0; 
-    box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
 }
 
 .chatfield {
@@ -141,6 +140,7 @@ page {
 
 .inputframe {
     width: 100%;
+    height: 45%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -151,9 +151,10 @@ page {
 
 .inputbox {
     width: 78%;
-    height: 70rpx;
+    height: 80%;
     background-color: white;
     padding: 0 8rpx;
+    border-radius: 5rpx;
 }
 
 .inputframe button {

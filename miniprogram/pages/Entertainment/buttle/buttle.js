@@ -1,4 +1,5 @@
 // pages/Entertainment/buttle/buttle.js
+import Toast from '@vant/weapp/toast/toast';
 let app = getApp()
 const RM = wx.getRecorderManager()
 const range = Array.from({
@@ -27,11 +28,41 @@ Page({
                 }
             }
         ],
+        singlelistall: [
+            [{
+                name1: '张三',
+                name2: '李四',
+                grade: '录入成绩'
+            }],
+            [{
+                name1: '李四',
+                name2: '王五',
+                grade: '录入成绩'
+            }],
+        ],
+        singleindex: 0,
         singlelist: [{
             name1: '张三',
             name2: '李四',
             grade: '录入成绩'
         }],
+        couplelistall: [
+            [{
+                name11: '张三',
+                name12: '张四',
+                name21: '李五',
+                name22: '李六',
+                grade: '录入成绩'
+            }],
+            [{
+                name11: '李四',
+                name12: '王五',
+                name21: '张三',
+                name22: '李五',
+                grade: '录入成绩'
+            }],
+        ],
+        coupleindex: 0,
         couplelist: [{
             name11: '张三',
             name12: '张四',
@@ -173,15 +204,40 @@ Page({
 
     handlmore: function (e) {
         var id = e.currentTarget.id
+        var i = 0
         switch (id) {
             case '0':
+                i = ++this.data.singleindex
+                if (i < this.data.singlelistall.length) {
+                    this.setData({
+                        singlelist: this.data.singlelistall[i]
+                    })
+                } else {
+                    Toast.success('单人比赛结束')
+                    this.data.singledone = true
+                    this.data.singleindex = -1
+                }
                 break
             case '1':
+                i = ++this.data.coupleindex
+                if (i < this.data.couplelistall.length) {
+                    this.setData({
+                        couplelist: this.data.couplelistall[i]
+                    })
+                } else {
+                    Toast.success('双人比赛结束')
+                    this.data.coupledone = true
+                    this.data.coupleindex = -1
+                }
                 break
             case '2':
-                this.setData({
-                    showrank: !this.data.showrank
-                })
+                if (this.data.singledone || this.data.coupledone) {
+                    this.setData({
+                        showrank: !this.data.showrank
+                    })
+                } else {
+                    Toast.fail('比赛还没结束')
+                }
                 break
         }
     },
@@ -211,6 +267,7 @@ Page({
     },
 
     onConfirm: function (e) {
+        let picker = this.selectComponent('#picker')
         var grades = e.detail.value
         if (this.data.isingle) {
             var singlelist = this.data.singlelist
@@ -227,6 +284,8 @@ Page({
                 showpop: false
             })
         }
+        picker.setColumnIndex(0, 0)
+        picker.setColumnIndex(1, 0)
     },
 
     /**

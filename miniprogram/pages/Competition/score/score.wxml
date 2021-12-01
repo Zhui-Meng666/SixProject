@@ -1,2 +1,37 @@
 <!--pages/Competition/score/score.wxml-->
-<text>pages/Competition/score/score.wxml</text>
+<view class="container">
+    <view class="head">
+        <view>{{department}}</view>
+        <view>比赛号 {{compid}} 计分表</view>
+    </view>
+    <view class="divider"></view>
+    <view class="clockfield">
+        <view>第 {{gameid}} 局</view>
+        <view class="clock" bindtap="start" bindtouchstart="touchStart" bindtouchend="touchEnd">
+            <van-count-down class="control-count-down" use-slot auto-start="{{false}}" time="{{ time }}" bind:change="onchange">
+                <text class="item">{{ timeData.minutes }}</text>
+                <text class="item">{{ timeData.seconds }}</text>
+            </van-count-down>
+        </view>
+    </view>
+    <view class="score">
+        <view class="scoretable">
+            <view class="scoreitem" wx:for="{{score1}}" wx:key="key">{{item}}</view>
+            <view class="vers">:</view>
+            <view class="scoreitem" wx:for="{{score2}}" wx:key="key">{{item}}</view>
+        </view>
+        <view class="scoretable">
+            <view class="vers" wx:for="{{playername}}" wx:key="key">{{item.college}} / {{item.name}}</view>
+        </view>
+        <view class="scoretable">
+            <van-icon id="1" name="add-o" size="40px" bind:click="addscore" />
+            <van-icon id="2" name="add-o" size="40px" bind:click="addscore" />
+        </view>
+    </view>
+    <view class="submit">
+        <van-button loading="{{loading1}}" loading-type="spinner" loading-text="上传中..." type="primary" round block bind:click="submitnow">上传本局结果</van-button>
+        <van-button loading="{{loading2}}" loading-type="spinner" loading-text="上传中..." type="primary" round block bind:click="submitall">结束比赛</van-button>
+    </view>
+</view>
+<van-toast id="custom-selector" />
+<van-toast id="van-toast" />
