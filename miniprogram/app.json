@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/Entertainment/appoint/appoint",
         "pages/index/index",
+        "pages/Entertainment/appoint/appoint",
+        
         "pages/Entertainment/buttle/buttle",
         "pages/Exchange/main/mian",
         "pages/Exchange/details/details",
