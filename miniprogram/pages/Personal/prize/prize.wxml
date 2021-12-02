@@ -5,13 +5,13 @@
         <image src="{{item.imgsrc}}" class='firstimagestyle'></image>
         <view class='containeritem'>
             <view class='name'>
-                <text>{{item.name}}</text>
+                <text>奖品名称：{{item.name}}</text>
             </view>
             <view class='message'>
                 <view class='sb'>
-                    SUFE币：{{item.sb}}
+                    <image src="../../../images/sufecoin.png" class="sbimg"></image> {{item.sb}}
                 </view>
-                <view class='divLine'></view>
+                <!-- <view class='divLine'></view> -->
                 <view class='date'>
                     获得日期：{{item.date}}  
                 </view>

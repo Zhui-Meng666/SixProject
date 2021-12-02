@@ -10,7 +10,7 @@ Page({
         bottom_active : 'home',
         msglist : [
             {
-                title: "公告：多地首套房贷利率上浮 热点城市渐迎零折扣时代",
+                title: "公告：多地首套房贷利率上浮 热点城市渐迎零折",
                 img_src : "../../images/Cat.jpeg",
                 url : 'https://www.baidu.com'
             },
@@ -36,19 +36,19 @@ Page({
             {
                 name : '456',
                 msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/home-unclick.png',
+                cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/2.mp4',
             },
             {
                 name : '000',
                 msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/like.png',
+                cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/3.mp4',
             },
             {
                 name : '0331',
                 msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/me-click.png',
+                cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/4.mp4',
             },
         ],
@@ -62,19 +62,19 @@ Page({
             {
                 name : '456',
                 msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/home-unclick.png',
+                cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '000',
                 msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/like.png',
+                cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '0331',
                 msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/me-click.png',
+                cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
         ],
@@ -136,7 +136,7 @@ Page({
     },
     to_game(event){
         wx.redirectTo({
-          url: '',
+          url: '../Competition/main/main',
         })
     },
     to_entertainment(event){
@@ -159,9 +159,9 @@ Page({
                 })
                 break
             case 1:
-                // wx.navigateTo({
-                //     url: '',
-                // })
+                wx.navigateTo({
+                    url: '../Competition/main/main',
+                })
                 break
             case 2:
                 wx.navigateTo({

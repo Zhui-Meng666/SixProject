@@ -1,22 +1,35 @@
 <!--pages/Entertainment/main/main.wxml-->
 <van-tabs active="{{active}}" bind:change="onChange">
     <van-tab title="乱斗">
-        <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange1" bind:search="onSearch1" bind:focus="onFocus1" bind:cancel="onCancel"></van-search>
+        <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange1" bind:search="onSearch1" ></van-search>
         
         <view class="class">
-            <view class="class_item">我加入的</view>
-            <view class="class_item">推荐</view>
-            <view class="class_item">创建新的</view>
+            <image class="class_item" src="../../../images/mine.png">
+              <!-- <view class="class_item_font">我的</view> -->
+            </image>
+            <image class="class_item" src="../../../images/recom.png">
+              <!-- <view class="class_item_font">推荐</view> -->
+            </image>
+            <image class="class_item" src="../../../images/build.png" bindtap="create">
+              <!-- <view class="class_item_font">创建</view> -->
+            </image>
         </view>
 
         <view class="acts">
             <view wx:for="{{acts_show}}" class="act_item" bindtap="Tobattle">
                 <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
                 <view class="act_details">
-                    <view class="act_detail">{{item.name}}</view>
-                    <view class="act_detail">{{item.detail}}</view>
-                    <view class="act_detail">人数：{{item.number}}</view>
-                    <view class="act_detail">{{item.date}}</view>
+                    <!-- <view class="act_detail">{{item.name}}</view> -->
+                    <view class="act_line">
+                      <view class="act_name">{{item.detail}}</view>
+                      <image src="../../../images/add.png" class="act_join_in"></image>
+                    </view>
+                    <view class="act_detail">{{item.state}}</view>
+                    <view class="act_line">
+                      <view class="act_detail">人数：{{item.number}}</view>
+                      <view class="act_detail_date">{{item.date}}</view>
+                    </view>
+                    <view class="act_bar"></view>
                 </view>
             </view>
         
@@ -27,21 +40,28 @@
         <van-search value="{{value_show}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange2" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel"></van-search>
         
         <view class="class">
-            <view class="class_item1">女子单打</view>
-            <view class="class_item1">男子单打</view>
-            <view class="class_item1">女子双打</view>
-            <view class="class_item1">男子双打</view>
-            <view class="class_item1">混合双打</view>
+            <image class="class_item1" src="../../../images/male_1.png"></image>
+            <image class="class_item1" src="../../../images/male_2.png"></image>
+            <image class="class_item1" src="../../../images/male_2.png"></image>
+            <image class="class_item1" src="../../../images/female_2.png"></image>
+            <image class="class_item1" src="../../../images/male_and_female.png"></image>
         </view>
         <!-- <view>|   我的匹配</view> -->
         <view class="acts">
             <view wx:for="{{date_show}}" class="act_item" bindtap="Toappoint">
                 <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
                 <view class="act_details">
-                    <view class="act_detail">{{item.name}}</view>
+                  <view class="act_line">
+                      <view class="act_name">{{item.name}}</view>
+                      <image src="../../../images/add.png" class="act_join_in"></image>
+                    </view>
+                    <view class="act_detail">{{item.state}}</view>
                     <view class="act_detail">{{item.class}}</view>
-                    <view class="act_detail">人数：{{item.number}}</view>
-                    <view class="act_detail">{{item.date}}</view>
+                    <view class="act_line">
+                      <view class="act_detail">人数：{{item.number}}</view>
+                      <view class="act_detail_date">{{item.date}}</view>
+                    </view>
+                    <view class="act_bar"></view>
                 </view>
             </view>
         
@@ -115,3 +135,16 @@
     个人
   </van-tabbar-item>
 </van-tabbar>
+
+<van-popup custom-class="setpop" show="{{show_create}}" bind:close="close_create" position="bottom" round safe-area-inset-top>
+  <!-- <view> hello world! </view> -->
+  <image src="{{create_img}}" class="team_img" bindtap="uploadimg"></image>
+  <view class="full_line"></view>
+  <van-cell-group>
+    <van-field value="{{team_name}}" label="小组名称" placeholder="请输入小组名称" border="{{false}}" bind:change="check_create"></van-field>
+    <van-field value="{{team_detail}}" label="小组简介" placeholder="请输入小组简介" border="{{false}}" bind:change="check_create"></van-field>
+    <van-field value="{{team_info}}" label="小组介绍" placeholder="请输入小组介绍" border="{{false}}" bind:change="check_create"></van-field>
+  </van-cell-group>
+  <vant-button plain type="primary" bindtap="create_done" class="create">创建</vant-button>
+
+</van-popup>

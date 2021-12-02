@@ -185,7 +185,7 @@ Page({
   },
   to_game(event){
       wx.redirectTo({
-        url: '',
+        url: '../../Competition/main/main',
       })
   },
   to_entertainment(event){

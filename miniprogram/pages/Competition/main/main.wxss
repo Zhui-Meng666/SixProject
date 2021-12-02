@@ -1,0 +1,125 @@
+/* pages/Competition/main/main.wxss */
+.game_items{
+    border-style: groove;
+    border-color: cornflowerblue;
+    border-radius: 25rpx;
+    width: 98%;
+    margin: auto;
+    margin-top: 15rpx;
+}
+.game_msg{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20rpx;
+    font-style: 'Heiti';
+}
+.game_info{
+    margin: 20rpx
+}
+.signup{
+    display: flex;
+    flex-direction: row;
+}
+.signup_button{
+    margin: 80rpx;
+    margin-bottom: 20rpx;
+    margin-top: 20rpx;
+}
+.com_info{
+    margin: 20rpx;
+}
+.game_id{
+    margin: 20rpx;
+}
+.field{
+    margin: 20rpx;
+}
+.start_game{
+    margin-left: 275rpx;
+}
+.res_score{
+    margin: 30rpx;
+    border-style: groove;
+    border-color: cornflowerblue;
+    width: 200rpx;
+    height: 100rpx;
+    text-align: center;
+    margin-left: 260rpx;
+}
+.free{
+    margin: 30rpx;
+    border-style: groove;
+    border-color: cornflowerblue;
+    text-align: center;
+}
+
+.ath_submit{
+    margin-left: 310rpx;
+}
+
+.info_style{
+    margin-left: 20rpx;
+    font-family: heiti;
+    font-weight: bolder;
+}
+
+.act_items{
+    border-radius: 16rpx;
+    border-style: groove;
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    margin-bottom: 10rpx;
+}
+.act_img{
+    width: 318rpx;
+    height: 318rpx;
+    margin: 5rpx;
+}
+.act_info{
+    margin-left: 10rpx;
+}
+.act_name{
+    font-style: heiti;
+    font-weight: 700;
+    font-size: 45rpx;
+}
+.act_msg{
+    font-size: 25rpx;
+    margin-top: 10rpx;
+    width: 365rpx;
+}
+.act_sign{
+    width: 200rpx;
+    height: 80rpx;
+    background-color: green;
+    color: white;
+    text-align: center;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    margin-left: 0rpx;
+}
+.act_cancel{
+    width: 200rpx;
+    height: 80rpx;
+    background-color: red;
+    color: white;
+    text-align: center;
+    align-items: center;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+    margin-left: 0rpx;
+}
+.act_coin1{
+    height: 30rpx;
+    width: 30rpx;
+    position: relative;
+    left: -10rpx;
+    top: 18rpx;
+}
+.act_number_coin1{
+    position: relative;
+    left: -8rpx;
+    top: 10rpx;
+}

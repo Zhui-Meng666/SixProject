@@ -57,27 +57,29 @@
     color:#000000;
   }
   .secondlayout{
-    width: 100%;
+    width: 98%;
     height: 250rpx;
     display: flex;
     flex-direction: row;
-    border: cadetblue;
     border-style: groove;
+    margin: auto;
     margin-top: 10rpx;
-    margin-bottom: auto;
-    border-color: lightsteelblue;
+    border-color: wheatightsteelblue;
+    background-color: white;
+    border-radius: 15rpx;
   }
   .date{
-    font-size: 20rpx;
+    font-size: 25rpx;
     color: #515C5D;
-    margin-left: 15rpx;
-
+    margin-right: -245rpx;
+    position: relative;
+    top: 35rpx;
   }
   .sb{
     color: #515C5D;
-    font-size: 20rpx;
-    margin-right: 20rpx;
-    margin-left: 15rpx;
+    font-size: 40rpx;
+    margin-right: -390rpx;
+    margin-bottom: -10rpx;
   }
   .divLine{
     background: #141f44;
@@ -100,32 +102,18 @@
   .name{
     flex: 1;
     height: 45rpx;
-    width: 30%;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    margin-top: 40rpx;
+    margin-top: 20rpx;
     font-family: 'Heiti';
-    border-style: dashed;
-    border-width: 5rpx;
-    border-color: lightsteelblue;
   }
   .message{
     flex: 1;
-    height: 80rpx;
+    /* height: 80rpx; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    margin-top: 10rpx;
-    border-style: dashed;
-    border-radius: 10rpx;
-    border-width: 5rpx;
-    border-color: lightsteelblue;
-
-    border-style: dashed;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: lightsteelblue;
+    /* /* margin-top: 10rpx; */
   }
   .secondlayoutitem{
     flex: 1;
@@ -151,9 +139,6 @@
     width: 200rpx;
     height: 200rpx;
     margin: 20rpx;
-    margin-top: 20rpx;
-    align-items: center;
-    border-radius: 5%;
   }
   .sbimg{
     width: 20px;
