@@ -1,4 +1,5 @@
 // pages/Entertainment/appoint/appoint.js
+import Toast from '@vant/weapp/toast/toast';
 let app = getApp()
 const RM = wx.getRecorderManager()
 Page({
@@ -191,6 +192,7 @@ Page({
                 })
                 break
             case '2':
+                Toast('开始比赛！')
                 break
         }
     },
