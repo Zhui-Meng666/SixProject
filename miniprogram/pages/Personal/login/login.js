@@ -1,6 +1,7 @@
 // pages/Personal/login/login.js
 import Toast from '@vant/weapp/toast/toast';
-var app = getApp()
+let app = getApp()
+let conn = wx.WebIM.conn
 Page({
 
   /**
@@ -67,19 +68,53 @@ Page({
             avatar: this.data.userInfo.avatarUrl,
             nickname: this.data.userInfo.nickName
           }
-          console.log(submitdata)
+          console.log(app.globalData.openid)
+          let that = this
+          var options = {
+            username: app.globalData.openid,
+            password: "123456",
+            nickname: this.data.userInfo.nickName,
+            appKey: app.globalData.appKey,
+            success: function () {
+              app.globalData.registered = true
+              Toast.success('登录成功')
+              wx.redirectTo({
+                url: '../../index/index',
+              })
+            },
+            error: function (err) {
+              let errorData = err.data;
+              if (errorData.error === 'duplicate_unique_property_exists') {
+                console.log('用户已存在！');
+                Toast.fail('已注册！')
+                app.globalData.registered = true
+                wx.redirectTo({
+                  url: '../../index/index',
+                })
+              } else if (errorData.error === 'illegal_argument') {
+                if (errorData.error_description === 'USERNAME_TOO_LONG') {
+                  console.log('用户名超过64个字节！')
+                } else {
+                  console.log('用户名不合法！')
+                }
+              } else if (errorData.error === 'unauthorized') {
+                console.log('注册失败，无权限！')
+              } else if (errorData.error === 'resource_limited') {
+                console.log('您的App用户注册数量已达上限,请升级至企业版！')
+              }
+            },
+          };
+          conn.registerUser(options);
           wx.cloud.callFunction({
             name: 'register',
-            data: submitdata,
+            data: {
+              openid: app.globalData.openid
+            },
             success: (res) => {
               console.log('成功', res)
               this.setData({
                 loading: false,
                 butwidth: 200
-              })
-              Toast.success('登录成功')
-              wx.redirectTo({
-                url: '../main/main',
               })
             },
             fail: (err) => {

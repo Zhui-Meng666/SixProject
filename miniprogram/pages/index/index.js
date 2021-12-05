@@ -1,5 +1,6 @@
 // miniprogram/pages/index/index.js
-var app = getApp()
+let app = getApp()
+let conn = wx.WebIM.conn
 
 Page({
 
@@ -7,99 +8,94 @@ Page({
      * 页面的初始数据
      */
     data: {
-        bottom_active : 'home',
-        msglist : [
-            {
+        bottom_active: 'home',
+        msglist: [{
                 title: "公告：多地首套房贷利率上浮 热点城市渐迎零折扣时代",
-                img_src : "../../images/Cat.jpeg",
-                url : 'https://www.baidu.com'
+                img_src: "../../images/Cat.jpeg",
+                url: 'https://www.baidu.com'
             },
-            { 
+            {
                 title: "公告：悦如公寓三周年生日趴邀你免费吃喝欢唱",
-                img_src : "../../images/Cat.jpeg",
-                url : '../Personal/main'
+                img_src: "../../images/Cat.jpeg",
+                url: '../Personal/main'
             },
-            { 
+            {
                 title: "公告：你想和一群有志青年一起过生日嘛？",
-                img_src : "../../images/Cat.jpeg",
-                url : '../Personal/main'
+                img_src: "../../images/Cat.jpeg",
+                url: '../Personal/main'
             }
         ],
-        videos : [
-            {
-                name : '123',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
+        videos: [{
+                name: '123',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/Cat.jpeg',
                 // video_src : '../../videos/1.mp4',
-                video_src : 'https://v.douyin.com/RC8XYgW/'
+                video_src: 'https://v.douyin.com/RC8XYgW/'
             },
             {
-                name : '456',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/home-unclick.png',
-                video_src : '../../videos/2.mp4',
+                name: '456',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/home-unclick.png',
+                video_src: '../../videos/2.mp4',
             },
             {
-                name : '000',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/like.png',
-                video_src : '../../videos/3.mp4',
+                name: '000',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/like.png',
+                video_src: '../../videos/3.mp4',
             },
             {
-                name : '0331',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/me-click.png',
-                video_src : '../../videos/4.mp4',
-            },
-        ],
-        all_videos : [
-            {
-                name : '123',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-                video_src : '',
-            },
-            {
-                name : '456',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/home-unclick.png',
-                video_src : '',
-            },
-            {
-                name : '000',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/like.png',
-                video_src : '',
-            },
-            {
-                name : '0331',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src : '../../images/me-click.png',
-                video_src : '',
+                name: '0331',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/me-click.png',
+                video_src: '../../videos/4.mp4',
             },
         ],
-        bottom_list : [
-            {
-                name : '主页',
-                img_src : '../../images/home-click.png'
+        all_videos: [{
+                name: '123',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/Cat.jpeg',
+                video_src: '',
             },
             {
-                name : '赛事',
-                img_src : '../../images/competition-unclick.png'
+                name: '456',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/home-unclick.png',
+                video_src: '',
             },
             {
-                name : '娱乐',
-                img_src : '../../images/entertainment-unclick.png'
+                name: '000',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/like.png',
+                video_src: '',
             },
             {
-                name : '我的',
-                img_src : '../../images/me-unclick.png'
+                name: '0331',
+                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src: '../../images/me-click.png',
+                video_src: '',
+            },
+        ],
+        bottom_list: [{
+                name: '主页',
+                img_src: '../../images/home-click.png'
+            },
+            {
+                name: '赛事',
+                img_src: '../../images/competition-unclick.png'
+            },
+            {
+                name: '娱乐',
+                img_src: '../../images/entertainment-unclick.png'
+            },
+            {
+                name: '我的',
+                img_src: '../../images/me-unclick.png'
             }
         ]
     },
 
-    getid: function (e) {
-    },
+    getid: function (e) {},
     onChange: function (e) {
         this.setData({
             value: e.detail,
@@ -126,33 +122,33 @@ Page({
     },
     onCancel: function (e) {
         this.setData({
-            videos : this.data.all_videos
+            videos: this.data.all_videos
         })
     },
-    to_home(event){
+    to_home(event) {
         wx.redirectTo({
-          url: '../index/index',
+            url: '../index/index',
         })
     },
-    to_game(event){
+    to_game(event) {
         wx.redirectTo({
-          url: '',
+            url: '',
         })
     },
-    to_entertainment(event){
+    to_entertainment(event) {
         wx.redirectTo({
-          url: '../Entertainment/main/main',
+            url: '../Entertainment/main/main',
         })
     },
-    to_personal(event){
+    to_personal(event) {
         wx.redirectTo({
-          url: '../Personal/main/main',
+            url: '../Personal/main/main',
         })
     },
     bottom_click(event) {
         let id = event.detail.index
         console.log(id)
-        switch(id){
+        switch (id) {
             case 0:
                 wx.navigateTo({
                     url: './index',
@@ -175,34 +171,34 @@ Page({
                 break
         }
     },
-    video_click : function(e){
+    video_click: function (e) {
         let vid = e.currentTarget.id
         wx.navigateTo({
-          url: '../Popular_Sci/video_play/video_play?vid='+vid,
+            url: '../Popular_Sci/video_play/video_play?vid=' + vid,
         })
     },
-    news_click : function(e){
-        let idx = e.currentTarget.dataset.index 
-        let url = this.data.msglist[idx].url 
+    news_click: function (e) {
+        let idx = e.currentTarget.dataset.index
+        let url = this.data.msglist[idx].url
         console.log(url)
         wx.navigateTo({
-          url: String(url)
+            url: String(url)
         })
     },
 
-    onChangeBottom : function(event){
+    onChangeBottom: function (event) {
         console.log(event.detail)
         this.setData({
-            bottom_active : event.detail
+            bottom_active: event.detail
         })
     },
-    
+
     /**
      * 生命周期函数--监听页面加载
      */
-    // onLoad: function (options) {
-
-    // },
+    onLoad: function (options) {
+        
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成

@@ -154,7 +154,7 @@ page {
     height: 80%;
     background-color: white;
     padding: 0 8rpx;
-    border-radius: 5rpx;
+    border-radius: 8rpx;
 }
 
 .inputframe button {
