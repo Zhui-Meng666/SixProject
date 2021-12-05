@@ -553,7 +553,12 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {},
+    onShow: function () {
+        console.log(app.globalData.openid)
+        this.setData({
+            openid: app.globalData.openid
+        })
+    },
 
     /**
      * 生命周期函数--监听页面隐藏
