@@ -8,11 +8,12 @@ Page({
      * 页面的初始数据
      */
     data: {
-        bottom_active: 'home',
-        msglist: [{
-                title: "公告：多地首套房贷利率上浮 热点城市渐迎零折扣时代",
-                img_src: "../../images/Cat.jpeg",
-                url: 'https://www.baidu.com'
+        bottom_active : 'home',
+        msglist : [
+            {
+                title: "公告：多地首套房贷利率上浮 热点城市渐迎零折",
+                img_src : "../../images/Cat.jpeg",
+                url : 'https://www.baidu.com'
             },
             {
                 title: "公告：悦如公寓三周年生日趴邀你免费吃喝欢唱",
@@ -33,22 +34,22 @@ Page({
                 video_src: 'https://v.douyin.com/RC8XYgW/'
             },
             {
-                name: '456',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/home-unclick.png',
-                video_src: '../../videos/2.mp4',
+                name : '456',
+                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src : '../../images/Cat.jpeg',
+                video_src : '../../videos/2.mp4',
             },
             {
-                name: '000',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/like.png',
-                video_src: '../../videos/3.mp4',
+                name : '000',
+                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src : '../../images/Cat.jpeg',
+                video_src : '../../videos/3.mp4',
             },
             {
-                name: '0331',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/me-click.png',
-                video_src: '../../videos/4.mp4',
+                name : '0331',
+                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src : '../../images/Cat.jpeg',
+                video_src : '../../videos/4.mp4',
             },
         ],
         all_videos: [{
@@ -58,22 +59,22 @@ Page({
                 video_src: '',
             },
             {
-                name: '456',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/home-unclick.png',
-                video_src: '',
+                name : '456',
+                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src : '../../images/Cat.jpeg',
+                video_src : '',
             },
             {
-                name: '000',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/like.png',
-                video_src: '',
+                name : '000',
+                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src : '../../images/Cat.jpeg',
+                video_src : '',
             },
             {
-                name: '0331',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/me-click.png',
-                video_src: '',
+                name : '0331',
+                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                cover_src : '../../images/Cat.jpeg',
+                video_src : '',
             },
         ],
         bottom_list: [{
@@ -132,7 +133,7 @@ Page({
     },
     to_game(event) {
         wx.redirectTo({
-            url: '',
+          url: '../Competition/main/main',
         })
     },
     to_entertainment(event) {
@@ -155,9 +156,9 @@ Page({
                 })
                 break
             case 1:
-                // wx.navigateTo({
-                //     url: '',
-                // })
+                wx.navigateTo({
+                    url: '../Competition/main/main',
+                })
                 break
             case 2:
                 wx.navigateTo({

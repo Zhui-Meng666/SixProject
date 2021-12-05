@@ -10,14 +10,12 @@
 }
 
 .swiper_item{
-    font-size: 15px;
+    font-size: 17px;
     position: absolute;
     margin: auto;
-    top: 77px;
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
-    /* white-space: nowrap; */
-    /* letter-spacing: 2px; */
+    top: 180rpx;
+    color: white;
+    left: 15rpx;
 }
 .search {
     width: 98%;
@@ -45,19 +43,19 @@
 }
 .v_name{
     position: relative;
-    left: 17px;
-    top: -55px;
+    left: 20rpx;
+    top: -120rpx;
     color: white;
     font-family: "heiti";
-    font-size: 15px;
+    font-size: 50rpx;
 }
 .v_detail{
     position: relative;
-    left: 17px;
-    top: -55px;
-    width: 125px;
+    left: 16rpx;
+    top: -120rpx;
+    width: 300rpx;
     color: white;
-    font-size: 10px;
+    font-size: 30rpx;
 }
 
 .bottom{

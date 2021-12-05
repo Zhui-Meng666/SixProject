@@ -68,8 +68,6 @@ Page({
             avatar: this.data.userInfo.avatarUrl,
             nickname: this.data.userInfo.nickName
           }
-          console.log(app.globalData.openid)
-          let that = this
           var options = {
             username: app.globalData.openid,
             password: "123456",
@@ -85,7 +83,6 @@ Page({
             error: function (err) {
               let errorData = err.data;
               if (errorData.error === 'duplicate_unique_property_exists') {
-                console.log('用户已存在！');
                 Toast.fail('已注册！')
                 app.globalData.registered = true
                 wx.redirectTo({
@@ -111,7 +108,6 @@ Page({
               openid: app.globalData.openid
             },
             success: (res) => {
-              console.log('成功', res)
               this.setData({
                 loading: false,
                 butwidth: 200

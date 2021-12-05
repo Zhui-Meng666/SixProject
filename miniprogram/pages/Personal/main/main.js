@@ -186,7 +186,7 @@ Page({
   },
   to_game(event) {
     wx.redirectTo({
-      url: '',
+      url: '../../Competition/main/main',
     })
   },
   to_entertainment(event) {
@@ -203,14 +203,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    console.log(app.globalData.registered)
-    if (!app.globalData.registered) {
-      wx.redirectTo({
-        url: '../login/login',
-      })
-    }
-    var userallid = ['1', '3', '4', '2', '0', '5']
-    this.Idtoname(userallid.sort())
+
   },
 
   /**
@@ -224,7 +217,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!app.globalData.registered) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    }
+    var userallid = ['1', '3', '4', '2', '0', '5']
+    this.Idtoname(userallid.sort())
   },
 
   /**

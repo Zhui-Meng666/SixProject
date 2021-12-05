@@ -109,7 +109,7 @@
     text-align: right;
     margin-bottom: 34rpx;
     position: relative;
-    left: 100rpx;
+    left: 150rpx;
   }
   .rdate{
     font-size: 10px;
@@ -171,18 +171,29 @@
   border-style: groove;
   margin: auto;
   margin-bottom: 20rpx;
+  border-radius: 20rpx;
+  background-color: white;
 }
 
 .details{
   display: flex;
   flex-direction: column;
-  margin-top: 15rpx;
-  margin-left: 25rpx;
+  margin-top: 27rpx;
+  margin-left: 36rpx;
   width: 430rpx;
   height: 100%;
 }
 
 .imgs{
-  width: 256rpx;
-  height: 256rpx;
+  width: 200rpx;
+  height: 200rpx;
+  position: relative;
+  top: 30rpx;
+  left: 15rpx;
+}
+
+.back{
+  background-color: #FAFAFB;
+  height: 2000rpx;
+  width: 100%;
 }

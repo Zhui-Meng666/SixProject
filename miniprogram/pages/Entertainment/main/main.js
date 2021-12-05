@@ -7,109 +7,122 @@ Page({
      * 页面的初始数据
      */
     data: {
-        active: 0,
-        bottom_active: 'entertainment',
-        acts: [{
-                coverimg: '../../../images/Cat.jpeg',
-                name: '1234组',
-                detail: '菜鸡互啄队',
-                number: 3,
-                date: '2021-3-7'
+        active : 0,
+        bottom_active : 'entertainment',
+        create_img : '../../../images/Cat.jpeg',
+        acts : [
+            {
+                coverimg : '../../../images/Cat.jpeg',
+                name : '1234组',
+                detail : '菜鸡互啄队',
+                number : 3,
+                date : '2021-3-7',
+                state : '准备中'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: '3311组',
-                detail: '菜鸡互啄队',
-                number: 4,
-                date: '2021-5-8'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '3311组',
+                detail : '菜鸡互啄队',
+                number : 4,
+                date : '2021-5-8',
+                state : '准备中'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: '8821组',
-                detail: '菜鸡互啄队',
-                number: 2,
-                date: '2021-10-7'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '8821组',
+                detail : '菜鸡互啄队',
+                number : 2,
+                date : '2021-10-7',
+                state : '乱斗中'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: '1234组',
-                detail: '菜鸡互啄队',
-                number: 3,
-                date: '2021-4-7'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '1234组',
+                detail : '菜鸡互啄队',
+                number : 3,
+                date : '2021-4-7',
+                state : '准备中'
             },
         ],
-        acts_show: [{
-                coverimg: '../../../images/Cat.jpeg',
-                name: '1234组',
-                detail: '菜鸡互啄队',
-                number: 3,
-                date: '2021-3-7'
+        acts_show : [
+            {
+                coverimg : '../../../images/Cat.jpeg',
+                name : '1234组',
+                detail : '菜鸡互啄队',
+                number : 3,
+                date : '2021-3-7',
+                state : '准备中'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: '3311组',
-                detail: '菜鸡互啄队',
-                number: 4,
-                date: '2021-5-8'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '3311组',
+                detail : '菜鸡互啄队',
+                number : 4,
+                date : '2021-5-8',
+                state : '准备中'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: '8821组',
-                detail: '菜鸡互啄队',
-                number: 2,
-                date: '2021-10-7'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '8821组',
+                detail : '菜鸡互啄队',
+                number : 2,
+                date : '2021-10-7',
+                state : '乱斗中'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: '1234组',
-                detail: '菜鸡互啄队',
-                number: 3,
-                date: '2021-4-7'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '1234组',
+                detail : '菜鸡互啄队',
+                number : 3,
+                date : '2021-4-7',
+                state : '准备中'
             },
         ],
 
-        date: [{
-                coverimg: '../../../images/Cat.jpeg',
-                name: 'ABC',
-                class: '女子单打',
-                number: 2,
-                date: '2021-3-7'
+        date : [
+            {
+                coverimg : '../../../images/Cat.jpeg',
+                name : '三缺一',
+                class : '女子单打',
+                number : 2,
+                date : '2021-3-7'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: 'CDE ABC QWE',
-                class: '女子双打',
-                number: 4,
-                date: '2021-5-8'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '菜鸡互啄',
+                class : '女子双打',
+                number : 4,
+                date : '2021-5-8'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: 'ADC QWE RTY',
-                class: '混合双打',
-                number: 4,
-                date: '2021-10-7'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '有梦你就来',
+                class : '混合双打',
+                number : 4,
+                date : '2021-10-7'
             },
         ],
-        date_show: [{
-                coverimg: '../../../images/Cat.jpeg',
-                name: 'ABC',
-                class: '女子单打',
-                number: 2,
-                date: '2021-3-7'
+        date_show : [
+            {
+                coverimg : '../../../images/Cat.jpeg',
+                name : '三缺一',
+                class : '女子单打',
+                number : 2,
+                date : '2021-3-7'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: 'CDE ABC QWE',
-                class: '女子双打',
-                number: 4,
-                date: '2021-5-8'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '菜鸡互啄',
+                class : '女子双打',
+                number : 4,
+                date : '2021-5-8'
             },
             {
-                coverimg: '../../../images/Cat.jpeg',
-                name: 'ADC QWE RTY',
-                class: '混合双打',
-                number: 4,
-                date: '2021-10-7'
+                coverimg : '../../../images/Cat.jpeg',
+                name : '有梦你就来',
+                class : '混合双打',
+                number : 4,
+                date : '2021-10-7'
             },
         ]
 
@@ -143,6 +156,12 @@ Page({
     Tobattle: function (e) {
         wx.navigateTo({
             url: '../appoint/appoint',
+        })
+    },
+
+    ToCreate: function(e) {
+        wx.navigateTo({
+          url: '../create/create',
         })
     },
 
@@ -208,7 +227,7 @@ Page({
     },
     to_game(event) {
         wx.redirectTo({
-            url: '',
+          url: '../../Competition/main/main',
         })
     },
     to_entertainment(event) {
@@ -222,12 +241,43 @@ Page({
         })
     },
 
-
+    close_create: function(e){
+        this.setData({
+            show_create : false,
+        })
+    },
+    create: function(e) {
+        this.setData({
+            show_create : true,
+        })
+    },
+    check_create(event) {
+        console.log(event.detail)
+    },
+    create_done: function(e){
+        this.setData({
+            show_create : false,
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
 
+    },
+    uploadimg : function(e) {
+        wx.chooseImage({
+          count: 1,
+          sizeType : ['original', 'compressed'],
+          sourceType : ['album', 'camera'],
+          success : function(res) {
+              var tempFilePaths = res.tempFilePaths;
+              let new_img = tempFilePaths;
+              this.setData({
+                  create_img : new_img
+              })
+          }
+        })
     },
 
     /**

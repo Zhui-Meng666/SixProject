@@ -86,7 +86,7 @@ App({
           success: (res) => {
             // console.log("成功", res)
             var data = res.result.data
-            if (data) {
+            if (data.length) {
               this.globalData.registered = true
             }
           },
