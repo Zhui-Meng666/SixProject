@@ -1,17 +1,13 @@
-// pages/Competition/main/ref_signup.js
+// pages/Activity/details/details.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+    },
 
-    },
-    close_signup_ref: function(e){
-        wx.navigateBack({
-            delta: 1
-          })
-    },
+
     /**
      * 生命周期函数--监听页面加载
      */

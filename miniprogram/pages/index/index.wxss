@@ -29,7 +29,7 @@ page{
 
 .videos{
     width: 100%;
-    height: 910rpx;
+    height: 790rpx;
     display: flex;
     align-content: flex-start;
     flex-direction: row;

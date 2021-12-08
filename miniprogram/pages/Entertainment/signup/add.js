@@ -5,26 +5,53 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+      list : []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     create_finished: function(e) {
-        wx.redirectTo({
-          url: './signup',
-        })
+      var name = this.data.name
+      var sid = this.data.sid
+      var ins = this.data.ins
+      var gender = this.data.gender
+
+      var temp = {name:name, sid:sid, ins:ins, gender:gender}
+      var list = this.data.list
+      list.push(temp)
+      console.log(list)
+      wx.redirectTo({
+        url: './signup?list='+list
+      })
+    },
+    nameInput(event){
+      this.setData({name : event.detail})
+    },
+    sidInput(event){
+      this.setData({sid : event.detail})
+    },
+    insInput(e){
+      this.setData({ins : e.detail})
+    },
+    onChange(event){
+      this.setData({gender:event.detail})
+    },
+    onClick(event){
+      const {gender} = event.currentTarget.dataset
+      this.setData({gender : gender})
     },
     onLoad: function (options) {
-
+      var ath = JSON.parse(options.list)
+      this.setData({
+        list : ath 
+      })
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
     },
 
     /**

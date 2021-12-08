@@ -1,13 +1,14 @@
 <!--pages/Entertainment/signup/mod.wxml-->
 <van-cell-group>
-    <van-field label="姓名" value="{{name}}"></van-field>
-    <van-field label="学院" value="{{ins}}"></van-field>
-    <van-field label="学号" value="{{sid}}"></van-field>
-    <van-radio-group value="{{gender}}" bind:change="onChange" title="性别">
-        <van-radio name="男">男</van-radio>
-        <van-radio name="女">女</van-radio>
-    </van-radio-group>
-    
+    <van-field label="姓名" bind:change="nameInput"></van-field>
+    <van-field label="学院" bind:change="insInput"></van-field>
+    <van-field label="学号" bind:change="sidInput"></van-field>
+    <van-cell title="性别">
+        <van-radio-group value="性别" bind:change="onChange" title="性别" direction="horizontal">
+            <van-radio name="男" >男</van-radio>
+            <van-radio name="女">女</van-radio>
+        </van-radio-group>
+    </van-cell>
 </van-cell-group>
 
 <button bindtap="mod_finished" class="submit">确认修改</button>

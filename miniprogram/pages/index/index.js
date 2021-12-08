@@ -26,11 +26,11 @@ Page({
                 url: '../Personal/main'
             }
         ],
-        videos: [{
+        videos: [
+            {
                 name: '123',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg: '哈哈哈哈哈哈哈',
                 cover_src: '../../images/Cat.jpeg',
-                // video_src : '../../videos/1.mp4',
                 video_src: 'https://v.douyin.com/RC8XYgW/'
             },
             {
@@ -174,8 +174,9 @@ Page({
     },
     video_click: function (e) {
         let vid = e.currentTarget.id
+        let videos = this.data.videos
         wx.navigateTo({
-            url: '../Popular_Sci/video_play/video_play?vid=' + vid,
+            url: '../Popular_Sci/video_play/video_play?vid=' + vid + '&videos' + videos,
         })
     },
     news_click: function (e) {

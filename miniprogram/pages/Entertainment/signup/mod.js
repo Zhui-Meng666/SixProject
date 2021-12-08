@@ -5,23 +5,49 @@ Page({
      * 页面的初始数据
      */
     data: {
-        name : null,
-        ins : null,
-        sid : null,
-        gender : '男',
-        idx : null
+    
     },
-
     mod_finished: function(e) {
+        var list = this.data.list
+        var name = this.data.name
+        var sid = this.data.sid
+        var ins = this.data.ins
+        var gender = this.data.gender
+        for(var i=0;i<list.length;i++){
+            if(list[i].sid == sid){
+                list[i].name = name
+                list[i].ins = ins
+                list[i].gender = gender
+                break
+            }
+        }
+        console.log(list)
         wx.redirectTo({
-          url: './signup?name='+this.data.name+'&ins='+this.data.name+'&sid='+this.data.sid + '&gender='+this.data.gender + '&idx='+this.data.idx,
+          url: './signup?list=' + list 
         })
+    },
+    nameInput(event){
+        this.setData({name : event.detail})
+      },
+    sidInput(event){
+    this.setData({sid : event.detail})
+    },
+    insInput(e){
+    this.setData({ins : e.detail})
+    },
+    onChange(event){
+    this.setData({gender:event.detail})
+    },
+    onClick(event){
+    const {gender} = event.currentTarget.dataset
+    this.setData({gender : gender})
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.setData({
+            list : options.list,
             name : options.name,
             ins : options.ins,
             sid : options.sid,

@@ -1,4 +1,4 @@
-// pages/Competition/main/ref_signup.js
+// pages/Activity/release/release.js
 Page({
 
     /**
@@ -7,11 +7,7 @@ Page({
     data: {
 
     },
-    close_signup_ref: function(e){
-        wx.navigateBack({
-            delta: 1
-          })
-    },
+
     /**
      * 生命周期函数--监听页面加载
      */
