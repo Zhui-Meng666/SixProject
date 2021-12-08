@@ -3,7 +3,11 @@
     <view class="imagefield">
         <image src="{{goodsimg}}" class="goodsimg"></image>
     </view>
-    <view class="descrfield">这份奖品的编号为：{{id}}</view>
+    <view class="descrfield">
+        <text>奖品名称：{{goodsname}}</text>
+        <text>奖品详情：{{detailed_info}}</text>
+        <text>奖品简介：{{introduction}}</text>
+    </view>
     <view class="conditfield">
         <van-icon name="location" size="25px" />
         地址：{{addr}}

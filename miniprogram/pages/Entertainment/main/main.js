@@ -155,7 +155,7 @@ Page({
 
     Tobattle: function (e) {
         wx.navigateTo({
-            url: '../appoint/appoint',
+            url: '../buttle/buttle',
         })
     },
 

@@ -76,6 +76,20 @@ Page({
 
     },
 
+    toAct: function (e) {
+        var id = '1' //活动id
+        wx.navigateTo({
+          url: '../../Activity/details/details?id='+id+'&type=0',  //type = 0表示报名
+        })
+    },
+
+    toCan: function (e) {
+        var id = '1' //活动id
+        wx.navigateTo({
+          url: '../../Activity/details/details?id='+id+'&type=1',  //type = 1表示取消报名
+        })
+    },
+
     search_change: function(e) {
         this.setData({
             value : e.detail,

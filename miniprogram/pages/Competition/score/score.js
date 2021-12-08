@@ -22,6 +22,8 @@ Page({
         start: false,
         score1real: 1,
         score2real: 1,
+        scorebig1: 0,
+        scorebig2: 0,
         playername: [{
                 college: '学院',
                 name: '姓名'
@@ -131,24 +133,75 @@ Page({
         this.setData({
             loading1: true
         })
-        setTimeout(()=>{
-            this.setData({
-                loading1: false
-            })
-            Toast.success('上传成功')
-        }, 2000)
+        wx.cloud.callFunction({
+            name: 'httppost',
+            data: {
+                url: app.globalData.baseurl + 'match_single_detail_score/',
+                data: {
+                    single_match_id: this.data.single_match_id,
+                    score1: this.data.score1real,
+                    score2: this.data.score2real,
+                    num_game: this.data.gameid
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                this.setData({
+                    loading1: false,
+                    gameid: this.data.gameid+1
+                })
+                Toast.success('上传成功')
+                if (this.data.score1real > this.data.score2real) {
+                    this.setData({
+                        scorebig1: this.data.scorebig1+1,
+                        score1real: 0,
+                        score2real: 0,
+                        score1: [0, 0],
+                        score2: [0, 0]
+                    })
+                } else if (this.data.score1real < this.data.score2real) {
+                    this.setData({
+                        scorebig1: this.data.scorebig2+1,
+                        score1real: 0,
+                        score2real: 0,
+                        score1: [0, 0],
+                        score2: [0, 0]
+                    })
+                }
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
+        })
     },
 
     submitall: function (e) {
         this.setData({
             loading2: true
         })
-        setTimeout(()=>{
-            this.setData({
-                loading2: false
-            })
-            Toast.success('比赛结束')
-        }, 2000)
+        wx.cloud.callFunction({
+            name: 'httppost',
+            data: {
+                url: app.globalData.baseurl + 'match_single_total_score/',
+                data: {
+                    single_match_id: this.data.single_match_id,
+                    total1: this.data.scorebig1,
+                    total2: this.data.scorebig2
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                this.setData({
+                    loading2: false,
+                    scorebig1: 0,
+                    scorebig2: 0
+                })
+                Toast.success('比赛结束')
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
+        })
     },
 
     splitnum: function (num) {
@@ -169,6 +222,7 @@ Page({
         this.setData({
             score1: score1,
             score2: score2,
+            // single_match_id: options.id,
         })
     },
 

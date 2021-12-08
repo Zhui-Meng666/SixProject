@@ -47,57 +47,49 @@ App({
 
     this.globalData = {
       appKey: appKey,
-      registered: false,
+      registered: true,
       bsurl: '',
       getPageHeight: function () {
         let systemInfo = wx.getSystemInfoSync()
         // px转换到rpx的比例
         let pxToRpxScale = 750 / systemInfo.windowWidth;
-        // 状态栏的高度
-        let ktxStatusHeight = systemInfo.statusBarHeight * pxToRpxScale
-        // 导航栏的高度
-        let navigationHeight = 44 * pxToRpxScale
         // window的高度
         let ktxWindowHeight = systemInfo.windowHeight * pxToRpxScale
-        // 屏幕的高度
-        let ktxScreentHeight = systemInfo.screenHeight * pxToRpxScale
-        // 底部tabBar的高度
-        let tabBarHeight = ktxScreentHeight - ktxStatusHeight - navigationHeight - ktxWindowHeight
         return ktxWindowHeight
       }
     }
 
     //获取openid
-    wx.cloud.callFunction({
-      // 要调用的云函数名称
-      name: 'getopenid',
-      // 传递给云函数的参数
-      data: {},
-      success: (res) => {
-        // console.log("成功", res)
-        this.globalData.openid = res.result.openid
-        wx.cloud.callFunction({
-          // 要调用的云函数名称
-          name: 'findopenid',
-          // 传递给云函数的参数
-          data: {
-            id: res.result.openid
-          },
-          success: (res) => {
-            // console.log("成功", res)
-            var data = res.result.data
-            if (data.length) {
-              this.globalData.registered = true
-            }
-          },
-          fail: (err) => {
-            console.log("错误", err);
-          }
-        })
-      },
-      fail: (err) => {
-        console.log("错误", err);
-      }
-    })
+    // wx.cloud.callFunction({
+    //   // 要调用的云函数名称
+    //   name: 'getopenid',
+    //   // 传递给云函数的参数
+    //   data: {},
+    //   success: (res) => {
+    //     // console.log("成功", res)
+    //     this.globalData.openid = res.result.openid
+    //     wx.cloud.callFunction({
+    //       // 要调用的云函数名称
+    //       name: 'findopenid',
+    //       // 传递给云函数的参数
+    //       data: {
+    //         id: res.result.openid
+    //       },
+    //       success: (res) => {
+    //         // console.log("成功", res)
+    //         var data = res.result.data
+    //         if (data.length) {
+    //           this.globalData.registered = true
+    //         }
+    //       },
+    //       fail: (err) => {
+    //         console.log("错误", err);
+    //       }
+    //     })
+    //   },
+    //   fail: (err) => {
+    //     console.log("错误", err);
+    //   }
+    // })
   }
 })

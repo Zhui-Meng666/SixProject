@@ -421,7 +421,7 @@ Page({
     onLoad: function (options) {
         if (app.globalData.registered) {
             var options = {
-                user: app.globalData.openid,
+                user: 'o1Kyy4vYqC42XNci7QIYpXLJQZD4',
                 pwd: "123456",
                 appKey: app.globalData.appKey,
                 success: (res) => {
@@ -539,7 +539,102 @@ Page({
                     temphoto: temphoto,
                     msglist: msglist
                 })
-            } //收到图片消息
+            }, //收到图片消息
+            onPresence: function (msg) {
+                console.log(msg)
+                switch (msg.type) {
+                    case 'removeAdmin':
+                        // 移除管理员
+                        break;
+                    case 'addAdmin':
+                        // 添加管理员
+                        break;
+                    case 'direct_joined':
+                        // 直接被拉进群
+                        break;
+                    case 'leaveGroup':
+                        // 退出群
+                        break;
+                    case 'memberJoinPublicGroupSuccess':
+                        // 加入公开群成功
+                        wx.cloud.callFunction({
+                            name: 'httppost',
+                            data: {
+                                url: app.globalData.baseurl + 'arrange_join_group/',
+                                data: {
+                                    openid: msg.owner,
+                                    group_id: msg.gid,
+                                }
+                            },
+                            success: (res) => {
+                                console.log("成功", res.result)
+                            },
+                            fail: (err) => {
+                                console.log("失败", err)
+                            }
+                        })
+                        break;
+                    case 'removedFromGroup':
+                        // 从群组移除
+                        break;
+                    case 'invite_decline':
+                        // 拒绝加群邀请
+                        break;
+                    case 'invite_accept':
+                        // 接收加群邀请（群含权限情况）
+                        break;
+                    case 'invite':
+                        // 接收加群邀请
+                        break;
+                    case 'joinPublicGroupDeclined':
+                        // 拒绝入群申请
+                        break;
+                    case 'joinPublicGroupSuccess':
+                        // 同意入群申请
+                        break;
+                    case 'joinGroupNotifications':
+                        // 用户申请入群，群主在此同意
+                        break;
+                    case 'leave':
+                        // 退出群
+                        break;
+                    case 'join':
+                        // 加入群
+                        break;
+                    case 'deleteGroupChat':
+                        // 解散群
+                        break;
+                    default:
+                        break;
+                }
+            }
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'arrange_group_member_info_show/',
+                data: {
+                    group_id: this.data.groupid,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let data = res.result.data
+                let userinfo = {}
+                for (var i = 0; i < data.length; ++i) {
+                    userinfo[data[i].user.openid] = {
+                        avatar: data[i].user.avatar,
+                        nickname: data[i].user.nickname,
+                        phone: data[i].user.phone_number
+                    }
+                }
+                this.setData({
+                    userinfo: userinfo
+                })
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
         })
     },
 

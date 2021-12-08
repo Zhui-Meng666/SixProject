@@ -1,6 +1,7 @@
 // miniprogram/pages/Personal/main/main.js
 let app = getApp()
 const Identify = ['管理员', '裁判', '运动员领队', '运动员', '会员', '非会员']
+const gender = ['../../../images/man.png', '../../../images/woman.png', '']
 Page({
 
   /**
@@ -172,6 +173,39 @@ Page({
           tempPath: tempPath,
           bgimg: tempPath,
         })
+        let tempPaths = tempPath.split('/')
+        let filename = tempPaths[tempPaths.length - 1]
+        wx.cloud.uploadFile({
+          cloudPath: filename,
+          filePath: tempPath, // 文件路径
+          success: (res) => {
+            // get resource ID
+            console.log(res.fileID)
+            this.setData({
+              fileID: res.fileID
+            })
+            wx.cloud.callFunction({
+              name: 'httppost',
+              data: {
+                url: app.globalData.baseurl + 'change_back_picture/',
+                data: {
+                  openid: app.globalData.openid,
+                  back_picture: res.fileID
+                }
+              },
+              success: (res) => {
+                console.log("修改成功", res)
+              },
+              fail: (err) => {
+                console.log('失败', err)
+              }
+            })
+          },
+          fail: (err) => {
+            // handle error
+            console.log("上传失败", err)
+          }
+        })
       },
       fail: (err) => {
         console.log('失败', err)
@@ -203,7 +237,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    wx.cloud.callFunction({
+      name: 'httprequest',
+      data: {
+        url: app.globalData.baseurl + 'user_show/',
+        data: {
+          openid: app.globalData.openid
+        }
+      },
+      success: (res) => {
+        var data = res.result.data
+        this.setData({
+          bgimg: data.back_picture,
+          gendersrc: gender[Number(data.gender)],
+          intro: data.introduction,
+          coinnum: sufe_currency,
+          
+        })
+      },
+      fail: (err) => {
+        console.log('失败', err)
+      }
+    })
   },
 
   /**

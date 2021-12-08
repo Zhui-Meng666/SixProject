@@ -44,7 +44,20 @@ Page({
             gender: this.data.gender,
             introduction: this.data.userintro,
         }
-        Toast.success('已保存')
+        wx.cloud.callFunction({
+            name: 'httppost', // 不需要动
+            data: {
+                url: app.globalData.bsurl + '', //后面加路径名
+                data: {} // 需要传递的参数，没有可以不写，json格式
+            },
+            success: (res) => { //调用成功的回调函数
+                console.log('成功', res.result) //返回的数据存在res.result中，可能需要访问res.result.data获取需要的数据
+                Toast.success('已保存')
+            },
+            fail: (err) => {
+                console.log('失败', err) //调用失败的回调函数
+            }
+        })
     },
 
     /**

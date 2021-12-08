@@ -12,6 +12,7 @@ page {
     align-items: center;
     justify-content: space-between;
     border: thin solid #515c5d;
+    background-color: white;
 }
 
 .coinfield {

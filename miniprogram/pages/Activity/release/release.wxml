@@ -1,2 +1,25 @@
 <!--pages/Activity/release/release.wxml-->
-<text>pages/Activity/release/release.wxml</text>
+<view class="container">
+    <view class="input-field" wx:key="id" wx:for="{{actdetail}}" wx:for-index="key" wx:for-item="value">
+        <view class="input-title">{{key}}</view>
+        <view class="input-frame">
+            <van-field id="{{key}}" value="{{ value }}" clearable clickable bind:blur="change" />
+        </view>
+    </view>
+    <view class="input-field">
+        <view class="input-title">活动简介</view>
+        <view class="input-frame">
+            <van-field type="textarea" value="{{ intro }}" clearable clickable autosize bind:blur="changeintro" />
+        </view>
+    </view>
+    <view class="upload">
+        <view class="input-title">添加图片</view>
+        <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" bind:delete="delete">
+            <image src="../../../images/upload-pic.png" mode="aspectFit"></image>
+        </van-uploader>
+    </view>
+    <view class="submit">
+        <van-button type="primary" loading="{{loading}}" loading-type="spinner" round block bind:click="submit">提交</van-button>
+    </view>
+</view>
+<van-toast id="van-toast" />

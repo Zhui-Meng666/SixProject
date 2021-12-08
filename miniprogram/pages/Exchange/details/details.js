@@ -3,15 +3,6 @@ import Toast from '@vant/weapp/toast/toast';
 var app = getApp()
 const tempid = 'mBVcUt6ZBlmHcTWyjWYrceyz1ODekgtvPerEj8T3bus'
 
-function sleep(numberMillis) {
-    var now = new Date();
-    var exitTime = now.getTime() + numberMillis;
-    while (true) {
-        now = new Date();
-        if (now.getTime() > exitTime)
-            return;
-    }
-}
 Page({
 
     /**
@@ -22,9 +13,10 @@ Page({
         id: '0',
         goodsname: '雨伞',
         goodsimg: '../../../images/goodsimg.jpg',
-        addr: '武东路三教101',
-        day: 3,
-        price: 20
+        addr: '武川路羽毛球馆',
+        price: 20,
+        detailed_info: '请到指定地点领取',
+        introduction: '这是一件精美的奖品',
     },
 
     submit: function (e) {
@@ -51,43 +43,58 @@ Page({
                 reduce: this.data.price
             }
         })
-        sleep(1000)
-        this.setData({
-            show: false,
-        })
-        Toast.success('兑换成功')
-        wx.requestSubscribeMessage({
-            tmplIds: [tempid],
-            success: (res) => {
-                console.log('成功', res[tempid])
-                if (res[tempid] == 'accept') {
-                    wx.cloud.callFunction({
-                        name: 'sendmsg',
-                        data: {
-                            openid: app.globalData.openid,
-                            data: {
-                                thing2: {
-                                    value: this.data.goodsname
-                                },
-                                amount3: {
-                                    value: this.data.price
-                                },
-                                thing5: {
-                                    value: '地点：' + this.data.addr
-                                }
-                            }
-                        },
-                        success: (res) => {
-                            console.log('成功', res)
-                        },
-                        fail: (err) => {
-                            console.log('失败', err)
-                        }
-                    })
+        wx.cloud.callFunction({
+            name: 'httppost',
+            data: {
+                url: app.globalData.baseurl + 'exchange_prize/',
+                data: {
+                    id: this.data.id,
+                    openid: app.globalData.openid,
                 }
             },
+            success: (res) => {
+                console.log("成功", res.result)
+                this.setData({
+                    show: false,
+                })
+                Toast.success('兑换成功')
+                wx.requestSubscribeMessage({
+                    tmplIds: [tempid],
+                    success: (res) => {
+                        console.log('成功', res[tempid])
+                        if (res[tempid] == 'accept') {
+                            wx.cloud.callFunction({
+                                name: 'sendmsg',
+                                data: {
+                                    openid: app.globalData.openid,
+                                    data: {
+                                        thing2: {
+                                            value: this.data.goodsname
+                                        },
+                                        amount3: {
+                                            value: this.data.price
+                                        },
+                                        thing5: {
+                                            value: '地点：' + this.data.addr
+                                        }
+                                    }
+                                },
+                                success: (res) => {
+                                    console.log('成功', res)
+                                },
+                                fail: (err) => {
+                                    console.log('失败', err)
+                                }
+                            })
+                        }
+                    },
+                    fail: (err) => {
+                        console.log('失败', err)
+                    }
+                })
+            },
             fail: (err) => {
-                console.log('失败', err)
+                console.log("失败", err)
             }
         })
     },
@@ -96,13 +103,37 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var deadline = '2021/11/20'
+        var deadline = '2021/12/21'
         var now = new Date()
         var dead = new Date(Date.parse(deadline))
         var day = parseInt(Math.abs(now - dead) / 1000 / 60 / 60 / 24) + 1
         this.setData({
             id: options.id,
             day: day
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'exchange_prize_detail/',
+                data: {
+                    id: options.id,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let data = res.result.data
+                this.setData({
+                    goodsname: data.prize_name,
+                    goodsimg: data.picture_link,
+                    price: data.sufe_currency,
+                    detailed_info: data.detailed_info,
+                    rest: data.rest,
+                    introduction: data.introduction
+                })
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
         })
     },
 
