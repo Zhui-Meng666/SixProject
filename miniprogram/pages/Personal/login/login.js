@@ -68,14 +68,27 @@ Page({
             avatar: this.data.userInfo.avatarUrl,
             nickname: this.data.userInfo.nickName
           }
+          wx.cloud.callFunction({
+            name: 'httppost',
+            data: {
+              url: app.globalData.baseurl + 'register/',
+              data: submitdata
+            },
+            success: (res) => {
+              console.log("成功", res)
+            },
+            fail: (err) => {
+              console.log('失败', err)
+            }
+          })
           var options = {
             username: app.globalData.openid,
             password: "123456",
             nickname: this.data.userInfo.nickName,
             appKey: app.globalData.appKey,
             success: function () {
-              app.globalData.registered = true
               Toast.success('登录成功')
+              app.globalData.registered = true
               wx.redirectTo({
                 url: '../../index/index',
               })
@@ -102,21 +115,6 @@ Page({
             },
           };
           conn.registerUser(options);
-          wx.cloud.callFunction({
-            name: 'register',
-            data: {
-              openid: app.globalData.openid
-            },
-            success: (res) => {
-              this.setData({
-                loading: false,
-                butwidth: 200
-              })
-            },
-            fail: (err) => {
-              console.log('失败', err)
-            }
-          })
         },
         fail: (err) => {
           console.log('出错', err)

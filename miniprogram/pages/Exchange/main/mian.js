@@ -142,7 +142,7 @@ Page({
                     var data = res.data
                     goods[data.id].sold += 1
                     that.setData({
-                        coinnum: that.data.coinnum-data.reduce,
+                        coinnum: that.data.coinnum - data.reduce,
                         goods: goods
                     })
                 }
@@ -154,10 +154,53 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var height = app.globalData.getPageHeight()
-        this.setData({
-            pgheight: height - 133,
-            goodsheight: (height - 182) / 2,
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'exchange_balance/',
+                data: {
+                    openid: app.globalData.openid
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                this.setData({
+                    coinnum: res.result.data.sufe_currency
+                })
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'exchange_prize_show/',
+                data: {}
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let result = res.result
+                let goods = result.results
+                let goodsall = {}
+                this.setData({
+                    count: result.count,
+                    next: result.next,
+                    previous: result.previous
+                })
+                for (var i = 0; i < goods.length; ++i) {
+                    goodsall[goods[i].id] = {
+                        src: goods.picture_link,
+                        name: goods.prize_name,
+                        price: goods.sufe_currency,
+                        sold: 0,
+                        total: goods.rest
+                    }
+                }
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
         })
     },
 
@@ -172,7 +215,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        var height = app.globalData.getPageHeight()
+        this.setData({
+            pgheight: height - 133,
+            goodsheight: (height - 182) / 2,
+        })
     },
 
     /**

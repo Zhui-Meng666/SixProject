@@ -1,1 +1,46 @@
 /* pages/Activity/details/details.wxss */
+.bground {
+    width: 100%;
+    height: 400rpx;
+}
+
+.title-field {
+    width: 90%;
+    height: 60rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -60rpx;
+}
+
+.title-text {
+    font-size: large;
+    font-weight: bold;
+    color: white;
+}
+
+.coinfield {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.coinimg {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.coin-number {
+    margin-left: 5rpx;
+    color: white;
+}
+
+.detail-field {
+    width: 100%;
+}
+
+.submit {
+    width: 200rpx;
+    margin-top: 50rpx;
+}

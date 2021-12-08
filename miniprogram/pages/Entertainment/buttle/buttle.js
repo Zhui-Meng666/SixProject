@@ -6,6 +6,11 @@ const RM = wx.getRecorderManager()
 const range = Array.from({
     length: 30
 }, (a, i) => i + 1);
+function compare(arg) {
+    return function(a, b) {
+        return a[arg] - b[arg];
+    }
+}
 Page({
 
     /**
@@ -48,30 +53,7 @@ Page({
             name2: '李四',
             grade: '录入成绩'
         }],
-        couplelistall: [
-            [{
-                name11: '张三',
-                name12: '张四',
-                name21: '李五',
-                name22: '李六',
-                grade: '录入成绩'
-            }],
-            [{
-                name11: '李四',
-                name12: '王五',
-                name21: '张三',
-                name22: '李五',
-                grade: '录入成绩'
-            }],
-        ],
-        coupleindex: 0,
-        couplelist: [{
-            name11: '张三',
-            name12: '张四',
-            name21: '李五',
-            name22: '李六',
-            grade: '录入成绩'
-        }],
+        singledone: [false],
         ranklist: [{
                 img: '../../../images/gold.png',
                 name: '张三'
@@ -298,6 +280,14 @@ Page({
         var i = 0
         switch (id) {
             case '0':
+                let singlelist = this.data.singlelist
+                for (var i = 0; i < singlelist.length; ++i) {
+                    if (singlelist[i].grade == "录入成绩") {
+                        this.data.singledone[i] = false
+                    } else {
+                        this.data.singledone[i] = true
+                    }
+                }
                 i = ++this.data.singleindex
                 if (i < this.data.singlelistall.length) {
                     this.setData({
@@ -305,29 +295,58 @@ Page({
                     })
                 } else {
                     Toast.success('单人比赛结束')
-                    this.data.singledone = true
                     this.data.singleindex = -1
                 }
                 break
             case '1':
-                i = ++this.data.coupleindex
-                if (i < this.data.couplelistall.length) {
-                    this.setData({
-                        couplelist: this.data.couplelistall[i]
-                    })
-                } else {
-                    Toast.success('双人比赛结束')
-                    this.data.coupledone = true
-                    this.data.coupleindex = -1
-                }
+                let options = {
+                    groupId: "167298202664961", // 群组ID
+                    message: "I am zhangjun", // 请求信息
+                    success: (res) => {
+                        console.log("成功", res)
+                    },
+                    fail: (err) => {
+                        console.log("失败", err)
+                    }
+                };
+                conn.joinGroup(options)
                 break
             case '2':
-                if (this.data.singledone || this.data.coupledone) {
-                    this.setData({
-                        showrank: !this.data.showrank
+                let flag = true
+                for (var done of this.data.singledone) {
+                    if (!done) {
+                        Toast.fail('比赛还没结束')
+                        flag = false
+                        break
+                    }
+                }
+                if (flag) {
+                    wx.cloud.callFunction({
+                        name: 'httprequest',
+                        data: {
+                            url: app.globalData.baseurl + 'melee_rank/',
+                            data: {
+                                openid: app.globalData.openid,
+                            }
+                        },
+                        success: (res) => {
+                            console.log("成功", res.result)
+                            let rank = this.data.ranklist
+                            let data = res.result.data.user
+                            data = data.sort(compare('rank'))
+                            for (var i = 0; i < 3; ++i) {
+                                rank[i].name = data[i].student_id
+                            }
+                            this.setData({
+                                ranklist: rank,
+                                showrank: !this.data.showrank
+                            })
+                        },
+                        fail: (err) => {
+                            console.log("失败", err)
+                            Toast.fail("获取排名失败！")
+                        }
                     })
-                } else {
-                    Toast.fail('比赛还没结束')
                 }
                 break
         }
@@ -360,31 +379,44 @@ Page({
     onConfirm: function (e) {
         let picker = this.selectComponent('#picker')
         var grades = e.detail.value
-        if (this.data.isingle) {
-            var singlelist = this.data.singlelist
-            singlelist[this.data.nowid].grade = grades[0] + '  :  ' + grades[1]
-            this.setData({
-                singlelist: singlelist,
-                showpop: false
-            })
-        } else {
-            var couplelist = this.data.couplelist
-            couplelist[this.data.nowid].grade = grades[0] + '  :  ' + grades[1]
-            this.setData({
-                couplelist: couplelist,
-                showpop: false
-            })
-        }
+        var singlelist = this.data.singlelist
+        singlelist[this.data.nowid].grade = grades[0] + '  :  ' + grades[1]
+        this.setData({
+            singlelist: singlelist,
+            showpop: false
+        })
         picker.setColumnIndex(0, 0)
         picker.setColumnIndex(1, 0)
+        wx.cloud.callFunction({
+            name: 'httppost',
+            data: {
+                url: app.globalData.baseurl + 'melee_upload_score/',
+                data: {
+                    openid1: singlelist[this.data.nowid].openid1,
+                    openid1: singlelist[this.data.nowid].openid2,
+                    score1: grades[0],
+                    score2: grades[1],
+                    group_id: this.data.groupid,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
+        })
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // this.setData({
+        //     groupid: options.id    //接受上一页面传来的群id
+        // })
         if (app.globalData.registered) {
-            var options = {
+            conn.open({
                 user: 'username',
                 pwd: "zhj48691626",
                 appKey: app.globalData.appKey,
@@ -394,8 +426,7 @@ Page({
                 fail: (err) => {
                     console.log("失败", err)
                 }
-            };
-            conn.open(options);
+            });
         } else {
             Toast.fail("请先注册！")
             wx.redirectTo({
@@ -468,8 +499,144 @@ Page({
                     }
                 })
             },
-            onPersoncard: function (message) {
-                console.log(message)
+            onPresence: function (msg) {
+                console.log(msg)
+                switch (msg.type) {
+                    case 'removeAdmin':
+                        // 移除管理员
+                        break;
+                    case 'addAdmin':
+                        // 添加管理员
+                        break;
+                    case 'direct_joined':
+                        // 直接被拉进群
+                        break;
+                    case 'leaveGroup':
+                        // 退出群
+                        break;
+                    case 'memberJoinPublicGroupSuccess':
+                        // 加入公开群成功
+                        break;
+                    case 'removedFromGroup':
+                        // 从群组移除
+                        break;
+                    case 'invite_decline':
+                        // 拒绝加群邀请
+                        break;
+                    case 'invite_accept':
+                        // 接收加群邀请（群含权限情况）
+                        break;
+                    case 'invite':
+                        // 接收加群邀请
+                        break;
+                    case 'joinPublicGroupDeclined':
+                        // 拒绝入群申请
+                        break;
+                    case 'joinPublicGroupSuccess':
+                        // 用户获得群主同意入群申请
+                        break;
+                    case 'joinGroupNotifications':
+                        // 申请入群
+                        conn.agreeJoinGroup({
+                            applicant: msg.owner, // 申请加群的用户名
+                            groupId: '167298202664961', // 群组ID
+                            success: (res) => {
+                                console.log("成功", res)
+                                wx.cloud.callFunction({
+                                    name: 'httppost',
+                                    data: {
+                                        url: app.globalData.baseurl + 'melee_join_group/',
+                                        data: {
+                                            openid: msg.owner,
+                                            group_id: msg.gid,
+                                        }
+                                    },
+                                    success: (res) => {
+                                        console.log("成功", res.result)
+                                    },
+                                    fail: (err) => {
+                                        console.log("失败", err)
+                                    }
+                                })
+                            },
+                            fail: (err) => {
+                                console.log("失败", err)
+                            }
+                        });
+                        break;
+                    case 'leave':
+                        // 退出群
+                        break;
+                    case 'join':
+                        // 加入群
+                        break;
+                    case 'deleteGroupChat':
+                        // 解散群
+                        break;
+                    default:
+                        break;
+                }
+            }
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'melee_group_member_info_show/',
+                data: {
+                    group_id: this.data.groupid,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let data = res.result.data
+                let userinfo = {}
+                for (var i = 0; i < data.length; ++i) {
+                    userinfo[data[i].user.openid] = {
+                        avatar: data[i].user.avatar,
+                        nickname: data[i].user.nickname,
+                        phone: data[i].user.phone_number
+                    }
+                }
+                this.setData({
+                    userinfo: userinfo
+                })
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'melee_against_info/',
+                data: {
+                    group_id: this.data.groupid,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let data = res.result.data
+                let singlelistall = []
+                for (var i = 0; i < data.length / 3; ++i) {
+                    let singlelist = []
+                    for (var j = i * 3; j < data.length; ++j) {
+                        singlelist.push({
+                            name1: data[j].user1.student_id,
+                            name2: data[j].user2.student_id,
+                            openid1: data[j].user1.openid,
+                            openid2: data[j].user2.openid,
+                            grade: '录入成绩'
+                        })
+                    }
+                    singlelistall.push(singlelist)
+                }
+                this.setData({
+                    singlelistall: singlelistall,
+                    singlelist: singlelistall[0],
+                })
+            },
+            fail: (err) => {
+                console.log("失败", err)
             }
         })
     },

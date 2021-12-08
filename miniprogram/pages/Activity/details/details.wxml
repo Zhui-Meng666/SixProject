@@ -1,2 +1,23 @@
 <!--pages/Activity/details/details.wxml-->
-<text>pages/Activity/details/details.wxml</text>
+<view class="container">
+    <image class="bground" src="../../../images/background_3.png"></image>
+    <view class="title-field">
+        <view class="title-text">{{title}}</view>
+        <view class="coinfield">
+            <image src="../../../images/coin.png" mode="aspectFit" class="coinimg"></image>
+            <view class="coin-number">{{coinnum}}</view>
+        </view>
+    </view>
+    <view class="detail-field">
+        <van-cell-group inset>
+            <van-cell title="活动时间：" value="{{time}}" />
+            <van-cell title="活动地点：" value="{{addr}}" />
+            <van-cell title="人数上限：" value="{{have_sign}} / {{personum}}" />
+            <van-cell title="活动简介：" title-width="70px" value="{{intro}}" />
+        </van-cell-group>
+    </view>
+    <view class="submit">
+        <van-button type="primary" loading="{{loading}}" loading-type="spinner" round block bind:click="submit">{{button}}</van-button>
+    </view>
+</view>
+<van-toast id="van-toast" />
