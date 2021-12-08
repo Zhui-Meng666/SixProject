@@ -7,10 +7,9 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-    var id= event.openid
     try {
       return await db.collection('ID').where({
-        id: id
+        openid: event.id,
       }).get()
     } catch (e) {
       console.error(e)
