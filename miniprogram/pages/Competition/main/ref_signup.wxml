@@ -1,0 +1,22 @@
+<!--pages/Competition/main/ref_signup.wxml-->
+<van-cell-group>
+
+
+    <van-cell title="选择执裁项目">
+        <van-radio-group direction="horizontal" value="{{porj}}">
+            <van-radio name="1">男子单打</van-radio>
+            <van-radio name="2">女子单打</van-radio>
+            <van-radio name="3">男子双打</van-radio>
+            <van-radio name="4">女子双打</van-radio>
+            <van-radio name="5">混合双打</van-radio>
+        </van-radio-group>
+    </van-cell>
+    <van-cell title="选择执裁角色">
+        <van-radio-group direction="horizontal" value="{{role}}">
+            <van-radio name="1">主裁</van-radio>
+            <van-radio name="2">边裁</van-radio>
+        </van-radio-group>
+    </van-cell>
+    <button type="default" bindtap="close_signup_ref" class="ath_submit">提交</button>
+
+</van-cell-group>

@@ -1,0 +1,14 @@
+<!--pages/Entertainment/signup/add.wxml-->
+<!--pages/Entertainment/signup/mod.wxml-->
+<van-cell-group>
+    <van-field label="姓名" value=""></van-field>
+    <van-field label="学院" value=""></van-field>
+    <van-field label="学号" value=""></van-field>
+    <van-radio-group value="" bind:change="onChange" title="性别">
+        <van-radio name="男">男</van-radio>
+        <van-radio name="女">女</van-radio>
+    </van-radio-group>
+    
+</van-cell-group>
+
+<button bindtap="create_finished" class="submit">提交</button>

@@ -1,6 +1,7 @@
 <!--miniprogram/pages/index/index.wxml-->
 
 <swiper class="swiper_container" autoplay="true" circular="true" interval="3000">
+
   <block wx:for="{{msglist}}">
     <swiper-item>
       <image wx:if="{{item.img_src}}" src="{{item.img_src}}" url="{{item.url}}" data-index="{{index}}" bindtap="news_click" class="news_img"></image>
@@ -23,7 +24,7 @@
   </view>
 </scroll-view>
 
-<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">  
+<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom" border="false" fixed="false">  
   <van-tabbar-item name = 'home' bindtap="bottom_click" class="icon_class">
     <image
       slot = "icon"

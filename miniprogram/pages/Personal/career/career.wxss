@@ -11,13 +11,11 @@
   }
   
   .container{
-      /*弹性模型*/
-      display:flex;
-      /*垂直方向 列方向 排布*/
-      flex-direction:column; 
-      width: 100%;
-      height: 100%;
-      margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1260rpx;
+    background-color: #FAFAFB;
   }
 
   .firstimagestyle{
@@ -168,9 +166,9 @@
   width: 98%;
   height: 260rpx;
   border-color: lightsteelblue;
-  border-style: groove;
-  margin: auto;
-  margin-bottom: 20rpx;
+  /* border-style: groove; */
+  margin-top: 10rpx;
+  margin-left: auto;
   border-radius: 20rpx;
   background-color: white;
 }

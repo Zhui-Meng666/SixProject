@@ -19,6 +19,7 @@
         "checkSiteMap": true,
         "uploadWithSourceMap": true,
         "compileHotReLoad": false,
+        "lazyloadPlaceholderEnable": false,
         "useMultiFrameRuntime": true,
         "useApiHook": true,
         "useApiHostProcess": true,
@@ -28,18 +29,20 @@
             "outputPath": ""
         },
         "enableEngineNative": false,
-        "bundle": false,
         "useIsolateContext": true,
-        "useCompilerModule": true,
-        "userConfirmedUseCompilerModuleSwitch": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": true,
-        "packNpmRelationList": [{
-            "packageJsonPath": "./package.json",
-            "miniprogramNpmDistDir": "./"
-        }],
+        "packNpmRelationList": [
+            {
+                "packageJsonPath": "./package.json",
+                "miniprogramNpmDistDir": "./"
+            }
+        ],
         "minifyWXSS": true,
-        "minifyWXML": true
+        "disableUseStrict": false,
+        "minifyWXML": true,
+        "showES6CompileOption": false,
+        "useCompilerPlugins": false
     },
     "appid": "wxaccc8e0fa18fa43b",
     "projectname": "Badminton",
@@ -48,6 +51,11 @@
     "simulatorType": "wechat",
     "simulatorPluginLibVersion": {},
     "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+    "permissions": {
+        "openapi": [
+            "subscribeMessage.send"
+        ]
+    },
     "condition": {
         "search": {
             "list": []
@@ -62,16 +70,13 @@
             "list": []
         },
         "miniprogram": {
-            "list": [{
-                "id": -1,
-                "name": "db guide",
-                "pathName": "pages/databaseGuide/databaseGuide"
-            }]
+            "list": [
+                {
+                    "id": -1,
+                    "name": "db guide",
+                    "pathName": "pages/databaseGuide/databaseGuide"
+                }
+            ]
         }
-    },
-    "permissions": {
-        "openapi": [
-            "subscribeMessage.send"
-        ]
     }
 }

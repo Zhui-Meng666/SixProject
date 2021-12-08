@@ -9,8 +9,16 @@
     <view class="video_msg">
       @ {{item.author_name}}
     </view>
-    <image class="like" src="{{like_src}}" bindtap="like_click"></image>
-    <image class="share" src="{{share_src}}"></image>
+    <view wx:if="{{item.like == true}}">
+      <image class="like" src="../../../images/like-click.png" bindtap="like_click"></image>
+      <image class="share" src="{{share_src}}"></image>
+    </view>
+    <view wx:if="{{item.like == false}}">
+      <image class="like" src="../../../images/like-unclick.png" bindtap="like_click"></image>
+      <image class="share" src="{{share_src}}"></image>
+    </view>
+    <!-- <image class="like" src="{{like_src}}" bindtap="like_click"></image> -->
+    
   </view>
 
 </view>

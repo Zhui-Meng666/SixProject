@@ -1,0 +1,30 @@
+/* pages/Entertainment/signup/signup.wxss */
+
+.items{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10rpx;
+}
+.name{
+    width: 400rpx;
+}
+.mod{
+    position: relative;
+    right: -95rpx;
+}
+.submit{
+    background: green;
+    color: white;
+    width: 200rpx;
+    height: 100rpx;
+    position: relative;
+    top: 20rpx;
+    left: 10rpx;
+}
+.add_item{
+    width: 50rpx;
+    height: 50rpx;
+    position: relative;
+    left: 650rpx;
+    margin-top: 20rpx;
+}

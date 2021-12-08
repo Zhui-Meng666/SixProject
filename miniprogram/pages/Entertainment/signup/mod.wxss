@@ -1,0 +1,14 @@
+/* pages/Entertainment/signup/mod.wxss */
+
+page{
+    background-color: #FAFAFB;
+}
+.submit{
+    background: green;
+    color: white;
+    width: 200rpx;
+    height: 100rpx;
+    position: relative;
+    top: 20rpx;
+    left: 10rpx;
+}

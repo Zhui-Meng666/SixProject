@@ -9,28 +9,24 @@ Page({
     share_src: '../../../images/video_share.png',
     video_list: [{
         like: false,
-        like_src: '../../../images/like-unclick.png',
         video_name: 'hahaha',
         author_name: 'abc',
         video_src: 'https://stream7.iqilu.com/10339/upload_transcode/202002/18/20200218093206z8V1JuPlpe.mp4'
       },
       {
         like: false,
-        like_src: '../../../images/like-unclick.png',
         video_name: 'hahaha',
         author_name: 'abc',
         video_src: 'https://vod-progressive.akamaized.net/exp=1637783863~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4285%2F21%2F546426056%2F2591116644.mp4~hmac=2d2d7ca0685b5d65f1045c6a733d1c188b5c655d216e103d853ae7a8d20a14cb/vimeo-prod-skyfire-std-us/01/4285/21/546426056/2591116644.mp4?filename=pexels-anna-nekrashevich-7814905.mp4'
       },
       {
         like: false,
-        like_src: '../../../images/like-unclick.png',
         video_name: 'hahaha',
         author_name: 'abc',
         video_src: 'https://vod-progressive.akamaized.net/exp=1637783966~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2871%2F22%2F564357626%2F2668629918.mp4~hmac=16c6232a8ee4d2542c83e901b7a0726f12fc5615beed8dc8210e08f090d03a14/vimeo-prod-skyfire-std-us/01/2871/22/564357626/2668629918.mp4?filename=pexels-shvets-production-8376368.mp4'
       },
       {
         like: false,
-        like_src: '../../../images/like-unclick.png',
         video_name: 'hahaha',
         author_name: 'abc',
         video_src: 'https://vod-progressive.akamaized.net/exp=1637784004~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1322%2F23%2F581612438%2F2746682532.mp4~hmac=33756f14da756f0266f3e994a20ba6d5133e7201c71781f1d3d276f0838ee7ab/vimeo-prod-skyfire-std-us/01/1322/23/581612438/2746682532.mp4?filename=pexels-solodsha-9008286.mp4'
@@ -38,28 +34,24 @@ Page({
     ],
     video_all: [{
       like: false,
-      like_src: '../../../images/like-unclick.png',
       video_name: 'hahaha',
       author_name: 'abc',
       video_src: 'https://stream7.iqilu.com/10339/upload_transcode/202002/18/20200218093206z8V1JuPlpe.mp4'
     },
     {
       like: false,
-      like_src: '../../../images/like-unclick.png',
       video_name: 'hahaha',
       author_name: 'abc',
       video_src: 'https://vod-progressive.akamaized.net/exp=1637783863~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4285%2F21%2F546426056%2F2591116644.mp4~hmac=2d2d7ca0685b5d65f1045c6a733d1c188b5c655d216e103d853ae7a8d20a14cb/vimeo-prod-skyfire-std-us/01/4285/21/546426056/2591116644.mp4?filename=pexels-anna-nekrashevich-7814905.mp4'
     },
     {
       like: false,
-      like_src: '../../../images/like-unclick.png',
       video_name: 'hahaha',
       author_name: 'abc',
       video_src: 'https://vod-progressive.akamaized.net/exp=1637783966~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2871%2F22%2F564357626%2F2668629918.mp4~hmac=16c6232a8ee4d2542c83e901b7a0726f12fc5615beed8dc8210e08f090d03a14/vimeo-prod-skyfire-std-us/01/2871/22/564357626/2668629918.mp4?filename=pexels-shvets-production-8376368.mp4'
     },
     {
       like: false,
-      like_src: '../../../images/like-unclick.png',
       video_name: 'hahaha',
       author_name: 'abc',
       video_src: 'https://vod-progressive.akamaized.net/exp=1637784004~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1322%2F23%2F581612438%2F2746682532.mp4~hmac=33756f14da756f0266f3e994a20ba6d5133e7201c71781f1d3d276f0838ee7ab/vimeo-prod-skyfire-std-us/01/1322/23/581612438/2746682532.mp4?filename=pexels-solodsha-9008286.mp4'
@@ -96,17 +88,13 @@ Page({
     console.log(idx)
     if (videos[idx]['like'] == true) {
       videos[idx].like = false;
-      // videos[idx].like_src = '../../../images/like-unclick.png';
       this.setData({
         video_list: videos,
-        like_src: '../../../images/like-unclick.png'
       })
     } else {
       videos[idx]['like'] = true;
-      // videos[idx].like_src = '../../../images/like-click.png';
       this.setData({
         video_list: videos,
-        like_src: '../../../images/like-click.png'
       })
     }
   },

@@ -10,12 +10,12 @@ Page({
         bottom_active : 'home',
         msglist : [
             {
-                title: "公告：多地首套房贷利率上浮 热点城市渐迎零折",
+                title: "公告：多地首套房贷利率上浮 热。。。",
                 img_src : "../../images/Cat.jpeg",
                 url : 'https://www.baidu.com'
             },
             { 
-                title: "公告：悦如公寓三周年生日趴邀你免费吃喝欢唱",
+                title: "公告：悦如公寓三周年生日。。。",
                 img_src : "../../images/Cat.jpeg",
                 url : '../Personal/main'
             },
@@ -28,26 +28,26 @@ Page({
         videos : [
             {
                 name : '123',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 // video_src : '../../videos/1.mp4',
                 video_src : 'https://v.douyin.com/RC8XYgW/'
             },
             {
                 name : '456',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/2.mp4',
             },
             {
                 name : '000',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/3.mp4',
             },
             {
                 name : '0331',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/4.mp4',
             },
@@ -55,25 +55,25 @@ Page({
         all_videos : [
             {
                 name : '123',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '456',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '000',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '0331',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },

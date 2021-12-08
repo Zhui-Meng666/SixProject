@@ -16,7 +16,10 @@
                             <view>{{item.info}}</view>
                         </view>
                         <view class="signup">
-                            <van-button type="default" bindtap="signup_ath" class="signup_button">
+                            <van-button type="default" bindtap="signup_ath1" class="signup_button" wx:if="{{item.host == '体教部'}}">
+                                运动员报名
+                            </van-button>
+                            <van-button type="default" bindtap="signup_ath2" class="signup_button" wx:if="{{item.host == '羽协'}}">
                                 运动员报名
                             </van-button>
                             <van-button type="default" bindtap="signup_ref" class="signup_button">
@@ -28,22 +31,25 @@
             </van-tab>
 
             <van-tab title="进行中">
-                <view wx:for="{{games}}" >
+                <view wx:for="{{games}}">
                     <view wx:if="{{item.state == '进行中'}}" class="game_items">
-                        <view class="game_msg">
-                            <view>{{item.host}}.</view>
-                            <view>{{item.name}}</view>
-                        </view>
-                        <view class="com_info">
+                        <view class="group_title">小组表</view>
+                        <image src="../../../images/Cat.jpeg" class="game_msg_img">
+                            <!-- <view>{{item.host}}.</view>
+                            <view>{{item.name}}</view> -->
+                        </image>
+                        <!-- <image src="../../../images/Cat.jpeg" class="com_info">
                             <view>{{item.com_info}}</view>
-                        </view>
-                        <view class="game_id">
-                            比赛号：6
-                        </view>
-                        <view class="field">
-                            <view>{{item.field}}</view>
-                            <view>{{item.time}}</view>
-                        </view>
+                        </image> -->
+                        <view class="game_id_title">比赛号表</view>
+                        <image src="../../../images/Cat.jpeg" class="game_id_img">
+                            <!-- 比赛号：6 -->
+                        </image>
+                        <view class="field_title">场地时间表</view>
+                        <image src="../../../images/Cat.jpeg" class="field_img">
+                            <!-- <view>{{item.field}}</view>
+                            <view>{{item.time}}</view> -->
+                        </image>
                         <van-button type="default" class="start_game" bindtap="start_game">
                             开始比赛
                         </van-button>
@@ -120,6 +126,70 @@
     </van-tab>
 </van-tabs>
 
+<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">  
+  <van-tabbar-item name = 'home' bindtap="to_home" class="icon_class">  
+    <image
+      slot = "icon"
+      wx:if="../../../images/home-unclick.png"
+      src = "../../../images/home-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      wx:if="../../../images/home-click.png"
+      src = "../../../images/home-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    主页
+  </van-tabbar-item>
+  <van-tabbar-item name = 'game' bindtap="to_game" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../../images/competition-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      src = "../../../images/competition-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    赛事
+  </van-tabbar-item>
+  <van-tabbar-item name = 'entertainment' bindtap="to_entertainment" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../../images/entertainment-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    <image
+      slot = "icon-active"
+      src = "../../../images/entertainment-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+    />
+    娱乐
+  </van-tabbar-item>
+  <van-tabbar-item name = 'personal' bindtap="to_personal" class="icon_class">
+    <image
+      slot = "icon"
+      src = "../../../images/me-unclick.png"
+      mode = "aspectFit"
+      class="icon_class"
+      />
+    <image
+      slot = "icon-active"
+      src = "../../../images/me-click.png"
+      mode = "aspectFit"
+      class="icon_class"
+      />
+    个人
+  </van-tabbar-item>
+</van-tabbar>
 
 
 <van-popup custom-class="setpop" show="{{show_signup_ath}}" bind:close="close_signup_ath" position="bottom" round safe-area-inset-top>

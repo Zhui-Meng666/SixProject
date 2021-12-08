@@ -1,6 +1,10 @@
 /* pages/Competition/main/main.wxss */
+page{
+    height: 100%;
+    background-color: #FAFAFB;
+}
 .game_items{
-    border-style: groove;
+    /* border-style: groove; */
     border-color: cornflowerblue;
     border-radius: 25rpx;
     width: 98%;
@@ -39,7 +43,7 @@
 }
 .res_score{
     margin: 30rpx;
-    border-style: groove;
+    /* border-style: groove; */
     border-color: cornflowerblue;
     width: 200rpx;
     height: 100rpx;
@@ -48,7 +52,7 @@
 }
 .free{
     margin: 30rpx;
-    border-style: groove;
+    /* border-style: groove; */
     border-color: cornflowerblue;
     text-align: center;
 }
@@ -65,7 +69,7 @@
 
 .act_items{
     border-radius: 16rpx;
-    border-style: groove;
+    /* border-style: groove; */
     display: flex;
     flex-direction: row;
     width: 98%;
@@ -122,4 +126,43 @@
     position: relative;
     left: -8rpx;
     top: 10rpx;
+}
+
+.icon_class{
+    margin-top: 25rpx;
+    height: 40rpx;
+    width: 50rpx;
+}
+
+.group_title{
+
+    margin-left: 17rpx;
+    font-weight: 700;
+    font-size: 40rpx;
+
+}
+.game_id_title{
+    margin-left: 17rpx;
+    font-weight: 700;
+    font-size: 40rpx;
+}
+.field_title{
+    margin-left: 17rpx;
+    font-weight: 700;
+    font-size: 40rpx;
+}
+.game_msg_img{
+    width: 100%;
+    height: 200rpx;
+    margin: auto;
+}
+.game_id_img{
+    width: 100%;
+    height: 100rpx;
+    margin: auto;
+}
+.field_img{
+    width: 100%;
+    height: 100rpx;
+    margin: auto;
 }

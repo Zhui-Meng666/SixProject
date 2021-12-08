@@ -1,0 +1,21 @@
+/* pages/Competition/main/ath_signup2.wxss */
+
+page{
+    background-color: #FAFAFB;
+
+}
+.info_style{
+    margin-left: 20rpx;
+    font-family: heiti;
+    font-weight: bolder;
+    margin-top: 25rpx;
+}
+.ath_submit{
+    color: white;
+    width: 200rpx;
+    height: 100rpx;
+    margin-left: 285rpx;
+    margin-top: 10rpx;
+    background-color: green;
+    border-radius: 30rpx;
+}

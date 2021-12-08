@@ -1,0 +1,25 @@
+<!--pages/Competition/main/ath_signup2.wxml-->
+<van-cell-group>
+    <view class="info_style">选择学院</view> 
+    <van-field value="{{ath_ins}}" label="学院" placeholder="填写所属学院" border="{{false}}" bind:change="check_ins"></van-field>
+    <view class="info_style">添加运动员信息</view>
+    <van-field value="{{ath_name}}" label="姓名" placeholder="填写运动员姓名" border="{{false}}" bind:change="check_name"></van-field>
+    <van-field value="{{ath_sid}}" label="学号" placeholder="填写运动员学号" border="{{false}}" bind:change="check_sid"></van-field>
+    <!-- <van-picker columns="{{genders}}" bind:change="select_gender"/> -->
+</van-cell-group>
+<van-cell title="性别: " center custom-class="normalcell" title-class="celltitle">
+    <van-radio-group bind:change="select_gender" direction="horizontal" value="{{gender}}">
+        <van-radio name="1">男</van-radio>
+        <van-radio name="2">女</van-radio>
+    </van-radio-group>
+</van-cell> 
+<van-cell title="选择项目: " center custom-class="normalcell" title-class="celltitle">
+    <van-radio-group bind:change="select_gender" direction="horizontal" value="{{class}}">
+        <van-radio name="1">男子单打</van-radio>
+        <van-radio name="2">女子单打</van-radio>
+        <van-radio name="3">男子双打</van-radio>
+        <van-radio name="4">女子双打</van-radio>
+        <van-radio name="5">男女混双</van-radio>
+    </van-radio-group>
+</van-cell> 
+<button type="default" bindtap="close_signup_ath" class="ath_submit">提交</button>
