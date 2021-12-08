@@ -181,28 +181,10 @@ Page({
           url: '../../Personal/main/main',
         })
     },
-    toAct(event){
-        // let idx = event.detail.index
-        // console.log(idx)
-        // let act = this.data.acts[idx];
-        // act.signed = !act.signed;
-        // let acts = this.data.acts;
-        // acts[idx] = act;
-        // this.setData({
-        //     acts : acts
-        // })
-        wx.navigateTo({
-          url: '../Activity/details/details',
-        })
-    },
-    toCan(event){
-        wx.navigateTo({
-            url: '../Activity/details/details',
-          })
-    },
+    
     add_act: function(e){
         wx.navigateTo({
-          url: '../Activity/release/release',
+          url: '../../Activity/release/release',
         })
     },
 

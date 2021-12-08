@@ -1,7 +1,0 @@
-<!--pages/Activity/release/release.wxml-->
-<view class="container">
-    <view class="inputfield" wx:key="id" wx:for="{{actdetail}}" wx:for-index="key" wx:for-item="value"></view>
-    <view class="textarea"></view>
-    <view class="upload"></view>
-    <view class="submit"></view>
-</view>
