@@ -16,12 +16,8 @@
         "pages/Entertainment/main/main",
         "pages/Competition/main/main",
         "pages/Competition/score/score",
-        "pages/Entertainment/signup/signup",
-        "pages/Entertainment/signup/mod",
-        "pages/Entertainment/signup/add",
-        "pages/Competition/main/ath_signup1",
-        "pages/Competition/main/ath_signup2",
-        "pages/Competition/main/ref_signup"
+        "pages/Activity/release/release",
+        "pages/Activity/details/details"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

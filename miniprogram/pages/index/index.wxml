@@ -1,8 +1,7 @@
 <!--miniprogram/pages/index/index.wxml-->
 
 <swiper class="swiper_container" autoplay="true" circular="true" interval="3000">
-
-  <block wx:for="{{msglist}}">
+  <block wx:for="{{msglist}}" wx:key="key">
     <swiper-item>
       <image wx:if="{{item.img_src}}" src="{{item.img_src}}" url="{{item.url}}" data-index="{{index}}" bindtap="news_click" class="news_img"></image>
       <view class="swiper_item">{{item.title}}</view>
@@ -16,7 +15,7 @@
 </view>
 
 <scroll-view class="videos" scroll-y="true" refresher-enabled="true">
-  <view wx:for="{{videos}}" class="video">
+  <view wx:for="{{videos}}" wx:key="key" class="video">
     <!-- <view>{{item.name}}</view> -->
     <image src="{{item.cover_src}}" class="v_cover" id="{{index}}" bindtap="video_click"></image>
     <view class="v_name">{{item.name}}</view>

@@ -1,6 +1,7 @@
 // pages/Entertainment/buttle/buttle.js
 import Toast from '@vant/weapp/toast/toast';
 let app = getApp()
+let conn = wx.WebIM.conn
 const RM = wx.getRecorderManager()
 const range = Array.from({
     length: 30
@@ -11,6 +12,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        groupid: '166787045982209',
         msglist: [{
                 type: 'message',
                 value: {
@@ -116,12 +118,13 @@ Page({
 
     send: function (e) {
         var msglt = this.data.msglist
+        var text = this.data.msg
         msglt.push({
             type: 'message',
             value: {
                 self: true,
                 avatar: '../../../images/unload.png',
-                messg: this.data.msg
+                messg: text
             }
         })
         this.setData({
@@ -129,6 +132,27 @@ Page({
             msg: '',
             showsend: false
         })
+        let that = this
+        let mesg = JSON.stringify({
+            type: 'text',
+            value: text
+        })
+        let id = conn.getUniqueId(); // 生成本地消息id
+        let msg = new wx.WebIM.message('txt', id); // 创建文本消息
+        let option = {
+            msg: mesg, // 消息内容
+            to: that.data.groupid, // 接收消息对象(群组id)
+            chatType: 'groupChat', // 群聊类型设置为群聊
+            ext: {}, // 扩展消息
+            success: function (res) {
+                console.log('成功', res);
+            }, // 对成功的相关定义，sdk会将消息id登记到日志进行备份处理
+            fail: function (err) {
+                console.log('失败', err);
+            } // 对失败的相关定义，sdk会将消息id登记到日志进行备份处理
+        };
+        msg.set(option);
+        conn.send(msg.body);
     },
 
     showmore: function (e) {
@@ -145,10 +169,17 @@ Page({
 
     startrecord: function (e) {
         console.log('开始')
-        this.setData({
-            record: true,
+        wx.vibrateLong({
+            success: (res) => {
+                this.setData({
+                    record: true,
+                })
+                RM.start()
+            },
+            fail: (err) => {
+                console.log('失败', err)
+            }
         })
-        RM.start()
     },
 
     sendsound: function (e) {
@@ -182,6 +213,67 @@ Page({
                     tempsound: tempsound,
                     msglist: msglist
                 })
+                let that = this
+                var id = conn.getUniqueId(); // 生成本地消息id
+                var msg = new wx.WebIM.message('audio', id); // 创建音频消息
+                let token = wx.WebIM.conn.context.accessToken
+                let allowType = {
+                    'mp3': true,
+                    'amr': true,
+                    'wmv': true,
+                    'aac': true
+                };
+                let str = app.globalData.appKey.split("#");
+                let length = res.duration / 1000;
+                let index = tempath.lastIndexOf(".");
+                let filetype = (~index && tempath.slice(index + 1)) || "";
+                let domain = wx.WebIM.conn.apiUrl + '/'
+                if (filetype.toLowerCase() in allowType) {
+                    wx.uploadFile({
+                        url: domain + str[0] + "/" + str[1] + "/chatfiles",
+                        filePath: tempath,
+                        name: "file",
+                        header: {
+                            "Content-Type": "multipart/form-data",
+                            Authorization: "Bearer " + token
+                        },
+                        success(res) {
+                            if (res.statusCode === 400) {
+                                // 音频上传阿里云检验不合法
+                                let errData = res.data;
+                                if (errData.error === 'content improper') {
+                                    wx.showToast({
+                                        title: '音频不合法'
+                                    });
+                                    return
+                                }
+                            }
+                            let dataObj = JSON.parse(res.data);
+                            let file = {
+                                type: 'audio',
+                                length: length,
+                                url: dataObj.uri + "/" + dataObj.entities[0].uuid,
+                                filetype: filetype,
+                                filename: tempath
+                            };
+                            msg.set({
+                                apiUrl: conn.apiURL,
+                                body: file,
+                                to: that.data.groupid,
+                                chatType: 'groupChat',
+                                success: function (res) {
+                                    console.log('成功', res)
+                                },
+                                fail: function (e) {
+                                    console.log("Fail"); //如禁言、拉黑后发送消息会失败
+                                }
+                            });
+                            conn.send(msg.body);
+                        }
+                    })
+                } else {
+                    console.log('文件不合法')
+                }
             })
         }
     },
@@ -197,8 +289,7 @@ Page({
             console.log('播放成功')
         })
         IAC.onError((res) => {
-            console.log(res.errMsg)
-            console.log(res.errCode)
+            console.log("播放失败", res.errMsg)
         })
     },
 
@@ -292,9 +383,94 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        if (app.globalData.registered) {
+            var options = {
+                user: 'username',
+                pwd: "zhj48691626",
+                appKey: app.globalData.appKey,
+                success: (res) => {
+                    console.log("成功", res)
+                },
+                fail: (err) => {
+                    console.log("失败", err)
+                }
+            };
+            conn.open(options);
+        } else {
+            Toast.fail("请先注册！")
+            wx.redirectTo({
+                url: '../../Personal/login/login',
+            })
+        }
         var height = app.globalData.getPageHeight()
         this.setData({
             scrollh: height * 0.8
+        })
+        let that = this
+        conn.listen({
+            onTextMessage: function (message) {
+                var data = JSON.parse(message.data)
+                if (data.type === 'text') {
+                    var text = data.value
+                    var msglt = that.data.msglist
+                    msglt.push({
+                        type: 'message',
+                        value: {
+                            self: false,
+                            avatar: '../../../images/unload.png',
+                            messg: text
+                        }
+                    })
+                    that.setData({
+                        msglist: msglt,
+                    })
+                }
+            },
+            onAudioMessage: function (message) {
+                var duration = message.length
+                wx.downloadFile({
+                    url: message.url,
+                    header: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        Accept: "audio/aac",
+                        Authorization: "Bearer " + message.token
+                    },
+                    success(res) {
+                        var tempFilePath = res.tempFilePath;
+                        var len = Math.round(duration / 6)
+                        var msg = '~· '
+                        for (let i = 0; i < len; ++i) {
+                            msg += '~· '
+                        }
+                        var tempsound = that.data.tempsound
+                        var msglist = that.data.msglist
+                        var sdid = tempsound.length
+                        tempsound.push(tempFilePath)
+                        msglist.push({
+                            type: 'sound',
+                            value: {
+                                self: false,
+                                avatar: '../../../images/unload.png',
+                                sdid: sdid,
+                                sdtext: msg
+                            }
+                        })
+                        that.setData({
+                            tempsound: tempsound,
+                            msglist: msglist
+                        })
+                    },
+                    fail(e) {
+                        wx.showToast({
+                            title: "下载失败",
+                            duration: 1000
+                        });
+                    }
+                })
+            },
+            onPersoncard: function (message) {
+                console.log(message)
+            }
         })
     },
 
@@ -323,7 +499,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        conn.close();
     },
 
     /**

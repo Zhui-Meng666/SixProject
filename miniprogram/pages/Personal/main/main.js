@@ -1,4 +1,5 @@
 // miniprogram/pages/Personal/main/main.js
+let app = getApp()
 const Identify = ['管理员', '裁判', '运动员领队', '运动员', '会员', '非会员']
 Page({
 
@@ -6,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bottom_active : 'personal',
+    bottom_active: 'personal',
     show: false,
     bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
     gendersrc: '../../../images/man.png',
@@ -178,32 +179,30 @@ Page({
     })
   },
 
-  to_home(event){
+  to_home(event) {
     wx.redirectTo({
       url: '../../index/index',
     })
   },
-  to_game(event){
-      wx.redirectTo({
-        url: '../../Competition/main/main',
-      })
+  to_game(event) {
+    wx.redirectTo({
+      url: '../../Competition/main/main',
+    })
   },
-  to_entertainment(event){
-      wx.redirectTo({
-        url: '../../Entertainment/main/main',
-      })
+  to_entertainment(event) {
+    wx.redirectTo({
+      url: '../../Entertainment/main/main',
+    })
   },
-  to_personal(event){
-      wx.redirectTo({
-        url: '../../Personal/main/main',
-      })
+  to_personal(event) {
+    wx.redirectTo({
+      url: '../../Personal/main/main',
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    var userallid = ['1', '3', '4', '2', '0', '5']
-    this.Idtoname(userallid.sort())
 
   },
 
@@ -218,7 +217,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!app.globalData.registered) {
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    }
+    var userallid = ['1', '3', '4', '2', '0', '5']
+    this.Idtoname(userallid.sort())
   },
 
   /**
