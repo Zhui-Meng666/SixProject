@@ -5,14 +5,13 @@
     }
   
   .container{
-      /*弹性模型*/
-      display:flex;
-      /*垂直方向 列方向 排布*/
-      flex-direction:column; 
-      width: 100%;
-      height: 100;
-      border-radius: 5%;
-      border-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100;
+    border-radius: 5%;
+    border-color: aquamarine;
+    background-color: #FAFAFB;
   }
   
   .firstlayout{
@@ -61,7 +60,7 @@
     height: 250rpx;
     display: flex;
     flex-direction: row;
-    border-style: groove;
+    /* border-style: groove; */
     margin: auto;
     margin-top: 10rpx;
     border-color: wheatightsteelblue;

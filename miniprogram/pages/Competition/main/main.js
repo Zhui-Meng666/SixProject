@@ -12,12 +12,19 @@ Page({
         show_signup_ath : false,
         show_signup_ref : false,
         show_select_ins : false,
+        bottom_active : 'game',
 
         
         games : [
             {
                 name : '男单锦标赛',
                 host : '体教部',
+                state : '准备中',
+                info : '没有简介。。。。。。。。。。。。。。'
+            },
+            {
+                name : '男单锦标赛',
+                host : '羽协',
                 state : '准备中',
                 info : '没有简介。。。。。。。。。。。。。。'
             },
@@ -91,14 +98,19 @@ Page({
     onSearch1: function(e) {
         var text = this.data.value
     },
-    signup_ath: function(e){
-        this.setData({
-            show_signup_ath : true 
+    signup_ath1: function(e){
+        wx.navigateTo({
+          url: './ath_signup1',
+        })
+    },
+    signup_ath2: function(e){
+        wx.navigateTo({
+          url: './ath_signup2',
         })
     },
     signup_ref: function(e){
-        this.setData({
-            show_signup_ref : true
+        wx.navigateTo({
+          url: './ref_signup',
         })
     },
     start_game: function(e){
@@ -149,6 +161,39 @@ Page({
     check_sid:function(e){
 
     },
+    to_home(event){
+        wx.redirectTo({
+          url: '../../index/index',
+        })
+    },
+    to_game(event){
+        wx.redirectTo({
+          url: './main',
+        })
+    },
+    to_entertainment(event){
+        wx.redirectTo({
+          url: '../../Entertainment/main/main',
+        })
+    },
+    to_personal(event){
+        wx.redirectTo({
+          url: '../../Personal/main/main',
+        })
+    },
+    toAct(event){
+        let idx = event.detail.index
+        console.log(idx)
+        let act = this.data.acts[idx];
+        act.signed = !act.signed;
+        let acts = this.data.acts;
+        acts[idx] = act;
+        this.setData({
+            acts : acts
+        })
+        
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */

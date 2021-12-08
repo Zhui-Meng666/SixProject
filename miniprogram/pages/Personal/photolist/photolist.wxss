@@ -17,7 +17,7 @@
     height: 325rpx;
     display: flex;
     flex-direction: column;
-    background-color: #795548;
+    background-color: #f2ffaaaa;
 }
 .row{
     height: 27px;

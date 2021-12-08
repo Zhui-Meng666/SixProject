@@ -1,7 +1,11 @@
 /* pages/Entertainment/main/main.wxss */
+page{
+    background-color: #FAFAFB;
+}
 .icon_class{
-    height: 60rpx;
-    width: 60rpx;
+    margin-top: 25rpx;
+    height: 40rpx;
+    width: 50rpx;
 }
 .class{
     display: flex;
@@ -45,12 +49,12 @@
     height: 250rpx;
     display: flex;
     flex-direction: row;
-    margin: 8rpx;
+    margin: 5rpx;
 }
 
 .act_img{
-    width: 200rpx;
-    height: 200rpx;
+    width: 160rpx;
+    height: 160rpx;
     margin: 25rpx;
 }
 
@@ -61,34 +65,35 @@
 
 .act_detail{
     font-size: 30rpx;
+    color: gray;
 }
 
 .act_line{
     display: flex;
     flex-direction: row;
     margin-bottom: 35rpx;
+    color: gray;
 }
 
 .act_join_in{
     width: 50rpx;
     height: 50rpx;
-    position: absolute;
-    /* left: 680rpx; */
-    /* right: -45rpx; */
-    left: 680rpx;
+    position: relative;
+    left: 220rpx;
 }
 .act_name{
+    width: 220rpx;
     font-size: 40rpx;
     font-family: 'Heiti';
 }
 .act_bar{
-    width: 490rpx;
-    height: -2rpx;
-    border-color: black;
-    border-style: solid;
+    width: 545rpx;
+    height: 3rpx;
+    border-color: gray;
     position: relative;
     top: -10rpx;
     left: -14rpx;
+    background-color: #C7C6C3;
 }
 
 .act_detail_date{
@@ -119,4 +124,11 @@
     top: 20rpx;
     border-style: groove;
     border-color: aliceblue;
+}
+
+.add_new_act{
+    width: 100rpx;
+    height: 100rpx;
+    position: relative;
+    left: 330rpx;
 }

@@ -11,7 +11,7 @@ Page({
         bottom_active : 'home',
         msglist : [
             {
-                title: "公告：多地首套房贷利率上浮 热点城市渐迎零折",
+                title: "公告：多地首套房贷利率上浮 热。。。",
                 img_src : "../../images/Cat.jpeg",
                 url : 'https://www.baidu.com'
             },
@@ -35,19 +35,19 @@ Page({
             },
             {
                 name : '456',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/2.mp4',
             },
             {
                 name : '000',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/3.mp4',
             },
             {
                 name : '0331',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '../../videos/4.mp4',
             },
@@ -60,19 +60,19 @@ Page({
             },
             {
                 name : '456',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '000',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },
             {
                 name : '0331',
-                msg : '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+                msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
                 video_src : '',
             },

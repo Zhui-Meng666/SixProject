@@ -1,0 +1,11 @@
+<!--pages/Entertainment/signup/signup.wxml-->
+<van-cell-group>
+    <image src="../../../images/add.png" bindtap="add_item" class="add_item"></image>
+    <view wx:for="{{athlete}}" class="items">
+        <van-cell title="姓名" value = "{{item.name}}" class="name"></van-cell>
+        <button bindtap="mod" class="mod">编辑</button>
+    </view>
+    
+</van-cell-group>
+
+<button class="submit" bindtap="submit">提交</button>

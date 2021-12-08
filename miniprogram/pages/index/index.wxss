@@ -1,7 +1,11 @@
 /* miniprogram/pages/index/index.wxss */
+page{
+    background-color: #FAFAFB;
+}
 .icon_class{
-    height: 60rpx;
-    width: 60rpx;
+    margin-top: 25rpx;
+    height: 40rpx;
+    width: 50rpx;
 }
 .swiper_container{
     height: 240rpx;
@@ -25,26 +29,28 @@
 
 .videos{
     width: 100%;
-    height: 920rpx;
+    height: 910rpx;
     display: flex;
     align-content: flex-start;
     flex-direction: row;
     margin: auto;
-    margin-left: 6px;
+    margin-left: 3px;
+    background-color: #fafafb;
 }
 .video{
     width: 50%;
-    height: 30%;
+    height: 500rpx;
     display: inline-block;
 }
 .v_cover{
-    width: 350rpx;
-    height: 350rpx;
+    width: 365rpx;
+    height: 500rpx;
+    margin-bottom: -95rpx;
 }
 .v_name{
     position: relative;
     left: 20rpx;
-    top: -120rpx;
+    top: -25rpx;
     color: white;
     font-family: "heiti";
     font-size: 50rpx;
@@ -52,7 +58,7 @@
 .v_detail{
     position: relative;
     left: 16rpx;
-    top: -120rpx;
+    top: -25rpx;
     width: 300rpx;
     color: white;
     font-size: 30rpx;

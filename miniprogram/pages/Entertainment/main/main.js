@@ -279,7 +279,16 @@ Page({
           }
         })
     },
-
+    to_create_acts: function(e){
+        wx.navigateTo({
+          url: '../signup/signup',
+        })
+    },
+    to_appoint: function(e){
+        wx.navigateTo({
+          url: '../appoint/appoint',
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

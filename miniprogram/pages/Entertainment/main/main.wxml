@@ -3,17 +3,14 @@
     <van-tab title="乱斗">
         <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange1" bind:search="onSearch1" ></van-search>
         
-        <view class="class">
+        <!-- <view class="class">
             <image class="class_item" src="../../../images/mine.png">
-              <!-- <view class="class_item_font">我的</view> -->
             </image>
             <image class="class_item" src="../../../images/recom.png">
-              <!-- <view class="class_item_font">推荐</view> -->
             </image>
             <image class="class_item" src="../../../images/build.png" bindtap="create">
-              <!-- <view class="class_item_font">创建</view> -->
             </image>
-        </view>
+        </view> -->
 
         <view class="acts">
             <view wx:for="{{acts_show}}" class="act_item" bindtap="Tobattle">
@@ -32,19 +29,22 @@
                     <view class="act_bar"></view>
                 </view>
             </view>
-        
+            <image src="../../../images/add.png" class="add_new_act" bindtap="to_create_acts"></image>
         </view>
+
+        
+
     </van-tab>
 
     <van-tab title="约球">
         <van-search value="{{value_show}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange2" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel"></van-search>
         
         <view class="class">
-            <image class="class_item1" src="../../../images/male_1.png"></image>
-            <image class="class_item1" src="../../../images/male_2.png"></image>
-            <image class="class_item1" src="../../../images/male_2.png"></image>
-            <image class="class_item1" src="../../../images/female_2.png"></image>
-            <image class="class_item1" src="../../../images/male_and_female.png"></image>
+            <image class="class_item1" src="../../../images/male_1.png" bindtap="to_appoint"></image>
+            <image class="class_item1" src="../../../images/male_2.png" bindtap="to_appoint"></image>
+            <image class="class_item1" src="../../../images/male_2.png" bindtap="to_appoint"></image>
+            <image class="class_item1" src="../../../images/female_2.png" bindtap="to_appoint"></image>
+            <image class="class_item1" src="../../../images/male_and_female.png" bindtap="to_appoint"></image>
         </view>
         <!-- <view>|   我的匹配</view> -->
         <view class="acts">

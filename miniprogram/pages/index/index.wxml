@@ -23,7 +23,7 @@
   </view>
 </scroll-view>
 
-<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">  
+<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom" border="false" fixed="false">  
   <van-tabbar-item name = 'home' bindtap="bottom_click" class="icon_class">
     <image
       slot = "icon"

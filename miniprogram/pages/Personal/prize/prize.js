@@ -78,7 +78,25 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        wx.request({
+          url: 'http://127.0.0.1:8000/api/user_prize/',
+          method : 'GET',
+          data : {
+              openid : this.openid 
+          },
+          success : function(res) {
+              this.setData({
 
+              })
+          },
+          fail : function(err){
+              wx.showToast({
+                title: 'Failed',
+                icon : 'fail',
+                duration : 2000
+              })
+          }
+        })
     },
 
     /**
