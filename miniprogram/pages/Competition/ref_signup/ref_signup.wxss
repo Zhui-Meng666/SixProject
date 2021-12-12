@@ -1,10 +1,10 @@
 /* pages/Competition/main/ref_signup.wxss */
-.ath_submit{
+.ref_submit{
     color: white;
     width: 200rpx;
     height: 100rpx;
     margin-left: 285rpx;
-    margin-top: 10rpx;
+    margin-top: 25rpx;
     background-color: green;
     border-radius: 30rpx;
 }

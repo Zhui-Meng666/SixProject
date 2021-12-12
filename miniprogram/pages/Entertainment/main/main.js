@@ -1,6 +1,7 @@
 // pages/Entertainment/main/main.js
 let app = getApp()
 let conn = wx.WebIM.conn
+
 Page({
 
     /**
@@ -9,122 +10,13 @@ Page({
     data: {
         active : 0,
         bottom_active : 'entertainment',
-        create_img : '../../../images/Cat.jpeg',
-        acts : [
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '1234组',
-                detail : '菜鸡互啄队',
-                number : 3,
-                date : '2021-3-7',
-                state : '准备中'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '3311组',
-                detail : '菜鸡互啄队',
-                number : 4,
-                date : '2021-5-8',
-                state : '准备中'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '8821组',
-                detail : '菜鸡互啄队',
-                number : 2,
-                date : '2021-10-7',
-                state : '乱斗中'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '1234组',
-                detail : '菜鸡互啄队',
-                number : 3,
-                date : '2021-4-7',
-                state : '准备中'
-            },
-        ],
-        acts_show : [
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '1234组',
-                detail : '菜鸡互啄队',
-                number : 3,
-                date : '2021-3-7',
-                state : '准备中'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '3311组',
-                detail : '菜鸡互啄队',
-                number : 4,
-                date : '2021-5-8',
-                state : '准备中'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '8821组',
-                detail : '菜鸡互啄队',
-                number : 2,
-                date : '2021-10-7',
-                state : '乱斗中'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '1234组',
-                detail : '菜鸡互啄队',
-                number : 3,
-                date : '2021-4-7',
-                state : '准备中'
-            },
+        show_create : false,
+        team_img : '../../../images/Cat.jpeg',
+        buttle : [
         ],
 
-        date : [
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '三缺一',
-                class : '女子单打',
-                number : 2,
-                date : '2021-3-7'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '菜鸡互啄',
-                class : '女子双打',
-                number : 4,
-                date : '2021-5-8'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '有梦你就来',
-                class : '混合双打',
-                number : 4,
-                date : '2021-10-7'
-            },
+        appoint : [
         ],
-        date_show : [
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '三缺一',
-                class : '女子单打',
-                number : 2,
-                date : '2021-3-7'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '菜鸡互啄',
-                class : '女子双打',
-                number : 4,
-                date : '2021-5-8'
-            },
-            {
-                coverimg : '../../../images/Cat.jpeg',
-                name : '有梦你就来',
-                class : '混合双打',
-                number : 4,
-                date : '2021-10-7'
-            },
-        ]
 
     },
 
@@ -152,24 +44,37 @@ Page({
         // };
         // conn.createGroupNew(options);
     },
-
-    Tobattle: function (e) {
-        wx.navigateTo({
-            url: '../buttle/buttle',
-        })
+    buttle_join_in : function(e) {
+        // 申请加入乱斗群
+        let idx = e.currentTarget.dataset.index
+        console.log(idx)
+        let groups = this.data.buttle_show;
+        let group = groups[idx];
+        if (group.number >= 4){
+            console.log("抱歉，已满！")
+        }
+        else{
+            console.log("已发送申请")
+        }
     },
+    
+    // Tobattle: function (e) {
+    //     wx.navigateTo({
+    //         url: '../buttle/buttle',
+    //     })
+    // },
 
-    ToCreate: function(e) {
-        wx.navigateTo({
-          url: '../create/create',
-        })
-    },
+    // ToCreate: function(e) {
+    //     wx.navigateTo({
+    //       url: '../create/create',
+    //     })
+    // },
 
-    Toappoint: function (e) {
-        wx.navigateTo({
-            url: '../appoint/appoint',
-        })
-    },
+    // Toappoint: function (e) {
+    //     wx.navigateTo({
+    //         url: '../appoint/appoint',
+    //     })
+    // },
 
     onChange1: function (e) {
         this.setData({
@@ -179,7 +84,7 @@ Page({
     onSearch1: function (e) {
         var newlist = []
         var text = this.data.value
-        var list = this.data.acts
+        var list = this.data.buttle
         var len = list.length
         for (let i = 0; i < len; i++) {
             if (list[i].date.indexOf(text) != -1 || list[i].name.indexOf(text) != -1 ||
@@ -188,7 +93,7 @@ Page({
             }
         }
         this.setData({
-            acts_show: newlist
+            buttle_show: newlist
         })
     },
     onChange2: function (e) {
@@ -199,7 +104,7 @@ Page({
     onSearch2: function (e) {
         var newlist = []
         var text = this.data.value
-        var list = this.data.date
+        var list = this.data.appoint
         var len = list.length
         for (let i = 0; i < len; i++) {
             if (list[i].date.indexOf(text) != -1 || list[i].name.indexOf(text) != -1 ||
@@ -208,15 +113,10 @@ Page({
             }
         }
         this.setData({
-            date_show: newlist
+            appoint_show: newlist
         })
     },
-    // onChange(event){
-    //     wx.showToast({
-    //     //   title: `切换到标签 ${event.detail.index + 1}`,
-    //     //   icon : 'none'
-    //     })
-    // },
+    
     onChange(event) {
         console.log(event.detail)
     },
@@ -240,33 +140,169 @@ Page({
             url: '../../Personal/main/main',
         })
     },
-
-    close_create: function(e){
-        this.setData({
-            show_create : false,
-        })
+    appoint_join_in: function(e) {
+        // 加入约球群
+        let idx = e.currentTarget.dataset.index;
+        let appoints = this.data.appoint_show;
+        let appoint = appoints[idx];
+        if (appoint.number < 4){
+            wx.navigateTo({
+                url: '../appoint/appoint',
+              })
+        }
+        else{
+            console.log("抱歉，已满！")
+        }
     },
-    create: function(e) {
-        this.setData({
-            show_create : true,
-        })
-    },
-    check_create(event) {
-        console.log(event.detail)
-    },
-    create_done: function(e){
-        this.setData({
-            show_create : false,
-        })
-    },
-    add_appoint: function(e){
+    add_buttle: function(e){
+        this.setData({show_create : true})
         
     },
+    add_appoint: function(e){
+        this.setData({show_create : true})
+        // var groups = this.data.appoint_show;
+        // var team_name = this.data.team_name;
+        // var team_class = this.data.team_class;
+        // var team_max = this.data.team_max;
+        // var team_img = this.data.team_img;
+
+        // var temp = {
+        //     coverimg : team_img,
+        //     name : team_name,
+        //     class : team_class,
+        //     max_num : team_max,
+        //     number : 1,
+        //     date : '2021-10-11'
+        // }
+
+        // groups.push(temp)
+        // this.setData({group : groups})
+    },
+
+    // 创建群接口
+    create_done: function(e) {
+        var type = this.data.active; // 判断类型，0---乱斗，1---约球
+        var groupid = xxx // 在这里填入groupid
+        var openid = app.globalData.openid // openid
+        if(type==0){
+            var groups = this.data.buttle;
+            var team_name = this.data.team_name;
+            var team_introduction = this.data.team_introduction
+            var team_class = this.data.team_class;
+            var team_max = this.data.team_max;
+            var team_img = this.data.team_img;
+
+            wx.cloud.callFunction({
+                name : 'httppost',
+                data : {
+                    url : app.globalData.baseurl + 'melee_create_group/',
+                    data : {
+                        openid : openid,
+                        name : team_name,
+                        head_portrait : team_img,
+                        introduction : team_introduction,
+                        member_num : team_max,
+                        group_id : groupid 
+                    }
+                },
+                success : (res)=>{
+                    groups.push(res.data)
+                    this.setData({buttle : groups})
+                }
+            })
+            this.setData({show_create:false})
+        }
+        else{
+            var groups = this.data.appoint;
+            var team_name = this.data.team_name;
+            var team_introduction = this.data.team_introduction;
+            var team_class = this.data.team_class;
+            var team_max = this.data.team_max;
+            var team_img = this.data.team_img;
+
+            wx.cloud.callFunction({
+                name : 'httppost',
+                data : {
+                    url : app.globalData.baseurl + 'arrange_create_group/',
+                    data : {
+                        openid : openid,
+                        name : team_name,
+                        head_portrait : team_img,
+                        introduction : team_introduction,
+                        member_num : team_max,
+                        group_id : groupid 
+                    }
+                },
+                success : (res)=>{
+                    groups.push(res)
+                    this.setData({appoint : groups})
+                }
+            })
+            this.setData({show_create:false})
+        }
+        
+    },
+    close_create(event){
+        this.setData({show_create:false})
+    },  
+    tname_input(event) {
+        this.setData({team_name : event.detail})
+    },
+    tintro_input(event) {
+        this.setData({team_introduction: event.detail})
+    },
+    tclass_input(event){
+        this.setData({team_class : event.detail})
+    },
+    tnumber_input(event){
+        this.setData({team_max : event.detail})
+    },
+    group_id_input(event){
+        this.setData({search_group_id : event.detail})
+    },
+
+    // 按照群号搜索乱斗群并加入
+    search_buttle(event){
+        // 搜索
+        var group_id = this.data.group_id
+        var openid = app.globalData.openid
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + "melee_search_group/",
+                data : {
+                    group_id : group_id 
+                }
+            },
+            success:(res) => {
+                this.setData({
+                    search_group_result : res.data
+                })
+            }
+        })
+
+        // 加入
+        wx.cloud.callFunction({
+            name : 'httppost',
+            data : {
+                url : app.globalData.baseurl + 'melee_join_group/',
+                data : {
+                    opendid : openid,
+                    group_id : group_id 
+                }
+            },
+            success : (res) =>{
+                this.setData({
+                    res_group : res.data
+                })
+            }
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
     },
     uploadimg : function(e) {
         wx.chooseImage({
@@ -276,22 +312,23 @@ Page({
           success : function(res) {
               var tempFilePaths = res.tempFilePaths;
               let new_img = tempFilePaths;
+              console.log(new_img)
               this.setData({
-                  create_img : new_img
+                  team_img : new_img
               })
           }
         })
     },
-    to_create_acts: function(e){
+    to_create_buttle: function(e){
         wx.navigateTo({
           url: '../signup/signup',
         })
     },
-    to_appoint: function(e){
-        wx.navigateTo({
-          url: '../appoint/appoint',
-        })
-    },
+    // to_appoint: function(e){
+    //     wx.navigateTo({
+    //       url: '../appoint/appoint',
+    //     })
+    // },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -303,8 +340,22 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
-    },
+        // 我参加的群
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'melee_my_group/',
+                data : {
+                    openid : app.globalData.openid
+                }
+            },
+            success : (res) => {
+                this.setData({
+                    buttle : res.data  
+                })
+            }
+        })
+    },  
 
     /**
      * 生命周期函数--监听页面隐藏

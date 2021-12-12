@@ -13,133 +13,55 @@ Page({
 
         athlete : [
             {
-                game_name : "新秀赛",
-                ranking : "1st",
-                date : "2019-10-10",
-                class : "男子单打"
-            },
-            {
-                game_name : '黄金赛',
-                ranking : '2nd',
-                date : '2020-10-10',
-                class : "男子双打"
-            },
-            {
-                game_name : '比赛3',
-                ranking : '3rd',
-                date : '2021-10-10',
-                class : "男子单打"
+                name : "新秀赛",
+                match_rank : "1st",
+                start_time : "2019-10-10",
+                end_time : "2019-10-10",
+                type : "男子单打"
             },
         ],
         athlete1 : [
             {
-                game_name : "新秀赛",
-                ranking : "1st",
-                date : "2019-10-10",
-                class : "男子单打"
-            },
-            {
-                game_name : '黄金赛',
-                ranking : '2nd',
-                date : '2020-10-10',
-                class : "男子双打"
-            },
-            {
-                game_name : '比赛3',
-                ranking : '3rd',
-                date : '2021-10-10',
-                class : "男子单打"
+                name : "新秀赛",
+                match_rank : "1st",
+                start_time : "2019-10-10",
+                end_time : "2019-10-10",
+                type : "男子单打"
             },
         ],
-
-        play : [
-            {
-                ground_id : '1', 
-                date : '2021-2-9',
-                datey : '2021',
-                datem : '2',
-                dated : '9',
-                partner : 'ABC',
-                class : '单打'
-            },
-            {
-                ground_id: '2',
-                date : '2021-3-9',
-                datey : '2021',
-                datem : '3',
-                dated : '9',
-                partner : 'QWE',
-                class : '男女双打'
-            },
-        ],
-        play1 : [
-            {
-                ground_id : '1', 
-                date : '2021-2-9',
-                datey : '2021',
-                datem : '2',
-                dated : '9',
-                partner : 'ABC',
-                class : '单打'
-            },
-            {
-                ground_id: '2',
-                date : '2021-3-9',
-                datey : '2021',
-                datem : '3',
-                dated : '9',
-                partner : 'QWE',
-                class : '男女双打'
-            },
-        ],
-
         referee : [
             {
-                game_name : '新生杯',
-                game_id : 2,
-                date : '2021-5-10',
+                name : '新生杯',
+                id : 2,
+                referee_date : '2021-5-10',
                 identity : '主裁',
-                score : '+8'
+                credit_score : '+8'
             },
-            {
-                game_name : '老生杯',
-                game_id : 1,
-                date : '2021-10-10',
-                identity : '边裁',
-                score : '-2'
-            }
         ],
         referee1 : [
             {
-                game_name : '新生杯',
-                game_id : 2,
-                date : '2021-5-10',
+                name : '新生杯',
+                id : 2,
+                referee_date : '2021-5-10',
                 identity : '主裁',
-                score : '+8'
+                credit_score : '+8'
             },
-            {
-                game_name : '老生杯',
-                game_id : 1,
-                date : '2021-10-10',
-                identity : '边裁',
-                score : '-2'
-            }
         ],
 
         activity : [
             {
-                activity_name : '宣讲会',
-                date : '2021-3-10',
-                img : '../../../images/test.png',
-                sb : 8
+                name : '宣讲会',
+                time : '2021-3-10',
+                picture : '../../../images/test.png',
+                prize : 8
             }
         ],
         activity1 : [
             {
-                activity_name : '宣讲会',
-                date : '2021-3-10',
-                img : '../../../images/test.png',
-                sb : 8
+                name : '宣讲会',
+                time : '2021-3-10',
+                picture : '../../../images/test.png',
+                prize : 8
             }
         ],
 
@@ -255,7 +177,58 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'career_activity/',
+                data : {
+                    openid : app.globalData.openid
+                }
+            },
+            success: (res) => {
+                this.setData({
+                    activity : res.data,
+                    activity1 : res.data
+                })
+            },
+            fail:(res) => {
+                console.log(res)
+            }
+        })
 
+        // 比赛
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'career_match/',
+                data : {
+                    openid : app.globalData.openid
+                }
+            },
+            success:(res) => {
+                this.setData({
+                    athlete : res.data,
+                    athlete1 : res.data
+                })
+            }
+        })
+
+        // 执裁
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + "career_referee/",
+                data : {
+                    openid : app.globalData.openid
+                }
+            },
+            success : (res) => {
+                this.setData({
+                    referee : res.data,
+                    referee1 : res.data 
+                })
+            }
+        })
     },
 
     /**
@@ -269,7 +242,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        // 活动
+        
     },
 
     /**

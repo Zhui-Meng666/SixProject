@@ -1,6 +1,5 @@
 // pages/Entertainment/signup/signup.js
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -13,12 +12,15 @@ Page({
                 gender : '男'
             }
         ],
-        list : []
     },
+
+    // 增加运动员
     add_item : function(e){
-        var list = this.data.athlete
+        var list = JSON.stringify(this.data.athlete)
+        var gameid = this.data.gameid
+        var game_type = this.data.game_type
         wx.navigateTo({
-          url: './add?list='+list,
+            url: '../ath_signup1/ath_signup1?list='+list + '&gameid=' + gameid + '&game_type=' + game_type,
         })
     },
     submit : function(e){
@@ -27,27 +29,32 @@ Page({
         })
     },
     mod : function(e){
-        let idx = e.currentTarget.id;
-        // let idx = 0;
-        console.log(idx)
-        let name = this.data.athlete[idx].name
-        let ins = this.data.athlete[idx].ins
-        let sid = this.data.athlete[idx].sid
-        let gender = this.data.athlete[idx].gender
-        var list = this.data.athlete
+        let idx = e.currentTarget.dataset.index;
+        let ath = JSON.stringify(this.data.athlete[idx]);
+        let gameid = this.data.gameid 
+        let game_type = this.data.game_type // 主办方
+        var list = JSON.stringify(this.data.athlete)
+
         wx.navigateTo({
-            url: './mod?name='+name+'&ins='+ins+'&sid='+sid + '&gender='+gender + '&list='+list,
+            url: '../ath_mod1/ath_mod1?ath=' + ath + '&list='+list + '&gameid=' + JSON.stringify(gameid) + '&game_type=' + game_type,
         })
     },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // console.log(options.name)
-        // var list = options.list
-        // this.setData({
-        //     athlete : list 
-        // })
+        console.log(options)
+        if(options.list){
+            var list = JSON.parse(options.list)
+            this.setData({
+                athlete : list 
+            })
+        }
+        this.setData({
+            gameid : options.gameid,
+            game_type : options.game_type
+        })
     },
 
     /**
@@ -61,10 +68,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function (options) {
-        var list = options.list
-        this.setData({
-            athlete : list 
-        })
+        
+        
     },
 
     /**

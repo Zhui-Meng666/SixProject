@@ -1,17 +1,32 @@
-// pages/Competition/main/ref_signup.js
+// pages/Competition/res_com/res_com.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        res : [
+            {
+                id : '001',
+                com1 : '小明',
+                com2 : '小红',
+                type : '男子单打',
+                create_time : '2021-10-21',
+                referee : '销量',
+                totalscore : {score1:12, score2:13}
+            },
+            {
+                id : '002',
+                com1 : '小明',
+                com2 : '小红',
+                type : '男子单打',
+                create_time : '2021-10-21',
+                referee : '销量',
+                totalscore : {score1:12, score2:13}
+            }
+        ]
+    },
 
-    },
-    close_signup_ref: function(e){
-        wx.navigateBack({
-            delta: 1
-          })
-    },
     /**
      * 生命周期函数--监听页面加载
      */

@@ -1,6 +1,5 @@
 {
     "pages": [
-        
         "pages/index/index",
         "pages/Entertainment/appoint/appoint",
         "pages/Entertainment/buttle/buttle",
@@ -18,8 +17,12 @@
         "pages/Competition/main/main",
         "pages/Competition/score/score",
         "pages/Activity/release/release",
-        "pages/Activity/details/details"
-        
+        "pages/Activity/details/details",
+        "pages/Competition/detail_com/detail_com",
+        "pages/Competition/add_com/add_com",
+        "pages/Competition/res_com/res_com",
+        "pages/Competition/ath_mod1/ath_mod1"
+
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

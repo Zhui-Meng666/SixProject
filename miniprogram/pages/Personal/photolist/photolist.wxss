@@ -7,17 +7,13 @@
     margin-top: 15rpx;
 }
 
-.background{
-    width: 100%;
-    height: 150px;
-}
-
 .container{
     width: 100%;
     height: 325rpx;
     display: flex;
     flex-direction: column;
-    background-color: #f2ffaaaa;
+    /* background-color: #f2ffaaaa; */
+    /* background-image: '../../../images/Cat.jpeg'; */
 }
 .row{
     height: 27px;
@@ -33,7 +29,7 @@
     margin-left: 0rpx;
     align-items: center;
     position: relative;
-    top: 253rpx;
+    top: 125rpx;
     left: 20rpx;
     font-size: 34rpx;
 }
@@ -44,7 +40,7 @@
     font-family: "Kaiti";
     font-size: 45rpx;
     position: relative;
-    top: 259rpx;
+    top: 125rpx;
     left: 220rpx;
 }
 .line{

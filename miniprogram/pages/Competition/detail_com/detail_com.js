@@ -1,13 +1,31 @@
-// pages/Competition/main/ath_signup1.js
+// pages/Competition/detail_com/detail_com.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        single_match : [
+            {
+                id : '001',
+                com1 : '小明',
+                com2 : '小红',
+                type : '男子单打',
+                create_time : '比赛时间',
+                referee : '销量',
+                totalscore : {
+                    score1 : 12,
+                    score2 : 13
+                },
+            }
+        ]
     },
 
+    start_game: function(e){
+        wx.navigateTo({
+          url: '../score/score',
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */

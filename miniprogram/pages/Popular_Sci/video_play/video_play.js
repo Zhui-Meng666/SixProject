@@ -1,4 +1,5 @@
 // pages/video_play.js
+let app = getApp()
 Page({
 
   /**
@@ -8,55 +9,6 @@ Page({
     like_src: '../../../images/like-unclick.png',
     share_src: '../../../images/video_share.png',
     video_list: [
-      {
-        like: false,
-        video_name: 'hahaha',
-        author_name: 'abc',
-        video_src: 'https://stream7.iqilu.com/10339/upload_transcode/202002/18/20200218093206z8V1JuPlpe.mp4'
-      },
-      {
-        like: false,
-        video_name: 'hahaha',
-        author_name: 'abc',
-        video_src: 'https://vod-progressive.akamaized.net/exp=1637783863~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4285%2F21%2F546426056%2F2591116644.mp4~hmac=2d2d7ca0685b5d65f1045c6a733d1c188b5c655d216e103d853ae7a8d20a14cb/vimeo-prod-skyfire-std-us/01/4285/21/546426056/2591116644.mp4?filename=pexels-anna-nekrashevich-7814905.mp4'
-      },
-      {
-        like: false,
-        video_name: 'hahaha',
-        author_name: 'abc',
-        video_src: 'https://vod-progressive.akamaized.net/exp=1637783966~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2871%2F22%2F564357626%2F2668629918.mp4~hmac=16c6232a8ee4d2542c83e901b7a0726f12fc5615beed8dc8210e08f090d03a14/vimeo-prod-skyfire-std-us/01/2871/22/564357626/2668629918.mp4?filename=pexels-shvets-production-8376368.mp4'
-      },
-      {
-        like: false,
-        video_name: 'hahaha',
-        author_name: 'abc',
-        video_src: 'https://vod-progressive.akamaized.net/exp=1637784004~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1322%2F23%2F581612438%2F2746682532.mp4~hmac=33756f14da756f0266f3e994a20ba6d5133e7201c71781f1d3d276f0838ee7ab/vimeo-prod-skyfire-std-us/01/1322/23/581612438/2746682532.mp4?filename=pexels-solodsha-9008286.mp4'
-      }
-    ],
-    video_all: [{
-      like: false,
-      video_name: 'hahaha',
-      author_name: 'abc',
-      video_src: 'https://stream7.iqilu.com/10339/upload_transcode/202002/18/20200218093206z8V1JuPlpe.mp4'
-    },
-    {
-      like: false,
-      video_name: 'hahaha',
-      author_name: 'abc',
-      video_src: 'https://vod-progressive.akamaized.net/exp=1637783863~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4285%2F21%2F546426056%2F2591116644.mp4~hmac=2d2d7ca0685b5d65f1045c6a733d1c188b5c655d216e103d853ae7a8d20a14cb/vimeo-prod-skyfire-std-us/01/4285/21/546426056/2591116644.mp4?filename=pexels-anna-nekrashevich-7814905.mp4'
-    },
-    {
-      like: false,
-      video_name: 'hahaha',
-      author_name: 'abc',
-      video_src: 'https://vod-progressive.akamaized.net/exp=1637783966~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2871%2F22%2F564357626%2F2668629918.mp4~hmac=16c6232a8ee4d2542c83e901b7a0726f12fc5615beed8dc8210e08f090d03a14/vimeo-prod-skyfire-std-us/01/2871/22/564357626/2668629918.mp4?filename=pexels-shvets-production-8376368.mp4'
-    },
-    {
-      like: false,
-      video_name: 'hahaha',
-      author_name: 'abc',
-      video_src: 'https://vod-progressive.akamaized.net/exp=1637784004~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1322%2F23%2F581612438%2F2746682532.mp4~hmac=33756f14da756f0266f3e994a20ba6d5133e7201c71781f1d3d276f0838ee7ab/vimeo-prod-skyfire-std-us/01/1322/23/581612438/2746682532.mp4?filename=pexels-solodsha-9008286.mp4'
-    }
     ],
 
     up_stroke: false, // ture:上划；false：下划
@@ -69,35 +21,90 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var {
-      vid
-    } = options;
-    console.log(vid)
-    var temp = this.data.video_all
-    var tar = temp[vid]
-    temp[vid] = temp[0]
-    temp[0] = tar
-    this.setData({
-      video_list: temp,
-      windowHeight: wx.getSystemInfoSync().windowHeight
-    })
+    var vids = JSON.parse(options.vids)
+    
+    for(let i=0;i<vids.length;i++){
+      let vid = vids[i]
+      wx.cloud.callFunction({
+        name : 'httprequest',
+        data : {
+          url : app.globalData.baseurl + 'scientific_video_detail/',
+          data : {
+            id : vid 
+          }
+        },
+        success : (res) => {
+          this.setData({
+            video_list : this.data.video_list.push(res.data)
+          })
+        }
+      })
+    }
+    let videos = this.data.video_list
+    for(let i=0;i<vids.length;i++){
+      let vid = vids[i]
+      wx.cloud.callFunction({
+        name : 'httprequest',
+        data : {
+          url : app.globalData.baseurl + 'scientific_video_like/',
+          data : {
+            openid : app.globalData.openid,
+            id : vid 
+          },
+          success : (res) => {
+            is_like = res.data.is_like 
+            videos[vid]['like'] = is_like
+            this.setData({
+              video_list : videos 
+            })
+          }
+        }
+      })
+    }
   },
 
   like_click(e) {
     let videos = this.data.video_list;
-    let idx = Number(e.currentTarget.id);
+    let idx = Number(e.currentTarget.dataset.index);
     console.log(idx)
-    if (videos[idx]['like'] == true) {
-      videos[idx].like = false;
-      this.setData({
-        video_list: videos,
+    let vid = videos[idx].id 
+    if(videos[idx].like == false){
+      wx.cloud.callFunction({
+        name : 'httppost',
+        data : {
+          url : app.globalData.baseurl + 'scientific_video_like/',
+          data : {
+            openid : app.globalData.openid,
+            id : vid 
+          }
+        },
+        success : (res) => {
+          videos[idx]['like'] = !videos[idx]['like'] 
+        }
       })
-    } else {
-      videos[idx]['like'] = true;
       this.setData({
-        video_list: videos,
+        video_list : videos 
       })
     }
+    else{
+      wx.cloud.callFunction({
+        name : 'httppost',
+        data : {
+          url : app.globalData.baseurl + 'scientific_video_like_cancel/',
+          data : {
+            openid : app.globalData.openid,
+            id : vid 
+          }
+        },
+        success : (res) => {
+            videos[idx]['like'] = !videos[idx]['like'] 
+        }
+      })
+      this.setData({
+        video_list : videos 
+      })
+    }
+    
   },
 
   touchStart(e) {

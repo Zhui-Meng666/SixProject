@@ -1,4 +1,5 @@
 // pages/Competition/main/main.js
+let app = getApp()
 Page({
 
     /**
@@ -17,18 +18,35 @@ Page({
         
         games : [
             {
+                id : 1,
                 name : '男单锦标赛',
-                host : '体教部',
-                state : '准备中',
-                info : '没有简介。。。。。。。。。。。。。。'
+                type : '体教部',
+                status : '准备中',
+                introduction : '没有简介。。。。。。。。。。。。。。'
             },
             {
+                id : 2,
                 name : '男单锦标赛',
-                host : '羽协',
-                state : '准备中',
-                info : '没有简介。。。。。。。。。。。。。。'
+                type : '体教部',
+                status : '准备中',
+                introduction : '没有简介。。。。。。。。。。。。。。'
             },
             {
+                id : 3,
+                name : '男单锦标赛',
+                type : '体教部',
+                status : '准备中',
+                introduction : '没有简介。。。。。。。。。。。。。。'
+            },
+            {
+                id : 4,
+                name : '男单锦标赛',
+                type : '羽协',
+                status : '准备中',
+                introduction : '没有简介。。。。。。。。。。。。。。'
+            },
+            {
+                gameid : '001',
                 name : '女单锦标赛',
                 host : '体教部',
                 state : '进行中',
@@ -98,24 +116,27 @@ Page({
     onSearch1: function(e) {
         var text = this.data.value
     },
-    signup_ath1: function(e){
+    signup_ath: function(e){
+        let idx = e.currentTarget.dataset.index 
+        let games = this.data.games
+        let gameid = games[idx].id
+        let game_type = games[idx].type 
         wx.navigateTo({
-          url: './ath_signup1',
+            url : '../signup/signup?gameid=' + JSON.stringify(gameid) + '&game_type=' + game_type
         })
     },
-    signup_ath2: function(e){
-        wx.navigateTo({
-          url: './ath_signup2',
-        })
-    },
+
     signup_ref: function(e){
+        let idx = e.currentTarget.dataset.index 
+        let games = this.data.games
+        let gameid = games[idx].id
         wx.navigateTo({
-          url: './ref_signup',
+          url: '../ref_signup/ref_signup?gameid=' + gameid,
         })
     },
     start_game: function(e){
         wx.navigateTo({
-          url: '../score/score',
+          url: '../detail_com/detail_com',
         })
     },
     open_select_ins: function(e){
@@ -187,6 +208,16 @@ Page({
           url: '../../Activity/release/release',
         })
     },
+    add_com: function(e){
+        wx.navigateTo({
+          url: '../add_com/add_com',
+        })
+    },
+    res_com: function(e) {
+        wx.navigateTo({
+          url: '../res_com/res_com',
+        })
+    },
 
     /**
      * 生命周期函数--监听页面加载
@@ -206,8 +237,39 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        var openid = app.globalData.openid
+        // 所有比赛
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + "match_show/",
+            },
+            success:(res)=>{
+                this.setData({
+                    games : res.data 
+                })
+            },
+            fail:(err)=>{
+                console.log(err)
+            }
+        })
 
-    },
+        // 已经报名的活动
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'activity_have_sign_up_show/',
+                data : {
+                    openid : openid
+                }
+            },
+            success:(res)=>{
+                this.setData({
+                    acts_signed : res.data 
+                })
+            }
+        })
+    },      
 
     /**
      * 生命周期函数--监听页面隐藏

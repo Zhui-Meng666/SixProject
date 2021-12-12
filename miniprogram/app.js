@@ -92,5 +92,21 @@ App({
         console.log("错误", err);
       }
     })
+    // wx.cloud.callFunction({
+    //   name: 'httpdelete',
+    //   data: {
+    //     url: this.globalData.baseurl + 'album_upload/',
+    //     data: {
+    //       openid: this.globalData.openid,
+    //       picture_link: ''
+    //     }
+    //   },
+    //   success: (res) => {
+    //     console.log("成功", res.result)
+    //   },
+    //   fail: (err) => {
+    //     console.log("失败", err)
+    //   }
+    // })
   }
 })
