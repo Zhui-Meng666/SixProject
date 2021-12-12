@@ -41,7 +41,7 @@ page{
 }
 .acts{
     width: 100%;
-    height: 865rpx;
+    height: 930rpx;
 }
 
 .act_item{
@@ -127,8 +127,15 @@ page{
 }
 
 .add_new_act{
-    width: 100rpx;
-    height: 100rpx;
+    width: 150rpx;
+    height: 150rpx;
     position: relative;
-    left: 330rpx;
+    left: 310rpx;
+}
+
+.add_appoint{
+    width: 150rpx;
+    height: 150rpx;
+    position: relative;
+    left: 300rpx;
 }

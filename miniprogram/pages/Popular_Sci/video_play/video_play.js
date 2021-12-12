@@ -7,7 +7,8 @@ Page({
   data: {
     like_src: '../../../images/like-unclick.png',
     share_src: '../../../images/video_share.png',
-    video_list: [{
+    video_list: [
+      {
         like: false,
         video_name: 'hahaha',
         author_name: 'abc',

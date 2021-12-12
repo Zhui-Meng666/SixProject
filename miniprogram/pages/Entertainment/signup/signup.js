@@ -7,18 +7,18 @@ Page({
     data: {
         athlete : [
             {
+                sid : '2019',
                 name : '小明',
                 ins : '信息管理与工程学院',
-                sid : '2019111571',
                 gender : '男'
             }
-        ]
+        ],
+        list : []
     },
-
-
     add_item : function(e){
+        var list = this.data.athlete
         wx.navigateTo({
-          url: './add',
+          url: './add?list='+list,
         })
     },
     submit : function(e){
@@ -27,30 +27,27 @@ Page({
         })
     },
     mod : function(e){
-        // let idx = e.currentTarget.dataset.index;
-        let idx = 0;
+        let idx = e.currentTarget.id;
+        // let idx = 0;
         console.log(idx)
         let name = this.data.athlete[idx].name
         let ins = this.data.athlete[idx].ins
         let sid = this.data.athlete[idx].sid
         let gender = this.data.athlete[idx].gender
+        var list = this.data.athlete
         wx.navigateTo({
-            url: './mod?name='+name+'&ins='+ins+'&sid='+sid + '&gender='+gender + '&idx'+idx,
+            url: './mod?name='+name+'&ins='+ins+'&sid='+sid + '&gender='+gender + '&list='+list,
         })
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // let idx = options.idx
-        // let aths = this.data.athlete
-        // let ath = {
-        //     options + '.' + name, 
-        //     options.ins,
-        //     options.ins,
-        //     options.gender
-        // }
-
+        // console.log(options.name)
+        // var list = options.list
+        // this.setData({
+        //     athlete : list 
+        // })
     },
 
     /**
@@ -63,8 +60,11 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-
+    onShow: function (options) {
+        var list = options.list
+        this.setData({
+            athlete : list 
+        })
     },
 
     /**

@@ -1,9 +1,20 @@
 <!--pages/Competition/main/ref_signup.wxml-->
 <van-cell-group>
 
-
+    <van-cell title="姓名">
+        <van-field value="{{name}}" placeholder="请输入裁判姓名"></van-field>
+    </van-cell>
+    <van-cell title="学号">
+        <van-field value="{{sid}}" placeholder="请输入裁判学号"></van-field>
+    </van-cell>
+    <van-cell title="电话">
+        <van-field value="{{tel}}" placeholder="请输入裁判电话"></van-field>
+    </van-cell>
+    <van-cell title="学院">
+        <van-field value="{{ins}}" placeholder="请输入裁判学院"></van-field>
+    </van-cell>
     <van-cell title="选择执裁项目">
-        <van-radio-group direction="horizontal" value="{{porj}}">
+        <van-radio-group value="{{porj}}">
             <van-radio name="1">男子单打</van-radio>
             <van-radio name="2">女子单打</van-radio>
             <van-radio name="3">男子双打</van-radio>
