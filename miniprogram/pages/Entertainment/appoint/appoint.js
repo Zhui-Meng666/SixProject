@@ -625,17 +625,19 @@ Page({
             success: (res) => {
                 console.log("成功", res.result)
                 let data = res.result.data
-                let userinfo = {}
-                for (var i = 0; i < data.length; ++i) {
-                    userinfo[data[i].user.openid] = {
-                        avatar: data[i].user.avatar,
-                        nickname: data[i].user.nickname,
-                        phone: data[i].user.mobile_phone
+                if (data) {
+                    let userinfo = {}
+                    for (var i = 0; i < data.length; ++i) {
+                        userinfo[data[i].user.openid] = {
+                            avatar: data[i].user.avatar,
+                            nickname: data[i].user.nickname,
+                            phone: data[i].user.mobile_phone
+                        }
                     }
+                    this.setData({
+                        userinfo: userinfo
+                    })
                 }
-                this.setData({
-                    userinfo: userinfo
-                })
             },
             fail: (err) => {
                 console.log("失败", err)
@@ -654,7 +656,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
+
     },
 
     /**

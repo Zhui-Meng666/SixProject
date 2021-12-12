@@ -41,7 +41,7 @@ Page({
                 fail: (err) => {
                     console.log("失败", err)
                 }
-            })    
+            })
         } else {
             wx.cloud.callFunction({
                 name: 'httppost',
@@ -62,7 +62,7 @@ Page({
                 fail: (err) => {
                     console.log("失败", err)
                 }
-            })    
+            })
         }
     },
 
@@ -95,15 +95,17 @@ Page({
             success: (res) => {
                 console.log("成功", res.result)
                 let data = res.result.data
-                this.setData({
-                    title: data.title,
-                    coinnum: data.prize,
-                    time: data.time,
-                    addr: data.address,
-                    have_sign: data.have_sign_up,
-                    personum: data.upper_limit,
-                    intro: data.introduction,
-                })
+                if (data) {
+                    this.setData({
+                        title: data.title,
+                        coinnum: data.prize,
+                        time: data.time,
+                        addr: data.address,
+                        have_sign: data.have_sign_up,
+                        personum: data.upper_limit,
+                        intro: data.introduction,
+                    })
+                }
             },
             fail: (err) => {
                 console.log("失败", err)

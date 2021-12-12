@@ -1,5 +1,6 @@
 // pages/Competition/score/score.js
 import Toast from '@vant/weapp/toast/toast';
+let app = getApp()
 Page({
 
     /**
@@ -32,7 +33,8 @@ Page({
                 college: '学院',
                 name: '姓名'
             }
-        ]
+        ],
+        single_match_id: 20191012
     },
 
     onchange: function (e) {

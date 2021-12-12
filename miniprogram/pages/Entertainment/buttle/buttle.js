@@ -611,54 +611,56 @@ Page({
             success: (res) => {
                 console.log("成功", res.result)
                 let data = res.result.data
-                let len = data.length
-                let userinfo = {}
-                for (var i = 0; i < data.length; ++i) {
-                    userinfo[data[i].user.openid] = {
-                        avatar: data[i].user.avatar,
-                        nickname: data[i].user.nickname,
-                        phone: data[i].user.phone_number
+                if (data) {
+                    let len = data.length
+                    let userinfo = {}
+                    for (var i = 0; i < data.length; ++i) {
+                        userinfo[data[i].user.openid] = {
+                            avatar: data[i].user.avatar,
+                            nickname: data[i].user.nickname,
+                            phone: data[i].user.phone_number
+                        }
                     }
-                }
-                this.setData({
-                    userinfo: userinfo,
-                })
-                wx.cloud.callFunction({
-                    name: 'httprequest',
-                    data: {
-                        url: app.globalData.baseurl + 'melee_against_info/',
+                    this.setData({
+                        userinfo: userinfo,
+                    })
+                    wx.cloud.callFunction({
+                        name: 'httprequest',
                         data: {
-                            group_id: this.data.groupid,
-                        }
-                    },
-                    success: (res) => {
-                        console.log("成功", res.result)
-                        let data = res.result.data
-                        let singlelistall = []
-                        let game = len % 2 == 0 ? len - 1 : len
-                        let round = Math.floor(len / 2)
-                        for (var i = 0; i < game; ++i) {
-                            let singlelist = []
-                            for (var j = i * round; j < data.length; ++j) {
-                                singlelist.push({
-                                    name1: data[j].user1.student_id,
-                                    name2: data[j].user2.student_id,
-                                    openid1: data[j].user1.openid,
-                                    openid2: data[j].user2.openid,
-                                    grade: '录入成绩'
-                                })
+                            url: app.globalData.baseurl + 'melee_against_info/',
+                            data: {
+                                group_id: this.data.groupid,
                             }
-                            singlelistall.push(singlelist)
+                        },
+                        success: (res) => {
+                            console.log("成功", res.result)
+                            let data = res.result.data
+                            let singlelistall = []
+                            let game = len % 2 == 0 ? len - 1 : len
+                            let round = Math.floor(len / 2)
+                            for (var i = 0; i < game; ++i) {
+                                let singlelist = []
+                                for (var j = i * round; j < data.length; ++j) {
+                                    singlelist.push({
+                                        name1: data[j].user1.student_id,
+                                        name2: data[j].user2.student_id,
+                                        openid1: data[j].user1.openid,
+                                        openid2: data[j].user2.openid,
+                                        grade: '录入成绩'
+                                    })
+                                }
+                                singlelistall.push(singlelist)
+                            }
+                            this.setData({
+                                singlelistall: singlelistall,
+                                singlelist: singlelistall[0],
+                            })
+                        },
+                        fail: (err) => {
+                            console.log("失败", err)
                         }
-                        this.setData({
-                            singlelistall: singlelistall,
-                            singlelist: singlelistall[0],
-                        })
-                    },
-                    fail: (err) => {
-                        console.log("失败", err)
-                    }
-                })
+                    })
+                }
             },
             fail: (err) => {
                 console.log("失败", err)
