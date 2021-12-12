@@ -89,7 +89,7 @@
 </van-popup>
 
 <van-popup custom-class="setpop" show="{{ showset }}" bind:close="closeset" position="right" round safe-area-inset-top>
-  <van-cell is-link title="修改信息" link-type="navigateTo" url="../changeinfo/changeinfo" bind:click="closeset" />
+  <van-cell is-link title="修改信息" bind:click="closeset" />
   <van-cell is-link title="更换背景图" bind:click="chooseimg"></van-cell>
 </van-popup>
 

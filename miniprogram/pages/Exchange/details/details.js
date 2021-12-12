@@ -33,6 +33,13 @@ Page({
     },
 
     confirm: function (e) {
+        if (this.data.coin < this.data.price) {
+            Toast.fail("金币不够！")
+            this.setData({
+                show: false,
+            })
+            return -1
+        }
         const eventChannel = this.getOpenerEventChannel()
         this.setData({
             loading: true,
@@ -58,43 +65,44 @@ Page({
                     show: false,
                 })
                 Toast.success('兑换成功')
-                wx.requestSubscribeMessage({
-                    tmplIds: [tempid],
-                    success: (res) => {
-                        console.log('成功', res[tempid])
-                        if (res[tempid] == 'accept') {
-                            wx.cloud.callFunction({
-                                name: 'sendmsg',
-                                data: {
-                                    openid: app.globalData.openid,
-                                    data: {
-                                        thing2: {
-                                            value: this.data.goodsname
-                                        },
-                                        amount3: {
-                                            value: this.data.price
-                                        },
-                                        thing5: {
-                                            value: '地点：' + this.data.addr
-                                        }
-                                    }
-                                },
-                                success: (res) => {
-                                    console.log('成功', res)
-                                },
-                                fail: (err) => {
-                                    console.log('失败', err)
-                                }
-                            })
-                        }
-                    },
-                    fail: (err) => {
-                        console.log('失败', err)
-                    }
-                })
             },
             fail: (err) => {
                 console.log("失败", err)
+                Toast.fail('兑换失败')
+            }
+        })
+        wx.requestSubscribeMessage({
+            tmplIds: [tempid],
+            success: (res) => {
+                console.log('成功', res[tempid])
+                if (res[tempid] == 'accept') {
+                    wx.cloud.callFunction({
+                        name: 'sendmsg',
+                        data: {
+                            openid: app.globalData.openid,
+                            data: {
+                                thing2: {
+                                    value: this.data.goodsname
+                                },
+                                amount3: {
+                                    value: this.data.price
+                                },
+                                thing5: {
+                                    value: '地点：' + this.data.addr
+                                }
+                            }
+                        },
+                        success: (res) => {
+                            console.log('成功', res)
+                        },
+                        fail: (err) => {
+                            console.log('失败', err)
+                        }
+                    })
+                }
+            },
+            fail: (err) => {
+                console.log('失败', err)
             }
         })
     },
@@ -109,6 +117,7 @@ Page({
         var day = parseInt(Math.abs(now - dead) / 1000 / 60 / 60 / 24) + 1
         this.setData({
             id: options.id,
+            coin: options.coin,
             day: day
         })
         wx.cloud.callFunction({
@@ -122,14 +131,16 @@ Page({
             success: (res) => {
                 console.log("成功", res.result)
                 let data = res.result.data
-                this.setData({
-                    goodsname: data.prize_name,
-                    goodsimg: data.picture_link,
-                    price: data.sufe_currency,
-                    detailed_info: data.detailed_info,
-                    rest: data.rest,
-                    introduction: data.introduction
-                })
+                if (data) {
+                    this.setData({
+                        goodsname: data.prize_name,
+                        goodsimg: data.picture_link,
+                        price: data.sufe_currency,
+                        detailed_info: data.detailed_info,
+                        rest: data.rest,
+                        introduction: data.introduction
+                    })
+                }
             },
             fail: (err) => {
                 console.log("失败", err)

@@ -42,20 +42,21 @@ Page({
             openid: app.globalData.openid,
             student_id: this.data.stuid,
             gender: this.data.gender,
-            introduction: this.data.userintro,
+            introduction: this.data.intro,
         }
+        console.log(submitdata)
         wx.cloud.callFunction({
-            name: 'httppost', // 不需要动
+            name: 'httppost',
             data: {
-                url: app.globalData.bsurl + '', //后面加路径名
-                data: {} // 需要传递的参数，没有可以不写，json格式
+                url: app.globalData.baseurl + 'change_user_info/',
+                data: submitdata
             },
-            success: (res) => { //调用成功的回调函数
-                console.log('成功', res.result) //返回的数据存在res.result中，可能需要访问res.result.data获取需要的数据
-                Toast.success('已保存')
+            success: (res) => {
+                Toast.success("保存成功")
+                console.log("成功", res.result)
             },
             fail: (err) => {
-                console.log('失败', err) //调用失败的回调函数
+                console.log("失败", err)
             }
         })
     },
@@ -64,7 +65,13 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let info = JSON.parse(options.info)
+        console.log(info)
+        this.setData({
+            stuid: info.stuid,
+            gender: info.gender,
+            intro: info.intro
+        })
     },
 
     /**

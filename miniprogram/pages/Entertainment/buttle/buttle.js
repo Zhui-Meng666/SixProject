@@ -6,8 +6,9 @@ const RM = wx.getRecorderManager()
 const range = Array.from({
     length: 30
 }, (a, i) => i + 1);
+
 function compare(arg) {
-    return function(a, b) {
+    return function (a, b) {
         return a[arg] - b[arg];
     }
 }
@@ -299,54 +300,60 @@ Page({
                 }
                 break
             case '1':
-                let options = {
-                    groupId: "167298202664961", // 群组ID
-                    message: "I am zhangjun", // 请求信息
-                    success: (res) => {
-                        console.log("成功", res)
-                    },
-                    fail: (err) => {
-                        console.log("失败", err)
-                    }
-                };
-                conn.joinGroup(options)
+                // let options = {
+                //     groupId: "167298202664961", // 群组ID
+                //     message: "I am zhangjun", // 请求信息
+                //     success: (res) => {
+                //         console.log("成功", res)
+                //     },
+                //     fail: (err) => {
+                //         console.log("失败", err)
+                //     }
+                // };
+                // conn.joinGroup(options)
                 break
             case '2':
-                let flag = true
-                for (var done of this.data.singledone) {
-                    if (!done) {
-                        Toast.fail('比赛还没结束')
-                        flag = false
-                        break
-                    }
-                }
-                if (flag) {
-                    wx.cloud.callFunction({
-                        name: 'httprequest',
-                        data: {
-                            url: app.globalData.baseurl + 'melee_rank/',
-                            data: {
-                                openid: app.globalData.openid,
-                            }
-                        },
-                        success: (res) => {
-                            console.log("成功", res.result)
-                            let rank = this.data.ranklist
-                            let data = res.result.data.user
-                            data = data.sort(compare('rank'))
-                            for (var i = 0; i < 3; ++i) {
-                                rank[i].name = data[i].student_id
-                            }
-                            this.setData({
-                                ranklist: rank,
-                                showrank: !this.data.showrank
-                            })
-                        },
-                        fail: (err) => {
-                            console.log("失败", err)
-                            Toast.fail("获取排名失败！")
-                        }
+                if (this.data.showrank) {
+                    this.setData({
+                        showrank: !this.data.showrank
                     })
+                } else {
+                    let flag = true
+                    for (var done of this.data.singledone) {
+                        if (!done) {
+                            Toast.fail('比赛还没结束')
+                            flag = false
+                            break
+                        }
+                    }
+                    if (flag) {
+                        wx.cloud.callFunction({
+                            name: 'httprequest',
+                            data: {
+                                url: app.globalData.baseurl + 'melee_rank/',
+                                data: {
+                                    group_id: this.data.groupid,
+                                }
+                            },
+                            success: (res) => {
+                                console.log("成功", res.result)
+                                let rank = this.data.ranklist
+                                let data = res.result.data.user
+                                for (var i = 0; i < 3; ++i) {
+                                    rank[i].img = data[i].avatar
+                                    rank[i].name = data[i].nickname
+                                }
+                                this.setData({
+                                    ranklist: rank,
+                                    showrank: !this.data.showrank
+                                })
+                            },
+                            fail: (err) => {
+                                console.log("失败", err)
+                                Toast.fail("获取排名失败！")
+                            }
+                        })
+                    }
                 }
                 break
         }
@@ -531,38 +538,53 @@ Page({
                         break;
                     case 'joinPublicGroupDeclined':
                         // 拒绝入群申请
+                        Toast.fail("加入房间失败")
                         break;
                     case 'joinPublicGroupSuccess':
                         // 用户获得群主同意入群申请
+                        Toast.success("加入房间成功")
                         break;
                     case 'joinGroupNotifications':
                         // 申请入群
-                        conn.agreeJoinGroup({
-                            applicant: msg.owner, // 申请加群的用户名
-                            groupId: '167298202664961', // 群组ID
-                            success: (res) => {
-                                console.log("成功", res)
-                                wx.cloud.callFunction({
-                                    name: 'httppost',
-                                    data: {
-                                        url: app.globalData.baseurl + 'melee_join_group/',
-                                        data: {
-                                            openid: msg.owner,
-                                            group_id: msg.gid,
+                        wx.showModal({
+                            title: '提示',
+                            content: '用户' + msg.reason + '申请入群',
+                            cancelText: '拒绝',
+                            confirmText: '同意',
+                            success(res) {
+                                if (res.confirm) {
+                                    console.log('同意入群申请')
+                                    conn.agreeJoinGroup({
+                                        applicant: msg.owner, // 申请加群的用户名
+                                        groupId: that.data.groupid, // 群组ID
+                                        success: (res) => {
+                                            console.log("成功", res)
+                                            wx.cloud.callFunction({
+                                                name: 'httppost',
+                                                data: {
+                                                    url: app.globalData.baseurl + 'melee_join_group/',
+                                                    data: {
+                                                        openid: msg.owner,
+                                                        group_id: msg.gid,
+                                                    }
+                                                },
+                                                success: (res) => {
+                                                    console.log("成功", res.result)
+                                                },
+                                                fail: (err) => {
+                                                    console.log("失败", err)
+                                                }
+                                            })
+                                        },
+                                        fail: (err) => {
+                                            console.log("失败", err)
                                         }
-                                    },
-                                    success: (res) => {
-                                        console.log("成功", res.result)
-                                    },
-                                    fail: (err) => {
-                                        console.log("失败", err)
-                                    }
-                                })
-                            },
-                            fail: (err) => {
-                                console.log("失败", err)
+                                    });
+                                } else if (res.cancel) {
+                                    console.log('拒绝入群申请')
+                                }
                             }
-                        });
+                        })
                         break;
                     case 'leave':
                         // 退出群
@@ -589,6 +611,7 @@ Page({
             success: (res) => {
                 console.log("成功", res.result)
                 let data = res.result.data
+                let len = data.length
                 let userinfo = {}
                 for (var i = 0; i < data.length; ++i) {
                     userinfo[data[i].user.openid] = {
@@ -598,41 +621,43 @@ Page({
                     }
                 }
                 this.setData({
-                    userinfo: userinfo
+                    userinfo: userinfo,
                 })
-            },
-            fail: (err) => {
-                console.log("失败", err)
-            }
-        })
-        wx.cloud.callFunction({
-            name: 'httprequest',
-            data: {
-                url: app.globalData.baseurl + 'melee_against_info/',
-                data: {
-                    group_id: this.data.groupid,
-                }
-            },
-            success: (res) => {
-                console.log("成功", res.result)
-                let data = res.result.data
-                let singlelistall = []
-                for (var i = 0; i < data.length / 3; ++i) {
-                    let singlelist = []
-                    for (var j = i * 3; j < data.length; ++j) {
-                        singlelist.push({
-                            name1: data[j].user1.student_id,
-                            name2: data[j].user2.student_id,
-                            openid1: data[j].user1.openid,
-                            openid2: data[j].user2.openid,
-                            grade: '录入成绩'
+                wx.cloud.callFunction({
+                    name: 'httprequest',
+                    data: {
+                        url: app.globalData.baseurl + 'melee_against_info/',
+                        data: {
+                            group_id: this.data.groupid,
+                        }
+                    },
+                    success: (res) => {
+                        console.log("成功", res.result)
+                        let data = res.result.data
+                        let singlelistall = []
+                        let game = len % 2 == 0 ? len - 1 : len
+                        let round = Math.floor(len / 2)
+                        for (var i = 0; i < game; ++i) {
+                            let singlelist = []
+                            for (var j = i * round; j < data.length; ++j) {
+                                singlelist.push({
+                                    name1: data[j].user1.student_id,
+                                    name2: data[j].user2.student_id,
+                                    openid1: data[j].user1.openid,
+                                    openid2: data[j].user2.openid,
+                                    grade: '录入成绩'
+                                })
+                            }
+                            singlelistall.push(singlelist)
+                        }
+                        this.setData({
+                            singlelistall: singlelistall,
+                            singlelist: singlelistall[0],
                         })
+                    },
+                    fail: (err) => {
+                        console.log("失败", err)
                     }
-                    singlelistall.push(singlelist)
-                }
-                this.setData({
-                    singlelistall: singlelistall,
-                    singlelist: singlelistall[0],
                 })
             },
             fail: (err) => {

@@ -9,8 +9,8 @@
         <view class="coinnum">余额：{{coinnum}}</view>
     </view>
 </view>
-<view wx:if="{{goodslen<= 4}}" class="goodslist">
-    <view class="goodsitem" style="height: {{goodsheight}}rpx;" wx:key="key" wx:for="{{goods}}" id="{{item.id}}" bindtap="details">
+<view wx:if="{{goods.length<= 4}}" class="goodslist">
+    <view class="goodsitem" style="height: {{goodsheight}}rpx;" wx:key="key" wx:for="{{goods}}" id="{{index}}" bindtap="details">
         <view class="goodsimg">
             <image class="image" src="{{item.src}}" mode="aspectFill"></image>
         </view>
@@ -27,7 +27,7 @@
     </view>
 </view>
 <scroll-view wx:else scroll-y enable-flex style="height: {{pgheight}}rpx;" class="goodslist">
-    <view class="goodsitem" style="height: {{goodsheight}}rpx;" wx:key="key" wx:for="{{goods}}" id="{{item.id}}" bindtap="details">
+    <view class="goodsitem" style="height: {{goodsheight}}rpx;" wx:key="key" wx:for="{{goods}}" id="{{index}}" bindtap="details">
         <view class="goodsimg">
             <image class="image" src="{{item.src}}" mode="aspectFill"></image>
         </view>

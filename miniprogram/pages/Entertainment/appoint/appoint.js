@@ -58,11 +58,12 @@ Page({
     send: function (e) {
         var msglt = this.data.msglist
         var text = this.data.msg
+        var userinfo = this.data.userinfo[app.globalData.openid]
         msglt.push({
             type: 'message',
             value: {
                 self: true,
-                avatar: '../../../images/unload.png',
+                avatar: userinfo.avatar,
                 messg: text
             }
         })
@@ -335,19 +336,19 @@ Page({
             case '1':
                 var msglist = this.data.msglist
                 var tempcard = this.data.tempcard
+                var userinfo = this.data.userinfo[app.globalData.openid]
                 msglist.push({
                     type: 'personcard',
                     value: {
                         self: true,
-                        avatar: '../../../images/unload.png',
-                        cdid: this.data.tempcard.length,
-                        nickname: '12345'
+                        avatar: userinfo.avatar,
+                        cdid: tempcard.length,
+                        nickname: userinfo.nickname
                     }
                 })
                 tempcard.push({
-                    avatar: '../../../images/unload.png',
-                    wechat: '1234567',
-                    phone: '13123456789',
+                    avatar: userinfo.avatar,
+                    phone: userinfo.phone,
                 })
                 this.setData({
                     msglist: msglist,
@@ -357,9 +358,8 @@ Page({
                 let mesg = JSON.stringify({
                     type: 'person',
                     value: {
-                        avatar: '../../../images/unload.png',
-                        wechat: '1234567',
-                        phone: '13123456789',
+                        avatar: userinfo.avatar,
+                        phone: userinfo.phone,
                     }
                 })
                 let id = conn.getUniqueId(); // 生成本地消息id
@@ -440,7 +440,8 @@ Page({
         }
         var height = app.globalData.getPageHeight()
         this.setData({
-            scrollh: height * 0.8
+            scrollh: height * 0.8,
+            // groupid: options.id
         })
         let that = this
         conn.listen({
@@ -449,11 +450,12 @@ Page({
                 if (data.type === 'text') {
                     var text = data.value
                     var msglt = that.data.msglist
+                    var userinfo = that.data.userinfo[message.owner]
                     msglt.push({
                         type: 'message',
                         value: {
                             self: false,
-                            avatar: '../../../images/unload.png',
+                            avatar: userinfo.avatar,
                             messg: text
                         }
                     })
@@ -464,13 +466,14 @@ Page({
                     var customExts = data.value
                     var msglist = that.data.msglist
                     var tempcard = that.data.tempcard
+                    var userinfo = that.data.userinfo[message.owner]
                     msglist.push({
                         type: 'personcard',
                         value: {
                             self: false,
-                            avatar: '../../../images/unload.png',
+                            avatar: userinfo.avatar,
                             cdid: tempcard.length,
-                            nickname: '12345'
+                            nickname: userinfo.nickname
                         }
                     })
                     tempcard.push(customExts)
@@ -482,6 +485,7 @@ Page({
             },
             onAudioMessage: function (message) {
                 var duration = message.length
+                var userinfo = that.data.userinfo[message.owner]
                 wx.downloadFile({
                     url: message.url,
                     header: {
@@ -504,7 +508,7 @@ Page({
                             type: 'sound',
                             value: {
                                 self: false,
-                                avatar: '../../../images/unload.png',
+                                avatar: userinfo.avatar,
                                 sdid: sdid,
                                 sdtext: msg
                             }
@@ -526,11 +530,12 @@ Page({
                 var temphoto = that.data.temphoto
                 that.data.temphoto.push(message.url)
                 var msglist = that.data.msglist
+                var userinfo = that.data.userinfo[message.owner]
                 msglist.push({
                     type: 'photo',
                     value: {
                         self: false,
-                        avatar: '../../../images/unload.png',
+                        avatar: userinfo.avatar,
                         phoid: temphoto.length,
                         imgsrc: message.url
                     }
@@ -625,7 +630,7 @@ Page({
                     userinfo[data[i].user.openid] = {
                         avatar: data[i].user.avatar,
                         nickname: data[i].user.nickname,
-                        phone: data[i].user.phone_number
+                        phone: data[i].user.mobile_phone
                     }
                 }
                 this.setData({
@@ -649,10 +654,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        console.log(app.globalData.openid)
-        this.setData({
-            openid: app.globalData.openid
-        })
+        
     },
 
     /**
@@ -666,7 +668,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        conn.close();
     },
 
     /**

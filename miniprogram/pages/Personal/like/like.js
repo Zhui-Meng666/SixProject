@@ -8,103 +8,133 @@ Page({
     data: {
         videonum: 100,
         userlike: [{
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '我'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '你'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '他'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '我'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '你'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '他'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             }
         ],
         likelist: [{
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '我'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '你'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '他'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '我'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '你'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '他'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             },
             {
+                id: '0',
                 src: '../../../images/videoimg.jpg',
                 title: '视频标题'
             }
         ],
+    },
+
+    Toplay: function (e) {
+        wx.navigateTo({
+            url: '../../Popular_Sci/video_play/video_play?id=' + e.currentTarget.id,
+        })
     },
 
     onChange: function (e) {
@@ -148,7 +178,44 @@ Page({
         var height = app.globalData.getPageHeight()
         this.setData({
             pgheight: height - 132,
-            likeheight: (height-132)/3,
+            likeheight: (height - 132) / 3,
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'user_collection/',
+                data: {
+                    openid: app.globalData.openid,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let data = res.result.data
+                let likelist = []
+                if (data) {
+                    for (var item of data) {
+                        likelist.push({
+                            id: item.id,
+                            src: item.picture_link,
+                            title: item.name
+                        })
+                    }
+                    this.setData({
+                        videonum: data.length,
+                        likelist: likelist,
+                        userlike: likelist
+                    })
+                } else {
+                    this.setData({
+                        videonum: 0,
+                        likelist: [],
+                        userlike: []
+                    })
+                }
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
         })
     },
 

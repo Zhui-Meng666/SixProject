@@ -143,9 +143,9 @@ page {
 }
 
 .identificon {
-    flex-grow: 8;
+    flex-grow: 9;
     height: 48rpx;
-    margin-left: 18rpx;
+    margin-left: 10rpx;
 }
 
 .iconimg {

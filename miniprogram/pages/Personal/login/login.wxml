@@ -3,7 +3,10 @@
   <view class="container">
     <van-cell-group>
       <van-cell title="学号：" label="必填" title-width="50px" required>
-        <van-field placeholder="请输入学号（10位）" type="number" maxlength="10" border="{{ false }}" error-message="{{ errmess }}" bind:change="onchange" bind:blur="submitid"></van-field>
+        <van-field placeholder="请输入学号（10位）" type="number" maxlength="10" border="{{ false }}" error-message="{{ errmess1 }}" bind:change="onchange1" bind:blur="submitid1"></van-field>
+      </van-cell>
+      <van-cell title="手机：" label="必填" title-width="50px" required>
+        <van-field placeholder="请输入手机号（11位）" type="number" maxlength="11" border="{{ false }}" error-message="{{ errmess2 }}" bind:change="onchange2" bind:blur="submitid2"></van-field>
       </van-cell>
       <van-cell title="性别：" title-width="70px" center>
         <van-radio-group bind:change="onChange" direction="horizontal">

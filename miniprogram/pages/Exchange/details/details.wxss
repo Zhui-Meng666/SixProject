@@ -28,6 +28,10 @@ page {
 .descrfield {
     width: 93%;
     height: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
     margin-top: 10rpx;
     border: thin solid #515c5d;
     border-radius: 25rpx;

@@ -14,7 +14,11 @@
 
 .input-frame {
     margin: 5rpx 0;
-    box-shadow: 0 5px 10px -5px rgba(70, 69, 69, 0.5);
+    box-shadow: 0 5px 10px -5px #c9dfd9;
+}
+
+van-field view.van-cell {
+    border-radius: 20rpx;
 }
 
 .upload {

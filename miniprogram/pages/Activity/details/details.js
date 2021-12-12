@@ -1,5 +1,6 @@
 // pages/Activity/details/details.js
 import Toast from '@vant/weapp/toast/toast';
+let app = getApp()
 Page({
 
     /**
@@ -69,15 +70,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        if (options.type == '0') {
+        console.log(options.type)
+        if (options.type == 0) {
             this.setData({
                 activity_id: options.id,
-                button: '点击报名'
+                button: '点击报名',
+                type: true
             })
         } else {
             this.setData({
                 activity_id: options.id,
-                button: '取消报名'
+                button: '取消报名',
+                type: false
             })
         }
         wx.cloud.callFunction({

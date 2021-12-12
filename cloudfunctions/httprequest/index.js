@@ -13,5 +13,5 @@ exports.main = async (event, context) => {
           'Content-Type': 'application/json'
         }
       })
-    return Response.body //返回数据
+    return JSON.parse(Response.body) //返回数据
 }
