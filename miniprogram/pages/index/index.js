@@ -167,7 +167,7 @@ Page({
     // 点击视频封面跳转
     video_click: function (e) {
         let vid = e.currentTarget.dataset.index 
-        console.log(vid)
+        // console.log(vid)
         let videos = this.data.videos
 
         let ids = [videos[vid].id]
@@ -241,8 +241,8 @@ Page({
             },
             success : (res) => {
                 this.setData({
-                    videos : res.result,
-                    all_videos : res.result
+                    videos : res.result.results,
+                    all_videos : res.result.results
                 })
             }
         })

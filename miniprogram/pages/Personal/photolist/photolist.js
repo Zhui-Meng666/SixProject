@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        num : 6,
+        num : 0,
         adjust : false,
         bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
         
@@ -40,15 +40,18 @@ Page({
 
     uploadimg: function(e) {
         console.log("点此上传图片，最多九张");
+        var imgs = this.data.imgs 
         var new_pics = []
         wx.chooseImage({
-          count: 9,
+          count: 1,
           sizeType: ['original', 'compressed'],
           sourceType : ['album', 'camera'],
-          success: function(res){
+          success: (res)=>{
             new_pics = res.tempFilePaths
           }
         })
+        imgs = imgs.concat(new_pics)
+        console.log(new_pics)
         wx.cloud.callFunction({
             name : 'httppost',
             data : {
@@ -59,10 +62,12 @@ Page({
                 }
             },
           success:(res)=>{
-              var picture_link = res.data 
+              console.log(res)
+              var picture_link = res.result.data 
+            
               this.setData({
                   imgs : picture_link,
-                  num : picture_link.length()
+                  num : picture_link.length
               })
           }
         })
@@ -81,7 +86,7 @@ Page({
             var index = e.currentTarget.dataset.index;
             var picture_link = imgs[index]
             wx.cloud.callFunction({
-                name : 'httppost',
+                name : 'httpdelete',
                 data : {
                     url : app.globalData.baseurl + 'album_upload/',
                     data : {
@@ -90,9 +95,10 @@ Page({
                     }
                 },
                 success: (res) => {
+                    console.log('success')
                     this.setData({
-                        imgs : res.data,
-                        num : res.data.length
+                        imgs : res.result.data,
+                        num : res.result.data.length
                     })
                 }
             })
@@ -112,9 +118,10 @@ Page({
                 }
             },
             success : (res) => {
+                console.log('success')
                 this.setData({
-                    imgs : res.picture_link,
-                    num : res.picture_link.length
+                    imgs : res.result.picture_link,
+                    num : res.result.picture_link.length
                 })
             },
             fail : (res) => {
@@ -134,21 +141,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function (e) {
-        // wx.cloud.callFunction({
-        //     name : 'httprequest',
-        //     data : {
-        //         url : app.globalData.baseurl + 'album_show_all/',
-        //         data : {
-        //             openid : app.globalData.openid,
-        //         }
-        //     },
-        //     success : (res) => {
-        //         this.setData({
-        //             picture_link : res.picture_link,
-        //             num : res.picture_link.length
-        //         })
-        //     }
-        // })
+
     },
 
     /**

@@ -8,8 +8,7 @@ Page({
   data: {
     like_src: '../../../images/like-unclick.png',
     share_src: '../../../images/video_share.png',
-    video_list: [
-    ],
+    video_list: [],
 
     up_stroke: false, // ture:上划；false：下划
     difference: '', // 拖动的距离
@@ -22,7 +21,7 @@ Page({
    */
   onLoad: function (options) {
     var vids = JSON.parse(options.vids)
-    
+    // console.log(vids)
     for(let i=0;i<vids.length;i++){
       let vid = vids[i]
       wx.cloud.callFunction({
@@ -34,39 +33,42 @@ Page({
           }
         },
         success : (res) => {
+          // console.log(res)
+          var video_list = this.data.video_list
           this.setData({
-            video_list : this.data.video_list.push(res.data)
+            video_list : video_list.push(res.result)
           })
         }
       })
     }
     let videos = this.data.video_list
-    for(let i=0;i<vids.length;i++){
-      let vid = vids[i]
-      wx.cloud.callFunction({
-        name : 'httprequest',
-        data : {
-          url : app.globalData.baseurl + 'scientific_video_like/',
-          data : {
-            openid : app.globalData.openid,
-            id : vid 
-          },
-          success : (res) => {
-            is_like = res.data.is_like 
-            videos[vid]['like'] = is_like
-            this.setData({
-              video_list : videos 
-            })
-          }
-        }
-      })
-    }
+    // for(let i=0;i<vids.length;i++){
+    //   let vid = vids[i]
+    //   wx.cloud.callFunction({
+    //     name : 'httprequest',
+    //     data : {
+    //       url : app.globalData.baseurl + 'scientific_video_like/',
+    //       data : {
+    //         openid : app.globalData.openid,
+    //         id : vid 
+    //       },
+    //       success : (res) => {
+    //         is_like = res.result.data.is_like 
+    //         videos[i]['like'] = is_like
+    //         this.setData({
+    //           video_list : videos 
+    //         })
+    //       }
+    //     }
+    //   })
+    // }
+    console.log(this.data.video_list)
   },
 
   like_click(e) {
     let videos = this.data.video_list;
     let idx = Number(e.currentTarget.dataset.index);
-    console.log(idx)
+    // console.log(idx)
     let vid = videos[idx].id 
     if(videos[idx].like == false){
       wx.cloud.callFunction({

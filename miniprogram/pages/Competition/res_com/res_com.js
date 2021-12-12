@@ -1,4 +1,5 @@
 // pages/Competition/res_com/res_com.js
+let app = getApp()
 Page({
 
     /**
@@ -31,7 +32,24 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.setData({
+            matchid : options.matchid
+        })
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'match_single_result_info_show/',
+                data : {
+                    match_id : matchid
+                }
+            },
+            success:(res)=>{
+                var games = res.result.data
+                this.setData({
+                    res : games 
+                })
+            }
+        })
     },
 
     /**

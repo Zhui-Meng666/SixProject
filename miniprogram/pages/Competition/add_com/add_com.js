@@ -58,7 +58,7 @@ Page({
             },
             success:(res)=>{
                 this.setData({
-                  game : res.data 
+                  game : res.result.data 
                 })
             },
             fail:(err)=>{

@@ -206,7 +206,7 @@ Page({
                     }
                 },
                 success : (res)=>{
-                    groups.push(res.data)
+                    groups.push(res.result.data)
                     this.setData({buttle : groups})
                 }
             })
@@ -234,7 +234,7 @@ Page({
                     }
                 },
                 success : (res)=>{
-                    groups.push(res)
+                    groups.push(res.result.data)
                     this.setData({appoint : groups})
                 }
             })
@@ -276,7 +276,7 @@ Page({
             },
             success:(res) => {
                 this.setData({
-                    search_group_result : res.data
+                    search_group_result : res.result.data
                 })
             }
         })
@@ -293,7 +293,7 @@ Page({
             },
             success : (res) =>{
                 this.setData({
-                    res_group : res.data
+                    res_group : res.result.data
                 })
             }
         })
@@ -341,20 +341,20 @@ Page({
      */
     onShow: function () {
         // 我参加的群
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'melee_my_group/',
-                data : {
-                    openid : app.globalData.openid
-                }
-            },
-            success : (res) => {
-                this.setData({
-                    buttle : res.data  
-                })
-            }
-        })
+        // wx.cloud.callFunction({
+        //     name : 'httprequest',
+        //     data : {
+        //         url : app.globalData.baseurl + 'melee_my_group/',
+        //         data : {
+        //             openid : app.globalData.openid
+        //         }
+        //     },
+        //     success : (res) => {
+        //         this.setData({
+        //             buttle : res.data  
+        //         })
+        //     }
+        // })
     },  
 
     /**
