@@ -1,0 +1,10 @@
+/* pages/Competition/add_com/add_com.wxss */
+page{
+    background-color: #FAFAFB;
+}
+.submit{
+    width: 200rpx;
+    margin-top: 20rpx;
+    background-color: green;
+    color: white;
+}

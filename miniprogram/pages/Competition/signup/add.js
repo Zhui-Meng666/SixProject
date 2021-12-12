@@ -20,9 +20,9 @@ Page({
       var temp = {name:name, sid:sid, ins:ins, gender:gender}
       var list = this.data.list
       list.push(temp)
-      console.log(list)
+      // console.log(list)
       wx.redirectTo({
-        url: './signup?list='+list
+        url: './signup?list='+JSON.stringify(list)
       })
     },
     nameInput(event){

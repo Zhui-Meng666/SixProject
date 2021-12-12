@@ -1,26 +1,29 @@
 <!--pages/Entertainment/main/main.wxml-->
 <van-tabs active="{{active}}" bind:change="onChange">
     <van-tab title="乱斗">
-        <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange1" bind:search="onSearch1" ></van-search>
+      <van-cell-group>
+        <van-field label = "群号" placeholder="请输入群号" bind:change="group_id_input" use-button-slot>
+          <van-button  slot="button" size="small" type="primary" bindtap="search_buttle">申请加入</van-button>
+        </van-field>
+      </van-cell-group>
 
         <view class="acts">
-            <view wx:for="{{acts_show}}" class="act_item" bindtap="Tobattle">
-                <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
+            <view wx:for="{{buttle}}" class="act_item">
+                <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img"></image>
                 <view class="act_details">
-                    <!-- <view class="act_detail">{{item.name}}</view> -->
                     <view class="act_line">
-                      <view class="act_name">{{item.detail}}</view>
-                      <image src="../../../images/add.png" class="act_join_in"></image>
+                      <view class="act_name">{{item.name}}</view>
+                      <image src="../../../images/add.png" class="act_join_in" data-index="{{index}}" bindtap="buttle_join_in"></image>
                     </view>
-                    <view class="act_detail">{{item.state}}</view>
+                    <!-- <view class="act_detail">{{item.state}}</view> -->
                     <view class="act_line">
-                      <view class="act_detail">人数：{{item.number}}</view>
-                      <view class="act_detail_date">{{item.date}}</view>
+                      <view class="act_detail">人数：{{item.member_num}}</view>
+                      <view class="act_detail_date">{{item.create_time}}</view>
                     </view>
                     <view class="act_bar"></view>
                 </view>
             </view>
-            <image src="../../../images/add.png" class="add_new_act" bindtap="to_create_acts"></image>
+            <image src="../../../images/add.png" class="add_new_act" bindtap="add_buttle"></image>
         </view>
         
     </van-tab>
@@ -29,12 +32,12 @@
         <van-search value="{{value_show}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange2" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel"></van-search>
 
         <view class="acts">
-            <view wx:for="{{date_show}}" class="act_item" bindtap="Toappoint">
+            <view wx:for="{{appoint_show}}" class="act_item">
                 <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
                 <view class="act_details">
                   <view class="act_line">
                       <view class="act_name">{{item.name}}</view>
-                      <image src="../../../images/add.png" class="act_join_in"></image>
+                      <image src="../../../images/add.png"  data-index="{{index}}" class="act_join_in" bindtap="appoint_join_in"></image>
                     </view>
                     <view class="act_detail">{{item.state}}</view>
                     <view class="act_detail">{{item.class}}</view>
@@ -120,13 +123,17 @@
 
 <van-popup custom-class="setpop" show="{{show_create}}" bind:close="close_create" position="bottom" round safe-area-inset-top>
   <!-- <view> hello world! </view> -->
-  <image src="{{create_img}}" class="team_img" bindtap="uploadimg"></image>
+  <image src="{{team_img}}" class="team_img" bindtap="uploadimg"></image>
   <view class="full_line"></view>
   <van-cell-group>
-    <van-field value="{{team_name}}" label="小组名称" placeholder="请输入小组名称" border="{{false}}" bind:change="check_create"></van-field>
-    <van-field value="{{team_detail}}" label="小组简介" placeholder="请输入小组简介" border="{{false}}" bind:change="check_create"></van-field>
-    <van-field value="{{team_info}}" label="小组介绍" placeholder="请输入小组介绍" border="{{false}}" bind:change="check_create"></van-field>
+    <van-field value="{{team_name}}" label="小组名称" placeholder="请输入小组名称" border="{{false}}" bind:change="tname_input"></van-field>
+
+    <van-field value="{{team_introduction}}" label="小组简介" placeholder="请输入小组简介" border="{{false}}" bind:change="tintro_input"></van-field>
+    
+    <!-- <van-field value="{{team_class}}" label="约球项目" placeholder="请输入约球项目" border="{{false}}" bind:change="tclass_input"></van-field> -->
+
+    <van-field value="{{team_max}}" label="人数上限" placeholder="请输入人数上限" border="{{false}}" bind:change="tnumber_input"></van-field>
   </van-cell-group>
-  <vant-button plain type="primary" bindtap="create_done" class="create">创建</vant-button>
+  <button bindtap="create_done" class="create">创建</button>
 
 </van-popup>

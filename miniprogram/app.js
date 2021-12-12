@@ -48,7 +48,7 @@ App({
     this.globalData = {
       appKey: appKey,
       registered: true,
-      bsurl: '',
+      baseurl: 'http://124.4.230.11:8001/api/',
       getPageHeight: function () {
         let systemInfo = wx.getSystemInfoSync()
         // px转换到rpx的比例
@@ -60,36 +60,36 @@ App({
     }
 
     //获取openid
-    // wx.cloud.callFunction({
-    //   // 要调用的云函数名称
-    //   name: 'getopenid',
-    //   // 传递给云函数的参数
-    //   data: {},
-    //   success: (res) => {
-    //     // console.log("成功", res)
-    //     this.globalData.openid = res.result.openid
-    //     wx.cloud.callFunction({
-    //       // 要调用的云函数名称
-    //       name: 'findopenid',
-    //       // 传递给云函数的参数
-    //       data: {
-    //         id: res.result.openid
-    //       },
-    //       success: (res) => {
-    //         // console.log("成功", res)
-    //         var data = res.result.data
-    //         if (data.length) {
-    //           this.globalData.registered = true
-    //         }
-    //       },
-    //       fail: (err) => {
-    //         console.log("错误", err);
-    //       }
-    //     })
-    //   },
-    //   fail: (err) => {
-    //     console.log("错误", err);
-    //   }
-    // })
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getopenid',
+      // 传递给云函数的参数
+      data: {},
+      success: (res) => {
+        // console.log("成功", res)
+        this.globalData.openid = res.result.openid
+        wx.cloud.callFunction({
+          // 要调用的云函数名称
+          name: 'findopenid',
+          // 传递给云函数的参数
+          data: {
+            id: res.result.openid
+          },
+          success: (res) => {
+            console.log("成功", res)
+            var data = res.result.data
+            if (data.length) {
+              this.globalData.registered = true
+            }
+          },
+          fail: (err) => {
+            console.log("错误", err);
+          }
+        })
+      },
+      fail: (err) => {
+        console.log("错误", err);
+      }
+    })
   }
 })

@@ -6,11 +6,11 @@
     margin-top: 10rpx;
 }
 .name{
-    width: 400rpx;
+    width: 610rpx;
 }
 .mod{
     position: relative;
-    right: -95rpx;
+    /* right: -95rpx; */
 }
 .submit{
     background: green;

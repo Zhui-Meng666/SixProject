@@ -2,18 +2,18 @@
 
 <!-- <image src="../../../images/Cat.jpeg" class="background"></image> -->
 
-<view class="container">
+<view class="container" style="background-image: url({{bgimg}});">
     <view class="row">
         <view class="picnum">
             照片:{{num}}
         </view>
         <view wx:if="{{adjust == false}}">
-            <view class="org" bindtap="org1">
+            <view class="org" bindtap="org">
             删除图片
             </view>
         </view>
         <view wx:if="{{adjust == true}}">
-            <view class="org" bindtap="org2">
+            <view class="org" bindtap="org">
             完成(单击图片删除)
             </view>
         </view>
@@ -22,7 +22,7 @@
 
 <view class="pics">
     <image src="../../../images/add-pic.png" class="box" bindtap="uploadimg"></image>
-    <view wx:for="{{showimgs}}">
-        <image src="{{item.src}}" class="box"  data-index="{{index}}" bindtap="del"></image>
+    <view wx:for="{{imgs}}">
+        <image src="{{item}}" class="box"  data-index="{{index}}" bindtap="del"></image>
     </view>
 </view>

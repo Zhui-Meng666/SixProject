@@ -1,34 +1,5 @@
 <!--pages/Personal/career/career.wxml-->
-
-<view class="back">
 <van-tabs antimated activate="{{activate}}">
-    <van-tab title="约球">
-    <view class="search">
-        <van-search value="{{value}}" placeholder="请输入关键词" shape="round"
-        show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch1"
-        bind:focus="onFocus" bind:cancel="onCancel">
-        </van-search>
-    </view>
-    <view class = "container">
-        <view wx:for="{{play}}" class='items'>
-            <image src="../../../images/test.png" class="imgs"></image>
-            <view class="details">
-                <view class="row1">
-                    <view class="cmsg">约球对象：</view>
-                    <view class='bmsg'>{{item.partner}}</view>
-                </view>
-                <view class="row2">
-                    <view class='cmsg'>约球项目：</view>
-                    <view class='bmsg'>{{item.class}}</view>
-                </view>
-                <view class="date">
-                    创建日期：{{item.date}} 
-                </view>
-            </view>
-            
-        </view>
-        </view>
-    </van-tab>
     <van-tab title="活动">
         <view class="search">
             <van-search value="{{value}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel">
@@ -36,20 +7,20 @@
         </view>
         <view class="container">
             <view wx:for="{{activity}}" class="items">
-                <image wx:if="{{item.img}}" src="{{item.img}}" class="imgs"></image>
+                <image wx:if="{{item.picture}}" src="{{item.picture}}" class="imgs"></image>
                 <view class="details">
                     <view class="row1">
                         <view class="cmsg">活动：</view>
-                        <view class="bmsg">{{item.activity_name}}</view> 
+                        <view class="bmsg">{{item.name}}</view> 
                     </view>
                     <view class="row2">
                     <view class="cmsg">获得SUFE币：</view>
                         <view class="bmsg">
-                            {{item.sb}} <image wx:if="../../../images/sufecoin.png" src="../../../images/sufecoin.png" class="actsb"></image>
+                            {{item.prize}} <image wx:if="../../../images/sufecoin.png" src="../../../images/sufecoin.png" class="actsb"></image>
                         </view>
                     </view>
                     <viwe class="date">
-                            参与时间: {{item.date}}
+                            参与时间: {{item.time}}
                     </viwe>
                 </view>
             </view>
@@ -122,4 +93,3 @@
     </van-tab>
 
 </van-tabs>
-</view>

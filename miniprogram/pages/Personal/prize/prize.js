@@ -1,67 +1,44 @@
 // pages/Personal/prize/prize.js
+let app = getApp()
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-        test_data : [
-            {
-                imgsrc : '../../../images/test.png',
-                name : '火箭0',
-                date : '2021-10-10',
-                price : '99',
-                postID : 0,
-                sb : 9,
-            },
-            {
-                imgsrc : '../../../images/test.png',
-                name : '火箭1',
-                date : '2021-10-10',
-                price : '99',
-                postID : 1,
-                sb : 8,
-            },
-            {
-                imgsrc : '../../../images/test.png',
-                name : '火箭2',
-                date : '2021-10-10',
-                price : '99',
-                postID : 2,
-                sb : 8,
-            },
-            {
-                imgsrc : '../../../images/test.png',
-                name : '火箭3',
-                date : '2021-10-10',
-                price : '99',
-                postID : 3,
-                sb : 8,
-            },
-            {
-                imgsrc : '../../../images/test.png',
-                name : '火箭4',
-                date : '2021-10-10',
-                price : '99',
-                postID : 4,
-                sb : 8,
-            }
-        ],
-        sb_src : '../../../images/sufecoin.png'
+        prizes : [],
+        sb_src : '../../../images/sufecoin.png',
+        total_sb : 0
     },
 
-    sum(test_data) {
-        var res = 0;
-        for (var i=0;i<test_data.length;i++){
-            res += test_data[i].sb;
-        }
-        return res;
-      },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+        var openid = app.globalData.openid 
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url: app.globalData.baseurl + 'user_prize/',
+                data : {
+                    openid : openid
+                }
+            },
+            success:(res)=>{
+                this.setData({
+                    prizes : res.data 
+                })
+            },
+            fail : (res) => {
+                console.log(res)
+            }
+        })
+        let total_sb = 0
+        for(let i=0;i<this.data.prizes.length;i++){
+            total_sb += this.data.prizes[i].sufe_currency
+        }
+        this.setData({
+            total_sb : total_sb
+        })
     },
 
     onPost: function (event) {
@@ -78,25 +55,31 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        wx.request({
-          url: 'http://127.0.0.1:8000/api/user_prize/',
-          method : 'GET',
-          data : {
-              openid : this.openid 
-          },
-          success : function(res) {
-              this.setData({
-
-              })
-          },
-          fail : function(err){
-              wx.showToast({
-                title: 'Failed',
-                icon : 'fail',
-                duration : 2000
-              })
-          }
-        })
+        // var openid = app.globalData.openid 
+        // wx.cloud.callFunction({
+        //     name : 'httprequest',
+        //     data : {
+        //         url: app.globalData.baseurl + 'user_prize/',
+        //         data : {
+        //             openid : openid
+        //         }
+        //     },
+        //     success:(res)=>{
+        //         this.setData({
+        //             prizes : res.data 
+        //         })
+        //     },
+        //     fail : (res) => {
+        //         console.log(res)
+        //     }
+        // })
+        // let total_sb = 0
+        // for(let i=0;i<this.data.prizes.length;i++){
+        //     total_sb += this.data.prizes[i].sufe_currency
+        // }
+        // this.setData({
+        //     total_sb : total_sb
+        // })
     },
 
     /**

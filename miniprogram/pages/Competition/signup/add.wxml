@@ -1,9 +1,15 @@
 <!--pages/Entertainment/signup/add.wxml-->
-<van-cell-group>
-    <van-field label="姓名" bind:change="nameInput"></van-field>
-    <van-field label="学院" bind:change="insInput"></van-field>
-    <van-field label="学号" bind:change="sidInput"></van-field>
-    <van-cell title="性别">
+<van-cell-group title="姓名">
+    <van-field bind:change="nameInput"></van-field>
+</van-cell-group>
+<van-cell-group title="学院">
+    <van-field bind:change="insInput"></van-field>
+</van-cell-group>
+<van-cell-group title="姓名">
+    <van-field bind:change="sidInput"></van-field>
+</van-cell-group>
+<van-cell-group title="性别">
+    <van-cell>
         <van-radio-group value="性别" bind:change="onChange" title="性别" direction="horizontal">
             <van-radio name="男" >男</van-radio>
             <van-radio name="女">女</van-radio>

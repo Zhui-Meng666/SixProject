@@ -1,4 +1,5 @@
 // pages/Personal/photolist/photolist.js
+let app = getApp()
 Page({
 
     /**
@@ -7,78 +8,30 @@ Page({
     data: {
         num : 6,
         adjust : false,
-        showimgs : [
-            {
-                idx : 0,
-                r_src : '../../../images/Cat.jpeg',
-                src : "../../../images/Cat.jpeg",
-                show : true
-            },
-            {
-                idx : 1,
-                r_src : '../../../images/coin.png',
-                src : "../../../images/coin.png",
-                show : true
-            },
-            {
-                idx : 2,
-                r_src : '../../../images/sufecoin.png',
-                src : "../../../images/sufecoin.png",
-                show : true
-            },
-            {
-                idx : 3,
-                r_src : '../../../images/home-click.png',
-                src : "../../../images/home-click.png",
-                show : true
-            },
-            {
-                idx : 4,
-                r_src : '../../../images/test.png',
-                src : "../../../images/test.png",
-                show : true
-            },
-            {
-                idx : 5,
-                r_src : '../../../images/Cat.jpeg',
-                src : "../../../images/Cat.jpeg",
-                show : true
-            }
-        ],
+        bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
+        
         imgs : [
             {
-                idx : 0,
-                r_src : '../../../images/Cat.jpeg',
-                src : "../../../images/Cat.jpeg",
+                src : '../../../images/Cat.jpeg',
                 show : true
             },
             {
-                idx : 1,
-                r_src : '../../../images/coin.png',
                 src : "../../../images/coin.png",
                 show : true
             },
             {
-                idx : 2,
-                r_src : '../../../images/sufecoin.png',
                 src : "../../../images/sufecoin.png",
                 show : true
             },
             {
-                idx : 3,
-                r_src : '../../../images/home-click.png',
                 src : "../../../images/home-click.png",
                 show : true
             },
             {
-                idx : 4,
-                r_src : '../../../images/test.png',
                 src : "../../../images/test.png",
                 show : true
             },
             {
-                idx : 5,
-                r_src : '../../../images/Cat.jpeg',
                 src : "../../../images/Cat.jpeg",
                 show : true
             }
@@ -86,67 +39,62 @@ Page({
     },
 
     uploadimg: function(e) {
-        var that=this;
-        console.log("点此上传图片");
+        console.log("点此上传图片，最多九张");
+        var new_pics = []
         wx.chooseImage({
-          count: 1,
+          count: 9,
           sizeType: ['original', 'compressed'],
           sourceType : ['album', 'camera'],
           success: function(res){
-              var tempFilePaths = res.tempFilePaths;
-              let imgs = that.data.imgs;
-              let idx = imgs.length;
-              let num = imgs.length;
-              let temp = {
-                  idx : idx,
-                  src : tempFilePaths,
-                  r_src : tempFilePaths,
-                  show : true
-              }
-              imgs.push(temp)
-              that.setData({
-                showimgs : imgs,
-                imgs : imgs,
-                num : num + 1
+            new_pics = res.tempFilePaths
+          }
+        })
+        wx.cloud.callFunction({
+            name : 'httppost',
+            data : {
+                url : app.globalData.baseurl + 'album_upload/',
+                data : {
+                    openid : app.globalData.openid,
+                    picture_link : new_pics
+                }
+            },
+          success:(res)=>{
+              var picture_link = res.data 
+              this.setData({
+                  imgs : picture_link,
+                  num : picture_link.length()
               })
           }
         })
     },
     
-    org1: function(e) {
-        // var showimgs = this.data.showimgs;
-        
-        // for(let i=0;i<showimgs.length;i++){
-        //     showimgs[i].src = '../../../images/delete.png'
-        // }
+    org: function(e) {
+        var adjust = !this.data.adjust
         this.setData({
-            // showimgs : showimgs,
-            adjust : true
+            adjust : adjust
         })
     },
 
-    org2: function(e) {
-        console.log(1)
-        var showimgs = this.data.showimgs;
-        var imgs = this.data.imgs;
-        for(let i=0;i<showimgs.length;i++){
-            showimgs[i].src = showimgs[i].r_src
-        }
-        this.setData({
-            showimgs : showimgs,
-            adjust : false
-        })
-    },
-    
     del: function(e) {
         if (this.data.adjust == true){
-            var imgs = this.data.showimgs;
+            var imgs = this.data.imgs;
             var index = e.currentTarget.dataset.index;
-            console.log(index)
-            imgs.splice(index, 1);
-            this.setData({
-                showimgs: imgs,
-                num : imgs.length
+            var picture_link = imgs[index]
+            wx.cloud.callFunction({
+                name : 'httppost',
+                data : {
+                    url : app.globalData.baseurl + 'album_upload/',
+                    data : {
+                        openid : app.globalData.openid,
+                        picture_link : picture_link
+                    }
+                },
+                success: (res) => {
+                    this.setData({
+                        imgs : res.data,
+                        num : res.data.length
+                    })
+                }
             })
         }
     },
@@ -155,9 +103,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(this.data.showimgs.length)
-        this.setData({
-            num : this.data.showimgs.length
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'album_show_all/',
+                data : {
+                    openid : app.globalData.openid,
+                }
+            },
+            success : (res) => {
+                this.setData({
+                    imgs : res.picture_link,
+                    num : res.picture_link.length
+                })
+            },
+            fail : (res) => {
+                console.log(res)
+            }
         })
     },
 
@@ -172,7 +134,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function (e) {
-
+        // wx.cloud.callFunction({
+        //     name : 'httprequest',
+        //     data : {
+        //         url : app.globalData.baseurl + 'album_show_all/',
+        //         data : {
+        //             openid : app.globalData.openid,
+        //         }
+        //     },
+        //     success : (res) => {
+        //         this.setData({
+        //             picture_link : res.picture_link,
+        //             num : res.picture_link.length
+        //         })
+        //     }
+        // })
     },
 
     /**

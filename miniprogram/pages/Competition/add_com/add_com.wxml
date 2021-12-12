@@ -1,0 +1,55 @@
+<!--pages/Competition/add_com/add_com.wxml-->
+<van-cell-group title="比赛名称">
+    <van-field value="{{name}}" placeholder="请输入比赛名" bind:change="name_input"></van-field>
+</van-cell-group>
+
+<van-cell-group title="比赛地点">
+    <van-field value="{{address}}" placeholder="请输入比赛地点" bind:change="address_input"></van-field>
+</van-cell-group>
+
+<van-cell-group title="比赛简介">
+    <van-field value="{{introduction}}" placeholder="请输入比赛介绍" bind:change="intro_input"></van-field>
+</van-cell-group>
+
+<van-cell-group title="比赛类型">
+    <van-field value="{{type}}" placeholder="请输入比赛类型" bind:change="type_input"></van-field>
+</van-cell-group>
+
+<van-cell-group title="开始时间">
+    <van-field value="{{start_time}}" placeholder="xxxx-xx-xx"  bind:change="start_time"></van-field>
+</van-cell-group>
+
+
+<van-cell-group title="结束时间">
+    <van-field value="{{end_time}}" placeholder="xxxx-xx-xx"  bind:change="end_time"></van-field>
+</van-cell-group>
+
+
+<button class="submit" bindtap="submit">提交</button>
+
+
+<van-popup show = "{{choose_start_time}}" bind:close="close_start" position="bottom">
+    <van-datetime-picker
+    type="datetime"
+    value="{{ currentDate }}"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    bind:input="onInput"
+    bind:change = "onInput"
+    title = "选择开始时间"
+    bind:confirm = "close_start"
+    bind:cancel = "close_start"
+    />
+</van-popup>
+
+<van-popup show = "{{choose_end_time}}" bind:close="close_end" position="bottom">
+    <van-datetime-picker
+    type="datetime"
+    value="{{ currentDate }}"
+    min-date="{{ minDate }}"
+    bind:input="onIuput"
+    title = "选择结束时间"
+    bind:confirm = "close_end"
+    bind:cancel = "close_end"
+    />
+</van-popup>

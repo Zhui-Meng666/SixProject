@@ -237,6 +237,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    
     wx.cloud.callFunction({
       name: 'httprequest',
       data: {
@@ -246,14 +247,15 @@ Page({
         }
       },
       success: (res) => {
-        var data = res.result.data
-        this.setData({
-          bgimg: data.back_picture,
-          gendersrc: gender[Number(data.gender)],
-          intro: data.introduction,
-          coinnum: sufe_currency,
+        // var data = res.result.data
+        // this.setData({
+        //   bgimg: data.back_picture,
+        //   gendersrc: gender[Number(data.gender)],
+        //   intro: data.introduction,
+        //   coinnum: sufe_currency,
           
-        })
+        // })
+        console.log(res)
       },
       fail: (err) => {
         console.log('失败', err)

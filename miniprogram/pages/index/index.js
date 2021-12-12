@@ -9,72 +9,64 @@ Page({
      */
     data: {
         bottom_active : 'home',
-        msglist : [
+        newslist : [
             {
                 title: "公告：多地首套房贷利率上浮 热。。。",
-                img_src : "../../images/Cat.jpeg",
-                url : 'https://www.baidu.com'
+                picture_link : "../../images/Cat.jpeg",
+                push_link : 'https://www.baidu.com'
             },
             {
                 title: "公告：悦如公寓三周年生日趴邀你免费吃喝欢唱",
-                img_src: "../../images/Cat.jpeg",
-                url: '../Personal/main'
+                picture_link: "../../images/Cat.jpeg",
+                push_link: '../Personal/main'
             },
             {
                 title: "公告：你想和一群有志青年一起过生日嘛？",
-                img_src: "../../images/Cat.jpeg",
-                url: '../Personal/main'
+                picture_link: "../../images/Cat.jpeg",
+                push_link: '../Personal/main'
             }
         ],
         videos: [
             {
                 name: '123',
                 msg: '哈哈哈哈哈哈哈',
-                cover_src: '../../images/Cat.jpeg',
-                video_src: 'https://v.douyin.com/RC8XYgW/'
+                picture_link: '../../images/Cat.jpeg',
             },
             {
                 name : '456',
                 msg : '哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-                video_src : '../../videos/2.mp4',
+                picture_link : '../../images/Cat.jpeg',
             },
             {
                 name : '000',
                 msg : '哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-                video_src : '../../videos/3.mp4',
+                picture_link : '../../images/Cat.jpeg',
             },
             {
                 name : '0331',
                 msg : '哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-                video_src : '../../videos/4.mp4',
+                picture_link : '../../images/Cat.jpeg',
             },
         ],
         all_videos: [{
                 name: '123',
                 msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
                 cover_src: '../../images/Cat.jpeg',
-                video_src: '',
             },
             {
                 name : '456',
                 msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
-                video_src : '',
             },
             {
                 name : '000',
                 msg : '哈哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
-                video_src : '',
             },
             {
                 name : '0331',
                 msg : '哈哈哈哈哈',
                 cover_src : '../../images/Cat.jpeg',
-                video_src : '',
             },
         ],
         bottom_list: [{
@@ -96,7 +88,6 @@ Page({
         ]
     },
 
-    getid: function (e) {},
     onChange: function (e) {
         this.setData({
             value: e.detail,
@@ -172,19 +163,33 @@ Page({
                 break
         }
     },
+
+    // 点击视频封面跳转
     video_click: function (e) {
-        let vid = e.currentTarget.id
+        let vid = e.currentTarget.dataset.index 
+        console.log(vid)
         let videos = this.data.videos
+
+        let ids = [videos[vid].id]
+        for(let i=0;i<videos.length;i++){
+            if(i==vid){
+                continue
+            }
+            else{
+                ids.push(videos[i].id)
+            }
+        }
+        console.log(ids)
         wx.navigateTo({
-            url: '../Popular_Sci/video_play/video_play?vid=' + vid + '&videos' + videos,
+            url: '../Popular_Sci/video_play/video_play?vids=' + JSON.stringify(ids) 
         })
     },
     news_click: function (e) {
         let idx = e.currentTarget.dataset.index
-        let url = this.data.msglist[idx].url
-        console.log(url)
+        let url = this.data.newslist[idx].push_link 
+        // console.log(url)
         wx.navigateTo({
-            url: String(url)
+            url: url
         })
     },
 
@@ -199,7 +204,35 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 推送
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'scientific_push_article/',
+            },
+            success: (res) => {
+                this.setData({
+                    newslist : res.data 
+                })
+            },
+            fail:(err) => {
+                console.log(err)
+            }
+        })
 
+        // 视频封面
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'scientific_video_show/'
+            },
+            success : (res) => {
+                this.setData({
+                    videos : res.result,
+                    all_videos : res.result
+                })
+            }
+        })
     },
 
     /**
@@ -212,7 +245,35 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
+        // 推送
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'scientific_push_article/',
+            },
+            success: (res) => {
+                this.setData({
+                    newslist : res.data 
+                })
+            },
+            fail:(err) => {
+                console.log(err)
+            }
+        })
+
+        // 视频封面
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'scientific_video_show/'
+            },
+            success : (res) => {
+                this.setData({
+                    videos : res.result,
+                    all_videos : res.result
+                })
+            }
+        })
     },
 
     /**

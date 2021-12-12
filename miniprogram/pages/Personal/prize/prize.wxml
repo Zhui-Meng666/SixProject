@@ -1,26 +1,24 @@
 <!--pages/Personal/prize/prize.wxml-->
 
 <view class="container">
-    <view wx:key="key" wx:for="{{test_data}}" class='secondlayout'>
-        <image src="{{item.imgsrc}}" class='firstimagestyle'></image>
+    <view wx:key="key" wx:for="{{prizes}}" class='secondlayout'>
+        <image src="{{item.picture_link}}" class='firstimagestyle'></image>
         <view class='containeritem'>
             <view class='name'>
-                <text>奖品名称：{{item.name}}</text>
+                <text>奖品名称：{{item.prize_name}}</text>
             </view>
             <view class='message'>
                 <view class='sb'>
-                    <image src="../../../images/sufecoin.png" class="sbimg"></image> {{item.sb}}
+                    <image src="../../../images/sufecoin.png" class="sbimg"></image> {{item.sufe_currency}}
                 </view>
-                <!-- <view class='divLine'></view> -->
                 <view class='date'>
-                    获得日期：{{item.date}}  
+                    获得日期：{{item.exchange_time}}  
                 </view>
-                
             </view>
         </view>
     </view>
     
 </view>
 <view class='total'>
-        总计: 41 <image wx:if="{{sb_src}}" src="{{sb_src}}" class="sbimg"></image>
+        总计: {{total_sb}} <image wx:if="{{sb_src}}" src="{{sb_src}}" class="sbimg"></image>
 </view>

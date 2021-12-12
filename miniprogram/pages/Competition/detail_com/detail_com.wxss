@@ -1,0 +1,10 @@
+/* pages/Competition/detail_com/detail_com.wxss */
+page{
+    background-color: #FAFAFB;
+}
+.start_game{
+    background-color: green;
+    color: white;
+    width: 200rpx;
+    margin-top: 10rpx;
+}

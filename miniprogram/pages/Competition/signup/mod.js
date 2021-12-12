@@ -21,33 +21,33 @@ Page({
                 break
             }
         }
-        console.log(list)
+        // console.log(list)
         wx.redirectTo({
-          url: './signup?list=' + list 
+          url: './signup?list=' + JSON.stringify(list) 
         })
     },
     nameInput(event){
         this.setData({name : event.detail})
       },
     sidInput(event){
-    this.setData({sid : event.detail})
+        this.setData({sid : event.detail})
     },
     insInput(e){
-    this.setData({ins : e.detail})
+        this.setData({ins : e.detail})
     },
     onChange(event){
-    this.setData({gender:event.detail})
+        this.setData({gender:event.detail})
     },
     onClick(event){
-    const {gender} = event.currentTarget.dataset
-    this.setData({gender : gender})
+        const {gender} = event.currentTarget.dataset
+        this.setData({gender : gender})
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.setData({
-            list : options.list,
+            list : JSON.parse(options.list),
             name : options.name,
             ins : options.ins,
             sid : options.sid,

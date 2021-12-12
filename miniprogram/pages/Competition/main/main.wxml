@@ -1,4 +1,5 @@
 <!--pages/Competition/main/main.wxml-->
+
 <van-tabs activate="{{active_1}}" bind:change="change1">
     <van-tab title="比赛">
         <van-search value="{{value}}" placerholder="请输入关键词" shape="round"
@@ -7,51 +8,46 @@
         <van-tabs activate="{{active-2}}" bind:change="change2">
             <van-tab title="准备中">
                 <view wx:for="{{games}}" >
-                    <view wx:if="{{item.state == '准备中'}}" class="game_items">
+                    <view wx:if="{{item.status == '准备中'}}" class="game_items">
                         <view class="game_msg">
-                            <view>{{item.host}}.</view>
+                            <view>{{item.type}}.</view>
                             <view>{{item.name}}</view>
                         </view>
                         <view class="game_info">
-                            <view>{{item.info}}</view>
+                            <view>{{item.introduction}}</view>
                         </view>
                         <view class="signup">
-                            <van-button type="default" bindtap="signup_ath1" class="signup_button" wx:if="{{item.host == '体教部'}}">
+                            <van-button type="default" bindtap="signup_ath" class="signup_button" data-index = "{{index}}">
                                 运动员报名
                             </van-button>
-                            <van-button type="default" bindtap="signup_ath2" class="signup_button" wx:if="{{item.host == '羽协'}}">
-                                运动员报名
-                            </van-button>
-                            <van-button type="default" bindtap="signup_ref" class="signup_button">
+                            
+                            <van-button type="default" bindtap="signup_ref" class="signup_button" data-index = "{{index}}">
                                 裁判报名
                             </van-button>
                         </view>
                     </view>
                 </view>
+                <image src="../../../images/add.png" class="add_com" bindtap="add_com"></image>
             </van-tab>
 
             <van-tab title="进行中">
                 <view wx:for="{{games}}">
-                    <view wx:if="{{item.state == '进行中'}}" class="game_items">
-                        <view class="group_title">小组表</view>
-                        <image src="../../../images/Cat.jpeg" class="game_msg_img">
-                            <!-- <view>{{item.host}}.</view>
-                            <view>{{item.name}}</view> -->
-                        </image>
-                        <!-- <image src="../../../images/Cat.jpeg" class="com_info">
-                            <view>{{item.com_info}}</view>
-                        </image> -->
-                        <view class="game_id_title">比赛号表</view>
-                        <image src="../../../images/Cat.jpeg" class="game_id_img">
-                            <!-- 比赛号：6 -->
-                        </image>
-                        <view class="field_title">场地时间表</view>
-                        <image src="../../../images/Cat.jpeg" class="field_img">
-                            <!-- <view>{{item.field}}</view>
-                            <view>{{item.time}}</view> -->
-                        </image>
-                        <van-button type="default" class="start_game" bindtap="start_game">
-                            开始比赛
+                    <view wx:if="{{item.status == '进行中'}}" class="game_items">
+                        <van-cell title="比赛号" value="{{item.id}}"></van-cell>
+                        <view class="preview_imgs">
+                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
+                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
+                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
+                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
+                        </view>
+                        <van-group-cell wx:for="{{item.single_match}}" wx:key="smatch">
+                            <van-cell title="开始时间">{{smatch.create_time}}</van-cell>
+                            <van-cell title="结束时间">结束时间</van-cell>
+                            <van-cell title="比赛地点">比赛地点</van-cell>
+                            <van-cell title="比赛简介">比赛简介</van-cell>
+                        </van-group-cell>
+                        <van-button type="default" class="start_game" bindtap="start_game" data-index = "{{index}}">
+                            进入比赛
                         </van-button>
                     </view>
                 </view>
@@ -59,9 +55,9 @@
 
             <van-tab title="已完成">
                 <view wx:for="{{games}}" >
-                    <view wx:if="{{item.state == '已完成'}}" class="game_items">
+                    <view wx:if="{{item.state == '已完成'}}" class="game_items" bindtap="res_com"> 
                         <view class="game_msg">
-                            <view>{{item.host}}.</view>
+                            <view>{{item.type}}.</view>
                             <view>{{item.name}}</view>
                         </view>
                         <view class="res_score">
@@ -85,7 +81,7 @@
 
         <van-tabs activate="{{active-2}}" bind:change="change2">
             <van-tab title="所有">
-                <view wx:for="{{acts}}">
+                <view wx:for="{{acts_signed}}">
                     <view class="act_items">
                         <image src="{{item.img_src}}" class="act_img"></image>
                         <view class="act_info">
@@ -109,19 +105,19 @@
             </van-tab>
 
             <van-tab title="已报名">
-                <view wx:for="{{acts}}">
-                    <view class="act_items" wx:if="{{item.signed==true}}">
-                        <image src="{{item.img_src}}" class="act_img"></image>
+                <view wx:for="{{acts_signed}}">
+                    <view class="act_items">
+                        <image src="{{item.picture}}" class="act_img"></image>
                         <view class="act_info">
-                            <view class="act_name">{{item.name}}</view>
-                            <view class="act_msg">地点{{item.site}}</view>
-                            <view class="act_msg">时间：{{item.date}}</view>
-                            <view class="act_msg">人数：{{item.n_people}}/{{item.m_people}}</view>
-                            <view class="act_msg">{{item.info}}</view>
+                            <view class="act_name">{{item.title}}</view>
+                            <view class="act_msg">地点{{item.address}}</view>
+                            <view class="act_msg">时间：{{item.create_time}}</view>
+                            <!-- <view class="act_msg">人数：{{item.n_people}}/{{item.m_people}}</view> -->
+                            <!-- <view class="act_msg">{{item.info}}</view> -->
                             <button class="act_cancel" bindtap="toCan">我要取消</button>
                         </view>
                         <image src="../../../images/sufecoin.png" class="act_coin1"></image>
-                        <view class="act_number_coin1">{{item.sb}}</view>
+                        <view class="act_number_coin1">{{item.prize}}</view>
                     </view>
                 </view>
             </van-tab>
