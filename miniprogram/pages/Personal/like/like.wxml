@@ -7,12 +7,12 @@
     </view>
 </view>
 <view wx:if="{{likelist.length <= 9}}" class="likelist">
-    <view class="likeitem" style="height: {{likeheight}}rpx;" wx:key="key" wx:for="{{likelist}}">
+    <view class="likeitem" id="{{item.id}}" style="height: {{likeheight}}rpx;" wx:key="key" wx:for="{{likelist}}" bindtap="Toplay">
         <image class="image" src="{{item.src}}" mode="aspectFill"></image>
     </view>
 </view>
 <scroll-view wx:else scroll-y enable-flex style="height: {{pgheight}}rpx;" class="likelist">
-    <view class="likeitem" style="height: {{likeheight}}rpx;" wx:key="key" wx:for="{{likelist}}">
+    <view class="likeitem" id="{{item.id}}" style="height: {{likeheight}}rpx;" wx:key="key" wx:for="{{likelist}}" bindtap="Toplay">
         <image class="image" src="{{item.src}}" mode="aspectFill"></image>
     </view>
 </scroll-view>

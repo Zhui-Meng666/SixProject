@@ -57,10 +57,6 @@
             <image src="{{useravatar}}" mode="aspectFit" class="avatarimg"></image>
         </view>
         <view class="cardinfo">
-            <view class="infotext">vx：{{wechat}}</view>
-            <view class="divider"></view>
-        </view>
-        <view class="cardinfo">
             <view class="infotext">手机：{{phone}}</view>
             <view class="divider"></view>
         </view>

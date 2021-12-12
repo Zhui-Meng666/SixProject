@@ -1,7 +1,7 @@
 // miniprogram/pages/Personal/main/main.js
 let app = getApp()
 const Identify = ['管理员', '裁判', '运动员领队', '运动员', '会员', '非会员']
-const gender = ['../../../images/man.png', '../../../images/woman.png', '']
+const gender = ['', '../../../images/man.png', '../../../images/woman.png']
 Page({
 
   /**
@@ -11,7 +11,7 @@ Page({
     bottom_active: 'personal',
     show: false,
     bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
-    gendersrc: '../../../images/man.png',
+    gendersrc: '',
     intro: '这个人很神秘，什么都没有~',
     coinnum: 100,
     level: [{
@@ -44,34 +44,26 @@ Page({
         text: 'sufe币'
       }
     ],
-    imglist: ['../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg']
+    imglist: ['../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg'],
+    userid: []
   },
 
   Idtoname: function (arr) {
     var len = arr.length
-    var identify = []
-    var userid = []
     var useridlist = []
-    if (len <= 3) {
-      for (var i = 0; i < len; ++i) {
-        identify.push(Identify[Number(arr[i])])
-      }
-      userid = arr
-    } else {
-      for (var i = 0; i < 3; ++i) {
-        identify.push(Identify[Number(arr[i])])
-        userid.push(arr[i])
-      }
-    }
+    var identify = []
+    var userid = this.data.userid
     for (var i = 0; i < len; ++i) {
       useridlist.push({
         id: arr[i],
         value: Identify[Number(arr[i])]
       })
     }
+    for (var i = 0; i < userid.length; ++i) {
+      identify.push(Identify[Number(userid[i])])
+    }
     this.setData({
       identify: identify,
-      userid: userid,
       useridlist: useridlist
     })
   },
@@ -98,6 +90,22 @@ Page({
     this.setData({
       show: false,
       identify: identify
+    })
+    wx.cloud.callFunction({
+      name: 'httppost',
+      data: {
+        url: app.globalData.baseurl + 'change_identity/',
+        data: {
+          identity: userid,
+          openid: app.globalData.openid,
+        }
+      },
+      success: (res) => {
+        console.log("成功", res.result)
+      },
+      fail: (err) => {
+        console.log("失败", err)
+      }
     })
   },
 
@@ -158,6 +166,14 @@ Page({
     this.setData({
       showset: false,
     })
+    var info = {
+      stuid: this.data.stuid,
+      gender: this.data.gender,
+      intro: this.data.intro
+    }
+    wx.navigateTo({
+      url: '../changeinfo/changeinfo?info=' + JSON.stringify(info),
+    })
   },
 
   chooseimg: function (e) {
@@ -167,7 +183,7 @@ Page({
     wx.chooseImage({
       count: 1,
       success: (res) => {
-        console.log('成功')
+        console.log('成功', res)
         var tempPath = res.tempFilePaths[0]
         this.setData({
           tempPath: tempPath,
@@ -180,7 +196,6 @@ Page({
           filePath: tempPath, // 文件路径
           success: (res) => {
             // get resource ID
-            console.log(res.fileID)
             this.setData({
               fileID: res.fileID
             })
@@ -237,30 +252,57 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    
-    wx.cloud.callFunction({
-      name: 'httprequest',
-      data: {
-        url: app.globalData.baseurl + 'user_show/',
+    if (app.globalData.registered) {
+      wx.cloud.callFunction({
+        name: 'httprequest',
         data: {
-          openid: app.globalData.openid
+          url: app.globalData.baseurl + 'user_show/',
+          data: {
+            openid: app.globalData.openid
+          }
+        },
+        success: (res) => {
+          console.log("成功", res)
+          var data = res.result.data
+          var imglist = []
+          var userid = []
+          for (var i = 0; i < data.album.length; ++i) {
+            imglist.push(data.album[i].picture_link)
+          }
+          for (var i = 0; i < data.identity.length; ++i) {
+            userid.push(data.identity[i].identity)
+          }
+          this.setData({
+            bgimg: data.back_picture == "default" ? this.data.bgimg : data.back_picture,
+            gendersrc: gender[Number(data.gender)],
+            gender: data.gender,
+            intro: data.introduction,
+            coinnum: data.sufe_currency,
+            level: [{
+                icon: '../../../images/level.png',
+                icontext: '等级',
+                progresstext: data.grade.toString() + '级',
+                percent: 20 * data.grade
+              },
+              {
+                icon: '../../../images/experience.png',
+                icontext: '经验',
+                progresstext: data.experience.toString() + '分',
+                percent: data.experience
+              }
+            ],
+            imglist: imglist,
+            stuid: data.student_id,
+            userid: userid
+          })
+          var userallid = ['0', '1', '2', '3', '4', '5']
+          this.Idtoname(userallid)
+        },
+        fail: (err) => {
+          console.log('失败', err)
         }
-      },
-      success: (res) => {
-        // var data = res.result.data
-        // this.setData({
-        //   bgimg: data.back_picture,
-        //   gendersrc: gender[Number(data.gender)],
-        //   intro: data.introduction,
-        //   coinnum: sufe_currency,
-          
-        // })
-        console.log(res)
-      },
-      fail: (err) => {
-        console.log('失败', err)
-      }
-    })
+      })
+    }
   },
 
   /**
@@ -274,13 +316,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (!app.globalData.registered) {
-      wx.redirectTo({
-        url: '../login/login',
-      })
-    }
-    var userallid = ['1', '3', '4', '2', '0', '5']
-    this.Idtoname(userallid.sort())
+
   },
 
   /**

@@ -15,22 +15,42 @@ Page({
     butwidth: 200
   },
 
-  onchange: function (e) {
+  onchange1: function (e) {
     var value = e.detail
     if (value.length != 10) {
       this.setData({
-        errmess: '学号格式错误'
+        errmess1: '学号格式错误'
       })
     } else {
       this.setData({
-        errmess: ''
+        errmess1: ''
       })
     }
   },
 
-  submitid: function (e) {
+
+  onchange2: function (e) {
+    var value = e.detail
+    if (value.length != 11) {
+      this.setData({
+        errmess2: '手机号格式错误'
+      })
+    } else {
+      this.setData({
+        errmess2: ''
+      })
+    }
+  },
+
+  submitid1: function (e) {
     this.setData({
       stuid: e.detail.value
+    })
+  },
+
+  submitid2: function (e) {
+    this.setData({
+      phone: e.detail.value
     })
   },
 
@@ -51,6 +71,10 @@ Page({
       Toast.fail('学号格式错误')
       return -1
     }
+    if (this.data.phone.length != 11) {
+      Toast.fail('手机号格式错误')
+      return -1
+    }
     if (wx.canIUse('getUserProfile')) {
       wx.getUserProfile({
         desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
@@ -66,7 +90,8 @@ Page({
             gender: this.data.gender,
             introduction: this.data.userintro,
             avatar: this.data.userInfo.avatarUrl,
-            nickname: this.data.userInfo.nickName
+            nickname: this.data.userInfo.nickName,
+            mobile_phone: this.data.phone
           }
           wx.cloud.callFunction({
             name: 'httppost',
@@ -81,7 +106,7 @@ Page({
               console.log('失败', err)
             }
           })
-          var options = {
+          conn.registerUser({
             username: app.globalData.openid,
             password: "123456",
             nickname: this.data.userInfo.nickName,
@@ -113,8 +138,7 @@ Page({
                 console.log('您的App用户注册数量已达上限,请升级至企业版！')
               }
             },
-          };
-          conn.registerUser(options);
+          });
         },
         fail: (err) => {
           console.log('出错', err)

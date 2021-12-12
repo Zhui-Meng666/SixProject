@@ -12,6 +12,7 @@ page {
     align-items: center;
     justify-content: space-around;
     border: thin solid #515c5d;
+    background-color: white;
 }
 
 .videonum {
@@ -36,9 +37,8 @@ page {
 }
 
 .likeitem {
-    width: 32.5%;
+    width: 32.65%;
     border: thin solid whitesmoke;
-    margin: 0 auto;
 }
 
 .image {

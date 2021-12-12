@@ -204,35 +204,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // 推送
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'scientific_push_article/',
-            },
-            success: (res) => {
-                this.setData({
-                    newslist : res.data 
-                })
-            },
-            fail:(err) => {
-                console.log(err)
-            }
-        })
-
-        // 视频封面
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'scientific_video_show/'
-            },
-            success : (res) => {
-                this.setData({
-                    videos : res.result,
-                    all_videos : res.result
-                })
-            }
-        })
+        
     },
 
     /**

@@ -13,6 +13,5 @@ exports.main = async (event, context) => {
         },
         body: JSON.stringify(event.data) //把json数据（对象）解析成字符串
     })
-
-    return postResponse.body //返回数据
+    return JSON.parse(postResponse.body) //返回数据
 }

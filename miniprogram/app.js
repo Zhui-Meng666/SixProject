@@ -47,8 +47,8 @@ App({
 
     this.globalData = {
       appKey: appKey,
-      registered: true,
-      baseurl: 'http://124.4.230.11:8001/api/',
+      registered: false,
+      baseurl: 'http://121.4.230.11:8001/api/',
       getPageHeight: function () {
         let systemInfo = wx.getSystemInfoSync()
         // px转换到rpx的比例
@@ -78,7 +78,8 @@ App({
           success: (res) => {
             console.log("成功", res)
             var data = res.result.data
-            if (data.length) {
+            if (data.length != 0) {
+              console.log("已注册")
               this.globalData.registered = true
             }
           },

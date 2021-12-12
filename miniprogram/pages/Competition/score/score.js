@@ -20,8 +20,8 @@ Page({
         time: 10 * 60 * 1000,
         timeData: {},
         start: false,
-        score1real: 1,
-        score2real: 1,
+        score1real: 0,
+        score2real: 0,
         scorebig1: 0,
         scorebig2: 0,
         playername: [{
@@ -148,12 +148,12 @@ Page({
                 console.log("成功", res.result)
                 this.setData({
                     loading1: false,
-                    gameid: this.data.gameid+1
+                    gameid: this.data.gameid + 1
                 })
                 Toast.success('上传成功')
                 if (this.data.score1real > this.data.score2real) {
                     this.setData({
-                        scorebig1: this.data.scorebig1+1,
+                        scorebig1: this.data.scorebig1 + 1,
                         score1real: 0,
                         score2real: 0,
                         score1: [0, 0],
@@ -161,7 +161,7 @@ Page({
                     })
                 } else if (this.data.score1real < this.data.score2real) {
                     this.setData({
-                        scorebig1: this.data.scorebig2+1,
+                        scorebig1: this.data.scorebig2 + 1,
                         score1real: 0,
                         score2real: 0,
                         score1: [0, 0],
@@ -206,8 +206,8 @@ Page({
 
     splitnum: function (num) {
         var score = []
-        score.push(Math.floor(num/10))
-        score.push(num%10)
+        score.push(Math.floor(num / 10))
+        score.push(num % 10)
         return score
     },
 
@@ -223,6 +223,34 @@ Page({
             score1: score1,
             score2: score2,
             // single_match_id: options.id,
+        })
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'match_single_return/',
+                data: {
+                    single_match_id: this.data.single_match_id,
+                }
+            },
+            success: (res) => {
+                console.log("成功", res.result)
+                let data = res.result.data
+                if (data) {
+                    for (var m of data) {
+                        if (m.score1 > m.score2) {
+                            this.data.scorebig1++
+                        } else if (m.score1 < m.score2) {
+                            this.data.scorebig2++
+                        }
+                    }
+                    this.setData({
+                        gameid: data.length+1
+                    })
+                }
+            },
+            fail: (err) => {
+                console.log("失败", err)
+            }
         })
     },
 

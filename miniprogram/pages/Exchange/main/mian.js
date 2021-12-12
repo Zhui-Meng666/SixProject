@@ -135,7 +135,7 @@ Page({
         var id = e.currentTarget.id
         let that = this
         wx.navigateTo({
-            url: '../details/details?id=' + id,
+            url: '../details/details?id=' + id+'&coin='+that.data.coinnum,
             events: {
                 exchange: function (res) {
                     var goods = that.data.goods
@@ -180,22 +180,28 @@ Page({
             },
             success: (res) => {
                 console.log("成功", res.result)
-                let result = res.result
-                let goods = result.results
-                let goodsall = {}
-                this.setData({
-                    count: result.count,
-                    next: result.next,
-                    previous: result.previous
-                })
-                for (var i = 0; i < goods.length; ++i) {
-                    goodsall[goods[i].id] = {
-                        src: goods.picture_link,
-                        name: goods.prize_name,
-                        price: goods.sufe_currency,
-                        sold: 0,
-                        total: goods.rest
+                let result = res.result.data
+                if (result) {
+                    let goods = result.results
+                    let goodsall = {}
+                    this.setData({
+                        count: result.count,
+                        next: result.next,
+                        previous: result.previous
+                    })
+                    for (var i = 0; i < goods.length; ++i) {
+                        goodsall[goods[i].id] = {
+                            src: goods.picture_link,
+                            name: goods.prize_name,
+                            price: goods.sufe_currency,
+                            sold: 0,
+                            total: goods.rest
+                        }
                     }
+                    this.setData({
+                        goodsall: goodsall,
+                        goods: goodsall
+                    })
                 }
             },
             fail: (err) => {
