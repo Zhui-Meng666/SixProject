@@ -2,11 +2,7 @@
 page{
     background-color: #FAFAFB;
 }
-.icon_class{
-    margin-top: 25rpx;
-    height: 40rpx;
-    width: 50rpx;
-}
+
 .swiper_container{
     height: 240rpx;
     width: 99%;
@@ -92,4 +88,11 @@ page{
 
 .news_img{
     width: 100%;
+}
+
+.icon_class{
+    margin-top: 25rpx;
+    height: 50rpx;
+    width: 100rpx;
+    margin-left: 70rpx;
 }

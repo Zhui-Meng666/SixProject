@@ -303,6 +303,11 @@ Page({
         }
       })
     }
+    else{
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    }
   },
 
   /**

@@ -3,7 +3,7 @@
     <van-tab title="比赛">
         <van-search value="{{value}}" placerholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="search_change" bind:search="onSearch1"></van-search>
 
-        <van-tabs activate="{{active-2}}" bind:change="change2">
+        <van-tabs activate="{{active-2}}">
             <van-tab title="准备中">
                 <view wx:for="{{games}}">
                     <view wx:if="{{item.status == '准备中'}}" class="game_items">
@@ -29,20 +29,20 @@
             </van-tab>
 
             <van-tab title="进行中">
-                <view wx:for="{{games}}">
-                    <view wx:if="{{item.status == '进行中'}}" class="game_items">
+                <view wx:for="{{games_on}}">
+                    <view class="game_items">
                         <van-cell title="比赛号" value="{{item.id}}"></van-cell>
                         <view class="preview_imgs">
-                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
-                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
-                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
-                            <image src="../../../images/Cat.jpeg" class="preview_img"></image>
+                            <image src="{{item.schedule_arrange}}" class="preview_img"></image>
+                            <image src="{{item.referee_arrange}}" class="preview_img"></image>
+                            <image src="{{item.competitors}}" class="preview_img"></image>
+                            <image src="{{item.top_eight}}" class="preview_img"></image>
                         </view>
-                        <van-group-cell wx:for="{{item.single_match}}" wx:key="smatch">
-                            <van-cell title="开始时间">{{smatch.create_time}}</van-cell>
-                            <van-cell title="结束时间">结束时间</van-cell>
-                            <van-cell title="比赛地点">比赛地点</van-cell>
-                            <van-cell title="比赛简介">比赛简介</van-cell>
+                        <van-group-cell wx:for="{{item.single_match}}" wx:for-item="smatch">
+                            <van-cell title="开始时间" value="{{smatch.create_time}}"></van-cell>
+                            <van-cell title="比赛类型">{{smatch.type}}</van-cell>
+                            <van-cell title="比赛裁判">{{smatch.refree}}</van-cell>
+                            <van-cell title="比赛双方">{{smatch.competitor1}} v.s. {{smatch.competitor2}}</van-cell>
                         </van-group-cell>
                         <van-button type="default" class="start_game" bindtap="start_game" data-index="{{index}}">
                             进入比赛
@@ -119,26 +119,21 @@
         </van-tabs>
     </van-tab>
 </van-tabs>
+<view style="flex-direction: row; position: absolute; bottom: 10rpx; width: 100%;">
+    <image slot="icon" wx:if="{{home == true}}" src="../../../images/home-click.png" mode="aspectFit" class="icon_class" bindtap="to_home"/>
 
-<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">
-    <van-tabbar-item name='home' bindtap="to_home" class="icon_class">
-        <image slot="icon" wx:if="../../../images/home-unclick.png" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" />
-        <image slot="icon-active" wx:if="../../../images/home-click.png" src="../../../images/home-click.png" mode="aspectFit" class="icon_class" />
-        主页
-    </van-tabbar-item>
-    <van-tabbar-item name='game' bindtap="to_game" class="icon_class">
-        <image slot="icon" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" />
-        <image slot="icon-active" src="../../../images/competition-click.png" mode="aspectFit" class="icon_class" />
-        赛事
-    </van-tabbar-item>
-    <van-tabbar-item name='entertainment' bindtap="to_entertainment" class="icon_class">
-        <image slot="icon" src="../../../images/entertainment-unclick.png" mode="aspectFit" class="icon_class" />
-        <image slot="icon-active" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" />
-        娱乐
-    </van-tabbar-item>
-    <van-tabbar-item name='personal' bindtap="to_personal" class="icon_class">
-        <image slot="icon" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" />
-        <image slot="icon-active" src="../../../images/me-click.png" mode="aspectFit" class="icon_class" />
-        个人
-    </van-tabbar-item>
-</van-tabbar>
+    <image slot="icon" wx:if="{{home == false}}" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_home"/>
+
+    <image slot="icon" wx:if="{{com == true}}" src="../../../images/competition-click.png" mode="aspectFit" class="icon_class" bindtap="to_game"/>
+
+    <image slot="icon" wx:if="{{com == false}}" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_game"/>
+
+    <image slot="icon" wx:if="{{ent == true}}" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment"/>
+
+    <image slot="icon" wx:if="{{ent == false}}" src="../../../images/entertainment-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment"/>
+
+    <image slot="icon" wx:if="{{per == true}}" src="../../../images/me-click.png" mode="aspectFit" class="icon_class" bindtap="to_personal"/>
+
+    <image slot="icon" wx:if="{{per == false}}" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_personal"/>
+    
+</view>

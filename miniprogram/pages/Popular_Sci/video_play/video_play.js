@@ -9,59 +9,55 @@ Page({
     like_src: '../../../images/like-unclick.png',
     share_src: '../../../images/video_share.png',
     video_list: [],
-    video_src_list : [],
-    test : [
-      'cloud://mengyanzhiya-7g39qvgfa47d0969.6d65-mengyanzhiya-7g39qvgfa47d0969-1304999579/pexels-sami-aksu-10207542.mp4',
-      'cloud://mengyanzhiya-7g39qvgfa47d0969.6d65-mengyanzhiya-7g39qvgfa47d0969-1304999579/f60b9b79704bd5d71e012da61dfbdb94.mp4'
-    ],
+    video_src_list: [],
 
     up_stroke: false, // ture:上划；false：下划
     difference: '', // 拖动的距离
     windowHeight: '', // 屏幕高度
     pageY: ''
   },
-  // this.walk
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      windowHeight : wx.getSystemInfoSync().windowHeight
+      windowHeight: wx.getSystemInfoSync().windowHeight
     })
     var vids = JSON.parse(options.vids)
     // console.log(vids)
     var video_list = this.data.video_list
     var video_src_list = this.data.video_src_list
     let openid = app.globalData.openid
-    for(let i=0;i<vids.length;i++){
+    for (let i = 0; i < vids.length; i++) {
+      
       let vid = vids[i]
       var temp = {
-        id : 0,
-        name : null,
-        video_link : null,
-        picture_link : null,
-        like_num : 0,
-        collection_num : 0,
-        introduction : null,
-        creator : null,
-        create_time : null,
-        like : false ,
-        collected : false 
+        id: 0,
+        name: null,
+        video_link: null,
+        picture_link: null,
+        like_num: 0,
+        collection_num: 0,
+        introduction: null,
+        creator: null,
+        create_time: null,
+        like: false,
+        collected: false
       }
       // 获取视频
       wx.cloud.callFunction({
-        name : 'httprequest',
-        data : {
-          url : app.globalData.baseurl + 'scientific_video_detail/',
-          data : {
-            id : vid 
+        name: 'httprequest',
+        data: {
+          url: app.globalData.baseurl + 'scientific_video_detail/',
+          data: {
+            id: vid
           }
         },
-        success : (res) => {
-          var v = res.result.data 
+        success: (res) => {
+          var v = res.result.data
           // console.log(v)
           // video_list.push(res.result.data)
-          temp.id = v.id 
+          temp.id = v.id
           temp.name = v.name
           temp.video_link = v.video_link
           temp.picture_link = v.picture_link
@@ -74,12 +70,12 @@ Page({
           video_list.push(temp)
           video_src_list.push(temp.video_link)
           this.setData({
-            video_list : video_list,
-            video_src_list : video_src_list
+            // video_list: video_list,
+            video_src_list: video_src_list
           })
         },
-        fail:(err) => {
-            console.log(err)
+        fail: (err) => {
+          console.log(err)
         }
       })
 
@@ -136,52 +132,53 @@ Page({
     // this.setData({
     //   video_list : video_list
     // })
-
-    console.log(this.data.video_src_list)
+    this.setData({
+      video_list : video_list
+    })
+    console.log(this.data.video_list)
   },
 
   like_click(e) {
     let videos = this.data.video_list;
     let idx = Number(e.currentTarget.dataset.index);
     // console.log(idx)
-    let vid = videos[idx].id 
-    if(videos[idx].like == false){
+    let vid = videos[idx].id
+    if (videos[idx].like == false) {
       wx.cloud.callFunction({
-        name : 'httppost',
-        data : {
-          url : app.globalData.baseurl + 'scientific_video_like/',
-          data : {
-            openid : app.globalData.openid,
-            id : vid 
+        name: 'httppost',
+        data: {
+          url: app.globalData.baseurl + 'scientific_video_like/',
+          data: {
+            openid: app.globalData.openid,
+            id: vid
           }
         },
-        success : (res) => {
-          videos[idx]['like'] = !videos[idx]['like'] 
+        success: (res) => {
+          videos[idx]['like'] = !videos[idx]['like']
         }
       })
       this.setData({
-        video_list : videos 
+        video_list: videos
       })
-    }
-    else{
+    } else {
       wx.cloud.callFunction({
-        name : 'httppost',
-        data : {
-          url : app.globalData.baseurl + 'scientific_video_like_cancel/',
-          data : {
-            openid : app.globalData.openid,
-            id : vid 
+        name: 'httppost',
+        data: {
+          url: app.globalData.baseurl + 'scientific_video_like_cancel/',
+          data: {
+            openid: app.globalData.openid,
+            id: vid
           }
         },
-        success : (res) => {
-            videos[idx]['like'] = !videos[idx]['like'] 
+        success: (res) => {
+          videos[idx]['like'] = !videos[idx]['like']
         }
       })
       this.setData({
-        video_list : videos 
+        video_list: videos
       })
     }
-    
+
   },
 
   touchStart(e) {
