@@ -8,7 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        bottom_active : 'home',
+        
         newslist : [],
         videos : [],
         all_videos : [],

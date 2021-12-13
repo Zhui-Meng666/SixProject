@@ -6,6 +6,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        home : false,
+        com : true,
+        ent : false,
+        per : false,
+        
         activate_1 : 0,
         activate_2 : 0,
         genders : '男',
@@ -14,8 +19,62 @@ Page({
         show_signup_ref : false,
         show_select_ins : false,
         bottom_active : 'game',
-
-        games : [],
+        img_default : '../../../images/Cat.jpeg',
+        games : [
+            {
+                id : 123,
+                name : 'test',
+                start_time : '2021-02-17',
+                end_time : '2021-02-17',
+                address : 'place',
+                introduction : '123',
+                type : '体教部',
+                status : '准备中'
+            },
+            {
+                id : 123,
+                name : 'test',
+                start_time : '2021-02-17',
+                end_time : '2021-02-17',
+                address : 'place',
+                introduction : '123',
+                type : '体教部',
+                status : '进行中'
+            },
+            {
+                id : 123,
+                name : 'test',
+                start_time : '2021-02-17',
+                end_time : '2021-02-17',
+                address : 'place',
+                introduction : '123',
+                type : '体教部',
+                status : '已完成'
+            },
+        ],
+        games_on : [
+            {
+                match : 1,
+                schedule_arrange : '../../../images/Cat.jpeg',
+                referee_arrange : '../../../images/Cat.jpeg',
+                competitors : '../../../images/Cat.jpeg',
+                top_eight : '../../../images/Cat.jpeg',
+                single_match : [
+                    {
+                        id : 1,
+                        competitor1 : 'ABC',
+                        competitor2 : 'CDE',
+                        type : '男子单打',
+                        create_time : '2021-10-21',
+                        refree : 'ADC',
+                        totalscore : {
+                            score1 : 10,
+                            score2 : 11
+                        }
+                    }
+                ]
+            }
+        ],
         acts : []
     },
 
@@ -148,53 +207,53 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        var openid = app.globalData.openid
-        // 所有比赛
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + "match_show/",
-            },
-            success:(res)=>{
-                console.log(res)
-                this.setData({
-                    games : res.result.data 
-                })
-            },
-            fail:(err)=>{
-                console.log(err)
-            }
-        })
+    // onLoad: function (options) {
+    //     var openid = app.globalData.openid
+    //     // 所有比赛
+    //     wx.cloud.callFunction({
+    //         name : 'httprequest',
+    //         data : {
+    //             url : app.globalData.baseurl + "match_show/",
+    //         },
+    //         success:(res)=>{
+    //             console.log(res)
+    //             this.setData({
+    //                 games : res.result.data 
+    //             })
+    //         },
+    //         fail:(err)=>{
+    //             console.log(err)
+    //         }
+    //     })
 
-        // 所有活动
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'activity_show/',
-            },
-            success:(res)=>{
-                this.setData({
-                    acts : res.result.data
-                })
-            }
-        })
-        // 已经报名的活动
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'activity_have_sign_up_show/',
-                data : {
-                    openid : openid
-                }
-            },
-            success:(res)=>{
-                this.setData({
-                    acts_signed : res.result.data 
-                })
-            }
-        })
-    },
+    //     // 所有活动
+    //     wx.cloud.callFunction({
+    //         name : 'httprequest',
+    //         data : {
+    //             url : app.globalData.baseurl + 'activity_show/',
+    //         },
+    //         success:(res)=>{
+    //             this.setData({
+    //                 acts : res.result.data
+    //             })
+    //         }
+    //     })
+    //     // 已经报名的活动
+    //     wx.cloud.callFunction({
+    //         name : 'httprequest',
+    //         data : {
+    //             url : app.globalData.baseurl + 'activity_have_sign_up_show/',
+    //             data : {
+    //                 openid : openid
+    //             }
+    //         },
+    //         success:(res)=>{
+    //             this.setData({
+    //                 acts_signed : res.result.data 
+    //             })
+    //         }
+    //     })
+    // },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -206,53 +265,53 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-        var openid = app.globalData.openid
-        // 所有比赛
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + "match_show/",
-            },
-            success:(res)=>{
-                console.log(res)
-                this.setData({
-                    games : res.result.data 
-                })
-            },
-            fail:(err)=>{
-                console.log(err)
-            }
-        })
+    // onShow: function () {
+    //     var openid = app.globalData.openid
+    //     // 所有比赛
+    //     wx.cloud.callFunction({
+    //         name : 'httprequest',
+    //         data : {
+    //             url : app.globalData.baseurl + "match_show/",
+    //         },
+    //         success:(res)=>{
+    //             console.log(res)
+    //             this.setData({
+    //                 games : res.result.data 
+    //             })
+    //         },
+    //         fail:(err)=>{
+    //             console.log(err)
+    //         }
+    //     })
 
-        // 所有活动
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'activity_show/',
-            },
-            success:(res)=>{
-                this.setData({
-                    acts : res.result.data
-                })
-            }
-        })
-        // 已经报名的活动
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'activity_have_sign_up_show/',
-                data : {
-                    openid : openid
-                }
-            },
-            success:(res)=>{
-                this.setData({
-                    acts_signed : res.result.data 
-                })
-            }
-        })
-    },      
+    //     // 所有活动
+    //     wx.cloud.callFunction({
+    //         name : 'httprequest',
+    //         data : {
+    //             url : app.globalData.baseurl + 'activity_show/',
+    //         },
+    //         success:(res)=>{
+    //             this.setData({
+    //                 acts : res.result.data
+    //             })
+    //         }
+    //     })
+    //     // 已经报名的活动
+    //     wx.cloud.callFunction({
+    //         name : 'httprequest',
+    //         data : {
+    //             url : app.globalData.baseurl + 'activity_have_sign_up_show/',
+    //             data : {
+    //                 openid : openid
+    //             }
+    //         },
+    //         success:(res)=>{
+    //             this.setData({
+    //                 acts_signed : res.result.data 
+    //             })
+    //         }
+    //     })
+    // },      
 
     /**
      * 生命周期函数--监听页面隐藏

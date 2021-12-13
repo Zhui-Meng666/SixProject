@@ -20,9 +20,9 @@
 }
 .video_msg{
   color: white;
-    position: relative;
-    left: 20rpx;
-    top: -100rpx;
+  position: relative;
+  left: 20rpx;
+  top: 1150rpx;
 }
 
 .like{
