@@ -180,8 +180,8 @@ Page({
             },
             success: (res) => {
                 console.log("成功", res.result)
-                let result = res.result.data
-                if (result) {
+                let result = res.result
+                if (result != null) {
                     let goods = result.results
                     let goodsall = {}
                     this.setData({
@@ -191,11 +191,11 @@ Page({
                     })
                     for (var i = 0; i < goods.length; ++i) {
                         goodsall[goods[i].id] = {
-                            src: goods.picture_link,
-                            name: goods.prize_name,
-                            price: goods.sufe_currency,
+                            src: goods[i].picture_link,
+                            name: goods[i].prize_name,
+                            price: goods[i].sufe_currency,
                             sold: 0,
-                            total: goods.rest
+                            total: goods[i].rest
                         }
                     }
                     this.setData({

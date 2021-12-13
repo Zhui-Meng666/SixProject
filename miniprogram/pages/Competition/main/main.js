@@ -245,6 +245,7 @@ Page({
                 url : app.globalData.baseurl + "match_show/",
             },
             success:(res)=>{
+                console.log(res)
                 this.setData({
                     games : res.result.data 
                 })

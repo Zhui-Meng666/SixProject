@@ -1,12 +1,12 @@
 <!--pages/Exchange/details/details.wxml-->
 <view class="container">
     <view class="imagefield">
-        <image src="{{goodsimg}}" class="goodsimg"></image>
+        <image src="{{goodsimg}}" class="goodsimg" mode="scaleToFill"></image>
     </view>
     <view class="descrfield">
-        <text>奖品名称：{{goodsname}}</text>
-        <text>奖品详情：{{detailed_info}}</text>
-        <text>奖品简介：{{introduction}}</text>
+        <view><view class="destitle">奖品名称：</view>{{goodsname}}</view>
+        <view><view class="destitle">奖品详情：</view>{{detailed_info}}</view>
+        <view><view class="destitle">奖品简介：</view>{{introduction}}</view>
     </view>
     <view class="conditfield">
         <van-icon name="location" size="25px" />

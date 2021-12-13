@@ -1,5 +1,6 @@
 // pages/Activity/release/release.js
 import Toast from '@vant/weapp/toast/toast';
+let app = getApp()
 Page({
 
     /**
