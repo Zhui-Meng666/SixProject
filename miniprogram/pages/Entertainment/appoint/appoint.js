@@ -421,7 +421,7 @@ Page({
     onLoad: function (options) {
         if (app.globalData.registered) {
             var options = {
-                user: 'o1Kyy4vYqC42XNci7QIYpXLJQZD4',
+                user: app.globalData.openid,
                 pwd: "123456",
                 appKey: app.globalData.appKey,
                 success: (res) => {
@@ -562,22 +562,6 @@ Page({
                         break;
                     case 'memberJoinPublicGroupSuccess':
                         // 加入公开群成功
-                        wx.cloud.callFunction({
-                            name: 'httppost',
-                            data: {
-                                url: app.globalData.baseurl + 'arrange_join_group/',
-                                data: {
-                                    openid: msg.owner,
-                                    group_id: msg.gid,
-                                }
-                            },
-                            success: (res) => {
-                                console.log("成功", res.result)
-                            },
-                            fail: (err) => {
-                                console.log("失败", err)
-                            }
-                        })
                         break;
                     case 'removedFromGroup':
                         // 从群组移除
@@ -596,9 +580,35 @@ Page({
                         break;
                     case 'joinPublicGroupSuccess':
                         // 同意入群申请
+                        wx.cloud.callFunction({
+                            name: 'httppost',
+                            data: {
+                                url: app.globalData.baseurl + 'arrange_join_group/',
+                                data: {
+                                    openid: msg.owner,
+                                    group_id: msg.gid,
+                                }
+                            },
+                            success: (res) => {
+                                console.log("成功", res.result)
+                            },
+                            fail: (err) => {
+                                console.log("失败", err)
+                            }
+                        })
                         break;
                     case 'joinGroupNotifications':
                         // 用户申请入群，群主在此同意
+                        // conn.agreeJoinGroup({
+                        //     applicant: msg.owner, // 申请加群的用户名
+                        //     groupId: that.data.groupid, // 群组ID
+                        //     success: (res) => {
+                        //         console.log("成功", res)
+                        //     },
+                        //     fail: (err) => {
+                        //         console.log("失败", err)
+                        //     }
+                        // })
                         break;
                     case 'leave':
                         // 退出群

@@ -2,6 +2,7 @@
 let app = getApp()
 const Identify = ['管理员', '裁判', '运动员领队', '运动员', '会员', '非会员']
 const gender = ['', '../../../images/man.png', '../../../images/woman.png']
+const defaultimg = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306'
 Page({
 
   /**
@@ -10,23 +11,11 @@ Page({
   data: {
     bottom_active: 'personal',
     show: false,
-    bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
+    bgimg: '',
     gendersrc: '',
     intro: '这个人很神秘，什么都没有~',
-    coinnum: 100,
-    level: [{
-        icon: '../../../images/level.png',
-        icontext: '等级',
-        progresstext: '1级',
-        percent: 20
-      },
-      {
-        icon: '../../../images/experience.png',
-        icontext: '经验',
-        progresstext: '80分',
-        percent: 80
-      }
-    ],
+    coinnum: 0,
+    level: [],
     list: [{
         icon: '../../../images/like.png',
         text: '收藏'
@@ -44,7 +33,7 @@ Page({
         text: 'sufe币'
       }
     ],
-    imglist: ['../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg', '../../../images/Cat.jpeg'],
+    imglist: [],
     userid: []
   },
 
@@ -169,7 +158,8 @@ Page({
     var info = {
       stuid: this.data.stuid,
       gender: this.data.gender,
-      intro: this.data.intro
+      intro: this.data.intro,
+      bgimg: this.data.bgimg
     }
     wx.navigateTo({
       url: '../changeinfo/changeinfo?info=' + JSON.stringify(info),
@@ -187,7 +177,6 @@ Page({
         var tempPath = res.tempFilePaths[0]
         this.setData({
           tempPath: tempPath,
-          bgimg: tempPath,
         })
         let tempPaths = tempPath.split('/')
         let filename = tempPaths[tempPaths.length - 1]
@@ -195,10 +184,10 @@ Page({
           cloudPath: filename,
           filePath: tempPath, // 文件路径
           success: (res) => {
-            // get resource ID
-            this.setData({
-              fileID: res.fileID
-            })
+            console.log("上传成功", res.fileID)
+            // this.setData({
+            //   fileID: res.fileID
+            // })
             wx.cloud.callFunction({
               name: 'httppost',
               data: {
@@ -210,6 +199,10 @@ Page({
               },
               success: (res) => {
                 console.log("修改成功", res)
+                this.setData({
+                  bgimg_link: res.result.data.back_picture,
+                  bgimg: res.result.data.back_picture
+                })
               },
               fail: (err) => {
                 console.log('失败', err)
@@ -251,7 +244,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad() {},
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     if (app.globalData.registered) {
       wx.cloud.callFunction({
         name: 'httprequest',
@@ -273,7 +278,8 @@ Page({
             userid.push(data.identity[i].identity)
           }
           this.setData({
-            bgimg: data.back_picture == "default" ? this.data.bgimg : data.back_picture,
+            bgimg: data.back_picture,
+            bgimg_link: data.back_picture == "default" ? defaultimg : data.back_picture,
             gendersrc: gender[Number(data.gender)],
             gender: data.gender,
             intro: data.introduction,
@@ -302,21 +308,11 @@ Page({
           console.log('失败', err)
         }
       })
+    } else {
+      wx.redirectTo({
+        url: '../login/login',
+      })
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**
@@ -336,9 +332,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+  onPullDownRefresh: function () {},
 
   /**
    * 页面上拉触底事件的处理函数

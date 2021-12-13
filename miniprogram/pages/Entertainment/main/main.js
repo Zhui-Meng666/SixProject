@@ -13,25 +13,22 @@ Page({
         show_create: false,
         team_img: '../../../images/Cat.jpeg',
         buttle: [],
-
         appoint: [],
 
     },
 
-    createGroup: function (e) {
-        wx.navigateTo({
-            url: '../buttle/buttle',
-        })
-    },
     buttle_join_in: function (e) {
         // 申请加入乱斗群
-        let idx = e.currentTarget.dataset.index
-        console.log(idx)
-        let groups = this.data.buttle;
-        console.log(groups)
-        let group = groups[idx];
-        let groupid = group.group_id
-        if (group.number >= 4) {
+        // let idx = e.currentTarget.dataset.index
+        // console.log(idx)
+        // let groups = this.data.buttle;
+        // console.log(groups)
+        // let group = groups[idx];
+        // let groupid = group.group_id
+
+        var group_id = this.data.group_id
+
+        if (false) {
             console.log("抱歉，已满！")
         } else {
             wx.showModal({
@@ -63,17 +60,12 @@ Page({
         }
     },
 
-    // Tobattle: function (e) {
-    //     wx.navigateTo({
-    //         url: '../buttle/buttle',
-    //     })
-    // },
-
-    // ToCreate: function(e) {
-    //     wx.navigateTo({
-    //       url: '../create/create',
-    //     })
-    // },
+    to_buttle: function (e) {
+        console.log(this.data.buttle)
+        wx.navigateTo({
+            url: '../buttle/buttle?id='+this.data.buttle[0].group_id,
+        })
+    },
 
     // Toappoint: function (e) {
     //     wx.navigateTo({
@@ -404,17 +396,23 @@ Page({
 
 
     uploadimg: function (e) {
-        let that = this
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: function (res) {
-                var tempFilePaths = res.tempFilePaths;
-                let new_img = tempFilePaths;
-                console.log(new_img)
-                that.setData({
-                    team_img: new_img
+                var new_img = res.tempFilePaths[0];
+                
+                let new_imgs = new_img.split('/')
+                let filename = new_imgs[new_imgs.length-1]
+                wx.cloud.uploadFile({
+                    cloudPath : filename,
+                    success:(res)=>{
+                        this.setData({
+                            img_fileID : res.fileID, 
+                            team_img : new_img
+                        })
+                    }
                 })
             }
         })
@@ -440,7 +438,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        // 我参加的群
+        // 我参加的乱斗群
         wx.cloud.callFunction({
             name: 'httprequest',
             data: {
@@ -453,6 +451,25 @@ Page({
                 console.log(res)
                 this.setData({
                     buttle: res.result.data
+                })
+            },
+            fail:(err)=>{
+                console.log(err)
+            }
+        })
+
+        // 所有约球群
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                data : {
+                    url : app.globalData.baseurl + 'arrange_group_show/',
+                }
+            },
+            success:(res) => {
+                this.setData({
+                    appoint : res.result.data,
+                    appoint_show : res.result.data
                 })
             }
         })

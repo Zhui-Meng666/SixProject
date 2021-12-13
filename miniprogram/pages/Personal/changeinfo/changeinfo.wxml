@@ -1,6 +1,7 @@
 <!--pages/Personal/changeinfo/changeinfo.wxml-->
 <view class="container">
     <view class="avatarfield">
+        <image class="pic_background" src="{{bgimg}}"></image>
         <view class="avatar">
             <open-data type="userAvatarUrl"></open-data>
         </view>
@@ -12,7 +13,7 @@
             </view>
         </van-cell>
         <van-cell title="学号：" title-width="30%" center custom-class="normalcell" title-class="celltitle">
-            <van-field value="{{stuid}}" border="{{false}}" disabled="{{uneditable}}" clearable placeholder="请输入学号（10位）" input-class="inputfield" bind:click-icon="edit" bind:blur="substuid">
+            <van-field value="{{stuid}}" border="{{false}}" disabled="{{uneditable}}" clearable placeholder="请输入学号（10位）" input-class="inputfield" bind:click-icon="edit" bind:change="substuid">
                 <view slot="right-icon">
                     <image src="../../../images/edit.png" class="righticon" mode="aspectFit"></image>
                 </view>
@@ -30,7 +31,7 @@
             </van-radio-group>
         </van-cell>
         <van-cell title="个人简介：" label="不超过30字" title-width="30%" custom-class="largecell" title-class="celltitle">
-            <van-field type="textarea" autosize value="{{intro}}" border="{{false}}" disabled="{{uneditable}}" clearable placeholder="请输入个人简介" bind:click-icon="edit" maxlength="30" show-word-limit bind:blur="sunintro">
+            <van-field type="textarea" autosize value="{{intro}}" border="{{false}}" disabled="{{uneditable}}" clearable placeholder="请输入个人简介" bind:click-icon="edit" maxlength="30" show-word-limit bind:change="subintro">
                 <view slot="right-icon">
                     <image src="../../../images/edit.png" class="righticon" mode="aspectFit"></image>
                 </view>

@@ -11,8 +11,8 @@ Page({
     data: {
         show: false,
         id: '0',
-        goodsname: '雨伞',
-        goodsimg: '../../../images/goodsimg.jpg',
+        goodsname: '',
+        goodsimg: '',
         addr: '武川路羽毛球馆',
         price: 20,
         detailed_info: '请到指定地点领取',

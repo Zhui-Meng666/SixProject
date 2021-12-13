@@ -15,15 +15,23 @@ page {
 .avatarfield {
     width: 100%;
     height: 35%;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #a2cba3;
 }
 
+.pic_background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
 .avatar {
     width: 150rpx;
     height: 150rpx;
+    position: absolute;
     overflow: hidden;
     display: block;
     border-radius: 50%;

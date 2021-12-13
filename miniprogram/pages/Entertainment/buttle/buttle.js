@@ -19,23 +19,7 @@ Page({
      */
     data: {
         groupid: '166787045982209',
-        msglist: [{
-                type: 'message',
-                value: {
-                    self: false,
-                    avatar: '../../../images/unload.png',
-                    messg: '欢迎来到xxxxx小组，期待你的表现'
-                }
-            },
-            {
-                type: 'message',
-                value: {
-                    self: true,
-                    avatar: '../../../images/unload.png',
-                    messg: '欢迎来到xxxxx小组，期待你的表现'
-                }
-            }
-        ],
+        msglist: [],
         singlelistall: [
             [{
                 name1: '张三',
@@ -49,11 +33,7 @@ Page({
             }],
         ],
         singleindex: 0,
-        singlelist: [{
-            name1: '张三',
-            name2: '李四',
-            grade: '录入成绩'
-        }],
+        singlelist: [],
         singledone: [false],
         ranklist: [{
                 img: '../../../images/gold.png',
@@ -106,7 +86,7 @@ Page({
             type: 'message',
             value: {
                 self: true,
-                avatar: '../../../images/unload.png',
+                avatar: this.data.userinfo[app.globalData.openid].avatar,
                 messg: text
             }
         })
@@ -187,7 +167,7 @@ Page({
                     type: 'sound',
                     value: {
                         self: true,
-                        avatar: '../../../images/unload.png',
+                        avatar: this.data.userinfo[app.globalData.openid].avatar,
                         sdid: sdid,
                         sdtext: msg
                     }
@@ -408,13 +388,13 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // this.setData({
-        //     groupid: options.id    //接受上一页面传来的群id
-        // })
+        this.setData({
+            groupid: options.id    //接受上一页面传来的群id
+        })
         if (app.globalData.registered) {
             conn.open({
-                user: 'username',
-                pwd: "zhj48691626",
+                user: app.globalData.openid,
+                pwd: "123456",
                 appKey: app.globalData.appKey,
                 success: (res) => {
                     console.log("成功", res)
@@ -444,7 +424,7 @@ Page({
                         type: 'message',
                         value: {
                             self: false,
-                            avatar: '../../../images/unload.png',
+                            avatar: that.data.userinfo[message.owner].avatar,
                             messg: text
                         }
                     })
@@ -477,7 +457,7 @@ Page({
                             type: 'sound',
                             value: {
                                 self: false,
-                                avatar: '../../../images/unload.png',
+                                avatar: that.data.userinfo[message.owner].avatar,
                                 sdid: sdid,
                                 sdtext: msg
                             }
@@ -594,7 +574,7 @@ Page({
             data: {
                 url: app.globalData.baseurl + 'melee_group_member_info_show/',
                 data: {
-                    group_id: this.data.groupid,
+                    group_id: options.id,
                 }
             },
             success: (res) => {
@@ -618,7 +598,7 @@ Page({
                         data: {
                             url: app.globalData.baseurl + 'melee_against_info/',
                             data: {
-                                group_id: this.data.groupid,
+                                group_id: options.id,
                             }
                         },
                         success: (res) => {

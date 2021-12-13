@@ -1,6 +1,7 @@
 // pages/Personal/changeinfo/changeinfo.js
 import Toast from '@vant/weapp/toast/toast';
 var app = getApp()
+const defaultimg = 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306'
 Page({
 
     /**
@@ -21,13 +22,13 @@ Page({
 
     substuid: function (e) {
         this.setData({
-            stuid: e.detail.value
+            stuid: e.detail
         })
     },
 
     subintro: function (e) {
         this.setData({
-            intro: e.detail.value
+            intro: e.detail
         })
     },
 
@@ -70,7 +71,8 @@ Page({
         this.setData({
             stuid: info.stuid,
             gender: info.gender,
-            intro: info.intro
+            intro: info.intro,
+            bgimg: info.bgimg == "default" ? defaultimg : info.bgimg
         })
     },
 

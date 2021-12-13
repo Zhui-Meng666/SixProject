@@ -1,5 +1,6 @@
 <!--miniprogram/pages/Personal/main/main.wxml-->
-<view class="front" style="background-image: url({{bgimg}});">
+<view class="front">
+  <image class="pic_background" src="{{bgimg_link}}"></image>
   <view class="setupfield">
     <view class="setup" bindtap="setup">
       <image src="../../../images/setup.png" mode="aspectFit" class="setupicon"></image>

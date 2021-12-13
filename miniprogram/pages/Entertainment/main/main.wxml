@@ -1,122 +1,80 @@
 <!--pages/Entertainment/main/main.wxml-->
 <van-tabs active="{{active}}" bind:change="onChange">
-    <van-tab title="乱斗">
-      <van-cell-group>
-        <van-field label = "群号" placeholder="请输入群号" bind:change="group_id_input" use-button-slot>
-          <van-button  slot="button" size="small" type="primary" bindtap="search_buttle">申请加入</van-button>
-        </van-field>
-      </van-cell-group>
+  <van-tab title="乱斗">
+    <van-cell-group>
+      <van-field label="群号" placeholder="请输入群号" bind:change="group_id_input" use-button-slot>
+        <van-button slot="button" size="small" type="primary" bindtap="buttle_join_in">申请加入</van-button>
+      </van-field>
+    </van-cell-group>
 
-        <view class="acts">
-            <view wx:for="{{buttle}}" class="act_item">
-                <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img"></image>
-                <view class="act_details">
-                    <view class="act_line">
-                      <view class="act_name">{{item.name}}</view>
-                      <image src="../../../images/add.png" class="act_join_in" data-index="{{index}}" bindtap="buttle_join_in"></image>
-                    </view>
-                    <!-- <view class="act_detail">{{item.state}}</view> -->
-                    <view class="act_line">
-                      <view class="act_detail">人数：{{item.member_num}}</view>
-                      <view class="act_detail_date">{{item.create_time}}</view>
-                    </view>
-                    <view class="act_bar"></view>
-                </view>
-            </view>
-            <image src="../../../images/add.png" class="add_new_act" bindtap="add_buttle"></image>
+    <view class="acts">
+      <view wx:for="{{buttle}}" class="act_item" bindtap="to_buttle">
+        <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img"></image>
+        <view class="act_details">
+          <view class="act_line">
+            <view class="act_name">{{item.name}}</view>
+
+          </view>
+          <!-- <view class="act_detail">{{item.state}}</view> -->
+          <view class="act_line">
+            <view class="act_detail">人数：{{item.member_num}}</view>
+            <view class="act_detail_date">{{item.create_time}}</view>
+          </view>
+          <view class="act_bar"></view>
         </view>
-        
-    </van-tab>
+      </view>
+      <image src="../../../images/add.png" class="add_new_act" bindtap="add_buttle"></image>
+    </view>
 
-    <van-tab title="约球">
-        <van-search value="{{value_show}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange2" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel"></van-search>
+  </van-tab>
 
-        <view class="acts">
-            <view wx:for="{{appoint_show}}" class="act_item">
-                <image wx:if="{{item.coverimg}}" src="{{item.coverimg}}" class="act_img"></image>
-                <view class="act_details">
-                  <view class="act_line">
-                      <view class="act_name">{{item.name}}</view>
-                      <image src="../../../images/add.png"  data-index="{{index}}" class="act_join_in" bindtap="appoint_join_in"></image>
-                    </view>
-                    <view class="act_detail">{{item.state}}</view>
-                    <view class="act_detail">{{item.class}}</view>
-                    <view class="act_line">
-                      <view class="act_detail">人数：{{item.number}}</view>
-                      <view class="act_detail_date">{{item.date}}</view>
-                    </view>
-                    <view class="act_bar"></view>
-                </view>
-            </view>
-            <image src="../../../images/add.png" class="add_new_act" bindtap="add_appoint"></image>
+  <van-tab title="约球">
+    <van-search value="{{value_show}}" placeholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="onChange2" bind:search="onSearch2" bind:focus="onFocus" bind:cancel="onCancel"></van-search>
+
+    <view class="acts">
+      <view wx:for="{{appoint_show}}" class="act_item">
+        <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img"></image>
+        <view class="act_details">
+          <view class="act_line">
+            <view class="act_name">{{item.name}}</view>
+            <image src="../../../images/add.png" data-index="{{index}}" class="act_join_in" bindtap="appoint_join_in"></image>
+          </view>
+          <view class="act_detail">{{item.state}}</view>
+          <view class="act_detail">{{item.class}}</view>
+          <view class="act_line">
+            <view class="act_detail">人数：{{item.number}}</view>
+            <view class="act_detail_date">{{item.create_time}}</view>
+          </view>
+          <view class="act_bar"></view>
         </view>
-        
+      </view>
+      <image src="../../../images/add.png" class="add_new_act" bindtap="add_appoint"></image>
+    </view>
 
-    </van-tab>
+
+  </van-tab>
 
 </van-tabs>
 
-<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">  
-  <van-tabbar-item name = 'home' bindtap="to_home" class="icon_class">
-    <image
-      slot = "icon"
-      wx:if="../../../images/home-unclick.png"
-      src = "../../../images/home-unclick.png"
-      mode = "aspectFit"
-      class="icon_class"
-    />
-    <image
-      slot = "icon-active"
-      wx:if="../../../images/home-click.png"
-      src = "../../../images/home-click.png"
-      mode = "aspectFit"
-      class="icon_class"
-    />
+<van-tabbar active="{{ bottom_active }}" bind:change="onChangeBottom">
+  <van-tabbar-item name='home' bindtap="to_home" class="icon_class">
+    <image slot="icon" wx:if="../../../images/home-unclick.png" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" />
+    <image slot="icon-active" wx:if="../../../images/home-click.png" src="../../../images/home-click.png" mode="aspectFit" class="icon_class" />
     主页
   </van-tabbar-item>
-  <van-tabbar-item name = 'game' bindtap="to_game" class="icon_class">
-    <image
-      slot = "icon"
-      src = "../../../images/competition-unclick.png"
-      mode = "aspectFit"
-      class="icon_class"
-    />
-    <image
-      slot = "icon-active"
-      src = "../../../images/competition-click.png"
-      mode = "aspectFit"
-      class="icon_class"
-    />
+  <van-tabbar-item name='game' bindtap="to_game" class="icon_class">
+    <image slot="icon" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" />
+    <image slot="icon-active" src="../../../images/competition-click.png" mode="aspectFit" class="icon_class" />
     赛事
   </van-tabbar-item>
-  <van-tabbar-item name = 'entertainment' bindtap="to_entertainment" class="icon_class">
-    <image
-      slot = "icon"
-      src = "../../../images/entertainment-unclick.png"
-      mode = "aspectFit"
-      class="icon_class"
-    />
-    <image
-      slot = "icon-active"
-      src = "../../../images/entertainment-click.png"
-      mode = "aspectFit"
-      class="icon_class"
-    />
+  <van-tabbar-item name='entertainment' bindtap="to_entertainment" class="icon_class">
+    <image slot="icon" src="../../../images/entertainment-unclick.png" mode="aspectFit" class="icon_class" />
+    <image slot="icon-active" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" />
     娱乐
   </van-tabbar-item>
-  <van-tabbar-item name = 'personal' bindtap="to_personal" class="icon_class">
-    <image
-      slot = "icon"
-      src = "../../../images/me-unclick.png"
-      mode = "aspectFit"
-      class="icon_class"
-      />
-    <image
-      slot = "icon-active"
-      src = "../../../images/me-click.png"
-      mode = "aspectFit"
-      class="icon_class"
-      />
+  <van-tabbar-item name='personal' bindtap="to_personal" class="icon_class">
+    <image slot="icon" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" />
+    <image slot="icon-active" src="../../../images/me-click.png" mode="aspectFit" class="icon_class" />
     个人
   </van-tabbar-item>
 </van-tabbar>
@@ -129,7 +87,7 @@
     <van-field value="{{team_name}}" label="小组名称" placeholder="请输入小组名称" border="{{false}}" bind:change="tname_input"></van-field>
 
     <van-field value="{{team_introduction}}" label="小组简介" placeholder="请输入小组简介" border="{{false}}" bind:change="tintro_input"></van-field>
-    
+
     <!-- <van-field value="{{team_class}}" label="约球项目" placeholder="请输入约球项目" border="{{false}}" bind:change="tclass_input"></van-field> -->
 
     <van-field value="{{team_max}}" label="人数上限" placeholder="请输入人数上限" border="{{false}}" bind:change="tnumber_input"></van-field>
