@@ -13,13 +13,14 @@ page{
     border-radius: 25rpx;
     width: 98%;
     margin: auto;
-    margin-top: 15rpx;
+    margin-top: 30rpx;
 }
 .game_msg{
     display: flex;
     flex-direction: row;
     margin-left: 20rpx;
     font-style: 'Heiti';
+    font-size: 40rpx;
 }
 .game_info{
     margin: 20rpx

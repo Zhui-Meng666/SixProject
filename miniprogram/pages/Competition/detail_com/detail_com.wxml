@@ -2,11 +2,12 @@
 <view wx:for="{{single_match}}">
     <van-cell-group>
         <van-cell title="比赛号" value="{{item.id}}"></van-cell>
-        <van-cell title="比赛双方" value="{{item.competitor1}} v.s. {{item.competitor2}}"></van-cell>
+        <van-cell title="比赛双方" value="{{item.com1}} v.s. {{item.com2}}"></van-cell>
         <van-cell title="比赛类型" value="{{item.type}}"></van-cell>
         <van-cell title="比赛时间" value="{{item.create_time}}"></van-cell>
         <van-cell title="比赛裁判" value="{{item.referee}}"></van-cell>
-        <van-cell title="比赛比分" value="{{item.totalscore.score1}} : {{item.totalscore.score2}}"></van-cell>
+        <!-- <van-cell title="比赛比分" value="{{item.totalscore.score1}} : {{item.totalscore.score2}}"></van-cell> -->
+        <van-cell title="比赛比分" value="0 : 0"></van-cell>
         
     </van-cell-group>
     <button class="start_game" bindtap="start_game" data-index="{{index}}">开始比赛</button>

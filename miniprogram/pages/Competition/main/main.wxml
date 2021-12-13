@@ -1,6 +1,6 @@
 <!--pages/Competition/main/main.wxml-->
 <van-tabs>
-    <van-tab title="比赛">
+    <van-tab title="比赛" style="height: 1130rpx;">
         <van-search value="{{value}}" placerholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="search_change" bind:search="onSearch1"></van-search>
 
         <van-tabs>
@@ -29,7 +29,7 @@
             </van-tab>
 
             <van-tab title="进行中">
-                <view wx:for="{{games}}">
+                <view wx:for="{{games_on}}">
                     <view class="game_items" wx:if="{{item.status == '进行中'}}">
                         <van-cell title="比赛号" value="{{item.id}}"></van-cell>
                         <view class="preview_imgs">
@@ -52,21 +52,24 @@
             </van-tab>
 
             <van-tab title="已完成">
-                <view wx:for="{{games}}">
-                    <view wx:if="{{item.status == '已完成'}}" class="game_items" bindtap="res_com">
+                <view wx:for="{{games_over}}">
+                    <view class="game_items" bindtap="res_com">
                         <view class="game_msg">
                             <view>{{item.type}}.</view>
                             <view>{{item.name}}</view>
                         </view>
-                        <view class="res_score">
-                            <view>{{item.res_score_1}} : {{item.res_score_2}} </view>
-                            <view>{{item.com_1}} {{item.com_2}}</view>
-                        </view>
-                        <view class="free">
-                            <view wx:for="{{item.free}}" wx:for-item="free">
-                                {{free}}
+                        <view wx:for="{{item.single_match}}" wx:for-item="sg">
+                            <view class="res_score">
+                                <view>{{sg.totalscore.score1}} : {{sg.totalscore.score2}} </view>
+                                <view>{{sg.competitor1}} v.s. {{sg.competitor2}}</view>
+                            </view>
+                            <view class="free">
+                                <view>{{sg.competitor1}} : {{sg.free.competitor1}} </view>
+                                <view>{{sg.competitor2}} : {{sg.free.competitor2}} </view>
+                                <view>裁判{{sg.refree}} : {{sg.free.refree}} </view>
                             </view>
                         </view>
+
                     </view>
                 </view>
             </van-tab>
@@ -97,7 +100,7 @@
                         <image src="../../../images/sufecoin.png" class="act_coin1"></image>
                         <view class="act_number_coin1">{{item.prize}}</view>
                     </view>
-                    
+
                 </view>
                 <image class="add_act" src="../../../images/add.png" bindtap="add_act"></image>
             </van-tab>
@@ -121,20 +124,20 @@
     </van-tab>
 </van-tabs>
 <view style="flex-direction: row; position: absolute; bottom: 10rpx; width: 100%;">
-    <image slot="icon" wx:if="{{home == true}}" src="../../../images/home-click.png" mode="aspectFit" class="icon_class" bindtap="to_home"/>
+    <image slot="icon" wx:if="{{home == true}}" src="../../../images/home-click.png" mode="aspectFit" class="icon_class" bindtap="to_home" />
 
-    <image slot="icon" wx:if="{{home == false}}" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_home"/>
+    <image slot="icon" wx:if="{{home == false}}" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_home" />
 
-    <image slot="icon" wx:if="{{com == true}}" src="../../../images/competition-click.png" mode="aspectFit" class="icon_class" bindtap="to_game"/>
+    <image slot="icon" wx:if="{{com == true}}" src="../../../images/competition-click.png" mode="aspectFit" class="icon_class" bindtap="to_game" />
 
-    <image slot="icon" wx:if="{{com == false}}" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_game"/>
+    <image slot="icon" wx:if="{{com == false}}" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_game" />
 
-    <image slot="icon" wx:if="{{ent == true}}" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment"/>
+    <image slot="icon" wx:if="{{ent == true}}" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment" />
 
-    <image slot="icon" wx:if="{{ent == false}}" src="../../../images/entertainment-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment"/>
+    <image slot="icon" wx:if="{{ent == false}}" src="../../../images/entertainment-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment" />
 
-    <image slot="icon" wx:if="{{per == true}}" src="../../../images/me-click.png" mode="aspectFit" class="icon_class" bindtap="to_personal"/>
+    <image slot="icon" wx:if="{{per == true}}" src="../../../images/me-click.png" mode="aspectFit" class="icon_class" bindtap="to_personal" />
 
-    <image slot="icon" wx:if="{{per == false}}" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_personal"/>
-    
+    <image slot="icon" wx:if="{{per == false}}" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_personal" />
+
 </view>

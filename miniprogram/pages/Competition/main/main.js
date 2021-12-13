@@ -13,11 +13,10 @@ Page({
 
         activate_1: 0,
         activate_2: 0,
-        genders: '男',
-        ins: ['信息学院', '经济学院', '数学学院', '统计学院', '金融学院', '法学院'],
+ 
         show_signup_ath: false,
         show_signup_ref: false,
-        show_select_ins: false,
+
         bottom_active: 'game',
         img_default: '../../../images/Cat.jpeg',
         games: [{
@@ -60,8 +59,55 @@ Page({
                 type: '体教部',
                 status: '已完成'
             },
+            
         ],
-        games_on: [],
+        games_over : [
+            {
+                type : '体教部',
+                name : '求王争霸赛',
+                single_match : [
+                    {
+                        id : '001',
+                        competitor1 : 'Ming',
+                        competitor2 : 'Ning',
+                        type : '男子双打',
+                        create_time : '2021-12-17',
+                        refree : 'UZI',
+                        totalscore : {
+                            score1 : 12,
+                            score2 : 13
+                        },
+                        free : {
+                            competitor1 : 12,
+                            competitor2 : 13,
+                            refree : 20
+                        }
+                    }
+                ]
+            }
+        ],
+        games_on: [
+            {
+                status: '进行中',
+                id: 1,
+                schedule_arrange: '../../../images/Cat.jpeg',
+                referee_arrange: '../../../images/Cat.jpeg',
+                competitors: '../../../images/Cat.jpeg',
+                top_eight: '../../../images/Cat.jpeg',
+                single_match: [{
+                    id: 1,
+                    competitor1: 'Faker',
+                    competitor2: 'Showmaker',
+                    type: '男子单打',
+                    create_time: '2021-10-21',
+                    refree: 'TS',
+                    totalscore: {
+                        score1: 10,
+                        score2: 11
+                    }
+                }]
+            },
+        ],
         acts: []
     },
 
@@ -123,9 +169,6 @@ Page({
                   url: '../detail_com/detail_com?data=' + JSON.stringify(res.result.data) + '&name=' + game.name,
                 })
             }
-        })
-        wx.navigateTo({
-            url: '../detail_com/detail_com',
         })
     },
     select_gender(event) {
@@ -283,8 +326,8 @@ Page({
 
     upload_sa: function (e) {
         var idx = e.currentTarget.dataset.index
-        var match = this.data.games[idx]
-        var match_id = this.data.games[idx]
+        var match = this.data.games_on[idx]
+        var match_id = this.data.games_on[idx]
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
@@ -295,15 +338,19 @@ Page({
                 let filename = tempPaths[tempPaths.length - 1]
                 wx.cloud.uploadFile({
                     cloudPath: filename,
-                    filePath: tempPaths,
+                    filePath: tempPath,
                     success: (res) => {
                         console.log('success')
+                        var games_on = this.data.games_on
                         match.schedule_arrange = res.fileID
-                        games[idx] = match
+                        games_on[idx] = match
                         this.setData({
-                            games: games,
+                            games_on: games_on,
                             sa_id: res.fileID
                         })
+                    },
+                    fail:(err)=>{
+                        console.log(err)
                     }
                 })
             }
@@ -311,26 +358,31 @@ Page({
     },
     upload_ra: function (e) {
         var idx = e.currentTarget.dataset.index
-        var match = this.data.games[idx]
-        var match_id = this.data.games[idx]
+        var match = this.data.games_on[idx]
+        var match_id = this.data.games_on[idx]
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: (res) => {
-                tempPath = res.tempFilePaths[0]
+                var tempPath = res.tempFilePaths[0]
                 let tempPaths = tempPath.split('/')
                 let filename = tempPaths[tempPaths.length - 1]
                 wx.cloud.uploadFile({
                     cloudPath: filename,
-                    filePath: tempPaths,
+                    filePath: tempPath,
                     success: (res) => {
                         match.referee_arrange = res.fileID
-                        games[idx] = match
+                        var games_on = this.data.games_on
+                        games_on[idx] = match
                         this.setData({
-                            games: games,
+                            games_on: games_on,
                             ra_id: res.fileID
                         })
+                        // console.log(games_on)
+                    },
+                    fail:(err)=>{
+                        console.log(err)
                     }
                 })
             }
@@ -338,24 +390,25 @@ Page({
     },
     upload_com: function (e) {
         var idx = e.currentTarget.dataset.index
-        var match = this.data.games[idx]
-        var match_id = this.data.games[idx]
+        var match = this.data.games_on[idx]
+        var match_id = this.data.games_on[idx]
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: (res) => {
-                tempPath = res.tempFilePaths[0]
+                var tempPath = res.tempFilePaths[0]
                 let tempPaths = tempPath.split('/')
                 let filename = tempPaths[tempPaths.length - 1]
                 wx.cloud.uploadFile({
                     cloudPath: filename,
-                    filePath: tempPaths,
+                    filePath: tempPath,
                     success: (res) => {
                         match.competitors = res.fileID
-                        games[idx] = match
+                        var games_on = this.data.games_on
+                        games_on[idx] = match
                         this.setData({
-                            games: games,
+                            games_on: games_on,
                             com_id: res.fileID
                         })
                     }
@@ -365,25 +418,26 @@ Page({
     },
     upload_te: function (e) {
         var idx = e.currentTarget.dataset.index
-        var match = this.data.games[idx]
-        var match_id = this.data.games[idx]
+        var match = this.data.games_on[idx]
+        var match_id = this.data.games_on[idx]
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: (res) => {
-                tempPath = res.tempFilePaths[0]
+                var tempPath = res.tempFilePaths[0]
                 let tempPaths = tempPath.split('/')
                 let filename = tempPaths[tempPaths.length - 1]
                 wx.cloud.uploadFile({
                     cloudPath: filename,
-                    filePath: tempPaths,
+                    filePath: tempPath,
                     success: (res) => {
-                        match.top_eight = res.fileID,
-                            games[idx] = match
+                        match.top_eight = res.fileID
+                        var games_on = this.data.games_on
+                        games_on[idx] = match
                         this.setData({
-                            te_id: res.fileID,
-                            games: games
+                            games_on: games_on,
+                            te_id: res.fileID
                         })
                         wx.cloud.callFunction({
                             name: 'httppost',
@@ -404,6 +458,78 @@ Page({
         })
     },
 
+    onShow: function() {
+        var openid = app.globalData.openid
+        // 所有比赛
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + "match_show/",
+            },
+            success:(res)=>{
+                console.log(res)
+                this.setData({
+                    games : res.result.data 
+                })
+            },
+            fail:(err)=>{
+                console.log(err)
+            }
+        })
+
+        // 已完成的比赛
+        var match_id = []
+        for(let i=0;i<this.games.length;i++){
+            if(this.games[i].status == '已完成'){
+                match_id.push(this.games[i].id)
+            }
+        }
+        var games_over = []
+        for(let i=0;i<match_id.length;i++){
+            var id = match_id[i]
+            wx.cloud.callFunction({
+                name : 'httprequest',
+                data : {
+                    url : app.globalData.baseurl + 'match_single_result_info_show/',
+                    data : {
+                        match_id : id 
+                    }
+                },
+                success:(res) =>{
+                    games_over.push(res.result.data)
+                }
+            })
+        }
+        
+
+        // 所有活动
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'activity_show/',
+            },
+            success:(res)=>{
+                this.setData({
+                    acts : res.result.data
+                })
+            }
+        })
+        // 已经报名的活动
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'activity_have_sign_up_show/',
+                data : {
+                    openid : openid
+                }
+            },
+            success:(res)=>{
+                this.setData({
+                    acts_signed : res.result.data 
+                })
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */
