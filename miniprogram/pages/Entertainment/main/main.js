@@ -15,7 +15,8 @@ Page({
         buttle: [],
         appoint: [],
         appoint_show : [],
-        type : '乱斗'
+        type : '乱斗',
+        fileList : []
     },
 
     buttle_join_in: function (e) {
@@ -434,28 +435,57 @@ Page({
         })
     },
 
+    afterRead: function (e) {
+        let fileList = this.data.fileList
+        fileList.push({
+            url: e.detail.file.url,
+            deletable: true,
+        })
+        this.setData({
+            fileList: fileList
+        })
+    },
 
+    delete: function(e) {
+        let i = e.detail.index 
+        this.data.fileList.splice(i,1)
+        this.setData({
+            fileList : this.data.fileList
+        })
+        let filepaths = this.data.fileList[0].url.split('/')
+        let filename = filepaths[filepaths.length - 1]
+        wx.cloud.uploadFile({
+            cloudPath : filename,
+            filePath : this.data.fileList[0].url,
+            success:(res) =>{
+                this.setData({
+                    team_img : res.fileID
+                })
+            }
+        })
+    },
     uploadimg: function (e) {
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: (res) =>{
-                var new_img = res.tempFilePaths[0];
-                // console.log(new_img)
-                // console.log(this.data.team_img)
-                // this.setData({
-                //     team_img : new_img
-                // })
-                let new_imgs = new_img.split('/')
-                let filename = new_imgs[new_imgs.length-1]
+                var tempPath = res.tempFilePaths[0];
+                let tempPaths = tempPath.split('/')
+                let filename = tempPaths[tempPaths.length-1]
+                // console.log(filename)
                 wx.cloud.uploadFile({
                     cloudPath : filename,
+                    filePath : tempPath,
                     success:(res)=>{
+                        console.log(res)
                         this.setData({
                             img_fileID : res.fileID, 
-                            team_img : new_img
+                            team_img : res.fileID
                         })
+                    },
+                    fail:(err)=>{
+                        console.log(err)
                     }
                 })
             }
