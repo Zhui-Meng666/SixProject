@@ -77,7 +77,6 @@ Page({
         var idx = e.currentTarget.dataset.index
         var group = groups[idx]
         var group_id = group.group_id 
-        console.log(group_id)
         wx.navigateTo({
           url: '../appoint/appoint?group_id='+group_id,
         })
@@ -156,7 +155,7 @@ Page({
         let appoints = this.data.appoint_show;
         let appoint = appoints[idx];
         let groupid = appoint.group_id
-        if (appoint.number < 4) {
+        if (appoint.member_num < 20) {
             conn.joinGroup({
                 groupId: groupid, // 群组ID
                 message: '申请入群', // 请求信息
@@ -373,24 +372,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        if (app.globalData.registered) {
-            conn.open({
-                user: app.globalData.openid,
-                pwd: "123456",
-                appKey: app.globalData.appKey,
-                success: (res) => {
-                    console.log("成功", res)
-                },
-                fail: (err) => {
-                    console.log("失败", err)
-                }
-            });
-        } else {
-            Toast.fail("请先注册！")
-            wx.redirectTo({
-                url: '../../Personal/login/login',
-            })
-        }
         wx.cloud.callFunction({
             name: 'httprequest',
             data: {
@@ -507,14 +488,32 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow:function() {
-
+        if (app.globalData.registered) {
+            conn.open({
+                user: app.globalData.openid,
+                pwd: "123456",
+                appKey: app.globalData.appKey,
+                success: (res) => {
+                    console.log("成功", res)
+                },
+                fail: (err) => {
+                    console.log("失败", err)
+                }
+            });
+        } else {
+            Toast.fail("请先注册！")
+            wx.redirectTo({
+                url: '../../Personal/login/login',
+            })
+        }
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        console.log("关闭连接")
+        conn.close()
     },
 
     /**

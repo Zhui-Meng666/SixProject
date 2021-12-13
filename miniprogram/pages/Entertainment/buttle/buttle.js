@@ -184,7 +184,8 @@ Page({
                     'mp3': true,
                     'amr': true,
                     'wmv': true,
-                    'aac': true
+                    'aac': true,
+                    'silk': true
                 };
                 let str = app.globalData.appKey.split("#");
                 let length = res.duration / 1000;
@@ -423,7 +424,7 @@ Page({
                         type: 'message',
                         value: {
                             self: false,
-                            avatar: that.data.userinfo[message.owner].avatar,
+                            avatar: that.data.userinfo[message.from].avatar,
                             messg: text
                         }
                     })
@@ -456,7 +457,7 @@ Page({
                             type: 'sound',
                             value: {
                                 self: false,
-                                avatar: that.data.userinfo[message.owner].avatar,
+                                avatar: that.data.userinfo[message.from].avatar,
                                 sdid: sdid,
                                 sdtext: msg
                             }

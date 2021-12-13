@@ -145,7 +145,8 @@ Page({
                     'mp3': true,
                     'amr': true,
                     'wmv': true,
-                    'aac': true
+                    'aac': true,
+                    'silk': true,
                 };
                 let str = app.globalData.appKey.split("#");
                 let length = res.duration / 1000;
@@ -405,6 +406,7 @@ Page({
     onLoad: function (options) {
         var id = options.group_id
         if (app.globalData.registered) {
+            console.log("开始连接")
             conn.open({
                 user: app.globalData.openid,
                 pwd: "123456",
@@ -434,12 +436,12 @@ Page({
                 if (data.type === 'text') {
                     var text = data.value
                     var msglt = that.data.msglist
-                    var userinfo = that.data.userinfo[message.owner]
+                    var userinfo = that.data.userinfo[message.from]
                     msglt.push({
                         type: 'message',
                         value: {
                             self: false,
-                            avatar: userinfo.avatar,
+                            avatar: userinfo == undefined ? '../../../images/unload.png' : userinfo.avatar,
                             messg: text
                         }
                     })
@@ -450,14 +452,14 @@ Page({
                     var customExts = data.value
                     var msglist = that.data.msglist
                     var tempcard = that.data.tempcard
-                    var userinfo = that.data.userinfo[message.owner]
+                    var userinfo = that.data.userinfo[message.from]
                     msglist.push({
                         type: 'personcard',
                         value: {
                             self: false,
-                            avatar: userinfo.avatar,
+                            avatar: userinfo == undefined ? '../../../images/unload.png' : userinfo.avatar,
                             cdid: tempcard.length,
-                            nickname: userinfo.nickname
+                            nickname: userinfo == undefined ? '无' : userinfo.nickname
                         }
                     })
                     tempcard.push(customExts)
@@ -468,13 +470,14 @@ Page({
                 }
             },
             onAudioMessage: function (message) {
+                console.log(message)
                 var duration = message.length
-                var userinfo = that.data.userinfo[message.owner]
+                var userinfo = that.data.userinfo[message.from]
                 wx.downloadFile({
                     url: message.url,
                     header: {
                         "X-Requested-With": "XMLHttpRequest",
-                        Accept: "audio/aac",
+                        Accept: "audio",
                         Authorization: "Bearer " + message.token
                     },
                     success(res) {
@@ -492,7 +495,7 @@ Page({
                             type: 'sound',
                             value: {
                                 self: false,
-                                avatar: userinfo.avatar,
+                                avatar: userinfo == undefined ? '../../../images/unload.png' : userinfo.avatar,
                                 sdid: sdid,
                                 sdtext: msg
                             }
@@ -514,12 +517,12 @@ Page({
                 var temphoto = that.data.temphoto
                 that.data.temphoto.push(message.url)
                 var msglist = that.data.msglist
-                var userinfo = that.data.userinfo[message.owner]
+                var userinfo = that.data.userinfo[message.from]
                 msglist.push({
                     type: 'photo',
                     value: {
                         self: false,
-                        avatar: userinfo.avatar,
+                        avatar: userinfo == undefined ? '../../../images/unload.png' : userinfo.avatar,
                         phoid: temphoto.length,
                         imgsrc: message.url
                     }
@@ -546,6 +549,22 @@ Page({
                         break;
                     case 'memberJoinPublicGroupSuccess':
                         // 加入公开群成功
+                        wx.cloud.callFunction({
+                            name: 'httppost',
+                            data: {
+                                url: app.globalData.baseurl + 'arrange_join_group/',
+                                data: {
+                                    openid: msg.owner,
+                                    group_id: msg.gid,
+                                }
+                            },
+                            success: (res) => {
+                                console.log("成功", res.result)
+                            },
+                            fail: (err) => {
+                                console.log("失败", err)
+                            }
+                        })
                         break;
                     case 'removedFromGroup':
                         // 从群组移除
