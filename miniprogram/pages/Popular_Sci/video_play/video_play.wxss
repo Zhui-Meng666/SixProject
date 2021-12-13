@@ -22,7 +22,7 @@
   color: white;
   position: relative;
   left: 20rpx;
-  top: 1150rpx;
+  top: 1030rpx;
 }
 
 .like{
