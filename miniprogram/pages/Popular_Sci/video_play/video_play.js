@@ -9,20 +9,29 @@ Page({
     like_src: '../../../images/like-unclick.png',
     share_src: '../../../images/video_share.png',
     video_list: [],
+    video_src_list : [],
+    test : [
+      'cloud://mengyanzhiya-7g39qvgfa47d0969.6d65-mengyanzhiya-7g39qvgfa47d0969-1304999579/pexels-sami-aksu-10207542.mp4',
+      'cloud://mengyanzhiya-7g39qvgfa47d0969.6d65-mengyanzhiya-7g39qvgfa47d0969-1304999579/f60b9b79704bd5d71e012da61dfbdb94.mp4'
+    ],
 
     up_stroke: false, // ture:上划；false：下划
     difference: '', // 拖动的距离
     windowHeight: '', // 屏幕高度
     pageY: ''
   },
-
+  // this.walk
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      windowHeight : wx.getSystemInfoSync().windowHeight
+    })
     var vids = JSON.parse(options.vids)
     // console.log(vids)
     var video_list = this.data.video_list
+    var video_src_list = this.data.video_src_list
     let openid = app.globalData.openid
     for(let i=0;i<vids.length;i++){
       let vid = vids[i]
@@ -49,7 +58,6 @@ Page({
           }
         },
         success : (res) => {
-          
           var v = res.result.data 
           // console.log(v)
           // video_list.push(res.result.data)
@@ -64,8 +72,10 @@ Page({
           temp.create_time = v.create_time
           // console.log(temp)
           video_list.push(temp)
+          video_src_list.push(temp.video_link)
           this.setData({
-            video_list : video_list
+            video_list : video_list,
+            video_src_list : video_src_list
           })
         },
         fail:(err) => {
@@ -126,6 +136,8 @@ Page({
     // this.setData({
     //   video_list : video_list
     // })
+
+    console.log(this.data.video_src_list)
   },
 
   like_click(e) {

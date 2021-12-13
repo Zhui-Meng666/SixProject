@@ -83,7 +83,7 @@
                         <image src="{{item.picture}}" class="act_img"></image>
                         <view class="act_info">
                             <view class="act_name">{{item.title}}</view>
-                            <view class="act_msg">地点{{item.address}}</view>
+                            <view class="act_msg">地点：{{item.address}}</view>
                             <view class="act_msg">时间：{{item.time}}</view>
                             <!-- <view class="act_msg">人数：{{item.n_people}}/{{item.m_people}}</view> -->
                             <!-- <view class="act_msg">{{item.info}}</view> -->

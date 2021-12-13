@@ -9,66 +9,9 @@ Page({
      */
     data: {
         bottom_active : 'home',
-        newslist : [
-            {
-                title: "公告：多地首套房贷利率上浮 热。。。",
-                picture_link : "../../images/Cat.jpeg",
-                push_link : 'https://www.baidu.com'
-            },
-            {
-                title: "公告：悦如公寓三周年生日趴邀你免费吃喝欢唱",
-                picture_link: "../../images/Cat.jpeg",
-                push_link: '../Personal/main'
-            },
-            {
-                title: "公告：你想和一群有志青年一起过生日嘛？",
-                picture_link: "../../images/Cat.jpeg",
-                push_link: '../Personal/main'
-            }
-        ],
-        videos: [
-            {
-                name: '123',
-                msg: '哈哈哈哈哈哈哈',
-                picture_link: '../../images/Cat.jpeg',
-            },
-            {
-                name : '456',
-                msg : '哈哈哈哈哈',
-                picture_link : '../../images/Cat.jpeg',
-            },
-            {
-                name : '000',
-                msg : '哈哈哈哈哈',
-                picture_link : '../../images/Cat.jpeg',
-            },
-            {
-                name : '0331',
-                msg : '哈哈哈哈哈',
-                picture_link : '../../images/Cat.jpeg',
-            },
-        ],
-        all_videos: [{
-                name: '123',
-                msg: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
-                cover_src: '../../images/Cat.jpeg',
-            },
-            {
-                name : '456',
-                msg : '哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-            },
-            {
-                name : '000',
-                msg : '哈哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-            },
-            {
-                name : '0331',
-                msg : '哈哈哈哈哈',
-                cover_src : '../../images/Cat.jpeg',
-            },
-        ],
+        newslist : [],
+        videos : [],
+        all_videos : [],
         bottom_list: [{
                 name: '主页',
                 img_src: '../../images/home-click.png'
@@ -224,7 +167,7 @@ Page({
                 url : app.globalData.baseurl + 'scientific_push_article/',
             },
             success: (res) => {
-                console.log(res)
+                // console.log(res)
                 this.setData({
                     msglist : res.result.data 
                 })
@@ -241,7 +184,7 @@ Page({
                 url : app.globalData.baseurl + 'scientific_video_show/'
             },
             success : (res) => {
-                console.log(res)
+                // console.log(res)
                 this.setData({
                     videos : res.result.results,
                     all_videos : res.result.results

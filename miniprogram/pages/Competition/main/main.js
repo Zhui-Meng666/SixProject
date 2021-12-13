@@ -15,83 +15,8 @@ Page({
         show_select_ins : false,
         bottom_active : 'game',
 
-        
-        games : [
-            {
-                id : 1,
-                name : '男单锦标赛',
-                type : '体教部',
-                status : '准备中',
-                introduction : '没有简介。。。。。。。。。。。。。。'
-            },
-            {
-                id : 2,
-                name : '男单锦标赛',
-                type : '体教部',
-                status : '准备中',
-                introduction : '没有简介。。。。。。。。。。。。。。'
-            },
-            {
-                id : 3,
-                name : '男单锦标赛',
-                type : '体教部',
-                status : '准备中',
-                introduction : '没有简介。。。。。。。。。。。。。。'
-            },
-            {
-                id : 4,
-                name : '男单锦标赛',
-                type : '羽协',
-                status : '准备中',
-                introduction : '没有简介。。。。。。。。。。。。。。'
-            },
-            {
-                gameid : '001',
-                name : '女单锦标赛',
-                host : '体教部',
-                state : '进行中',
-                info : '没有简介。。。。。。。。。。。。。。',
-                com_info : '23 VS 24',
-                field : '场地6',
-                time : '15:00 - 15:30'
-            },
-            {
-                name : '混合双打锦标赛',
-                host : '体教部',
-                state : '已完成',
-                info : '没有简介。。。。。。。。。。。。。。',
-                res_score_1 : 2,
-                res_score_2 : 1,
-                com_1 : '信息',
-                com_2 : '经济',
-                free : ['雒勖博         -30km', 'ABC            -10km']
-            },
-        ],
-        acts : [
-            {
-                name : '科普知识',
-                date : '2021-10-27',
-                site : '羽毛球馆',
-                sb : 100,
-                n_people : 30,
-                m_people : 50,
-                info : '没有介绍。。。。。。。',
-                img_src : '../../../images/Cat.jpeg',
-                signed : false
-            },
-            {
-                name : '科普知识',
-                date : '2021-10-27',
-                site : '羽毛球馆',
-                sb : 100,
-                n_people : 30,
-                m_people : 50,
-                info : '没有介绍。。。。。。。',
-                img_src : '../../../images/Cat.jpeg',
-                signed : true
-            }
-        ]
-
+        games : [],
+        acts : []
     },
 
     toAct: function (e) {

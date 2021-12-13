@@ -13,7 +13,7 @@
         <view class="act_details">
           <view class="act_line">
             <view class="act_name">{{item.name}}</view>
-
+            <view class="act_name">{{item.id}}</view>
           </view>
           <!-- <view class="act_detail">{{item.state}}</view> -->
           <view class="act_line">

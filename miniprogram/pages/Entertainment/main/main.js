@@ -14,7 +14,7 @@ Page({
         team_img: '../../../images/Cat.jpeg',
         buttle: [],
         appoint: [],
-
+        type : '乱斗'
     },
 
     buttle_join_in: function (e) {
@@ -122,7 +122,10 @@ Page({
     },
 
     onChange(event) {
-        console.log(event.detail)
+        console.log(event.detail.title)
+        this.setData({
+            type : event.detail.title
+        })
     },
     to_home(event) {
         wx.redirectTo({
@@ -182,31 +185,15 @@ Page({
         this.setData({
             show_create: true
         })
-        // var groups = this.data.appoint_show;
-        // var team_name = this.data.team_name;
-        // var team_class = this.data.team_class;
-        // var team_max = this.data.team_max;
-        // var team_img = this.data.team_img;
-
-        // var temp = {
-        //     coverimg : team_img,
-        //     name : team_name,
-        //     class : team_class,
-        //     max_num : team_max,
-        //     number : 1,
-        //     date : '2021-10-11'
-        // }
-
-        // groups.push(temp)
-        // this.setData({group : groups})
     },
 
     // 创建群接口
     create_done: function (e) {
-        var type = this.data.active; // 判断类型，0---乱斗，1---约球
+        var type = this.data.type; // 判断类型，0---乱斗，1---约球
+        console.log(type) // 这里决定创建的聊天去哪里了
         var groupid = '' // 在这里填入groupid
         var openid = app.globalData.openid // openid
-        if (type == 0) {
+        if (type == '乱斗') {
             var groups = this.data.buttle;
             var team_name = this.data.team_name;
             var team_introduction = this.data.team_introduction
@@ -407,9 +394,13 @@ Page({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
-            success: function (res) {
+            success: (res) =>{
                 var new_img = res.tempFilePaths[0];
-                
+                // console.log(new_img)
+                // console.log(this.data.team_img)
+                // this.setData({
+                //     team_img : new_img
+                // })
                 let new_imgs = new_img.split('/')
                 let filename = new_imgs[new_imgs.length-1]
                 wx.cloud.uploadFile({
@@ -445,41 +436,41 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        // 我参加的乱斗群
-        wx.cloud.callFunction({
-            name: 'httprequest',
-            data: {
-                url: app.globalData.baseurl + 'melee_my_group/',
-                data: {
-                    openid: app.globalData.openid
-                }
-            },
-            success: (res) => {
-                console.log(res)
-                this.setData({
-                    buttle: res.result.data
-                })
-            },
-            fail:(err)=>{
-                console.log(err)
-            }
-        })
+        // // 我参加的乱斗群
+        // wx.cloud.callFunction({
+        //     name: 'httprequest',
+        //     data: {
+        //         url: app.globalData.baseurl + 'melee_my_group/',
+        //         data: {
+        //             openid: app.globalData.openid
+        //         }
+        //     },
+        //     success: (res) => {
+        //         console.log(res)
+        //         this.setData({
+        //             buttle: res.result.data
+        //         })
+        //     },
+        //     fail:(err)=>{
+        //         console.log(err)
+        //     }
+        // })
 
-        // 所有约球群
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                data : {
-                    url : app.globalData.baseurl + 'arrange_group_show/',
-                }
-            },
-            success:(res) => {
-                this.setData({
-                    appoint : res.result.data,
-                    appoint_show : res.result.data
-                })
-            }
-        })
+        // // 所有约球群
+        // wx.cloud.callFunction({
+        //     name : 'httprequest',
+        //     data : {
+        //         data : {
+        //             url : app.globalData.baseurl + 'arrange_group_show/',
+        //         }
+        //     },
+        //     success:(res) => {
+        //         this.setData({
+        //             appoint : res.result.data,
+        //             appoint_show : res.result.data
+        //         })
+        //     }
+        // })
     },
 
     /**
