@@ -6,99 +6,115 @@ Page({
      * 页面的初始数据
      */
     data: {
-        num : 0,
-        adjust : false,
+        num: 0,
+        adjust: false,
         bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
-        
-        imgs : [
-            {
-                src : '../../../images/Cat.jpeg',
-                show : true
+
+        imgs: [{
+                src: '../../../images/Cat.jpeg',
+                show: true
             },
             {
-                src : "../../../images/coin.png",
-                show : true
+                src: "../../../images/coin.png",
+                show: true
             },
             {
-                src : "../../../images/sufecoin.png",
-                show : true
+                src: "../../../images/sufecoin.png",
+                show: true
             },
             {
-                src : "../../../images/home-click.png",
-                show : true
+                src: "../../../images/home-click.png",
+                show: true
             },
             {
-                src : "../../../images/test.png",
-                show : true
+                src: "../../../images/test.png",
+                show: true
             },
             {
-                src : "../../../images/Cat.jpeg",
-                show : true
+                src: "../../../images/Cat.jpeg",
+                show: true
             }
         ]
     },
 
-    uploadimg: function(e) {
+    uploadimg: function (e) {
         console.log("点此上传图片，最多九张");
-        var imgs = this.data.imgs 
-        var new_pics = []
+        var fileIDs = []
         wx.chooseImage({
-          count: 1,
-          sizeType: ['original', 'compressed'],
-          sourceType : ['album', 'camera'],
-          success: (res)=>{
-            new_pics = res.tempFilePaths
-          }
-        })
-        imgs = imgs.concat(new_pics)
-        console.log(new_pics)
-        wx.cloud.callFunction({
-            name : 'httppost',
-            data : {
-                url : app.globalData.baseurl + 'album_upload/',
-                data : {
-                    openid : app.globalData.openid,
-                    picture_link : new_pics
+            count: 9,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: (res) => {
+                for (let i = 0; i < res.tempFilePaths.length; i++) {
+                    var tempPath = res.tempFilePaths[i]
+                    let tempPaths = tempPath.split('/')
+                    let filename = tempPaths[tempPaths.length - 1]
+                    wx.cloud.uploadFile({
+                        cloudPath: filename,
+                        filePath: tempPath,
+                        success: (res) => {
+                            var fileID = res.fileID
+                            fileIDs.push(fileID)
+                            wx.cloud.callFunction({
+                                name: 'httppost',
+                                data: {
+                                    url: app.globalData.baseurl + 'album_upload/',
+                                    data: {
+                                        openid: app.globalData.openid,
+                                        picture_link: [fileID]
+                                    }
+                                },
+                                success: (res) => {
+                                    console.log(res)
+                                    var picture_link = res.result.data
+                                    var num = 0
+                                    if (picture_link) {
+                                        num = picture_link.length
+                                    }
+                                    this.setData({
+                                        imgs: picture_link,
+                                        num: num
+                                    })
+                                },
+                                fail:(err) => {
+                                    console.log(err)
+                                }
+                            })
+                        }
+                    })
                 }
-            },
-          success:(res)=>{
-              console.log(res)
-              var picture_link = res.result.data 
-            
-              this.setData({
-                  imgs : picture_link,
-                  num : picture_link.length
-              })
-          }
+            }
         })
+        
+
     },
-    
-    org: function(e) {
+
+    org: function (e) {
         var adjust = !this.data.adjust
         this.setData({
-            adjust : adjust
+            adjust: adjust
         })
     },
 
-    del: function(e) {
-        if (this.data.adjust == true){
+    del: function (e) {
+        if (this.data.adjust == true) {
             var imgs = this.data.imgs;
             var index = e.currentTarget.dataset.index;
             var picture_link = imgs[index]
             wx.cloud.callFunction({
-                name : 'httpdelete',
-                data : {
-                    url : app.globalData.baseurl + 'album_upload/',
-                    data : {
-                        openid : app.globalData.openid,
-                        picture_link : picture_link
+                name: 'httpdelete',
+                data: {
+                    url: app.globalData.baseurl + 'album_upload/',
+                    data: {
+                        openid: app.globalData.openid,
+                        picture_link: picture_link
                     }
                 },
                 success: (res) => {
                     console.log('success')
                     this.setData({
-                        imgs : res.result.data,
-                        num : res.result.data.length
+                        imgs: res.result.data,
+                        num: res.result.data.length
                     })
                 }
             })
@@ -110,21 +126,26 @@ Page({
      */
     onLoad: function (options) {
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'album_show_all/',
-                data : {
-                    openid : app.globalData.openid,
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'album_show_all/',
+                data: {
+                    openid: app.globalData.openid,
                 }
             },
-            success : (res) => {
+            success: (res) => {
                 console.log('success')
+                let imgs = res.result.picture_link
+                let num = 0
+                if (imgs) {
+                    let num = imgs.length
+                }
                 this.setData({
-                    imgs : res.result.picture_link,
-                    num : res.result.picture_link.length
+                    imgs: imgs,
+                    num: num
                 })
             },
-            fail : (res) => {
+            fail: (res) => {
                 console.log(res)
             }
         })
