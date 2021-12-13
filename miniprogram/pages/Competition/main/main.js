@@ -105,6 +105,25 @@ Page({
         })
     },
     start_game: function (e) {
+        var idx = e.currentTarget.dataset.index
+        var game = this.data.games[idx]
+        var match_id = game.id 
+        var openid = app.globalData.openid
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl  + 'match_detail_info_show/',
+                data : {
+                    openid : openid,
+                    match_id : match_id 
+                }
+            },
+            success:(res)=>{
+                wx.navigateTo({
+                  url: '../detail_com/detail_com?data=' + JSON.stringify(res.result.data) + '&name=' + game.name,
+                })
+            }
+        })
         wx.navigateTo({
             url: '../detail_com/detail_com',
         })

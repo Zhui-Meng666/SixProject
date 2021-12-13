@@ -22,14 +22,14 @@ Page({
     },
 
     start_game: function(e){
+        var idx = e.currentTarget.dataset.index 
+        var game = this.data.single_match[idx]
         var subdata = {
-            name: '',
-            match_id: '', //比赛号
-            singleid: '',  //小比赛ID
-            college1: '',
-            college2: '',
-            com1: '',
-            com2: ''
+            name: this.data.name ,
+            match_id: this.data.match, //比赛号
+            singleid: game.id,  //小比赛ID
+            com1: game.competitor1,
+            com2: game.competitor2
         }
         wx.navigateTo({
           url: '../score/score?subdata='+JSON.stringify(subdata),
@@ -39,6 +39,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var data = JSON.parse(options.data)
+        this.setData({
+            single_match : data.single_match,
+            match_id : data.match, 
+            name : options.name 
+        })
     },
 
     /**
