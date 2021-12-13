@@ -29,14 +29,14 @@
             </van-tab>
 
             <van-tab title="进行中">
-                <view wx:for="{{games_on}}">
-                    <view class="game_items">
+                <view wx:for="{{games}}">
+                    <view class="game_items" wx:if="{{item.status == '进行中'}}">
                         <van-cell title="比赛号" value="{{item.id}}"></van-cell>
                         <view class="preview_imgs">
-                            <image src="{{item.schedule_arrange}}" class="preview_img"></image>
-                            <image src="{{item.referee_arrange}}" class="preview_img"></image>
-                            <image src="{{item.competitors}}" class="preview_img"></image>
-                            <image src="{{item.top_eight}}" class="preview_img"></image>
+                            <image src="{{item.schedule_arrange}}" class="preview_img" bindtap="upload_sa" data-index="{{index}}"></image>
+                            <image src="{{item.referee_arrange}}" class="preview_img" bindtap="upload_ra" data-index="{{index}}"></image>
+                            <image src="{{item.competitors}}" class="preview_img" bindtap="upload_com" data-index="{{index}}"></image>
+                            <image src="{{item.top_eight}}" class="preview_img" bindtap="upload_te" data-index="{{index}}"></image>
                         </view>
                         <van-group-cell wx:for="{{item.single_match}}" wx:for-item="smatch">
                             <van-cell title="开始时间" value="{{smatch.create_time}}"></van-cell>

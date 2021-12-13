@@ -57,19 +57,20 @@
 </van-tabs>
 
 <view style="flex-direction: row; position: absolute; bottom: 10rpx; width: 100%;">
-    <image slot="icon" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_home"/>
+  <image slot="icon" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_home" />
 
-    <image slot="icon" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_game"/>
+  <image slot="icon" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_game" />
 
-    <image slot="icon" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment"/>
+  <image slot="icon" src="../../../images/entertainment-click.png" mode="aspectFit" class="icon_class" bindtap="to_entertainment" />
 
-    <image slot="icon" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_personal"/>
+  <image slot="icon" src="../../../images/me-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_personal" />
 </view>
 
 <van-popup custom-class="setpop" show="{{show_create}}" bind:close="close_create" position="bottom" round safe-area-inset-top>
-  <!-- <view> hello world! </view> -->
-  <image src="{{team_img}}" class="team_img" bindtap="uploadimg"></image>
-  <view class="full_line"></view>
+  <!-- <van-uploader file-list="{{fileList}}" max-count="1" bind:after-read="afterRead" bind:delete="delete" style="height: 150rpx;"> -->
+    <image src="{{team_img}}" class="team_img" mode="aspectFit" bindtap="uploadimg"></image>
+    <view class="full_line" ></view>
+  <!-- </van-uploader> -->
   <van-cell-group>
     <van-field value="{{team_name}}" label="小组名称" placeholder="请输入小组名称" border="{{false}}" bind:change="tname_input"></van-field>
 
