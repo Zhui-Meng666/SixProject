@@ -224,6 +224,7 @@ Page({
                 url : app.globalData.baseurl + 'scientific_push_article/',
             },
             success: (res) => {
+                console.log(res)
                 this.setData({
                     newslist : res.result.data 
                 })
@@ -240,9 +241,10 @@ Page({
                 url : app.globalData.baseurl + 'scientific_video_show/'
             },
             success : (res) => {
+                console.log(res)
                 this.setData({
-                    videos : res.result,
-                    all_videos : res.result
+                    videos : res.result.results,
+                    all_videos : res.result.results
                 })
             }
         })

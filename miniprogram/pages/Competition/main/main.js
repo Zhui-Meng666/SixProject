@@ -245,6 +245,7 @@ Page({
                 url : app.globalData.baseurl + "match_show/",
             },
             success:(res)=>{
+                console.log(res)
                 this.setData({
                     games : res.data 
                 })
@@ -254,6 +255,21 @@ Page({
             }
         })
 
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+              url: app.globalData.baseurl + 'activity_show/',
+              data: {
+                // openid: app.globalData.openid
+              }
+            },
+            success: (res) => {
+              console.log("成功", res)
+            },
+            fail: (err) => {
+              console.log('失败', err)
+            }
+          })
         // 已经报名的活动
         wx.cloud.callFunction({
             name : 'httprequest',
