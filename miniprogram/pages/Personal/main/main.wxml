@@ -94,7 +94,7 @@
   <van-cell is-link title="更换背景图" bind:click="chooseimg"></van-cell>
 </van-popup>
 
-<view style="flex-direction: row; position: absolute; bottom: 10rpx; width: 100%;">
+<view style="flex-direction: row; position: absolute; bottom: 10rpx; width: 100%;background-color: white;">
     <image slot="icon" src="../../../images/home-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_home"/>
 
     <image slot="icon" src="../../../images/competition-unclick.png" mode="aspectFit" class="icon_class" bindtap="to_game"/>
