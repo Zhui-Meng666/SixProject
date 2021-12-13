@@ -179,7 +179,7 @@ Page({
                 ids.push(videos[i].id)
             }
         }
-        console.log(ids)
+        // console.log(ids)
         wx.navigateTo({
             url: '../Popular_Sci/video_play/video_play?vids=' + JSON.stringify(ids) 
         })

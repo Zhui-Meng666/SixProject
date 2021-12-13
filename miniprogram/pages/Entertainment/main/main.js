@@ -208,7 +208,7 @@ Page({
                 success : (res)=>{
                     groups.push(res.result.data)
                     this.setData({buttle : groups})
-                }
+                },
             })
             this.setData({show_create:false})
         }
