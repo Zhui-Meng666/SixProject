@@ -66,7 +66,18 @@ Page({
         success:(res)=>{
           console.log(res)
           if(res.result.status == 200){
-            video_list[i].like = res.result.data.is_like
+            // console.log(video_list)
+            console.log(video_list[i])
+            var video_link = video_list[i]['video_link']
+            var video = {
+              video_link : video_link,
+              like : false,
+              collect : false,
+              name : video_list[i].name,
+              creator : video_list[i].creator
+            }
+            video.like = res.result.data.is_like
+            video_list[i] = video
             this.setData({
               video_list : video_list
             })

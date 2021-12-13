@@ -25,7 +25,7 @@ page{
 
 .videos{
     width: 100%;
-    height: 790rpx;
+    height: 1050rpx;
     display: flex;
     align-content: flex-start;
     flex-direction: row;
@@ -46,10 +46,10 @@ page{
 .v_name{
     position: relative;
     left: 20rpx;
-    top: -25rpx;
+    top: 10rpx;
     color: white;
     font-family: "heiti";
-    font-size: 50rpx;
+    font-size: 33rpx;
 }
 .v_detail{
     position: relative;

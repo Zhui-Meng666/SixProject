@@ -19,7 +19,7 @@
         </van-uploader>
     </view>
     <view class="submit">
-        <van-button type="primary" loading="{{loading}}" loading-type="spinner" round block bind:click="submit">提交</van-button>
+        <van-button type="primary" color="green" loading="{{loading}}" loading-type="spinner" square block bind:click="submit">提交</van-button>
     </view>
 </view>
 <van-toast id="van-toast" />

@@ -9,6 +9,7 @@ Page({
         num: 0,
         adjust: false,
         bgimg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F12%2F20170912162329_VPJnt.thumb.700_0.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1639148986&t=03cbf2e144f900a3944c1749697ea306',
+        imgs : []
     },
 
     uploadimg: function (e) {
@@ -32,7 +33,7 @@ Page({
                         cloudPath: filename,
                         filePath: tempPath,
                         success: (res) => {
-                            // console.log(res)
+                            console.log(res)
                             var fileID = res.fileID
                             fileIDs.push(fileID)
                             imgs.push(fileID)
@@ -99,7 +100,7 @@ Page({
                     }
                 },
                 success: (res) => {
-                    console.log('success')
+                    console.log(res)
                     var result = res.result.data
                     var lxb = []
                     for(let i=0;i<result.length;i++){

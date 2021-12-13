@@ -208,7 +208,6 @@ page {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    border: thin solid #515c5d;
     border-radius: 15rpx;
     margin: 3rpx 10rpx;
     padding: 5rpx 0;
@@ -234,7 +233,6 @@ page {
     min-height: 200rpx;
     position: relative;
     top: 10%;
-    border: thin solid #515c5d;
     border-radius: 15rpx;
     margin: 10rpx;
     background-color: white;
@@ -276,7 +274,6 @@ page {
     position: relative;
     top: 10%;
     margin: 10rpx;
-    border-bottom: thin solid #515c5d;
     border-radius: 15rpx;
 }
 

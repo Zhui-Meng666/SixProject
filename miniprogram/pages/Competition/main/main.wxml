@@ -1,9 +1,9 @@
 <!--pages/Competition/main/main.wxml-->
-<van-tabs activate="{{active_1}}" bind:change="change1">
+<van-tabs>
     <van-tab title="比赛">
         <van-search value="{{value}}" placerholder="请输入关键词" shape="round" show-action="{{showcancel}}" bind:change="search_change" bind:search="onSearch1"></van-search>
 
-        <van-tabs activate="{{active-2}}">
+        <van-tabs>
             <van-tab title="准备中">
                 <view wx:for="{{games}}">
                     <view wx:if="{{item.status == '准备中'}}" class="game_items">
@@ -25,7 +25,7 @@
                         </view>
                     </view>
                 </view>
-                <image src="../../../images/add.png" class="add_com" bindtap="add_com"></image>
+                <image src="../../../images/add.png" class="add_com" mode="aspectFit" bindtap="add_com"></image>
             </van-tab>
 
             <van-tab title="进行中">
@@ -53,7 +53,7 @@
 
             <van-tab title="已完成">
                 <view wx:for="{{games}}">
-                    <view wx:if="{{item.state == '已完成'}}" class="game_items" bindtap="res_com">
+                    <view wx:if="{{item.status == '已完成'}}" class="game_items" bindtap="res_com">
                         <view class="game_msg">
                             <view>{{item.type}}.</view>
                             <view>{{item.name}}</view>
@@ -76,7 +76,7 @@
     <van-tab title="活动">
         <van-search value="{{value}}" placerholder="请输入关键词" shape="round" show-action="{{showcance2}}" bind:change="search_change" bind:search="onSearch2"></van-search>
 
-        <van-tabs activate="{{active-2}}" bind:change="change2">
+        <van-tabs>
             <van-tab title="所有">
                 <view wx:for="{{acts}}">
                     <view class="act_items">

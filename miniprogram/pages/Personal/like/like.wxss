@@ -11,7 +11,6 @@ page {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    border: thin solid #515c5d;
     background-color: white;
 }
 
@@ -19,7 +18,6 @@ page {
     width: 20%;
     font-size: small;
     background-color: #FAFAFB;
-    border: thin solid #515c5d;
     border-radius: 8%;
     text-align: center;
     padding: 15rpx 0;

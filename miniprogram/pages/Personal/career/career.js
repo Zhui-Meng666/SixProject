@@ -6,64 +6,18 @@ Page({
      * 页面的初始数据
      */
     data: {
-        show1 : false,
-        show2 : false,
-        show3 : false,
-        show4 : false,
+        show1: false,
+        show2: false,
+        show3: false,
+        show4: false,
 
-        athlete : [
-            {
-                name : "新秀赛",
-                match_rank : "1st",
-                start_time : "2019-10-10",
-                end_time : "2019-10-10",
-                type : "男子单打"
-            },
-        ],
-        athlete1 : [
-            {
-                name : "新秀赛",
-                match_rank : "1st",
-                start_time : "2019-10-10",
-                end_time : "2019-10-10",
-                type : "男子单打"
-            },
-        ],
-        referee : [
-            {
-                name : '新生杯',
-                id : 2,
-                referee_date : '2021-5-10',
-                identity : '主裁',
-                credit_score : '+8'
-            },
-        ],
-        referee1 : [
-            {
-                name : '新生杯',
-                id : 2,
-                referee_date : '2021-5-10',
-                identity : '主裁',
-                credit_score : '+8'
-            },
-        ],
+        athlete: [],
+        athlete1: [],
+        referee: [],
+        referee1: [],
 
-        activity : [
-            {
-                name : '宣讲会',
-                time : '2021-3-10',
-                picture : '../../../images/test.png',
-                prize : 8
-            }
-        ],
-        activity1 : [
-            {
-                name : '宣讲会',
-                time : '2021-3-10',
-                picture : '../../../images/test.png',
-                prize : 8
-            }
-        ],
+        activity: [],
+        activity1: [],
 
     },
 
@@ -78,7 +32,7 @@ Page({
         var list = this.data.play
         var len = list.length
         for (let i = 0; i < len; ++i) {
-            if (list[i].date.indexOf(text) != -1 || list[i].class.indexOf(text)!=-1 || list[i].partner.indexOf(text)!=-1) {
+            if (list[i].date.indexOf(text) != -1 || list[i].class.indexOf(text) != -1 || list[i].partner.indexOf(text) != -1) {
                 newlist.push(list[i])
             }
         }
@@ -92,7 +46,7 @@ Page({
         var list = this.data.activity
         var len = list.length
         for (let i = 0; i < len; ++i) {
-            if (list[i].activity_name.indexOf(text) != -1 || list[i].date.indexOf(text)!=-1) {
+            if (list[i].activity_name.indexOf(text) != -1 || list[i].date.indexOf(text) != -1) {
                 newlist.push(list[i])
             }
         }
@@ -106,7 +60,7 @@ Page({
         var list = this.data.athlete
         var len = list.length
         for (let i = 0; i < len; ++i) {
-            if (list[i].game_name.indexOf(text) != -1 || list[i].class.indexOf(text)!=-1 || list[i].date.indexOf(text)!=-1) {
+            if (list[i].game_name.indexOf(text) != -1 || list[i].class.indexOf(text) != -1 || list[i].date.indexOf(text) != -1) {
                 newlist.push(list[i])
             }
         }
@@ -120,7 +74,7 @@ Page({
         var list = this.data.referee
         var len = list.length
         for (let i = 0; i < len; ++i) {
-            if (list[i].game_name.indexOf(text) != -1 || list[i].identity.indexOf(text)!=-1 || list[i].date.indexOf(text)!=-1) {
+            if (list[i].game_name.indexOf(text) != -1 || list[i].identity.indexOf(text) != -1 || list[i].date.indexOf(text) != -1) {
                 newlist.push(list[i])
             }
         }
@@ -137,40 +91,56 @@ Page({
     onCancel: function (e) {
         this.setData({
             athlete: this.data.athlete1,
-            referee : this.data.referee1,
-            activity : this.data.activity1,
-            play : this.data.play1,
+            referee: this.data.referee1,
+            activity: this.data.activity1,
+            play: this.data.play1,
             showcancel: false
         })
     },
 
     showPopup1() {
-        this.setData({show1:true});
+        this.setData({
+            show1: true
+        });
     },
     showPopup2() {
-        this.setData({show2:true});
+        this.setData({
+            show2: true
+        });
     },
     showPopup3() {
-        this.setData({show3:true});
+        this.setData({
+            show3: true
+        });
     },
     showPopup4() {
-        this.setData({show4:true});
+        this.setData({
+            show4: true
+        });
     },
     onClose1() {
-        this.setData({show1:false});
+        this.setData({
+            show1: false
+        });
     },
     onClose2() {
-        this.setData({show2:false});
+        this.setData({
+            show2: false
+        });
     },
     onClose3() {
-        this.setData({show3:false});
+        this.setData({
+            show3: false
+        });
     },
     onClose4() {
-        this.setData({show4:false});
+        this.setData({
+            show4: false
+        });
     },
-    back2main: function() {
+    back2main: function () {
         wx.navigateTo({
-          url: '../main/main.wxml',
+            url: '../main/main.wxml',
         })
     },
     /**
@@ -178,54 +148,54 @@ Page({
      */
     onLoad: function (options) {
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'career_activity/',
-                data : {
-                    openid : app.globalData.openid
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'career_activity/',
+                data: {
+                    openid: app.globalData.openid
                 }
             },
             success: (res) => {
                 this.setData({
-                    activity : res.result.data,
-                    activity1 : res.result.data
+                    activity: res.result.data,
+                    activity1: res.result.data
                 })
             },
-            fail:(res) => {
+            fail: (res) => {
                 console.log(res)
             }
         })
 
         // 比赛
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'career_match/',
-                data : {
-                    openid : app.globalData.openid
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'career_match/',
+                data: {
+                    openid: app.globalData.openid
                 }
             },
-            success:(res) => {
+            success: (res) => {
                 this.setData({
-                    athlete : res.result.data,
-                    athlete1 : res.result.data
+                    athlete: res.result.data,
+                    athlete1: res.result.data
                 })
             }
         })
 
         // 执裁
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + "career_referee/",
-                data : {
-                    openid : app.globalData.openid
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + "career_referee/",
+                data: {
+                    openid: app.globalData.openid
                 }
             },
-            success : (res) => {
+            success: (res) => {
                 this.setData({
-                    referee : res.result.data,
-                    referee1 : res.result.data 
+                    referee: res.result.data,
+                    referee1: res.result.data
                 })
             }
         })
@@ -243,7 +213,7 @@ Page({
      */
     onShow: function () {
         // 活动
-        
+
     },
 
     /**

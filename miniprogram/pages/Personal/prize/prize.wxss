@@ -124,8 +124,6 @@
     display: flex;
     height: 55rpx;
     width: 30%;
-    border-color: lightsteelblue;
-    border-style: groove;
     border-radius: 20rpx;
     align-items: center;
     margin: auto;

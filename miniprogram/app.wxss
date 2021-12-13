@@ -1,8 +1,4 @@
 /**app.wxss**/
-page {
-    background-color: #c9dfd9
-}
-
 .container {
     width: 100%;
     display: flex;

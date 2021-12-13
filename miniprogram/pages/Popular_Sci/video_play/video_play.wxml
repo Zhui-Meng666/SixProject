@@ -25,7 +25,7 @@
 
 </view> -->
 
-<swiper vertical="{{true}}" style="height: 1220rpx;">
+<swiper vertical="{{true}}" style="height: 1465rpx;">
   <view wx:for="{{video_list}}">
     <swiper-item style="height: 1220rpx;">
       <video src="{{item.video_link}}" enable-progress-gesture="{{true}}" object-fit="cover" controls="{{true}}" autoplay="{{false}}" loop="{{true}}" show-fullscreen-btn="{{false}}" class="video_box"></video>
@@ -36,12 +36,12 @@
       <view class="video_msg">
         @ {{item.creator}}
       </view>
-      <view wx:if="{{item.like == true}}">
+      <view wx:if="{{item.is_like == true}}">
         <image class="like" src="../../../images/like-click.png" bindtap="like_click"></image>
         <image class="share" src="{{share_src}}"></image>
         <image class="collect" src="../../../images/star_unclick.png" bindtap="collect_click"></image>
       </view>
-      <view wx:if="{{item.like == false}}">
+      <view wx:if="{{item.is_like == false}}">
         <image class="like" src="../../../images/like-unclick.png" bindtap="like_click"></image>
         <image class="share" src="{{share_src}}"></image>
         <image class="collect" src="../../../images/star_unclick.png" bindtap="collect_click"></image>

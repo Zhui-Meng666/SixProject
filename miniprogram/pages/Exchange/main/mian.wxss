@@ -11,7 +11,6 @@ page {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border: thin solid #515c5d;
     background-color: white;
 }
 
@@ -23,7 +22,6 @@ page {
     align-items: center;
     font-size: small;
     background-color: #FAFAFB;
-    border: thin solid #515c5d;
     border-radius: 30rpx;
     margin-right: 4%;
 }

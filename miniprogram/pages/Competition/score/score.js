@@ -217,6 +217,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var subdata =  JSON.parse(options)
         const countDown = this.selectComponent('.control-count-down');
         countDown.reset();
         var score1 = this.splitnum(this.data.score1real)
@@ -224,7 +225,18 @@ Page({
         this.setData({
             score1: score1,
             score2: score2,
-            // single_match_id: options.id,
+            single_match_id: subdata.singleid,
+            department: subdata.name,
+            compid: subdata.match_id,
+            playername: [{
+                college: subdata.college1,
+                name: subdata.com1
+            },
+            {
+                college: subdata.college2,
+                name: subdata.com2
+            }
+        ],
         })
         wx.cloud.callFunction({
             name: 'httprequest',

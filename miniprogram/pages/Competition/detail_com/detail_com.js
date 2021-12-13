@@ -22,8 +22,17 @@ Page({
     },
 
     start_game: function(e){
+        var subdata = {
+            name: '',
+            match_id: '', //比赛号
+            singleid: '',  //小比赛ID
+            college1: '',
+            college2: '',
+            com1: '',
+            com2: ''
+        }
         wx.navigateTo({
-          url: '../score/score',
+          url: '../score/score?subdata='+JSON.stringify(subdata),
         })
     },
     /**

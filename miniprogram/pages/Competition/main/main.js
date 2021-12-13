@@ -207,53 +207,78 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    // onLoad: function (options) {
-    //     var openid = app.globalData.openid
-    //     // 所有比赛
-    //     wx.cloud.callFunction({
-    //         name : 'httprequest',
-    //         data : {
-    //             url : app.globalData.baseurl + "match_show/",
-    //         },
-    //         success:(res)=>{
-    //             console.log(res)
-    //             this.setData({
-    //                 games : res.result.data 
-    //             })
-    //         },
-    //         fail:(err)=>{
-    //             console.log(err)
-    //         }
-    //     })
+    onLoad: function (options) {
+        var openid = app.globalData.openid
+        // 所有比赛
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + "match_show/",
+            },
+            success:(res)=>{
+                console.log(res)
+                this.setData({
+                    games : res.result.data 
+                })
+            },
+            fail:(err)=>{
+                console.log(err)
+            }
+        })
 
-    //     // 所有活动
-    //     wx.cloud.callFunction({
-    //         name : 'httprequest',
-    //         data : {
-    //             url : app.globalData.baseurl + 'activity_show/',
-    //         },
-    //         success:(res)=>{
-    //             this.setData({
-    //                 acts : res.result.data
-    //             })
-    //         }
-    //     })
-    //     // 已经报名的活动
-    //     wx.cloud.callFunction({
-    //         name : 'httprequest',
-    //         data : {
-    //             url : app.globalData.baseurl + 'activity_have_sign_up_show/',
-    //             data : {
-    //                 openid : openid
-    //             }
-    //         },
-    //         success:(res)=>{
-    //             this.setData({
-    //                 acts_signed : res.result.data 
-    //             })
-    //         }
-    //     })
-    // },
+        // 已完成的比赛
+        var match_id = []
+        for(let i=0;i<this.games.length;i++){
+            if(this.games[i].status == '已完成'){
+                match_id.push(this.games[i].id)
+            }
+        }
+        var games_over = []
+        for(let i=0;i<match_id.length;i++){
+            var id = match_id[i]
+            wx.cloud.callFunction({
+                name : 'httprequest',
+                data : {
+                    url : app.globalData.baseurl + 'match_single_result_info_show/',
+                    data : {
+                        match_id : id 
+                    }
+                },
+                success:(res) =>{
+                    games_over.push(res.result.data)
+                }
+            })
+        }
+        
+
+        // 所有活动
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'activity_show/',
+            },
+            success:(res)=>{
+                this.setData({
+                    acts : res.result.data
+                })
+            }
+        })
+        // 已经报名的活动
+        wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'activity_have_sign_up_show/',
+                data : {
+                    openid : openid
+                }
+            },
+            success:(res)=>{
+                this.setData({
+                    acts_signed : res.result.data 
+                })
+            }
+        })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
