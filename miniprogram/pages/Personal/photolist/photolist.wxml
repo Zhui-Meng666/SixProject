@@ -23,6 +23,6 @@
 <view class="pics">
     <image src="../../../images/add-pic.png" class="box" bindtap="uploadimg"></image>
     <view wx:for="{{imgs}}">
-        <image src="{{item}}" class="box"  data-index="{{index}}" bindtap="del"></image>
+        <image src="{{item.picture_link}}" class="box"  data-index="{{index}}" bindtap="del"></image>
     </view>
 </view>

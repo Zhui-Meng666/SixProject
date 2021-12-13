@@ -187,8 +187,8 @@ Page({
             },
             success: (res) => {
                 this.setData({
-                    activity : res.data,
-                    activity1 : res.data
+                    activity : res.result.data,
+                    activity1 : res.result.data
                 })
             },
             fail:(res) => {
@@ -207,8 +207,8 @@ Page({
             },
             success:(res) => {
                 this.setData({
-                    athlete : res.data,
-                    athlete1 : res.data
+                    athlete : res.result.data,
+                    athlete1 : res.result.data
                 })
             }
         })
@@ -224,8 +224,8 @@ Page({
             },
             success : (res) => {
                 this.setData({
-                    referee : res.data,
-                    referee1 : res.data 
+                    referee : res.result.data,
+                    referee1 : res.result.data 
                 })
             }
         })

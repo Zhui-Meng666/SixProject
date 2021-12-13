@@ -247,7 +247,7 @@ Page({
             success:(res)=>{
                 console.log(res)
                 this.setData({
-                    games : res.data 
+                    games : res.result.data 
                 })
             },
             fail:(err)=>{
@@ -255,21 +255,18 @@ Page({
             }
         })
 
+        // 所有活动
         wx.cloud.callFunction({
-            name: 'httprequest',
-            data: {
-              url: app.globalData.baseurl + 'activity_show/',
-              data: {
-                // openid: app.globalData.openid
-              }
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'activity_show/',
             },
-            success: (res) => {
-              console.log("成功", res)
-            },
-            fail: (err) => {
-              console.log('失败', err)
+            success:(res)=>{
+                this.setData({
+                    acts : res.result.data
+                })
             }
-          })
+        })
         // 已经报名的活动
         wx.cloud.callFunction({
             name : 'httprequest',
@@ -281,7 +278,7 @@ Page({
             },
             success:(res)=>{
                 this.setData({
-                    acts_signed : res.data 
+                    acts_signed : res.result.data 
                 })
             }
         })

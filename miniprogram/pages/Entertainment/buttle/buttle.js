@@ -300,17 +300,6 @@ Page({
                 }
                 break
             case '1':
-                // let options = {
-                //     groupId: "167298202664961", // 群组ID
-                //     message: "I am zhangjun", // 请求信息
-                //     success: (res) => {
-                //         console.log("成功", res)
-                //     },
-                //     fail: (err) => {
-                //         console.log("失败", err)
-                //     }
-                // };
-                // conn.joinGroup(options)
                 break
             case '2':
                 if (this.data.showrank) {

@@ -25,7 +25,7 @@ Page({
             },
             success:(res)=>{
                 this.setData({
-                    prizes : res.data 
+                    prizes : res.result.data 
                 })
             },
             fail : (res) => {
