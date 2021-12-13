@@ -24,26 +24,12 @@ Page({
       windowHeight: wx.getSystemInfoSync().windowHeight
     })
     var vids = JSON.parse(options.vids)
-    // console.log(vids)
-    var video_list = this.data.video_list
-    var video_src_list = this.data.video_src_list
+    var video_list = []
+    var video_src_list = []
     let openid = app.globalData.openid
     for (let i = 0; i < vids.length; i++) {
-      
       let vid = vids[i]
-      var temp = {
-        id: 0,
-        name: null,
-        video_link: null,
-        picture_link: null,
-        like_num: 0,
-        collection_num: 0,
-        introduction: null,
-        creator: null,
-        create_time: null,
-        like: false,
-        collected: false
-      }
+      
       // 获取视频
       wx.cloud.callFunction({
         name: 'httprequest',
@@ -55,22 +41,10 @@ Page({
         },
         success: (res) => {
           var v = res.result.data
-          // console.log(v)
-          // video_list.push(res.result.data)
-          temp.id = v.id
-          temp.name = v.name
-          temp.video_link = v.video_link
-          temp.picture_link = v.picture_link
-          temp.like_num = v.like_num
-          temp.collection_num = v.collection_num
-          temp.introduction = v.introduction
-          temp.creator = v.creator
-          temp.create_time = v.create_time
-          // console.log(temp)
-          video_list.push(temp)
-          video_src_list.push(temp.video_link)
+          video_list.push(v)
+          video_src_list.push(v.video_link)
           this.setData({
-            // video_list: video_list,
+            video_list: video_list,
             video_src_list: video_src_list
           })
         },
@@ -80,61 +54,53 @@ Page({
       })
 
       // 查看是否点赞
-      // wx.cloud.callFunction({
-      //   name : 'httprequest',
-      //   data : {
-      //     url : app.globalData.baseurl + "scientific_video_like/",
-      //     data : {
-      //       id : vid,
-      //       openid : openid 
-      //     }
-      //   },
-      //   success:(res)=>{
-      //     // console.log(res)
-      //     if(res.result.status == 200){
-      //       temp.like = res.result.data.is_like
-      //     }
-      //     else{
-      //       temp.like = false
-      //     }
-      //   },
-      //   fail:(err)=>{
-      //     console.log(err)
-      //   }
-      // })
+      wx.cloud.callFunction({
+        name : 'httprequest',
+        data : {
+          url : app.globalData.baseurl + "scientific_video_like/",
+          data : {
+            id : vid,
+            openid : openid 
+          }
+        },
+        success:(res)=>{
+          console.log(res)
+          if(res.result.status == 200){
+            video_list[i].like = res.result.data.is_like
+            this.setData({
+              video_list : video_list
+            })
+          }
+        },
+        fail:(err)=>{
+          console.log(err)
+        }
+      })
 
       // 查看是否收藏 
-      // wx.cloud.callFunction({
-      //   name : 'httprequest',
-      //   data : {
-      //     url : app.globalData.baseurl + 'scientific_video_collection/',
-      //     data : {
-      //       openid : openid,
-      //       id : vid 
-      //     }
-      //   },
-      //   success:(res)=>{
-      //     if(res.status==200){
-      //       temp.collected = res.result.data.is_collected
-      //     }
-      //     else{
-      //       temp.collected = false
-      //     }
-
-      //   },
-      //   fail:(err)=>{
-      //     console.log(err)
-      //   }
-      // })
-      // video_list.push(temp)
+      wx.cloud.callFunction({
+        name : 'httprequest',
+        data : {
+          url : app.globalData.baseurl + 'scientific_video_collection/',
+          data : {
+            openid : openid,
+            id : vid 
+          }
+        },
+        success:(res)=>{
+          if(res.status==200){
+            video_list[i].collected = res.result.data.is_collected
+            this.setData({
+              video_list : video_list
+            })
+          }
+        },
+        fail:(err)=>{
+          console.log(err)
+        }
+      })
+      
     }
-    // console.log(video_list)
-    // this.setData({
-    //   video_list : video_list
-    // })
-    this.setData({
-      video_list : video_list
-    })
     console.log(this.data.video_list)
   },
 
