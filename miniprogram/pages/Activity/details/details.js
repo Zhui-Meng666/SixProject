@@ -104,6 +104,7 @@ Page({
                         have_sign: data.have_sign_up,
                         personum: data.upper_limit,
                         intro: data.introduction,
+                        picture: data.picture
                     })
                 }
             },

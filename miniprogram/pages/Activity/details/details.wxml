@@ -1,6 +1,6 @@
 <!--pages/Activity/details/details.wxml-->
 <view class="container">
-    <image class="bground" src="../../../images/background_3.png"></image>
+    <image class="bground" src="{{picture}}"></image>
     <view class="title-field">
         <view class="title-text">{{title}}</view>
         <view class="coinfield">

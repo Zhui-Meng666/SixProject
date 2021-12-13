@@ -47,7 +47,7 @@ Page({
           sizeType: ['original', 'compressed'],
           sourceType : ['album', 'camera'],
           success: (res)=>{
-            new_pics = res.tempFilePaths
+            new_pics = res.tempFilePaths[0]
           }
         })
         imgs = imgs.concat(new_pics)

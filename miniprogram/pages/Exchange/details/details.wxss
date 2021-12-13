@@ -8,9 +8,8 @@
 }
 
 .imagefield {
-    width: 95%;
+    width: 100%;
     border: thin solid #515c5d;
-    border-radius: 25rpx;
     margin-top: 10rpx;
     background-color: #fafafa;
     overflow: hidden;
@@ -28,10 +27,9 @@
     align-items: flex-start;
     justify-content: space-around;
     margin-top: 10rpx;
-    margin-left: 10rpx;
     border: thin solid #515c5d;
     border-radius: 25rpx;
-    padding: 10rpx;
+    padding: 10rpx 0 10rpx 15rpx;
     background-color: #fafafa;
 }
 
@@ -41,7 +39,7 @@
 }
 
 .conditfield {
-    width: 93%;
+    width: 91%;
     color: #979797;
     margin-top: 10rpx;
     border: thin solid #515c5d;
