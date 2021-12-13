@@ -60,17 +60,25 @@ Page({
         }
     },
 
-    to_buttle: function (e) {
+    Tobuttle: function (e) {
+        var groups = this.data.buttle
+        var idx = e.currentTarget.dataset.index 
+        var group = groups[idx]
+        var group_id = group.group_id
         wx.navigateTo({
-            url: '../buttle/buttle',
+            url: '../buttle/buttle?group_id=' + group_id,
         })
     },
 
-    // Toappoint: function (e) {
-    //     wx.navigateTo({
-    //         url: '../appoint/appoint',
-    //     })
-    // },
+    Toappoint: function (e) {
+        var groups = this.data.appoint
+        var idx = e.currentTarget.dataset.index
+        var group = groups[idx]
+        var group_id = group.group_id 
+        wx.navigateTo({
+            url: '../appoint/appoint?group_id=' + group_id,
+        })
+    },
 
     onChange1: function (e) {
         this.setData({

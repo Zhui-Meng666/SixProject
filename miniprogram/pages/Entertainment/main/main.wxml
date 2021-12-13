@@ -8,8 +8,8 @@
     </van-cell-group>
 
     <view class="acts">
-      <view wx:for="{{buttle}}" class="act_item" bindtap="to_buttle">
-        <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img"></image>
+      <view wx:for="{{buttle}}" class="act_item">
+        <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img" bindtap="Tobuttle" data-index="{{index}}"></image>
         <view class="act_details">
           <view class="act_line">
             <view class="act_name">{{item.name}}</view>
@@ -33,7 +33,7 @@
 
     <view class="acts">
       <view wx:for="{{appoint_show}}" class="act_item">
-        <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img"></image>
+        <image wx:if="{{item.head_portrait}}" src="{{item.head_portrait}}" class="act_img" bindtap="Toappoint" data-index="{{index}}"></image>
         <view class="act_details">
           <view class="act_line">
             <view class="act_name">{{item.name}}</view>
