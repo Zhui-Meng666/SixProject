@@ -83,12 +83,12 @@
                         <image src="{{item.picture}}" class="act_img"></image>
                         <view class="act_info">
                             <view class="act_name">{{item.title}}</view>
-                            <view class="act_msg">地点{{item.address}}</view>
+                            <view class="act_msg">地点：{{item.address}}</view>
                             <view class="act_msg">时间：{{item.time}}</view>
                             <!-- <view class="act_msg">人数：{{item.n_people}}/{{item.m_people}}</view> -->
                             <!-- <view class="act_msg">{{item.info}}</view> -->
                             <!-- <view wx:if="{{item.signed == false}}"> -->
-                            <button class="act_sign" bindtap="toAct">我要报名</button>
+                            <button class="act_sign" bindtap="toAct" data-index="{{index}}">我要报名</button>
                             <!-- </view> -->
                             <!-- <view wx:if="{{item.signed == true}}">
                                 <button class="act_cancel" bindtap="toCan">我要取消</button>
@@ -97,8 +97,9 @@
                         <image src="../../../images/sufecoin.png" class="act_coin1"></image>
                         <view class="act_number_coin1">{{item.prize}}</view>
                     </view>
-                    <image class="add_act" src="../../../images/add.png" bindtap="add_act"></image>
+                    
                 </view>
+                <image class="add_act" src="../../../images/add.png" bindtap="add_act"></image>
             </van-tab>
 
             <van-tab title="已报名">
@@ -111,7 +112,7 @@
                             <view class="act_msg">时间：{{item.time}}</view>
                             <!-- <view class="act_msg">人数：{{item.n_people}}/{{item.m_people}}</view> -->
                             <!-- <view class="act_msg">{{item.info}}</view> -->
-                            <button class="act_cancel" bindtap="toCan">我要取消</button>
+                            <button class="act_cancel" bindtap="toCan" data-index="{{index}}">我要取消</button>
                         </view>
                     </view>
                 </view>

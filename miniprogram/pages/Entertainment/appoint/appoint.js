@@ -9,24 +9,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        groupid: '166787045982209',
-        msglist: [{
-                type: 'message',
-                value: {
-                    self: false,
-                    avatar: '../../../images/unload.png',
-                    messg: '欢迎来到xxxxx小组，期待你的表现'
-                }
-            },
-            {
-                type: 'message',
-                value: {
-                    self: true,
-                    avatar: '../../../images/unload.png',
-                    messg: '欢迎来到xxxxx小组，期待你的表现'
-                }
-            }
-        ],
+        groupid: '167778034188289',
+        msglist: [],
         tempsound: [],
         temphoto: [],
         tempcard: [],
@@ -144,7 +128,7 @@ Page({
                     type: 'sound',
                     value: {
                         self: true,
-                        avatar: '../../../images/unload.png',
+                        avatar: this.data.userinfo[app.globalData.openid].avatar,
                         sdid: sdid,
                         sdtext: msg
                     }
@@ -248,7 +232,7 @@ Page({
                                 type: 'photo',
                                 value: {
                                     self: true,
-                                    avatar: '../../../images/unload.png',
+                                    avatar: this.data.userinfo[app.globalData.openid].avatar,
                                     phoid: this.data.temphoto.length + i,
                                     imgsrc: tempaths[i]
                                 }
@@ -419,8 +403,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var id = options.group_id
         if (app.globalData.registered) {
-            var options = {
+            conn.open({
                 user: app.globalData.openid,
                 pwd: "123456",
                 appKey: app.globalData.appKey,
@@ -430,8 +415,7 @@ Page({
                 fail: (err) => {
                     console.log("失败", err)
                 }
-            };
-            conn.open(options);
+            });
         } else {
             Toast.fail("请先注册！")
             wx.redirectTo({
@@ -441,7 +425,7 @@ Page({
         var height = app.globalData.getPageHeight()
         this.setData({
             scrollh: height * 0.8,
-            // groupid: options.id
+            groupid: id
         })
         let that = this
         conn.listen({
@@ -629,7 +613,7 @@ Page({
             data: {
                 url: app.globalData.baseurl + 'arrange_group_member_info_show/',
                 data: {
-                    group_id: this.data.groupid,
+                    group_id: id,
                 }
             },
             success: (res) => {

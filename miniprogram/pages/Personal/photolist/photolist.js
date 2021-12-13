@@ -40,12 +40,17 @@ Page({
     uploadimg: function (e) {
         console.log("点此上传图片，最多九张");
         var fileIDs = []
+        var imgs = this.data.imgs
         wx.chooseImage({
             count: 9,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: (res) => {
+                // console.log(res.tempFilePaths.length)
+                var len = res.tempFilePaths.length
+                
                 for (let i = 0; i < res.tempFilePaths.length; i++) {
+                    
                     var tempPath = res.tempFilePaths[i]
                     let tempPaths = tempPath.split('/')
                     let filename = tempPaths[tempPaths.length - 1]
@@ -53,40 +58,48 @@ Page({
                         cloudPath: filename,
                         filePath: tempPath,
                         success: (res) => {
+                            // console.log(res)
                             var fileID = res.fileID
                             fileIDs.push(fileID)
-                            wx.cloud.callFunction({
-                                name: 'httppost',
-                                data: {
-                                    url: app.globalData.baseurl + 'album_upload/',
+                            imgs.push(fileID)
+                            // console.log(i)
+                            if(i == len-1){
+                                console.log(i)
+                                wx.cloud.callFunction({
+                                    name: 'httppost',
                                     data: {
-                                        openid: app.globalData.openid,
-                                        picture_link: [fileID]
+                                        url: app.globalData.baseurl + 'album_upload/',
+                                        data: {
+                                            openid: app.globalData.openid,
+                                            picture_link: fileIDs
+                                        }
+                                    },
+                                    success: (res) => {
+                                        console.log(res)
+                                        this.setData({
+                                            imgs : imgs,
+                                            num : imgs.length
+                                        })
+                                        
+                                    },
+                                    fail:(err) => {
+                                        console.log(err)
                                     }
-                                },
-                                success: (res) => {
-                                    console.log(res)
-                                    var picture_link = res.result.data
-                                    var num = 0
-                                    if (picture_link) {
-                                        num = picture_link.length
-                                    }
-                                    this.setData({
-                                        imgs: picture_link,
-                                        num: num
-                                    })
-                                },
-                                fail:(err) => {
-                                    console.log(err)
-                                }
-                            })
+                                })
+                            }
+                            
+                        },
+                        fail:(err)=>{
+                            console.log(err)
                         }
                     })
+                
                 }
+                
+                
             }
         })
         
-
     },
 
     org: function (e) {
@@ -101,6 +114,7 @@ Page({
             var imgs = this.data.imgs;
             var index = e.currentTarget.dataset.index;
             var picture_link = imgs[index]
+
             wx.cloud.callFunction({
                 name: 'httpdelete',
                 data: {
@@ -112,9 +126,14 @@ Page({
                 },
                 success: (res) => {
                     console.log('success')
+                    var result = res.result.data
+                    var lxb = []
+                    for(let i=0;i<result.length;i++){
+                        lxb.push(result[i].picture_link)
+                    }
                     this.setData({
-                        imgs: res.result.data,
-                        num: res.result.data.length
+                        imgs : lxb,
+                        num : lxb.length
                     })
                 }
             })
@@ -134,12 +153,11 @@ Page({
                 }
             },
             success: (res) => {
-                console.log('success')
-                let imgs = res.result.picture_link
-                let num = 0
-                if (imgs) {
-                    let num = imgs.length
-                }
+                console.log(res.result)
+                let imgs = res.result.data.picture_link
+                
+                let num = imgs.length
+                
                 this.setData({
                     imgs: imgs,
                     num: num

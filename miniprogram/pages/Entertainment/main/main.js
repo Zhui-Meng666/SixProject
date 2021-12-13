@@ -14,7 +14,8 @@ Page({
         team_img: '../../../images/Cat.jpeg',
         buttle: [],
         appoint: [],
-
+        appoint_show : [],
+        type : '乱斗'
     },
 
     buttle_join_in: function (e) {
@@ -60,18 +61,26 @@ Page({
         }
     },
 
-    to_buttle: function (e) {
-        console.log(this.data.buttle)
+    Tobuttle: function (e) {
+        var groups = this.data.buttle
+        var idx = e.currentTarget.dataset.index 
+        var group = groups[idx]
+        var group_id = group.group_id
         wx.navigateTo({
-            url: '../buttle/buttle?id='+this.data.buttle[0].group_id,
+            url: '../buttle/buttle?group_id=' + group_id,
         })
     },
 
-    // Toappoint: function (e) {
-    //     wx.navigateTo({
-    //         url: '../appoint/appoint',
-    //     })
-    // },
+    Toappoint: function (e) {
+        var groups = this.data.appoint
+        var idx = e.currentTarget.dataset.index
+        var group = groups[idx]
+        var group_id = group.group_id 
+        console.log(group_id)
+        wx.navigateTo({
+          url: '../appoint/appoint?group_id='+group_id,
+        })
+    },
 
     onChange1: function (e) {
         this.setData({
@@ -115,7 +124,10 @@ Page({
     },
 
     onChange(event) {
-        console.log(event.detail)
+        console.log(event.detail.title)
+        this.setData({
+            type : event.detail.title
+        })
     },
     to_home(event) {
         wx.redirectTo({
@@ -175,31 +187,15 @@ Page({
         this.setData({
             show_create: true
         })
-        // var groups = this.data.appoint_show;
-        // var team_name = this.data.team_name;
-        // var team_class = this.data.team_class;
-        // var team_max = this.data.team_max;
-        // var team_img = this.data.team_img;
-
-        // var temp = {
-        //     coverimg : team_img,
-        //     name : team_name,
-        //     class : team_class,
-        //     max_num : team_max,
-        //     number : 1,
-        //     date : '2021-10-11'
-        // }
-
-        // groups.push(temp)
-        // this.setData({group : groups})
     },
 
     // 创建群接口
     create_done: function (e) {
-        var type = this.data.active; // 判断类型，0---乱斗，1---约球
+        var type = this.data.type; // 判断类型，0---乱斗，1---约球
+        console.log(type) // 这里决定创建的聊天去哪里了
         var groupid = '' // 在这里填入groupid
         var openid = app.globalData.openid // openid
-        if (type == 0) {
+        if (type == '乱斗') {
             var groups = this.data.buttle;
             var team_name = this.data.team_name;
             var team_introduction = this.data.team_introduction
@@ -284,9 +280,11 @@ Page({
                             }
                         },
                         success: (res) => {
+                            console.log(res)
                             groups.push(res.result.data)
                             that.setData({
-                                appoint: groups
+                                appoint: groups,
+                                appoint_show : groups
                             })
                         }
                     })
@@ -392,6 +390,48 @@ Page({
                 url: '../../Personal/login/login',
             })
         }
+        wx.cloud.callFunction({
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'melee_my_group/',
+                data: {
+                    openid: app.globalData.openid
+                }
+            },
+            success: (res) => {
+                // console.log(res)
+                var temp = res.result.data 
+                for(let i=0;i<temp.length;i++){
+                    temp[i].create_time = temp[i].create_time.split('T')[0]
+                }
+                this.setData({
+                    buttle: temp
+                })
+            },
+            fail:(err)=>{
+                console.log(err)
+            }
+        })
+
+         // // 所有约球群
+         wx.cloud.callFunction({
+            name : 'httprequest',
+            data : {
+                url : app.globalData.baseurl + 'arrange_group_show/',
+                data : {}
+            },
+            success:(res) => {
+                console.log(res)
+                var temp = res.result.data 
+                for(let i=0;i<temp.length;i++){
+                    temp[i].create_time = temp[i].create_time.split('T')[0]
+                }
+                this.setData({
+                    appoint : temp,
+                    appoint_show : temp
+                })
+            }
+        })
     },
 
 
@@ -400,9 +440,13 @@ Page({
             count: 1,
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
-            success: function (res) {
+            success: (res) =>{
                 var new_img = res.tempFilePaths[0];
-                
+                // console.log(new_img)
+                // console.log(this.data.team_img)
+                // this.setData({
+                //     team_img : new_img
+                // })
                 let new_imgs = new_img.split('/')
                 let filename = new_imgs[new_imgs.length-1]
                 wx.cloud.uploadFile({
@@ -438,41 +482,42 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        // 我参加的乱斗群
-        wx.cloud.callFunction({
-            name: 'httprequest',
-            data: {
-                url: app.globalData.baseurl + 'melee_my_group/',
-                data: {
-                    openid: app.globalData.openid
-                }
-            },
-            success: (res) => {
-                console.log(res)
-                this.setData({
-                    buttle: res.result.data
-                })
-            },
-            fail:(err)=>{
-                console.log(err)
-            }
-        })
+        // // 我参加的乱斗群
+        // wx.cloud.callFunction({
+        //     name: 'httprequest',
+        //     data: {
+        //         url: app.globalData.baseurl + 'melee_my_group/',
+        //         data: {
+        //             openid: app.globalData.openid
+        //         }
+        //     },
+        //     success: (res) => {
+        //         console.log(res)
+        //         this.setData({
+        //             buttle: res.result.data
+        //         })
+        //     },
+        //     fail:(err)=>{
+        //         console.log(err)
+        //     }
+        // })
 
-        // 所有约球群
-        wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                data : {
-                    url : app.globalData.baseurl + 'arrange_group_show/',
-                }
-            },
-            success:(res) => {
-                this.setData({
-                    appoint : res.result.data,
-                    appoint_show : res.result.data
-                })
-            }
-        })
+        // // 所有约球群
+        // wx.cloud.callFunction({
+        //     name : 'httprequest',
+        //     data : {
+        //         data : {
+        //             url : app.globalData.baseurl + 'arrange_group_show/',
+        //         }
+        //     },
+        //     success:(res) => {
+        //         console.log(res)
+        //         this.setData({
+        //             appoint : res.result.data,
+        //             appoint_show : res.result.data
+        //         })
+        //     }
+        // })
     },
 
     /**

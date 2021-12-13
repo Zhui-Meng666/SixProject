@@ -388,9 +388,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            groupid: options.id    //接受上一页面传来的群id
-        })
+        var id = options.group_id
         if (app.globalData.registered) {
             conn.open({
                 user: app.globalData.openid,
@@ -411,7 +409,8 @@ Page({
         }
         var height = app.globalData.getPageHeight()
         this.setData({
-            scrollh: height * 0.8
+            scrollh: height * 0.8,
+            groupid: id
         })
         let that = this
         conn.listen({
@@ -574,7 +573,7 @@ Page({
             data: {
                 url: app.globalData.baseurl + 'melee_group_member_info_show/',
                 data: {
-                    group_id: options.id,
+                    group_id: id,
                 }
             },
             success: (res) => {
@@ -598,7 +597,7 @@ Page({
                         data: {
                             url: app.globalData.baseurl + 'melee_against_info/',
                             data: {
-                                group_id: options.id,
+                                group_id: id,
                             }
                         },
                         success: (res) => {
