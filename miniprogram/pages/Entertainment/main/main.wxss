@@ -108,6 +108,7 @@ page{
     height: 200rpx;
     margin-left: 263rpx;
     margin-top: 50rpx;
+    border-radius: 40rpx;
 }
 .full_line{
     background-color: cadetblue;

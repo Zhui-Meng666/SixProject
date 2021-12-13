@@ -496,11 +496,6 @@ Page({
             url: '../signup/signup',
         })
     },
-    // to_appoint: function(e){
-    //     wx.navigateTo({
-    //       url: '../appoint/appoint',
-    //     })
-    // },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -511,43 +506,8 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-        // // 我参加的乱斗群
-        // wx.cloud.callFunction({
-        //     name: 'httprequest',
-        //     data: {
-        //         url: app.globalData.baseurl + 'melee_my_group/',
-        //         data: {
-        //             openid: app.globalData.openid
-        //         }
-        //     },
-        //     success: (res) => {
-        //         console.log(res)
-        //         this.setData({
-        //             buttle: res.result.data
-        //         })
-        //     },
-        //     fail:(err)=>{
-        //         console.log(err)
-        //     }
-        // })
+    onShow:function() {
 
-        // // 所有约球群
-        // wx.cloud.callFunction({
-        //     name : 'httprequest',
-        //     data : {
-        //         data : {
-        //             url : app.globalData.baseurl + 'arrange_group_show/',
-        //         }
-        //     },
-        //     success:(res) => {
-        //         console.log(res)
-        //         this.setData({
-        //             appoint : res.result.data,
-        //             appoint_show : res.result.data
-        //         })
-        //     }
-        // })
     },
 
     /**
