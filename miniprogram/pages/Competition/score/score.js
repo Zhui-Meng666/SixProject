@@ -217,7 +217,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var subdata =  JSON.parse(options)
+        var subdata =  JSON.parse(options.subdata)
+        // console.log(subdata)
         const countDown = this.selectComponent('.control-count-down');
         countDown.reset();
         var score1 = this.splitnum(this.data.score1real)

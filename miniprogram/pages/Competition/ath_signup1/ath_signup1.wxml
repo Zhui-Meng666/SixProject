@@ -25,5 +25,5 @@
     </van-radio-group>
 </van-cell> 
 
-<button type="default" bindtap="ath_submit" class="ath_submit">提交</button>
+<button bindtap="ath_submit" class="ath_submit">提交</button>
 
