@@ -53,6 +53,7 @@ page {
     width: 49%;
     border: thin solid whitesmoke;
     margin: 10rpx 0 0 3rpx;
+    box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
 }
 
 .goodsimg {

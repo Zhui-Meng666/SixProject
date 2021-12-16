@@ -11,6 +11,7 @@ Page({
   data: {
     bottom_active: 'personal',
     show: false,
+    showagain: true,
     bgimg: '',
     gendersrc: '',
     intro: '这个人很神秘，什么都没有~',
@@ -151,6 +152,12 @@ Page({
     })
   },
 
+  close: function (e) {
+    this.setData({
+      showset: false
+    })
+  },
+
   closeset: function (e) {
     this.setData({
       showset: false,
@@ -169,11 +176,11 @@ Page({
   chooseimg: function (e) {
     this.setData({
       showset: false,
+      showagain: false
     })
     wx.chooseImage({
       count: 1,
       success: (res) => {
-        console.log('成功', res)
         var tempPath = res.tempFilePaths[0]
         this.setData({
           tempPath: tempPath,
@@ -184,10 +191,11 @@ Page({
           cloudPath: filename,
           filePath: tempPath, // 文件路径
           success: (res) => {
-            console.log("上传成功", res.fileID)
-            // this.setData({
-            //   fileID: res.fileID
-            // })
+            this.setData({
+              fileID: res.fileID,
+              bgimg_link: res.fileID,
+              bgimg: res.fileID
+            })
             wx.cloud.callFunction({
               name: 'httppost',
               data: {
@@ -200,8 +208,7 @@ Page({
               success: (res) => {
                 console.log("修改成功", res)
                 this.setData({
-                  bgimg_link: res.result.data.back_picture,
-                  bgimg: res.result.data.back_picture
+                  showagain: true
                 })
               },
               fail: (err) => {
@@ -210,7 +217,6 @@ Page({
             })
           },
           fail: (err) => {
-            // handle error
             console.log("上传失败", err)
           }
         })
@@ -258,56 +264,58 @@ Page({
    */
   onShow: function () {
     if (app.globalData.registered) {
-      wx.cloud.callFunction({
-        name: 'httprequest',
-        data: {
-          url: app.globalData.baseurl + 'user_show/',
+      if (this.data.showagain) {
+        wx.cloud.callFunction({
+          name: 'httprequest',
           data: {
-            openid: app.globalData.openid
+            url: app.globalData.baseurl + 'user_show/',
+            data: {
+              openid: app.globalData.openid
+            }
+          },
+          success: (res) => {
+            console.log("成功", res)
+            var data = res.result.data
+            var imglist = []
+            var userid = []
+            for (var i = 0; i < data.album.length; ++i) {
+              imglist.push(data.album[i].picture_link)
+            }
+            for (var i = 0; i < data.identity.length; ++i) {
+              userid.push(data.identity[i].identity)
+            }
+            this.setData({
+              bgimg: data.back_picture,
+              bgimg_link: data.back_picture == "default" ? defaultimg : data.back_picture,
+              gendersrc: gender[Number(data.gender)],
+              gender: data.gender,
+              intro: data.introduction,
+              coinnum: data.sufe_currency,
+              level: [{
+                  icon: '../../../images/level.png',
+                  icontext: '等级',
+                  progresstext: data.grade.toString() + '级',
+                  percent: 20 * data.grade
+                },
+                {
+                  icon: '../../../images/experience.png',
+                  icontext: '经验',
+                  progresstext: data.experience.toString() + '分',
+                  percent: data.experience
+                }
+              ],
+              imglist: imglist,
+              stuid: data.student_id,
+              userid: userid
+            })
+            var userallid = ['0', '1', '2', '3', '4', '5']
+            this.Idtoname(userallid)
+          },
+          fail: (err) => {
+            console.log('失败', err)
           }
-        },
-        success: (res) => {
-          console.log("成功", res)
-          var data = res.result.data
-          var imglist = []
-          var userid = []
-          for (var i = 0; i < data.album.length; ++i) {
-            imglist.push(data.album[i].picture_link)
-          }
-          for (var i = 0; i < data.identity.length; ++i) {
-            userid.push(data.identity[i].identity)
-          }
-          this.setData({
-            bgimg: data.back_picture,
-            bgimg_link: data.back_picture == "default" ? defaultimg : data.back_picture,
-            gendersrc: gender[Number(data.gender)],
-            gender: data.gender,
-            intro: data.introduction,
-            coinnum: data.sufe_currency,
-            level: [{
-                icon: '../../../images/level.png',
-                icontext: '等级',
-                progresstext: data.grade.toString() + '级',
-                percent: 20 * data.grade
-              },
-              {
-                icon: '../../../images/experience.png',
-                icontext: '经验',
-                progresstext: data.experience.toString() + '分',
-                percent: data.experience
-              }
-            ],
-            imglist: imglist,
-            stuid: data.student_id,
-            userid: userid
-          })
-          var userallid = ['0', '1', '2', '3', '4', '5']
-          this.Idtoname(userallid)
-        },
-        fail: (err) => {
-          console.log('失败', err)
-        }
-      })
+        })
+      }
     } else {
       wx.redirectTo({
         url: '../login/login',

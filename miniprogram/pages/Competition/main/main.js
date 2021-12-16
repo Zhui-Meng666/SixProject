@@ -13,7 +13,7 @@ Page({
 
         activate_1: 0,
         activate_2: 0,
- 
+
         show_signup_ath: false,
         show_signup_ref: false,
 
@@ -59,55 +59,49 @@ Page({
                 type: '体教部',
                 status: '已完成'
             },
-            
+
         ],
-        games_over : [
-            {
-                type : '体教部',
-                name : '求王争霸赛',
-                single_match : [
-                    {
-                        id : '001',
-                        competitor1 : 'Ming',
-                        competitor2 : 'Ning',
-                        type : '男子双打',
-                        create_time : '2021-12-17',
-                        refree : 'UZI',
-                        totalscore : {
-                            score1 : 12,
-                            score2 : 13
-                        },
-                        free : {
-                            competitor1 : 12,
-                            competitor2 : 13,
-                            refree : 20
-                        }
-                    }
-                ]
-            }
-        ],
-        games_on: [
-            {
-                status: '进行中',
+        games_over: [{
+            type: '体教部',
+            name: '求王争霸赛',
+            single_match: [{
+                id: '001',
+                competitor1: 'Ming',
+                competitor2: 'Ning',
+                type: '男子双打',
+                create_time: '2021-12-17',
+                refree: 'UZI',
+                totalscore: {
+                    score1: 12,
+                    score2: 13
+                },
+                free: {
+                    competitor1: 12,
+                    competitor2: 13,
+                    refree: 20
+                }
+            }]
+        }],
+        games_on: [{
+            status: '进行中',
+            id: 1,
+            schedule_arrange: '../../../images/Cat.jpeg',
+            referee_arrange: '../../../images/Cat.jpeg',
+            competitors: '../../../images/Cat.jpeg',
+            top_eight: '../../../images/Cat.jpeg',
+            single_match: [{
                 id: 1,
-                schedule_arrange: '../../../images/Cat.jpeg',
-                referee_arrange: '../../../images/Cat.jpeg',
-                competitors: '../../../images/Cat.jpeg',
-                top_eight: '../../../images/Cat.jpeg',
-                single_match: [{
-                    id: 1,
-                    competitor1: 'Faker',
-                    competitor2: 'Showmaker',
-                    type: '男子单打',
-                    create_time: '2021-10-21',
-                    refree: 'Xiaohu',
-                    totalscore: {
-                        score1: 10,
-                        score2: 11
-                    }
-                }]
-            },
-        ],
+                competitor1: 'Faker',
+                competitor2: 'Showmaker',
+                type: '男子单打',
+                create_time: '2021-10-21',
+                refree: 'Xiaohu',
+                totalscore: {
+                    score1: 10,
+                    score2: 11
+                }
+            }]
+        }, ],
         acts: []
     },
 
@@ -153,20 +147,20 @@ Page({
     start_game: function (e) {
         var idx = e.currentTarget.dataset.index
         var game = this.data.games[idx]
-        var match_id = game.id 
+        var match_id = game.id
         var openid = app.globalData.openid
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl  + 'match_detail_info_show/',
-                data : {
-                    openid : openid,
-                    match_id : match_id 
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'match_detail_info_show/',
+                data: {
+                    openid: openid,
+                    match_id: match_id
                 }
             },
-            success:(res)=>{
+            success: (res) => {
                 wx.navigateTo({
-                  url: '../detail_com/detail_com?data=' + JSON.stringify(res.result.data) + '&name=' + game.name,
+                    url: '../detail_com/detail_com?data=' + JSON.stringify(res.result.data) + '&name=' + game.name,
                 })
             }
         })
@@ -244,78 +238,78 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    // onLoad: function (options) {
-    //     var openid = app.globalData.openid
-    //     // 所有比赛
-    //     wx.cloud.callFunction({
-    //         name : 'httprequest',
-    //         data : {
-    //             url : app.globalData.baseurl + "match_show/",
-    //         },
-    //         success:(res)=>{
-    //             console.log(res)
-    //             this.setData({
-    //                 games : res.result.data 
-    //             })
-    //         },
-    //         fail:(err)=>{
-    //             console.log(err)
-    //         }
-    //     })
+    onLoad: function (options) {
+        //     var openid = app.globalData.openid
+        //     // 所有比赛
+        //     wx.cloud.callFunction({
+        //         name : 'httprequest',
+        //         data : {
+        //             url : app.globalData.baseurl + "match_show/",
+        //         },
+        //         success:(res)=>{
+        //             console.log(res)
+        //             this.setData({
+        //                 games : res.result.data 
+        //             })
+        //         },
+        //         fail:(err)=>{
+        //             console.log(err)
+        //         }
+        //     })
 
-    //     // 已完成的比赛
-    //     var match_id = []
-    //     for(let i=0;i<this.games.length;i++){
-    //         if(this.games[i].status == '已完成'){
-    //             match_id.push(this.games[i].id)
-    //         }
-    //     }
-    //     var games_over = []
-    //     for(let i=0;i<match_id.length;i++){
-    //         var id = match_id[i]
-    //         wx.cloud.callFunction({
-    //             name : 'httprequest',
-    //             data : {
-    //                 url : app.globalData.baseurl + 'match_single_result_info_show/',
-    //                 data : {
-    //                     match_id : id 
-    //                 }
-    //             },
-    //             success:(res) =>{
-    //                 games_over.push(res.result.data)
-    //             }
-    //         })
-    //     }
-        
+        //     // 已完成的比赛
+        //     var match_id = []
+        //     for(let i=0;i<this.games.length;i++){
+        //         if(this.games[i].status == '已完成'){
+        //             match_id.push(this.games[i].id)
+        //         }
+        //     }
+        //     var games_over = []
+        //     for(let i=0;i<match_id.length;i++){
+        //         var id = match_id[i]
+        //         wx.cloud.callFunction({
+        //             name : 'httprequest',
+        //             data : {
+        //                 url : app.globalData.baseurl + 'match_single_result_info_show/',
+        //                 data : {
+        //                     match_id : id 
+        //                 }
+        //             },
+        //             success:(res) =>{
+        //                 games_over.push(res.result.data)
+        //             }
+        //         })
+        //     }
 
-    //     // 所有活动
-    //     wx.cloud.callFunction({
-    //         name : 'httprequest',
-    //         data : {
-    //             url : app.globalData.baseurl + 'activity_show/',
-    //         },
-    //         success:(res)=>{
-    //             this.setData({
-    //                 acts : res.result.data
-    //             })
-    //         }
-    //     })
-    //     // 已经报名的活动
-    //     wx.cloud.callFunction({
-    //         name : 'httprequest',
-    //         data : {
-    //             url : app.globalData.baseurl + 'activity_have_sign_up_show/',
-    //             data : {
-    //                 openid : openid
-    //             }
-    //         },
-    //         success:(res)=>{
-    //             this.setData({
-    //                 acts_signed : res.result.data 
-    //             })
-    //         }
-    //     })
-    // },
+
+        //     // 所有活动
+        //     wx.cloud.callFunction({
+        //         name : 'httprequest',
+        //         data : {
+        //             url : app.globalData.baseurl + 'activity_show/',
+        //         },
+        //         success:(res)=>{
+        //             this.setData({
+        //                 acts : res.result.data
+        //             })
+        //         }
+        //     })
+        //     // 已经报名的活动
+        //     wx.cloud.callFunction({
+        //         name : 'httprequest',
+        //         data : {
+        //             url : app.globalData.baseurl + 'activity_have_sign_up_show/',
+        //             data : {
+        //                 openid : openid
+        //             }
+        //         },
+        //         success:(res)=>{
+        //             this.setData({
+        //                 acts_signed : res.result.data 
+        //             })
+        //         }
+        //     })
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -349,7 +343,7 @@ Page({
                             sa_id: res.fileID
                         })
                     },
-                    fail:(err)=>{
+                    fail: (err) => {
                         console.log(err)
                     }
                 })
@@ -381,7 +375,7 @@ Page({
                         })
                         // console.log(games_on)
                     },
-                    fail:(err)=>{
+                    fail: (err) => {
                         console.log(err)
                     }
                 })
@@ -458,21 +452,21 @@ Page({
         })
     },
 
-    onShow: function() {
+    onShow: function () {
         var openid = app.globalData.openid
         // 所有比赛
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + "match_show/",
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + "match_show/",
             },
-            success:(res)=>{
+            success: (res) => {
                 console.log(res)
                 this.setData({
-                    games : res.result.data 
+                    games: res.result.data
                 })
             },
-            fail:(err)=>{
+            fail: (err) => {
                 console.log(err)
             }
         })
@@ -500,50 +494,50 @@ Page({
         //         }
         //     })
         // }
-        
+
         // 所有活动
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + "activity_show/",
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + "activity_show/",
             },
-            success:(res)=>{
+            success: (res) => {
                 console.log(res)
                 this.setData({
-                    acts : res.result.data 
+                    acts: res.result.data
                 })
             },
-            fail:(err)=>{
+            fail: (err) => {
                 console.log(err)
             }
         })
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'activity_show/',
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'activity_show/',
             },
-            success:(res)=>{
+            success: (res) => {
                 console.log(res)
                 this.setData({
-                    acts : res.result.data
+                    acts: res.result.data
                 })
             },
-            fail:(err)=>{
+            fail: (err) => {
                 console.log(err)
             }
         })
         // 已经报名的活动
         wx.cloud.callFunction({
-            name : 'httprequest',
-            data : {
-                url : app.globalData.baseurl + 'activity_have_sign_up_show/',
-                data : {
-                    openid : openid
+            name: 'httprequest',
+            data: {
+                url: app.globalData.baseurl + 'activity_have_sign_up_show/',
+                data: {
+                    openid: openid
                 }
             },
-            success:(res)=>{
+            success: (res) => {
                 this.setData({
-                    acts_signed : res.result.data 
+                    acts_signed: res.result.data
                 })
             }
         })

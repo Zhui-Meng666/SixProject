@@ -5,6 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        match: '20211201',
         single_match : [
             {
                 id : 1,

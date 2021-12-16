@@ -390,24 +390,24 @@ Page({
      */
     onLoad: function (options) {
         var id = options.group_id
-        if (app.globalData.registered) {
-            conn.open({
-                user: app.globalData.openid,
-                pwd: "123456",
-                appKey: app.globalData.appKey,
-                success: (res) => {
-                    console.log("成功", res)
-                },
-                fail: (err) => {
-                    console.log("失败", err)
-                }
-            });
-        } else {
-            Toast.fail("请先注册！")
-            wx.redirectTo({
-                url: '../../Personal/login/login',
-            })
-        }
+        // if (app.globalData.registered) {
+        //     conn.open({
+        //         user: app.globalData.openid,
+        //         pwd: "123456",
+        //         appKey: app.globalData.appKey,
+        //         success: (res) => {
+        //             console.log("成功", res)
+        //         },
+        //         fail: (err) => {
+        //             console.log("失败", err)
+        //         }
+        //     });
+        // } else {
+        //     Toast.fail("请先注册！")
+        //     wx.redirectTo({
+        //         url: '../../Personal/login/login',
+        //     })
+        // }
         var height = app.globalData.getPageHeight()
         this.setData({
             scrollh: height * 0.8,
@@ -662,7 +662,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-        conn.close();
+        
     },
 
     /**

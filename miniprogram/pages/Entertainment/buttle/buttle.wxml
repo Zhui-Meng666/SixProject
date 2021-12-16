@@ -12,7 +12,10 @@
         <view class="userinfo-avatar">
             <image src="{{avatar}}" mode="aspectFit" class="avatarimg"></image>
         </view>
-        <view class="messtext" id="{{sdid}}" style="background-color: {{self ? '#9eea6a' : 'white'}};" bindtap="playsound">{{sdtext}}</view>
+        <view class="messtext" id="{{sdid}}" style="display:flex;flex-direction: row;background-color: {{self ? '#9eea6a' : 'white'}};" bindtap="playsound">
+            <van-icon name="volume-o" />
+            <view style="margin: auto 5px;">{{sdtext}}</view>
+        </view>
     </view>
 </template>
 <view class="container">

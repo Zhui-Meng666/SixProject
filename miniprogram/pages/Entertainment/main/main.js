@@ -414,6 +414,24 @@ Page({
                 })
             }
         })
+        if (app.globalData.registered) {
+            conn.open({
+                user: app.globalData.openid,
+                pwd: "123456",
+                appKey: app.globalData.appKey,
+                success: (res) => {
+                    console.log("成功", res)
+                },
+                fail: (err) => {
+                    console.log("失败", err)
+                }
+            });
+        } else {
+            Toast.fail("请先注册！")
+            wx.redirectTo({
+                url: '../../Personal/login/login',
+            })
+        }
     },
 
     afterRead: function (e) {
@@ -488,38 +506,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow:function() {
-        if (app.globalData.registered) {
-            conn.open({
-                user: app.globalData.openid,
-                pwd: "123456",
-                appKey: app.globalData.appKey,
-                success: (res) => {
-                    console.log("成功", res)
-                },
-                fail: (err) => {
-                    console.log("失败", err)
-                }
-            });
-        } else {
-            Toast.fail("请先注册！")
-            wx.redirectTo({
-                url: '../../Personal/login/login',
-            })
-        }
+       
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-        console.log("关闭连接")
-        conn.close()
+
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
+        console.log("关闭连接")
         conn.close()
     },
 

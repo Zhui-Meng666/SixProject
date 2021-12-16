@@ -17,7 +17,7 @@
 .title-text {
     font-size: large;
     font-weight: bold;
-    color: white;
+    color: black;
 }
 
 .coinfield {
@@ -33,7 +33,7 @@
 
 .coin-number {
     margin-left: 5rpx;
-    color: white;
+    color: black;
 }
 
 .detail-field {
